@@ -78,6 +78,12 @@
   --ankahe-hidden-soft: oklch(0.89 0.023 45);
   --ankahe-danger: oklch(0.52 0.095 28);
   --ankahe-danger-soft: oklch(0.89 0.04 30);
+  --ankahe-footer: oklch(0.172 0.014 25);
+  --ankahe-footer-border: oklch(0.265 0.018 30);
+  --ankahe-footer-text: oklch(0.75 0.015 72);
+  --ankahe-footer-text-strong: oklch(0.82 0.014 72);
+  --ankahe-footer-text-hover: oklch(0.94 0.012 70);
+  --ankahe-footer-focus: oklch(0.78 0.071 14);
   --color-page: var(--ankahe-page);
   --color-surface: var(--ankahe-surface);
   --color-surface-raised: var(--ankahe-surface-raised);
@@ -100,6 +106,12 @@
   --color-hidden-soft: var(--ankahe-hidden-soft);
   --color-danger: var(--ankahe-danger);
   --color-danger-soft: var(--ankahe-danger-soft);
+  --color-footer: var(--ankahe-footer);
+  --color-footer-border: var(--ankahe-footer-border);
+  --color-footer-text: var(--ankahe-footer-text);
+  --color-footer-text-strong: var(--ankahe-footer-text-strong);
+  --color-footer-text-hover: var(--ankahe-footer-text-hover);
+  --color-footer-focus: var(--ankahe-footer-focus);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -126,6 +138,12 @@
   --ankahe-hidden-soft: oklch(0.26 0.021 45);
   --ankahe-danger: oklch(0.7 0.113 28);
   --ankahe-danger-soft: oklch(0.29 0.048 28);
+  --ankahe-footer: oklch(0.145 0.014 25);
+  --ankahe-footer-border: oklch(0.27 0.018 30);
+  --ankahe-footer-text: oklch(0.78 0.016 72);
+  --ankahe-footer-text-strong: oklch(0.87 0.014 72);
+  --ankahe-footer-text-hover: oklch(0.96 0.011 70);
+  --ankahe-footer-focus: oklch(0.78 0.071 14);
 }
 
 @theme {
@@ -155,6 +173,12 @@
   --color-hidden-soft: var(--ankahe-hidden-soft);
   --color-danger: var(--ankahe-danger);
   --color-danger-soft: var(--ankahe-danger-soft);
+  --color-footer: var(--ankahe-footer);
+  --color-footer-border: var(--ankahe-footer-border);
+  --color-footer-text: var(--ankahe-footer-text);
+  --color-footer-text-strong: var(--ankahe-footer-text-strong);
+  --color-footer-text-hover: var(--ankahe-footer-text-hover);
+  --color-footer-focus: var(--ankahe-footer-focus);
 
   --color-ankahe-bg: var(--color-page);
   --color-ankahe-surface: var(--color-surface);
@@ -172,6 +196,12 @@
   --color-ankahe-warning-soft: var(--color-sandal-soft);
   --color-ankahe-danger: var(--color-danger);
   --color-ankahe-danger-soft: var(--color-danger-soft);
+  --color-ankahe-footer: var(--color-footer);
+  --color-ankahe-footer-border: var(--color-footer-border);
+  --color-ankahe-footer-text: var(--color-footer-text);
+  --color-ankahe-footer-text-strong: var(--color-footer-text-strong);
+  --color-ankahe-footer-text-hover: var(--color-footer-text-hover);
+  --color-ankahe-footer-focus: var(--color-footer-focus);
 }
 
 @layer base {
@@ -335,6 +365,14 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-variant-numeric: tabular-nums;
+  }
+
+  .type-footer-nav {
+    font-size: 0.8125rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .type-tabular {

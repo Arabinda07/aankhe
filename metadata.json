@@ -1,6 +1,6 @@
 {
-  "name": "Interpersonal OS",
-  "description": "A privacy-first web application for creating personal and professional operating manuals. Stateless, no account, no database.",
+  "name": "Ankahe",
+  "description": "A client-only web application for creating private personal and professional manuals. No account, no database, no uploads.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

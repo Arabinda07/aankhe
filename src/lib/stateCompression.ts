@@ -5,7 +5,7 @@
 
 import LZString from "lz-string";
 import { ManualState } from "./schemaTypes";
-import { PROTOCOL_MANIFEST } from "./protocolManifest";
+import { createShareSafeState } from "./visibilityPolicy";
 
 export function encodeState(state: ManualState): string {
   try {
@@ -36,7 +36,7 @@ export function readStateFromHash(): ManualState | null {
 }
 
 export function writeStateToHash(state: ManualState) {
-  const encoded = encodeState(state);
+  const encoded = encodeState(createShareSafeState(state));
   if (encoded) {
     const newHash = `#s=${encoded}`;
     // Replace state to avoid clogging history during every answer
@@ -49,19 +49,6 @@ export function clearStateFromHash() {
 }
 
 export function generateSharedUrl(state: ManualState): string {
-  const strippedState = { ...state, answers: { ...state.answers } };
-  const config = PROTOCOL_MANIFEST[state.mode];
-  
-  if (config) {
-    for (const q of config.questions) {
-      const vis = state.visibilityByQuestion[q.id] || q.defaultVisibility;
-      if (vis === "private" || vis === "hide") {
-        delete strippedState.answers[q.id];
-      }
-    }
-  }
-
-  const encoded = encodeState(strippedState);
+  const encoded = encodeState(createShareSafeState(state));
   return window.location.origin + window.location.pathname + `#s=${encoded}`;
 }
-

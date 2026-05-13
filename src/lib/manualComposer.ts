@@ -3,21 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ComposedManual, ComposedSection, ManualState, ModeConfig, Visibility } from "./schemaTypes";
+import { ComposedManual, ComposedSection, ManualState } from "./schemaTypes";
 import { PROTOCOL_MANIFEST } from "./protocolManifest";
+import { canAnswerAppearInManual, getAnswerVisibility, getVisibilityCounts } from "./visibilityPolicy";
+import type { ManualViewMode } from "./visibilityPolicy";
 
 export function composeManual(
   state: ManualState, 
-  options: { viewMode?: "private" | "public", excludedSections?: string[] } = {}
+  options: { viewMode?: ManualViewMode, excludedSections?: string[] } = {}
 ): ComposedManual {
   const { viewMode = "private", excludedSections = [] } = options;
   const config = PROTOCOL_MANIFEST[state.mode];
   const answers = state.answers;
-  const visibility = state.visibilityByQuestion;
 
   const answeredQuestions = Object.keys(answers);
-  const shareableCount = answeredQuestions.filter(id => visibility[id] === "share").length;
-  const privateCount = answeredQuestions.filter(id => visibility[id] === "private").length;
+  const visibilityCounts = getVisibilityCounts(state);
 
   // Manual generation logic
   const composedSections: ComposedSection[] = config.sections
@@ -30,13 +30,8 @@ export function composeManual(
       
       sectionAnswers.forEach(q => {
         const val = answers[q.id];
-        const vis = visibility[q.id] || q.defaultVisibility;
-        
-        // Only include if not hidden
-        if (vis === "hide") return;
-        
-        // Hide private fields if viewing in public mode
-        if (viewMode === "public" && vis === "private") return;
+        const visibility = getAnswerVisibility(state, q);
+        if (!canAnswerAppearInManual(visibility, viewMode)) return;
 
         let formattedAnswer = "";
         if (Array.isArray(val)) {
@@ -91,9 +86,6 @@ export function composeManual(
     subtitle: config.label,
     atAGlance,
     sections: composedSections,
-    hasPrivateItems: privateCount > 0,
-    answeredCount: answeredQuestions.length,
-    shareableCount,
-    privateCount
+    ...visibilityCounts
   };
 }

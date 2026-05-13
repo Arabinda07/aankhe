@@ -8,7 +8,6 @@ import type React from "react";
 import { ModeId, StorageMode } from "../lib/schemaTypes";
 import { SAMPLE_PERSONAL_STATE, SAMPLE_WORK_STATE } from "../lib/sampleState";
 import { cn } from "../lib/utils";
-import { AnkaheMark } from "./AnkaheMark";
 import { SoftButton } from "./SoftButton";
 import { StorageModeToggle } from "./StorageModeToggle";
 import { motion } from "motion/react";
@@ -38,15 +37,14 @@ export function Switchboard({
 }: SwitchboardProps) {
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 gap-12 px-6 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.82fr)] lg:items-center lg:gap-16">
-        <div className="min-w-0 max-w-[680px] space-y-10">
+      <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 gap-11 px-6 py-10 md:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.82fr)] lg:items-center lg:gap-16">
+        <div className="min-w-0 max-w-[680px] space-y-9">
           <motion.div
-            className="space-y-8"
+            className="space-y-6"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <AnkaheMark className="hidden sm:inline-flex" />
             <div className="space-y-6">
               <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
                 A guide to{" "}
@@ -129,9 +127,8 @@ export function Switchboard({
 
       <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-          <div className="space-y-4 lg:col-span-4 lg:pt-10">
-            <p className="type-eyebrow text-ankahe-accent">Choose a context</p>
-            <h2 className="type-display max-w-lg text-ankahe-text">One manual, shaped for the room it enters.</h2>
+          <div className="lg:col-span-4 lg:pt-10">
+            <h2 className="type-eyebrow text-ankahe-accent">Choose a context</h2>
           </div>
           <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2">
             <ModeCard

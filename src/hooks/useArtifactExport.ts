@@ -4,9 +4,14 @@
  */
 
 import React, { useState } from "react";
-import { toPng } from "html-to-image";
+import type { ManualViewMode } from "../lib/visibilityPolicy";
 
-export function useArtifactExport(artifactRef: React.RefObject<HTMLElement | null>, mode: string, secureSharedUrl: string) {
+export function useArtifactExport(
+  artifactRef: React.RefObject<HTMLElement | null>,
+  mode: string,
+  secureSharedUrl: string,
+  viewMode: ManualViewMode
+) {
   const [isExporting, setIsExporting] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
@@ -18,13 +23,14 @@ export function useArtifactExport(artifactRef: React.RefObject<HTMLElement | nul
       const pageColor =
         getComputedStyle(document.documentElement).getPropertyValue("--color-page").trim() ||
         "rgb(248 240 234)";
+      const { toPng } = await import("html-to-image");
       const dataUrl = await toPng(artifactRef.current, {
         cacheBust: true,
         backgroundColor: pageColor,
         pixelRatio: 2
       });
       const link = document.createElement("a");
-      link.download = `ankahe-manual-${mode}.png`;
+      link.download = `ankahe-${viewMode}-manual-${mode}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {

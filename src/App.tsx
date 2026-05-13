@@ -3,16 +3,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Switchboard } from './components/Switchboard';
 import { ModeId } from './lib/schemaTypes';
 import { useManualState } from './hooks/useManualState';
-import { ManualBuilder } from './components/ManualBuilder';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { SoftButton } from './components/SoftButton';
 import { HowItWorksPage, PrivacyPage } from './components/InfoPages';
+
+const ManualBuilder = lazy(() =>
+  import("./components/ManualBuilder").then((module) => ({
+    default: module.ManualBuilder,
+  }))
+);
 
 function AppContent() {
   const {
@@ -92,14 +97,16 @@ function AppContent() {
             <Route
               path="/manual/:mode"
               element={
-                <ManualBuilder
-                  state={state}
-                  setMode={setMode}
-                  updateAnswer={updateAnswer}
-                  updateVisibility={updateVisibility}
-                  setStorageMode={setStorageMode}
-                  onBack={() => navigate("/")}
-                />
+                <Suspense fallback={<RouteFallback label="Preparing manual" />}>
+                  <ManualBuilder
+                    state={state}
+                    setMode={setMode}
+                    updateAnswer={updateAnswer}
+                    updateVisibility={updateVisibility}
+                    setStorageMode={setStorageMode}
+                    onBack={() => navigate("/")}
+                  />
+                </Suspense>
               }
             />
           </Routes>
@@ -110,6 +117,13 @@ function AppContent() {
   );
 }
 
+function RouteFallback({ label }: { label: string }) {
+  return (
+    <div className="min-h-[calc(100dvh-8rem)] bg-ankahe-bg px-6 py-16 text-center">
+      <p className="type-meta text-ankahe-muted">{label}</p>
+    </div>
+  );
+}
 
 import { ErrorBoundary } from "./components/ErrorBoundary";
 

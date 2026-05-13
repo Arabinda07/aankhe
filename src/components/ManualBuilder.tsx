@@ -3,18 +3,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useState, useMemo } from 'react';
+import { lazy, Suspense, useEffect, useState, useMemo } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ModeId, ManualState, Visibility, StorageMode } from '../lib/schemaTypes';
 import { PROTOCOL_MANIFEST } from '../lib/protocolManifest';
 import { composeManual } from '../lib/manualComposer';
 import { FormRenderer } from './FormRenderer';
-import { ArtifactStudio } from './ArtifactStudio';
 import { ManualPreview } from './ManualPreview';
 import { PrivacyMeter } from './PrivacyMeter';
 import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
+
+const ArtifactStudio = lazy(() =>
+  import("./ArtifactStudio").then((module) => ({
+    default: module.ArtifactStudio,
+  }))
+);
 
 interface ManualBuilderProps {
   state: ManualState;
@@ -150,16 +155,25 @@ export function ManualBuilder({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
             >
-              <ArtifactStudio 
-                state={effectiveState}
-                url={window.location.href} 
-                storageMode={effectiveState.storageMode} 
-              />
+              <Suspense fallback={<ArtifactFallback />}>
+                <ArtifactStudio
+                  state={effectiveState}
+                  storageMode={effectiveState.storageMode}
+                />
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
+    </div>
+  );
+}
+
+function ArtifactFallback() {
+  return (
+    <div className="min-h-80 rounded-lg border border-ankahe-border bg-ankahe-surface p-8">
+      <p className="type-meta text-ankahe-muted">Preparing Artifact Studio</p>
     </div>
   );
 }

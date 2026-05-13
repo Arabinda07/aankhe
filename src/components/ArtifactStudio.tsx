@@ -11,6 +11,7 @@ import { generateSharedUrl } from "../lib/stateCompression";
 import { SoftButton } from "./SoftButton";
 import { ManualPreview } from "./ManualPreview";
 import { useArtifactExport } from "../hooks/useArtifactExport";
+import type { ManualViewMode } from "../lib/visibilityPolicy";
 import { Check, Copy, DownloadSimple, Printer, QrCode, ShareNetwork, WarningCircle } from "@phosphor-icons/react";
 import { QRCodeSVG } from "qrcode.react";
 import { cn } from "../lib/utils";
@@ -18,15 +19,14 @@ import { motion } from "motion/react";
 
 interface ArtifactStudioProps {
   state: ManualState;
-  url: string;
   storageMode: string;
 }
 
-export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps) {
+export function ArtifactStudio({ state, storageMode }: ArtifactStudioProps) {
   const artifactRef = useRef<HTMLDivElement>(null);
   const [showQR, setShowQR] = useState(false);
   
-  const [viewMode, setViewMode] = useState<"public" | "private">("public");
+  const [viewMode, setViewMode] = useState<ManualViewMode>("included");
   const [excludedSections, setExcludedSections] = useState<string[]>([]);
 
   const manual = useMemo(() => composeManual(state, { viewMode, excludedSections }), [state, viewMode, excludedSections]);
@@ -43,7 +43,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
     exportAsImage,
     printManual,
     copyLink
-  } = useArtifactExport(artifactRef, mode, secureSharedUrl);
+  } = useArtifactExport(artifactRef, mode, secureSharedUrl, viewMode);
 
   const toggleSection = (sectionId: string) => {
     setExcludedSections(prev => 
@@ -75,11 +75,11 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
           <div className="flex flex-wrap justify-center gap-4">
             <SoftButton onClick={exportAsImage} disabled={isExporting} className="gap-2 bg-ankahe-accent text-ankahe-on-accent border-none py-3">
               <DownloadSimple size={18} />
-              {isExporting ? "Exporting..." : "Save Image"}
+              {isExporting ? "Exporting..." : viewMode === "private" ? "Save Private Image" : "Save Included Image"}
             </SoftButton>
             <SoftButton variant="secondary" onClick={printManual} className="gap-2 bg-ankahe-surface text-ankahe-text py-3">
               <Printer size={18} />
-              Print / PDF
+              {viewMode === "private" ? "Print Private Copy" : "Print Included PDF"}
             </SoftButton>
           </div>
         </div>
@@ -91,9 +91,9 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
               <h3 className="type-panel-title text-ankahe-text mb-4">Manual view</h3>
               <div className="flex bg-ankahe-surface-soft p-1 rounded-sm w-fit border border-ankahe-border">
                 <button
-                  onClick={() => setViewMode("public")}
-                  aria-pressed={viewMode === "public"}
-                  className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "public" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
+                  onClick={() => setViewMode("included")}
+                  aria-pressed={viewMode === "included"}
+                  className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "included" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
                 >
                   Included only
                 </button>
@@ -106,9 +106,9 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
                 </button>
               </div>
               <p className="type-caption text-ankahe-muted mt-3">
-                {viewMode === "public" 
-                  ? "Previewing the manual made from included answers. Private answers are left out." 
-                  : "Previewing your own copy, including answers you marked private."}
+                {viewMode === "included"
+                  ? "Previewing the manual made from included answers. Private answers are left out."
+                  : "Previewing a local private copy. Saving or printing from here includes private answers."}
               </p>
             </div>
 
@@ -216,7 +216,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
               </div>
             </div>
             <p className="type-caption text-ankahe-muted pt-2">
-              Private answers appear only in your own copy. Included answers are used for share links, QR codes, images, and PDFs.
+              Share links and QR codes use only included answers. Images and PDFs use the view you choose above.
             </p>
           </div>
         </div>

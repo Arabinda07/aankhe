@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /manual/
+
+Sitemap: https://ankahe.vercel.app/sitemap.xml
