@@ -24,7 +24,7 @@ export function SiteFooter() {
             href="https://arabinda07.github.io/"
             target="_blank"
             rel="noreferrer noopener"
-            className="transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
+            className="inline-flex min-h-11 items-center transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
           >
             ARABINDA
           </a>
@@ -38,7 +38,7 @@ function FooterLink({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="inline-flex min-h-11 items-center transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
+      className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
     >
       {children}
     </Link>

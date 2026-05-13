@@ -49,7 +49,7 @@ export function Switchboard({
               <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
                 A guide to{" "}
                 <span className="font-display italic font-normal text-ankahe-accent">your</span>{" "}
-                <span className="font-display italic font-normal">mind</span>
+                <span className="font-display italic font-normal text-ankahe-accent">mind</span>
               </h1>
               <p className="type-lead text-ankahe-muted">
                 Write what usually goes unsaid, then shape it into a manual worth keeping.
@@ -106,11 +106,23 @@ export function Switchboard({
 
               <div className="space-y-8">
                 <DocumentSection
-                  label="When I am quiet"
+                  accessibleLabel="When I am quiet"
+                  label={
+                    <>
+                      <span>When I am</span>
+                      <span>quiet</span>
+                    </>
+                  }
                   text="I may be thinking, not withdrawing. A steady question usually helps more than pressure to answer quickly."
                 />
                 <DocumentSection
-                  label="How care reaches me"
+                  accessibleLabel="How care reaches me"
+                  label={
+                    <>
+                      <span>How care</span>
+                      <span>reaches me</span>
+                    </>
+                  }
                   text="Specific, practical care lands best. I trust warmth that leaves room for me to respond in my own time."
                 />
                 <div className="grid gap-3 border-t border-ankahe-border pt-7 text-sm sm:grid-cols-3">
@@ -127,7 +139,6 @@ export function Switchboard({
       <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
         <div className="grid gap-10 lg:gap-8 lg:grid-cols-12 lg:items-start">
           <div className="flex flex-col gap-10 lg:col-span-4 lg:pt-2 lg:pr-4">
-            <h2 className="type-eyebrow text-ankahe-accent">Start a manual</h2>
             <StoragePanel 
               storageMode={storageMode} 
               onStorageModeChange={onStorageModeChange} 
@@ -198,10 +209,18 @@ function PromiseItem({ icon, title, text }: { icon: React.ReactNode; title: stri
   );
 }
 
-function DocumentSection({ label, text }: { label: string; text: string }) {
+function DocumentSection({
+  accessibleLabel,
+  label,
+  text,
+}: {
+  accessibleLabel: string;
+  label: React.ReactNode;
+  text: string;
+}) {
   return (
     <section className="grid gap-3 sm:grid-cols-[0.7fr_1.3fr] sm:gap-7">
-      <h3 className="type-meta text-ankahe-muted">{label}</h3>
+      <h3 aria-label={accessibleLabel} className="type-meta flex flex-col text-ankahe-muted">{label}</h3>
       <p className="type-artifact-prose text-ankahe-text">{text}</p>
     </section>
   );

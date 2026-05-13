@@ -24,7 +24,7 @@ export function AnkaheMark({
       <span
         aria-hidden="true"
         className={cn(
-          "grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-ankahe-accent text-ankahe-on-accent shadow-[0_10px_24px_color-mix(in_oklch,var(--color-accent)_18%,transparent)] transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:-rotate-2 group-hover:scale-[1.03]",
+          "grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-ankahe-accent text-ankahe-on-accent shadow-[0_10px_24px_color-mix(in_oklch,var(--color-accent)_18%,transparent)] transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:-rotate-2 group-hover:scale-[1.03]",
           tileClassName
         )}
       >
