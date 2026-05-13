@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from "react";
-import { ModeConfig, ManualState, Visibility } from "../lib/schemaTypes";
+import { ModeConfig, Question, Visibility } from "../lib/schemaTypes";
 import { QuestionStep } from "./QuestionStep";
 import { cn } from "../lib/utils";
 import { motion, AnimatePresence } from "motion/react";
@@ -12,7 +11,8 @@ import { useStepNavigation } from "../hooks/useStepNavigation";
 
 interface FormRendererProps {
   config: ModeConfig;
-  state: ManualState;
+  getAnswer: (questionId: string) => string | string[] | number | undefined;
+  getVisibility: (question: Question) => Visibility;
   updateAnswer: (id: string, val: any) => void;
   updateVisibility: (id: string, vis: Visibility) => void;
   onFinish: () => void;
@@ -20,7 +20,8 @@ interface FormRendererProps {
 
 export function FormRenderer({
   config,
-  state,
+  getAnswer,
+  getVisibility,
   updateAnswer,
   updateVisibility,
   onFinish
@@ -75,9 +76,9 @@ export function FormRenderer({
         >
           <QuestionStep
             question={currentQuestion}
-            value={state.answers[currentQuestion.id]}
+            value={getAnswer(currentQuestion.id)}
             onChange={(val) => updateAnswer(currentQuestion.id, val)}
-            visibility={state.visibilityByQuestion[currentQuestion.id] || currentQuestion.defaultVisibility}
+            visibility={getVisibility(currentQuestion)}
             onVisibilityChange={(vis) => updateVisibility(currentQuestion.id, vis)}
             onNext={next}
             onBack={back}
@@ -100,7 +101,7 @@ export function FormRenderer({
             <span
               className={cn(
                 "block h-2 rounded-[3px] transition-all",
-                i === currentStepIndex ? "w-6 bg-ankahe-accent-dark" : (state.answers[q.id] ? "w-2 bg-ankahe-accent/60" : "w-2 bg-ankahe-surface-soft group-hover:bg-ankahe-border")
+                i === currentStepIndex ? "w-6 bg-ankahe-accent-dark" : (getAnswer(q.id) ? "w-2 bg-ankahe-accent/60" : "w-2 bg-ankahe-surface-soft group-hover:bg-ankahe-border")
               )}
             />
           </button>

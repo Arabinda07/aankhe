@@ -60,6 +60,10 @@
   --ankahe-surface: oklch(0.983 0.012 68);
   --ankahe-surface-raised: oklch(0.965 0.014 55);
   --ankahe-surface-muted: oklch(0.925 0.022 50);
+  --ankahe-surface-translucent: color-mix(in oklch, var(--ankahe-surface-muted) 30%, transparent);
+  --ankahe-surface-halo: color-mix(in oklch, var(--ankahe-surface-muted) 40%, transparent);
+  --ankahe-surface-halo-hover: color-mix(in oklch, var(--ankahe-surface-muted) 60%, transparent);
+  --ankahe-surface-preview: color-mix(in oklch, var(--ankahe-surface-muted) 50%, transparent);
   --ankahe-text: oklch(0.239 0.02 357);
   --ankahe-text-muted: oklch(0.504 0.024 7);
   --ankahe-text-soft: oklch(0.64 0.031 14);
@@ -88,6 +92,10 @@
   --color-surface: var(--ankahe-surface);
   --color-surface-raised: var(--ankahe-surface-raised);
   --color-surface-muted: var(--ankahe-surface-muted);
+  --color-surface-translucent: var(--ankahe-surface-translucent);
+  --color-surface-halo: var(--ankahe-surface-halo);
+  --color-surface-halo-hover: var(--ankahe-surface-halo-hover);
+  --color-surface-preview: var(--ankahe-surface-preview);
   --color-text: var(--ankahe-text);
   --color-text-muted: var(--ankahe-text-muted);
   --color-text-soft: var(--ankahe-text-soft);
@@ -120,6 +128,10 @@
   --ankahe-surface: oklch(0.219 0.014 356);
   --ankahe-surface-raised: oklch(0.239 0.016 350);
   --ankahe-surface-muted: oklch(0.274 0.019 350);
+  --ankahe-surface-translucent: color-mix(in oklch, var(--ankahe-surface-muted) 30%, transparent);
+  --ankahe-surface-halo: color-mix(in oklch, var(--ankahe-surface-muted) 40%, transparent);
+  --ankahe-surface-halo-hover: color-mix(in oklch, var(--ankahe-surface-muted) 60%, transparent);
+  --ankahe-surface-preview: color-mix(in oklch, var(--ankahe-surface-muted) 50%, transparent);
   --ankahe-text: oklch(0.951 0.012 60);
   --ankahe-text-muted: oklch(0.809 0.021 359);
   --ankahe-text-soft: oklch(0.685 0.032 359);
@@ -155,6 +167,10 @@
   --color-surface: var(--ankahe-surface);
   --color-surface-raised: var(--ankahe-surface-raised);
   --color-surface-muted: var(--ankahe-surface-muted);
+  --color-surface-translucent: var(--ankahe-surface-translucent);
+  --color-surface-halo: var(--ankahe-surface-halo);
+  --color-surface-halo-hover: var(--ankahe-surface-halo-hover);
+  --color-surface-preview: var(--ankahe-surface-preview);
   --color-text: var(--ankahe-text);
   --color-text-muted: var(--ankahe-text-muted);
   --color-text-soft: var(--ankahe-text-soft);
@@ -183,6 +199,10 @@
   --color-ankahe-bg: var(--color-page);
   --color-ankahe-surface: var(--color-surface);
   --color-ankahe-surface-soft: var(--color-surface-muted);
+  --color-ankahe-surface-translucent: var(--color-surface-translucent);
+  --color-ankahe-surface-halo: var(--color-surface-halo);
+  --color-ankahe-surface-halo-hover: var(--color-surface-halo-hover);
+  --color-ankahe-surface-preview: var(--color-surface-preview);
   --color-ankahe-text: var(--color-text);
   --color-ankahe-muted: var(--color-text-muted);
   --color-ankahe-border: var(--color-border);

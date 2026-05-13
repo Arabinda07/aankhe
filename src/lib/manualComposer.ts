@@ -5,19 +5,25 @@
 
 import { ComposedManual, ComposedSection, ManualState } from "./schemaTypes";
 import { PROTOCOL_MANIFEST } from "./protocolManifest";
-import { canAnswerAppearInManual, getAnswerVisibility, getVisibilityCounts } from "./visibilityPolicy";
+import { createVisibilityPolicy } from "./visibilityPolicy";
 import type { ManualViewMode } from "./visibilityPolicy";
+
+export interface ManualComposeOptions {
+  viewMode?: ManualViewMode;
+  excludedSections?: string[];
+}
 
 export function composeManual(
   state: ManualState, 
-  options: { viewMode?: ManualViewMode, excludedSections?: string[] } = {}
+  options: ManualComposeOptions = {}
 ): ComposedManual {
   const { viewMode = "private", excludedSections = [] } = options;
   const config = PROTOCOL_MANIFEST[state.mode];
   const answers = state.answers;
+  const visibilityPolicy = createVisibilityPolicy(state);
 
   const answeredQuestions = Object.keys(answers);
-  const visibilityCounts = getVisibilityCounts(state);
+  const visibilityCounts = visibilityPolicy.getCounts();
 
   // Manual generation logic
   const composedSections: ComposedSection[] = config.sections
@@ -30,8 +36,7 @@ export function composeManual(
       
       sectionAnswers.forEach(q => {
         const val = answers[q.id];
-        const visibility = getAnswerVisibility(state, q);
-        if (!canAnswerAppearInManual(visibility, viewMode)) return;
+        if (!visibilityPolicy.canAppearInManual(q, viewMode)) return;
 
         let formattedAnswer = "";
         if (Array.isArray(val)) {

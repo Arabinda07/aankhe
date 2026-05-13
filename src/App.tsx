@@ -21,15 +21,14 @@ const ManualBuilder = lazy(() =>
 
 function AppContent() {
   const {
-    state,
+    storageMode,
     isInitialized,
     hashError,
     clearHashError,
     setMode,
-    updateAnswer,
-    updateVisibility,
-    setStorageMode,
     resetState,
+    setStorageMode,
+    getManualForRoute,
   } = useManualState();
   const navigate = useNavigate();
   const location = useLocation();
@@ -84,7 +83,7 @@ function AppContent() {
                     </div>
                   )}
                   <Switchboard
-                    storageMode={state.storageMode}
+                    storageMode={storageMode}
                     onStorageModeChange={setStorageMode}
                     onStart={handleStart}
                     onTrySample={handleTrySample}
@@ -99,11 +98,7 @@ function AppContent() {
               element={
                 <Suspense fallback={<RouteFallback label="Preparing manual" />}>
                   <ManualBuilder
-                    state={state}
-                    setMode={setMode}
-                    updateAnswer={updateAnswer}
-                    updateVisibility={updateVisibility}
-                    setStorageMode={setStorageMode}
+                    getManualForRoute={getManualForRoute}
                     onBack={() => navigate("/")}
                   />
                 </Suspense>

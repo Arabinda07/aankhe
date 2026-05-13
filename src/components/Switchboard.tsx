@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ArrowRight, FileText, SealCheck, ShieldCheck, Sparkle } from "@phosphor-icons/react";
+import { ArrowRight, SealCheck, ShieldCheck, Sparkle } from "@phosphor-icons/react";
 import type React from "react";
 import { ModeId, StorageMode } from "../lib/schemaTypes";
 import { SAMPLE_PERSONAL_STATE, SAMPLE_WORK_STATE } from "../lib/sampleState";
@@ -49,7 +49,7 @@ export function Switchboard({
               <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
                 A guide to{" "}
                 <span className="font-display italic font-normal text-ankahe-accent">your</span>{" "}
-                mind
+                <span className="font-display italic font-normal">mind</span>
               </h1>
               <p className="type-lead text-ankahe-muted">
                 Write what usually goes unsaid, then shape it into a manual worth keeping.
@@ -77,9 +77,8 @@ export function Switchboard({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <PromiseItem icon={<ShieldCheck size={20} weight="regular" />} title="No account" text="No backend or database." />
-            <PromiseItem icon={<SealCheck size={20} weight="regular" />} title="Your choice" text="Included, private, or omitted." />
-            <PromiseItem icon={<FileText size={20} weight="regular" />} title="Real artifact" text="Link, QR, image, or PDF." />
+            <PromiseItem icon={<ShieldCheck size={20} weight="regular" />} title="Private by default" text="No account, backend, or database." />
+            <PromiseItem icon={<SealCheck size={20} weight="regular" />} title="You choose what leaves" text="Included answers can become a link, QR, image, or PDF." />
           </motion.ul>
         </div>
 
@@ -90,7 +89,7 @@ export function Switchboard({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="absolute -inset-3 rounded-shell border border-ankahe-border/60 bg-ankahe-surface-muted/40 transition-colors duration-500 group-hover:bg-ankahe-surface-muted/60" />
+          <div className="absolute -inset-3 rounded-shell border border-ankahe-border/60 bg-ankahe-surface-halo transition-colors duration-500 group-hover:bg-ankahe-surface-halo-hover" />
           <div className="relative rounded-shell border border-ankahe-border bg-ankahe-surface p-5 shadow-[0_24px_70px_color-mix(in_oklch,var(--color-accent)_10%,transparent)] transition-shadow duration-500 group-hover:shadow-[0_32px_80px_color-mix(in_oklch,var(--color-accent)_14%,transparent)]">
             <div className="rounded-xl border border-ankahe-border bg-ankahe-bg px-7 py-8 md:px-9 md:py-10">
               <div className="mb-9 flex items-start justify-between gap-6 border-b border-ankahe-border pb-8">
@@ -128,7 +127,7 @@ export function Switchboard({
       <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
         <div className="grid gap-10 lg:gap-8 lg:grid-cols-12 lg:items-start">
           <div className="flex flex-col gap-10 lg:col-span-4 lg:pt-2 lg:pr-4">
-            <h2 className="type-eyebrow text-ankahe-accent">Choose a context</h2>
+            <h2 className="type-eyebrow text-ankahe-accent">Start a manual</h2>
             <StoragePanel 
               storageMode={storageMode} 
               onStorageModeChange={onStorageModeChange} 
@@ -168,19 +167,19 @@ export function Switchboard({
 
 function StoragePanel({ storageMode, onStorageModeChange, className }: { storageMode: StorageMode, onStorageModeChange: (mode: StorageMode) => void, className?: string }) {
   return (
-    <div className={cn("space-y-6 rounded-2xl bg-ankahe-surface-muted/30 border border-ankahe-border/60 p-6 md:p-8", className)}>
+    <div className={cn("space-y-6 rounded-2xl bg-ankahe-surface-translucent border border-ankahe-border/60 p-6 md:p-8", className)}>
       <div className="space-y-2">
-        <p className="type-eyebrow text-ankahe-muted">Where answers live</p>
+        <p className="type-eyebrow text-ankahe-muted">Storage</p>
         <h3 className="font-sans text-xl font-bold tracking-tight text-ankahe-text md:text-2xl leading-tight">
-          Nothing is stored unless you put it in a link.
+          Keep it in this tab, or carry included answers in the link.
         </h3>
       </div>
       <div className="space-y-5">
         <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
         <p className="type-caption text-ankahe-muted">
           {storageMode === "url"
-            ? "Only answers marked included are saved inside your link. Private and omitted answers are left out."
-            : "Answers live only in this tab's memory. They vanish if you refresh or close."}
+            ? "Private and omitted answers stay out."
+            : "Refreshing or closing the tab clears the draft."}
         </p>
       </div>
     </div>

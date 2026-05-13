@@ -4,15 +4,16 @@
  */
 
 import { Info, ShieldCheck } from "@phosphor-icons/react";
-import { ManualState } from "../lib/schemaTypes";
+import { StorageMode } from "../lib/schemaTypes";
 import { getCurrentURLSize } from "../lib/urlSize";
 
 interface PrivacyMeterProps {
-  state: ManualState;
+  storageMode: StorageMode;
+  answeredCount: number;
   compact?: boolean;
 }
 
-export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
+export function PrivacyMeter({ storageMode, answeredCount, compact }: PrivacyMeterProps) {
   const { length, category } = getCurrentURLSize();
   const urlStatus = {
     safe: { label: "Link Ready", color: "text-ankahe-accent" },
@@ -25,10 +26,10 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
       <div className="type-meta flex items-center gap-4 text-ankahe-muted">
         <div className="flex items-center gap-1.5">
           <ShieldCheck size={14} className="text-ankahe-accent" />
-          No Account / No Database
+          Local first
         </div>
         <div className="h-1 w-1 rounded-[2px] bg-ankahe-border" />
-        <div>{state.storageMode === "url" ? "Save in link" : "Memory only"}</div>
+        <div>{storageMode === "url" ? "Save in link" : "Memory only"}</div>
       </div>
     );
   }
@@ -47,7 +48,7 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
         <div className="type-caption flex justify-between items-center">
           <span className="text-ankahe-muted">Answer storage</span>
           <span className="font-semibold text-ankahe-text">
-            {state.storageMode === "url" ? "Save in link" : "Memory only"}
+            {storageMode === "url" ? "Save in link" : "Memory only"}
           </span>
         </div>
         
@@ -59,11 +60,11 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
         <div className="type-caption flex justify-between items-center">
           <span className="text-ankahe-muted">Visibility</span>
           <span className="font-semibold text-ankahe-text type-tabular">
-            {Object.keys(state.answers).length} Answered
+            {answeredCount} Answered
           </span>
         </div>
 
-        {state.storageMode === "url" && (
+        {storageMode === "url" && (
           <div className="type-caption flex justify-between items-center border-t border-ankahe-border pt-3">
             <span className="text-ankahe-muted">URL Integrity</span>
             <span className={urlStatus[category].color + " font-semibold type-tabular"}>

@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect, useState, useMemo } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { ModeId, ManualState, Visibility, StorageMode } from '../lib/schemaTypes';
-import { PROTOCOL_MANIFEST } from '../lib/protocolManifest';
-import { composeManual } from '../lib/manualComposer';
+import { ManualWorkspace } from '../hooks/useManualState';
+import type { ModeId } from '../lib/schemaTypes';
 import { FormRenderer } from './FormRenderer';
 import { ManualPreview } from './ManualPreview';
 import { PrivacyMeter } from './PrivacyMeter';
@@ -22,46 +21,25 @@ const ArtifactStudio = lazy(() =>
 );
 
 interface ManualBuilderProps {
-  state: ManualState;
-  setMode: (mode: ModeId) => void;
-  updateAnswer: (id: string, val: any) => void;
-  updateVisibility: (id: string, vis: Visibility) => void;
-  setStorageMode: (mode: StorageMode) => void;
+  getManualForRoute: (routeMode: string | undefined) => ManualWorkspace | null;
   onBack: () => void;
 }
 
 export function ManualBuilder({
-  state,
-  setMode,
-  updateAnswer,
-  updateVisibility,
-  setStorageMode,
+  getManualForRoute,
   onBack,
 }: ManualBuilderProps) {
   const { mode } = useParams<{ mode: ModeId }>();
-  const isSupportedMode = mode === "me" || mode === "work";
-  const manualMode: "me" | "work" = isSupportedMode ? mode : "me";
-  const config = PROTOCOL_MANIFEST[manualMode];
   const [view, setView] = useState<"build" | "artifact">("build");
-  const effectiveState = useMemo<ManualState>(() => {
-    if (!isSupportedMode || state.mode === manualMode) return state;
-
-    return {
-      ...state,
-      mode: manualMode,
-      answers: {},
-      visibilityByQuestion: {},
-    };
-  }, [isSupportedMode, manualMode, state]);
-  const composed = useMemo(() => composeManual(effectiveState), [effectiveState]);
+  const manual = getManualForRoute(mode);
+  const manualMode = manual?.mode;
+  const composed = manual?.composeManual();
 
   useEffect(() => {
-    if (isSupportedMode && state.mode !== manualMode) {
-      setMode(manualMode);
-    }
-  }, [isSupportedMode, manualMode, setMode, state.mode]);
+    manual?.activate();
+  }, [manualMode]);
 
-  if (!isSupportedMode) {
+  if (!manual || !composed) {
     return <Navigate to="/" />;
   }
 
@@ -103,7 +81,11 @@ export function ManualBuilder({
           </div>
 
           <div className="hidden md:block">
-            <PrivacyMeter state={state} compact />
+            <PrivacyMeter
+              storageMode={manual.storageMode}
+              answeredCount={manual.visibilityCounts.answeredCount}
+              compact
+            />
           </div>
         </div>
       </nav>
@@ -121,10 +103,11 @@ export function ManualBuilder({
               {/* Form Side */}
               <div className="space-y-12">
                 <FormRenderer
-                  config={config}
-                  state={effectiveState}
-                  updateAnswer={updateAnswer}
-                  updateVisibility={updateVisibility}
+                  config={manual.config}
+                  getAnswer={manual.getAnswer}
+                  getVisibility={manual.getVisibility}
+                  updateAnswer={manual.updateAnswer}
+                  updateVisibility={manual.updateVisibility}
                   onFinish={() => setView("artifact")}
                 />
               </div>
@@ -135,17 +118,20 @@ export function ManualBuilder({
                   <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview
                   </h3>
-                  <div className="rounded-xl border border-ankahe-border bg-ankahe-surface-muted/50 p-1.5">
+                  <div className="rounded-xl border border-ankahe-border bg-ankahe-surface-preview p-1.5">
                     <div className="overflow-hidden rounded-lg border border-ankahe-border bg-ankahe-bg">
                       <ManualPreview
                         manual={composed}
-                        mode={effectiveState.mode}
+                        mode={manual.mode}
                         className="h-[600px] border-none shadow-none"
                       />
                     </div>
                   </div>
                 </div>
-                <PrivacyMeter state={effectiveState} />
+                <PrivacyMeter
+                  storageMode={manual.storageMode}
+                  answeredCount={manual.visibilityCounts.answeredCount}
+                />
               </div>
             </motion.div>
           ) : (
@@ -157,8 +143,7 @@ export function ManualBuilder({
             >
               <Suspense fallback={<ArtifactFallback />}>
                 <ArtifactStudio
-                  state={effectiveState}
-                  storageMode={effectiveState.storageMode}
+                  manual={manual}
                 />
               </Suspense>
             </motion.div>

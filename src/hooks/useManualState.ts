@@ -4,19 +4,45 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { ManualState, ModeId, StorageMode, Visibility } from "../lib/schemaTypes";
-import { readStateFromHash, writeStateToHash, clearStateFromHash } from "../lib/stateCompression";
+import { ComposedManual, ManualState, ModeConfig, ModeId, Question, StorageMode, Visibility } from "../lib/schemaTypes";
+import { PROTOCOL_MANIFEST } from "../lib/protocolManifest";
+import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
+import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
+import { readStateFromHash, writeStateToHash, clearStateFromHash, generateSharedUrl } from "../lib/stateCompression";
 
-const DEFAULT_STATE: ManualState = {
-  mode: "me",
-  answers: {},
-  visibilityByQuestion: {},
-  storageMode: "memory",
-  updatedAt: new Date().toISOString()
-};
+type ManualAnswer = ManualState["answers"][string];
+
+export interface ManualWorkspace {
+  mode: ModeId;
+  storageMode: StorageMode;
+  config: ModeConfig;
+  visibilityCounts: VisibilityCounts;
+  getAnswer: (questionId: string) => ManualAnswer | undefined;
+  getVisibility: (question: Question) => Visibility;
+  composeManual: (options?: ManualComposeOptions) => ComposedManual;
+  getShareUrl: () => string;
+  activate: () => void;
+  updateAnswer: (questionId: string, value: ManualAnswer) => void;
+  updateVisibility: (questionId: string, visibility: Visibility) => void;
+  setStorageMode: (storageMode: StorageMode) => void;
+}
+
+function createDefaultState(mode: ModeId = "me", storageMode: StorageMode = "memory"): ManualState {
+  return {
+    mode,
+    answers: {},
+    visibilityByQuestion: {},
+    storageMode,
+    updatedAt: new Date().toISOString()
+  };
+}
+
+function isSupportedManualMode(mode: string | undefined): mode is "me" | "work" {
+  return mode === "me" || mode === "work";
+}
 
 export function useManualState() {
-  const [state, setState] = useState<ManualState>(DEFAULT_STATE);
+  const [state, setState] = useState<ManualState>(() => createDefaultState());
   const [isInitialized, setIsInitialized] = useState(false);
   const [hashError, setHashError] = useState(false);
 
@@ -55,7 +81,7 @@ export function useManualState() {
     }));
   }, []);
 
-  const updateAnswer = useCallback((questionId: string, value: string | string[] | number) => {
+  const updateAnswer = useCallback((questionId: string, value: ManualAnswer) => {
     setState(prev => ({
       ...prev,
       answers: { ...prev.answers, [questionId]: value },
@@ -72,11 +98,11 @@ export function useManualState() {
   }, []);
 
   const setStorageMode = useCallback((storageMode: StorageMode) => {
-    setState(prev => ({ ...prev, storageMode }));
+    setState(prev => ({ ...prev, storageMode, updatedAt: new Date().toISOString() }));
   }, []);
 
   const resetState = useCallback((newState?: ManualState) => {
-    setState(newState || DEFAULT_STATE);
+    setState(newState || createDefaultState());
   }, []);
 
   const clearHashError = useCallback(() => {
@@ -84,15 +110,44 @@ export function useManualState() {
     clearStateFromHash();
   }, []);
 
+  const getManualForRoute = useCallback((routeMode: string | undefined): ManualWorkspace | null => {
+    if (!isSupportedManualMode(routeMode)) return null;
+
+    const workingState =
+      state.mode === routeMode
+        ? state
+        : createDefaultState(routeMode, state.storageMode);
+    const config = PROTOCOL_MANIFEST[routeMode];
+    const visibilityPolicy = createVisibilityPolicy(workingState);
+
+    return {
+      mode: workingState.mode,
+      storageMode: workingState.storageMode,
+      config,
+      visibilityCounts: visibilityPolicy.getCounts(),
+      getAnswer: (questionId) => workingState.answers[questionId],
+      getVisibility: visibilityPolicy.visibilityFor,
+      composeManual: (options) => buildComposedManual(workingState, options),
+      getShareUrl: () => generateSharedUrl(workingState),
+      activate: () => {
+        if (state.mode !== routeMode) {
+          setMode(routeMode);
+        }
+      },
+      updateAnswer,
+      updateVisibility,
+      setStorageMode,
+    };
+  }, [setMode, setStorageMode, state, updateAnswer, updateVisibility]);
+
   return {
-    state,
+    storageMode: state.storageMode,
     isInitialized,
     hashError,
     clearHashError,
     setMode,
-    updateAnswer,
-    updateVisibility,
     setStorageMode,
-    resetState
+    resetState,
+    getManualForRoute
   };
 }
