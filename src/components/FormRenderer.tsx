@@ -57,9 +57,9 @@ export function FormRenderer({
         {/* Progress Bar */}
         <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-ankahe-surface-soft">
           <motion.div 
-            className={cn("h-full bg-ankahe-accent")}
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
+            className={cn("h-full w-full bg-ankahe-accent origin-left")}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: progress / 100 }}
             transition={{ type: "spring", bounce: 0, duration: 0.5 }}
           />
         </div>
@@ -100,7 +100,7 @@ export function FormRenderer({
           >
             <span
               className={cn(
-                "block h-2 rounded-[3px] transition-all",
+                "block h-2 rounded-[3px] transition-all group-focus-visible:bg-ankahe-accent-dark",
                 i === currentStepIndex ? "w-6 bg-ankahe-accent-dark" : (getAnswer(q.id) ? "w-2 bg-ankahe-accent/60" : "w-2 bg-ankahe-surface-soft group-hover:bg-ankahe-border")
               )}
             />

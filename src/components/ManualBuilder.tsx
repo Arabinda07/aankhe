@@ -9,7 +9,6 @@ import { ManualWorkspace } from '../hooks/useManualState';
 import type { ModeId } from '../lib/schemaTypes';
 import { FormRenderer } from './FormRenderer';
 import { ManualPreview } from './ManualPreview';
-import { PrivacyMeter } from './PrivacyMeter';
 import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '../lib/utils';
 import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
@@ -122,10 +121,6 @@ export function ManualBuilder({
                     </div>
                   </div>
                 </div>
-                <PrivacyMeter
-                  storageMode={manual.storageMode}
-                  answeredCount={manual.visibilityCounts.answeredCount}
-                />
               </div>
             </motion.div>
           ) : (

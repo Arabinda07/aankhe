@@ -13,33 +13,35 @@ export function SiteHeader() {
         >
           <AnkaheMark wordmarkClassName="hidden sm:inline" />
         </Link>
-        <div className="flex min-w-0 items-center gap-1 sm:gap-4">
-          <nav className="type-ui-label flex min-w-0 gap-1 text-ankahe-muted sm:gap-5">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <nav className="type-ui-label flex items-center gap-2 sm:gap-5 text-ankahe-muted">
             <Link
               to="/how-it-works"
-              className="min-h-11 inline-flex items-center justify-center px-0.5 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2 sm:px-1"
+              className="hidden sm:inline-flex min-h-11 items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               How it works
             </Link>
             <Link
               to="/privacy"
-              className="min-h-11 inline-flex items-center justify-center px-0.5 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2 sm:px-1"
+              className="hidden sm:inline-flex min-h-11 items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               Privacy
             </Link>
+            <div className="hidden sm:block w-px h-4 bg-ankahe-border mx-1" aria-hidden="true" />
             <Link
               to="/manual/me"
-              className="min-h-11 min-w-11 inline-flex items-center justify-center px-0.5 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2 sm:px-1"
+              className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               Me
             </Link>
             <Link
               to="/manual/work"
-              className="min-h-11 min-w-11 inline-flex items-center justify-center px-0.5 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2 sm:px-1"
+              className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               Work
             </Link>
           </nav>
+          <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
           <ThemeSwitcher />
         </div>
       </div>

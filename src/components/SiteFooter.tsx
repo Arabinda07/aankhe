@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 md:min-h-36 md:flex-row md:items-center md:justify-between md:py-0">
         <nav
           aria-label="Footer"
-          className="type-footer-nav flex flex-wrap gap-x-9 gap-y-3 text-ankahe-footer-text"
+          className="type-footer-nav flex flex-col items-start gap-y-1 sm:flex-row sm:items-center sm:flex-wrap sm:gap-x-9 sm:gap-y-3 text-ankahe-footer-text"
         >
           <FooterLink to="/">Home</FooterLink>
           <FooterLink to="/how-it-works">How it works</FooterLink>
@@ -38,7 +38,7 @@ function FooterLink({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="inline-flex min-h-11 min-w-11 items-center justify-center px-1 transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
+      className="inline-flex min-h-11 items-center justify-start sm:justify-center px-1 sm:px-2 transition-colors duration-200 ease-[var(--ease-out-expo)] hover:text-ankahe-footer-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-footer-focus focus-visible:ring-offset-2 focus-visible:ring-offset-ankahe-footer"
     >
       {children}
     </Link>

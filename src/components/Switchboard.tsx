@@ -6,10 +6,8 @@
 import { ArrowRight, SealCheck, ShieldCheck, Sparkle } from "@phosphor-icons/react";
 import type React from "react";
 import { ModeId, StorageMode } from "../lib/schemaTypes";
-import { SAMPLE_PERSONAL_STATE, SAMPLE_WORK_STATE } from "../lib/sampleState";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
-import { StorageModeToggle } from "./StorageModeToggle";
 import { motion } from "motion/react";
 
 interface SwitchboardProps {
@@ -20,15 +18,7 @@ interface SwitchboardProps {
   onStorageModeChange: (mode: StorageMode) => void;
 }
 
-interface ModeCardProps {
-  id: "me" | "work";
-  title: string;
-  label: string;
-  description: string;
-  tone: "lac" | "sandal";
-  onClick: () => void;
-  onSampleClick: () => void;
-}
+
 
 export function Switchboard({
   onStart,
@@ -138,63 +128,6 @@ export function Switchboard({
         </motion.aside>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
-        <div className="grid gap-10 lg:gap-8 lg:grid-cols-12 lg:items-start">
-          <div className="flex flex-col gap-10 lg:col-span-4 lg:pt-2 lg:pr-4">
-            <StoragePanel 
-              storageMode={storageMode} 
-              onStorageModeChange={onStorageModeChange} 
-              className="hidden lg:block"
-            />
-          </div>
-          <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2 lg:pt-2">
-            <ModeCard
-              id="me"
-              title="Me"
-              label="For care and connection"
-              description="Write context for people who know you personally, before they have to guess."
-              tone="lac"
-              onClick={() => onStart("me")}
-              onSampleClick={() => onTrySample(SAMPLE_PERSONAL_STATE)}
-            />
-            <ModeCard
-              id="work"
-              title="Work"
-              label="For collaboration"
-              description="Share how you focus, decide, communicate, and build trust at work."
-              tone="sandal"
-              onClick={() => onStart("work")}
-              onSampleClick={() => onTrySample(SAMPLE_WORK_STATE)}
-            />
-          </div>
-          <StoragePanel 
-            storageMode={storageMode} 
-            onStorageModeChange={onStorageModeChange} 
-            className="lg:hidden lg:col-span-12"
-          />
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function StoragePanel({ storageMode, onStorageModeChange, className }: { storageMode: StorageMode, onStorageModeChange: (mode: StorageMode) => void, className?: string }) {
-  return (
-    <div className={cn("space-y-6 rounded-md bg-ankahe-surface-translucent border border-ankahe-border/60 p-6 md:p-8", className)}>
-      <div className="space-y-2">
-        <p className="type-eyebrow text-ankahe-muted">Storage</p>
-        <h3 className="font-sans text-xl font-bold tracking-tight text-ankahe-text md:text-2xl leading-tight">
-          Keep it in this tab, or carry included answers in the link.
-        </h3>
-      </div>
-      <div className="space-y-5">
-        <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-        <p className="type-caption text-ankahe-muted">
-          {storageMode === "url"
-            ? "Private and omitted answers stay out."
-            : "Refreshing or closing the tab clears the draft."}
-        </p>
-      </div>
     </div>
   );
 }
@@ -233,50 +166,5 @@ function VisibilityChip({ label, className }: { label: string; className?: strin
     <span className={cn("type-caption inline-flex min-h-9 items-center justify-center rounded-sm px-3 font-semibold", className)}>
       {label}
     </span>
-  );
-}
-
-function ModeCard({
-  title,
-  label,
-  description,
-  tone,
-  onClick,
-  onSampleClick,
-}: ModeCardProps) {
-  const toneClasses = {
-    lac: "border-ankahe-accent/30 bg-ankahe-accent-soft/35 text-ankahe-accent-dark",
-    sandal: "border-sandal/30 bg-sandal-soft/65 text-sandal",
-  };
-
-  return (
-    <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      className="rounded-md border border-ankahe-border bg-ankahe-surface p-6 md:p-8"
-    >
-      <div className="flex min-h-[300px] flex-col justify-between gap-10">
-        <div className="space-y-5">
-          <span className={cn("type-caption inline-flex rounded-md border px-3 py-2 font-bold", toneClasses[tone])}>
-            {label}
-          </span>
-          <div className="space-y-4">
-            <h3 className="type-mode-title text-ankahe-text">{title}</h3>
-            <p className="type-lead text-ankahe-muted">{description}</p>
-          </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-4 border-t border-ankahe-border pt-6">
-          <SoftButton size="md" onClick={onClick} icon={<ArrowRight size={16} />}>
-            Start manual
-          </SoftButton>
-          <button
-            onClick={onSampleClick}
-            className="type-ui-label inline-flex min-h-11 items-center px-1 text-ankahe-muted underline underline-offset-4 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
-          >
-            See a sample
-          </button>
-        </div>
-      </div>
-    </motion.article>
   );
 }
