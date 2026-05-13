@@ -25,7 +25,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
             : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
         )}
       >
-        <Monitor size={16} />
+        <Monitor size={18} weight="light" />
         Memory Only
       </button>
       <button
@@ -38,7 +38,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
             : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
         )}
       >
-        <Link size={16} />
+        <Link size={18} weight="light" />
         Save in Link
       </button>
     </div>

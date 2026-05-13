@@ -40,7 +40,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         <div className="min-h-screen flex items-center justify-center bg-ankahe-bg p-6">
           <div className="paper-card max-w-md w-full p-8 space-y-6 text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-ankahe-danger-soft text-ankahe-danger">
-              <ShieldWarning size={32} />
+              <ShieldWarning size={36} weight="light" />
             </div>
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-ankahe-text">Something went wrong</h2>

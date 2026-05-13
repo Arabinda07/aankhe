@@ -15,10 +15,10 @@ export function PrivacyPage() {
       lead="You choose what leaves the page."
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <InfoCard icon={<LockKey size={22} />} title="Memory only">
+        <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory only">
           Answers live in this tab's React memory. Refresh or close the tab and they are gone.
         </InfoCard>
-        <InfoCard icon={<LinkSimple size={22} />} title="Save in link">
+        <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in link">
           Included answers can be compressed into the URL. Anyone with that link can open the included manual.
         </InfoCard>
       </div>
@@ -26,13 +26,13 @@ export function PrivacyPage() {
       <section className="border-y border-ankahe-border bg-ankahe-surface/45 py-8">
         <h2 className="type-artifact-heading text-ankahe-text">What can leave the page</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <VisibilityRule icon={<Eye size={20} />} title="Included">
+          <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
           </VisibilityRule>
-          <VisibilityRule icon={<LockKey size={20} />} title="Private">
+          <VisibilityRule icon={<LockKey size={22} weight="light" />} title="Private">
             Stays local. It never enters shared links or public exports.
           </VisibilityRule>
-          <VisibilityRule icon={<EyeSlash size={20} />} title="Omitted">
+          <VisibilityRule icon={<EyeSlash size={22} weight="light" />} title="Omitted">
             Left out of preview, share, and export.
           </VisibilityRule>
         </div>
@@ -104,7 +104,7 @@ export function HowItWorksPage() {
             className="type-ui-label inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-ankahe-accent px-6 py-3 text-ankahe-on-accent transition-colors hover:bg-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           >
             Choose a manual
-            <ArrowRight size={16} />
+            <ArrowRight size={18} weight="light" />
           </Link>
         </div>
       </section>

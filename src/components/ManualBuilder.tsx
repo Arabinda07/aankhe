@@ -52,7 +52,7 @@ export function ManualBuilder({
             className="type-ui-label min-h-11 min-w-11 flex items-center justify-center justify-self-start gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
-            <CaretLeft size={18} />
+            <CaretLeft size={20} weight="light" />
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
@@ -64,7 +64,7 @@ export function ManualBuilder({
                 view === 'build' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
               )}
             >
-              <FileText size={14} />
+              <FileText size={18} weight="light" />
               Draft
             </button>
             <button
@@ -74,7 +74,7 @@ export function ManualBuilder({
                 view === 'artifact' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
               )}
             >
-              <Sparkle size={14} />
+              <Sparkle size={18} weight="light" />
               Artifact
             </button>
           </div>
