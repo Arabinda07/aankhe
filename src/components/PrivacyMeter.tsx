@@ -28,7 +28,7 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
           No Account / No Database
         </div>
         <div className="w-1 h-1 bg-ankahe-border rounded-full" />
-        <div>{state.storageMode === "url" ? "URL Storage" : "Memory Storage"}</div>
+        <div>{state.storageMode === "url" ? "Save in link" : "Memory only"}</div>
       </div>
     );
   }
@@ -45,8 +45,10 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
 
       <div className="space-y-3">
         <div className="type-caption flex justify-between items-center">
-          <span className="text-ankahe-muted">Storage Mode</span>
-          <span className="font-semibold text-ankahe-text capitalize">{state.storageMode}</span>
+          <span className="text-ankahe-muted">Answer storage</span>
+          <span className="font-semibold text-ankahe-text">
+            {state.storageMode === "url" ? "Save in link" : "Memory only"}
+          </span>
         </div>
         
         <div className="type-caption flex justify-between items-center">

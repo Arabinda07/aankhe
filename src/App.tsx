@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Switchboard } from './components/Switchboard';
 import { ModeId } from './lib/schemaTypes';
@@ -27,6 +28,10 @@ function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
   const handleStart = (mode: ModeId) => {
     setMode(mode);
     navigate(`/manual/${mode}`);
@@ -41,7 +46,7 @@ function AppContent() {
 
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans selection:bg-ankahe-accent-soft selection:text-ankahe-text">
-      <SiteHeader onStart={handleStart} />
+      <SiteHeader />
       <main className="flex-1 flex flex-col items-center w-full">
         <div className="w-full">
           <Routes>
@@ -86,6 +91,7 @@ function AppContent() {
               element={
                 <ManualBuilder
                   state={state}
+                  setMode={setMode}
                   updateAnswer={updateAnswer}
                   updateVisibility={updateVisibility}
                   setStorageMode={setStorageMode}

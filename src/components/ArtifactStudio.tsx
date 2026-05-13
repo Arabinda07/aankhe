@@ -88,27 +88,27 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
         <div className="space-y-8 sticky top-8">
           <div className="bg-ankahe-surface p-8 space-y-8 rounded-sm border border-ankahe-border shadow-sm">
             <div>
-              <h3 className="type-panel-title text-ankahe-text mb-4">Export Settings</h3>
+              <h3 className="type-panel-title text-ankahe-text mb-4">Manual view</h3>
               <div className="flex bg-ankahe-surface-soft p-1 rounded-sm w-fit border border-ankahe-border">
                 <button
                   onClick={() => setViewMode("public")}
                   aria-pressed={viewMode === "public"}
                   className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "public" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
                 >
-                  Share Version
+                  Included only
                 </button>
                 <button
                   onClick={() => setViewMode("private")}
                   aria-pressed={viewMode === "private"}
                   className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "private" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
                 >
-                  Private Version
+                  Full private copy
                 </button>
               </div>
               <p className="type-caption text-ankahe-muted mt-3">
                 {viewMode === "public" 
-                  ? "Currently previewing what others will see. Private fields are hidden." 
-                  : "Currently previewing everything, including private fields for your own viewing."}
+                  ? "Previewing the manual made from included answers. Private answers are left out." 
+                  : "Previewing your own copy, including answers you marked private."}
               </p>
             </div>
 
@@ -207,16 +207,16 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
             <h3 className="type-panel-title text-ankahe-text">Visibility Note</h3>
             <div className="space-y-3">
               <div className="type-caption flex items-center justify-between">
-                <span className="text-ankahe-muted">Shared Entries</span>
+                <span className="text-ankahe-muted">Included answers</span>
                 <span className="text-ankahe-text">{manual.shareableCount}</span>
               </div>
               <div className="type-caption flex items-center justify-between">
-                <span className="text-ankahe-muted">Private Only</span>
+                <span className="text-ankahe-muted">Private answers</span>
                 <span className="text-ankahe-accent-dark">{manual.privateCount}</span>
               </div>
             </div>
             <p className="type-caption text-ankahe-muted pt-2">
-              Private entries appear in your live preview but are excluded from exports and shared links unless explicitly trusted.
+              Private answers appear only in your own copy. Included answers are used for share links, QR codes, images, and PDFs.
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ModeId, ManualState, Visibility, StorageMode } from '../lib/schemaTypes';
 import { PROTOCOL_MANIFEST } from '../lib/protocolManifest';
@@ -18,6 +18,7 @@ import { ChevronLeft, Sparkles, FileText } from 'lucide-react';
 
 interface ManualBuilderProps {
   state: ManualState;
+  setMode: (mode: ModeId) => void;
   updateAnswer: (id: string, val: any) => void;
   updateVisibility: (id: string, vis: Visibility) => void;
   setStorageMode: (mode: StorageMode) => void;
@@ -26,17 +27,36 @@ interface ManualBuilderProps {
 
 export function ManualBuilder({
   state,
+  setMode,
   updateAnswer,
   updateVisibility,
   setStorageMode,
   onBack,
 }: ManualBuilderProps) {
   const { mode } = useParams<{ mode: ModeId }>();
-  const config = PROTOCOL_MANIFEST[mode || "me"];
+  const isSupportedMode = mode === "me" || mode === "work";
+  const manualMode: "me" | "work" = isSupportedMode ? mode : "me";
+  const config = PROTOCOL_MANIFEST[manualMode];
   const [view, setView] = useState<"build" | "artifact">("build");
-  const composed = useMemo(() => composeManual(state), [state]);
+  const effectiveState = useMemo<ManualState>(() => {
+    if (!isSupportedMode || state.mode === manualMode) return state;
 
-  if (!mode || (mode !== "me" && mode !== "work")) {
+    return {
+      ...state,
+      mode: manualMode,
+      answers: {},
+      visibilityByQuestion: {},
+    };
+  }, [isSupportedMode, manualMode, state]);
+  const composed = useMemo(() => composeManual(effectiveState), [effectiveState]);
+
+  useEffect(() => {
+    if (isSupportedMode && state.mode !== manualMode) {
+      setMode(manualMode);
+    }
+  }, [isSupportedMode, manualMode, setMode, state.mode]);
+
+  if (!isSupportedMode) {
     return <Navigate to="/" />;
   }
 
@@ -97,7 +117,7 @@ export function ManualBuilder({
               <div className="space-y-12">
                 <FormRenderer
                   config={config}
-                  state={state}
+                  state={effectiveState}
                   updateAnswer={updateAnswer}
                   updateVisibility={updateVisibility}
                   onFinish={() => setView("artifact")}
@@ -114,13 +134,13 @@ export function ManualBuilder({
                     <div className="bg-ankahe-bg rounded-[calc(2rem-0.375rem)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] overflow-hidden">
                       <ManualPreview
                         manual={composed}
-                        mode={state.mode}
+                        mode={effectiveState.mode}
                         className="h-[600px] border-none shadow-none"
                       />
                     </div>
                   </div>
                 </div>
-                <PrivacyMeter state={state} />
+                <PrivacyMeter state={effectiveState} />
               </div>
             </motion.div>
           ) : (
@@ -131,9 +151,9 @@ export function ManualBuilder({
               exit={{ opacity: 0, y: -10 }}
             >
               <ArtifactStudio 
-                state={state}
+                state={effectiveState}
                 url={window.location.href} 
-                storageMode={state.storageMode} 
+                storageMode={effectiveState.storageMode} 
               />
             </motion.div>
           )}

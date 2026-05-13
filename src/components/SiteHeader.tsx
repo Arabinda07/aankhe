@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
-import { ModeId } from "../lib/schemaTypes";
 
-interface SiteHeaderProps {
-  onStart?: (mode: ModeId) => void;
-}
-
-export function SiteHeader({ onStart }: SiteHeaderProps) {
+export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-ankahe-bg/90 backdrop-blur-md border-b border-ankahe-border/50">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">

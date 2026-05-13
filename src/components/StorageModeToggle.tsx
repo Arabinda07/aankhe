@@ -5,7 +5,7 @@
 
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { Database, Link } from "lucide-react";
+import { Link, Monitor } from "lucide-react";
 
 interface StorageModeToggleProps {
   value: StorageMode;
@@ -25,7 +25,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
             : "text-ankahe-muted hover:text-ankahe-text"
         )}
       >
-        <Database size={16} />
+        <Monitor size={16} />
         Memory Only
       </button>
       <button

@@ -20,26 +20,69 @@ interface SwitchboardProps {
 
 export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeChange }: SwitchboardProps) {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-12 md:py-24 space-y-24 bg-ankahe-bg">
+    <div className="max-w-6xl mx-auto px-6 py-10 md:py-16 space-y-16 md:space-y-20 bg-ankahe-bg">
       {/* Hero */}
-      <section className="text-center space-y-8">
-        <motion.h1 
-          className="type-hero text-ankahe-text"
+      <section className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-16 items-end">
+        <div className="space-y-8 text-center lg:text-left">
+          <motion.h1
+            className="type-hero text-ankahe-text"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Say it once. <br className="hidden md:block" />
+            <span className="type-hero-emphasis">Be understood.</span>
+          </motion.h1>
+          <motion.p
+            className="type-lead text-ankahe-muted mx-auto lg:mx-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            A private place to write what usually goes unsaid. <br className="hidden md:block" />
+            For work, care, hard conversations, and the people who matter.
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+          >
+            <SoftButton size="md" onClick={() => onStart("me")} icon={<ArrowRight size={16} />}>
+              Start Me Manual
+            </SoftButton>
+            <SoftButton size="md" variant="secondary" onClick={() => onStart("work")}>
+              Start Work Manual
+            </SoftButton>
+          </motion.div>
+        </div>
+
+        <motion.aside
+          aria-label="Manual preview"
+          className="hidden lg:block bg-ankahe-surface border border-ankahe-border rounded-sm p-7 shadow-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.14 }}
         >
-          Say it once. <br className="hidden md:block" />
-          <span className="type-hero-emphasis">Be understood.</span>
-        </motion.h1>
-        <motion.p 
-          className="type-lead text-ankahe-muted mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          A private place to write what usually goes unsaid. <br className="hidden md:block" />
-          For work, care, hard conversations, and the people who matter.
-        </motion.p>
+          <div className="space-y-6">
+            <div className="space-y-2 border-b border-ankahe-border pb-5">
+              <p className="type-eyebrow text-ankahe-accent">Sample manual</p>
+              <h2 className="font-display text-4xl font-bold leading-none text-ankahe-accent-dark">
+                A useful artifact
+              </h2>
+            </div>
+            <div className="space-y-4">
+              <p className="type-caption text-ankahe-muted">
+                Included answers become the shareable manual.
+              </p>
+              <p className="type-caption text-ankahe-muted">
+                Private answers stay available for your own copy.
+              </p>
+              <p className="type-caption text-ankahe-muted">
+                Omitted answers are left out without penalty.
+              </p>
+            </div>
+          </div>
+        </motion.aside>
       </section>
 
       <section className="flex justify-center">
@@ -79,7 +122,7 @@ export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeCh
       {/* Settings / Footer */}
       <section className="flex flex-col items-center gap-6 border-t border-ankahe-border pt-16 pb-12">
         <div className="space-y-4 text-center pb-8 border-b border-ankahe-border/50 max-w-xl mx-auto">
-          <h3 className="type-panel-title text-ankahe-text">Storage Mode</h3>
+          <h3 className="type-panel-title text-ankahe-text">Where answers live</h3>
           <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
           <p className="type-caption text-ankahe-muted">
             {storageMode === "url" 
