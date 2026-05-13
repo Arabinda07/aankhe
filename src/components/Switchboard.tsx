@@ -49,11 +49,12 @@ export function Switchboard({
             <AnkaheMark className="hidden sm:inline-flex" />
             <div className="space-y-6">
               <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
-                Say it once.{" "}
-                <span className="type-hero-emphasis">Be understood.</span>
+                A guide to{" "}
+                <span className="type-hero-emphasis">understanding</span>{" "}
+                you
               </h1>
               <p className="type-lead text-ankahe-muted">
-                A private studio for writing the things about yourself that usually go unsaid, then shaping them into a manual worth keeping.
+                Write what usually goes unsaid, then shape it into a manual worth keeping.
               </p>
             </div>
           </motion.div>

@@ -10,9 +10,21 @@ export function SiteHeader() {
           className="min-h-11 inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           aria-label="Ankahe home"
         >
-          <AnkaheMark />
+          <AnkaheMark wordmarkClassName="hidden sm:inline" />
         </Link>
-        <nav className="type-ui-label flex gap-4 sm:gap-8 text-ankahe-muted">
+        <nav className="type-ui-label flex gap-3 text-ankahe-muted sm:gap-5">
+          <Link
+            to="/how-it-works"
+            className="min-h-11 inline-flex items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+          >
+            How it works
+          </Link>
+          <Link
+            to="/privacy"
+            className="min-h-11 inline-flex items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+          >
+            Privacy
+          </Link>
           <Link
             to="/manual/me"
             className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
@@ -25,20 +37,6 @@ export function SiteHeader() {
           >
             Work
           </Link>
-          <span
-            aria-disabled="true"
-            className="hidden min-h-11 min-w-11 items-center justify-center px-1 opacity-50 sm:inline-flex"
-            title="Coming soon"
-          >
-            Talk
-          </span>
-          <span
-            aria-disabled="true"
-            className="hidden min-h-11 min-w-11 items-center justify-center px-1 opacity-50 sm:inline-flex"
-            title="Coming soon"
-          >
-            Us
-          </span>
         </nav>
       </div>
     </header>

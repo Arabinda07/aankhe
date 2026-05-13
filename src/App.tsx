@@ -12,6 +12,7 @@ import { ManualBuilder } from './components/ManualBuilder';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { SoftButton } from './components/SoftButton';
+import { HowItWorksPage, PrivacyPage } from './components/InfoPages';
 
 function AppContent() {
   const {
@@ -86,6 +87,8 @@ function AppContent() {
                 </div>
               }
             />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route
               path="/manual/:mode"
               element={
