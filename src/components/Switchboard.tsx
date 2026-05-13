@@ -69,8 +69,8 @@ export function Switchboard({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <PromiseItem icon={<ShieldCheck size={20} weight="regular" />} title="Private by default" text="No account, backend, or database." />
-            <PromiseItem icon={<SealCheck size={20} weight="regular" />} title="You choose what leaves" text="Included answers can become a link, QR, image, or PDF." />
+            <PromiseItem icon={<ShieldCheck size={22} weight="light" />} title="Private by default" text="No account, backend, or database." />
+            <PromiseItem icon={<SealCheck size={22} weight="light" />} title="You choose what leaves" text="Included answers can become a link, QR, image, or PDF." />
           </motion.ul>
         </div>
 
@@ -92,7 +92,7 @@ export function Switchboard({
                   </h2>
                 </div>
                 <span className="grid h-11 w-11 place-items-center rounded-md bg-ankahe-accent-soft text-ankahe-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:rotate-12 group-hover:scale-110">
-                  <Sparkle size={20} weight="regular" />
+                  <Sparkle size={22} weight="light" />
                 </span>
               </div>
 

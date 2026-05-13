@@ -42,19 +42,19 @@ export function QuestionStep({
           active={visibility === "share"}
           onClick={() => onVisibilityChange("share")}
           label="Share"
-          icon={<Eye size={14} />}
+          icon={<Eye size={16} weight={visibility === "share" ? "fill" : "light"} />}
         />
         <VisibilityButton
           active={visibility === "private"}
           onClick={() => onVisibilityChange("private")}
           label="Private"
-          icon={<LockKey size={14} />}
+          icon={<LockKey size={16} weight={visibility === "private" ? "fill" : "light"} />}
         />
         <VisibilityButton
           active={visibility === "hide"}
           onClick={() => onVisibilityChange("hide")}
           label="Hide"
-          icon={<EyeSlash size={14} />}
+          icon={<EyeSlash size={16} weight={visibility === "hide" ? "fill" : "light"} />}
         />
       </div>
 

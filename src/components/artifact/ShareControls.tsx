@@ -29,7 +29,7 @@ export function ShareControls({
   return (
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
-        <ShareNetwork size={18} className="text-ankahe-accent" />
+        <ShareNetwork size={20} className="text-ankahe-accent" weight="light" />
         Share link
       </h3>
 
@@ -44,13 +44,13 @@ export function ShareControls({
               aria-label={copied ? "Link copied" : "Copy share link"}
               className="min-h-11 min-w-11 p-2 bg-ankahe-control rounded-sm shadow-sm hover:bg-ankahe-control-hover transition-colors text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
-              {copied ? <Check size={16} className="text-ankahe-accent" /> : <Copy size={16} />}
+              {copied ? <Check size={18} className="text-ankahe-accent" weight="light" /> : <Copy size={18} weight="light" />}
             </button>
           </div>
 
           {sharedUrl.length > 2000 && (
             <div className="type-caption p-3 bg-ankahe-warning-soft rounded-sm border border-ankahe-warning/25 flex gap-3 text-ankahe-warning">
-              <WarningCircle size={16} className="shrink-0 text-ankahe-warning" />
+              <WarningCircle size={18} className="shrink-0 text-ankahe-warning" weight="light" />
               <p>
                 This URL is long. Saving an image or PDF may be more reliable in older apps.
               </p>
@@ -65,7 +65,7 @@ export function ShareControls({
               aria-expanded={showQR}
               aria-controls={qrPanelId}
             >
-              <QrCode size={18} />
+              <QrCode size={20} weight="light" />
               {showQR ? "Hide QR Code" : "Show QR Code"}
             </SoftButton>
 

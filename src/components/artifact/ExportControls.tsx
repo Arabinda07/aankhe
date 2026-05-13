@@ -27,7 +27,7 @@ export function ExportControls({
         disabled={isExporting}
         className="gap-2 bg-ankahe-accent text-ankahe-on-accent border-none py-3"
       >
-        <DownloadSimple size={18} />
+        <DownloadSimple size={20} weight="light" />
         {isExporting ? "Exporting..." : viewMode === "private" ? "Save Private Image" : "Save Included Image"}
       </SoftButton>
       <SoftButton
@@ -35,7 +35,7 @@ export function ExportControls({
         onClick={onPrint}
         className="gap-2 bg-ankahe-surface text-ankahe-text py-3"
       >
-        <Printer size={18} />
+        <Printer size={20} weight="light" />
         {viewMode === "private" ? "Print Private Copy" : "Print Included PDF"}
       </SoftButton>
     </div>
