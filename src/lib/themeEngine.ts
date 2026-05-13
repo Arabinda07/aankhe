@@ -17,18 +17,18 @@ export interface Theme {
 export const THEME_ENGINE: Record<ModeId, Theme> = {
   me: {
     bgGradient: "bg-ankahe-bg",
-    accent: "text-ankahe-clay",
+    accent: "text-ankahe-accent",
     cardBg: "bg-ankahe-surface",
     progressRail: "bg-ankahe-surface-soft",
-    buttonAccent: "bg-ankahe-clay hover:bg-ankahe-accent-dark",
+    buttonAccent: "bg-ankahe-accent hover:bg-ankahe-accent-dark",
     textDisplay: "font-display text-ankahe-text"
   },
   work: {
     bgGradient: "bg-ankahe-bg",
-    accent: "text-ankahe-sage",
+    accent: "text-sandal",
     cardBg: "bg-ankahe-surface",
     progressRail: "bg-ankahe-surface-soft",
-    buttonAccent: "bg-ankahe-sage hover:bg-opacity-90",
+    buttonAccent: "bg-sandal hover:bg-ankahe-accent-dark",
     textDisplay: "font-display text-ankahe-text"
   },
   talk: {

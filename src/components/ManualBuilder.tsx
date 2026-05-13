@@ -14,7 +14,7 @@ import { ManualPreview } from './ManualPreview';
 import { PrivacyMeter } from './PrivacyMeter';
 import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '../lib/utils';
-import { ChevronLeft, Sparkles, FileText } from 'lucide-react';
+import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
 
 interface ManualBuilderProps {
   state: ManualState;
@@ -70,7 +70,7 @@ export function ManualBuilder({
             className="type-ui-label min-h-11 min-w-11 flex items-center justify-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
-            <ChevronLeft size={18} />
+            <CaretLeft size={18} />
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
@@ -92,7 +92,7 @@ export function ManualBuilder({
                 view === 'artifact' ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
               )}
             >
-              <Sparkles size={14} />
+              <Sparkle size={14} />
               Artifact
             </button>
           </div>
@@ -130,8 +130,8 @@ export function ManualBuilder({
                   <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview
                   </h3>
-                  <div className="p-1.5 rounded-[2rem] bg-ankahe-surface-soft/50 ring-1 ring-ankahe-border/50">
-                    <div className="bg-ankahe-bg rounded-[calc(2rem-0.375rem)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] overflow-hidden">
+                  <div className="rounded-xl border border-ankahe-border bg-ankahe-surface-muted/50 p-1.5">
+                    <div className="overflow-hidden rounded-lg border border-ankahe-border bg-ankahe-bg">
                       <ManualPreview
                         manual={composed}
                         mode={effectiveState.mode}

@@ -5,7 +5,7 @@
 
 import { Question, Visibility } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { Eye, EyeOff, Lock } from "lucide-react";
+import { Eye, EyeSlash, LockKey } from "@phosphor-icons/react";
 import { SoftButton } from "./SoftButton";
 
 interface QuestionStepProps {
@@ -34,24 +34,24 @@ export function QuestionStep({
   return (
     <div className="space-y-8">
       {/* Visibility Control */}
-      <div className="flex items-center gap-3 bg-ankahe-surface-soft p-2 rounded-2xl w-fit">
+      <div className="flex w-fit flex-wrap items-center gap-2 rounded-lg border border-ankahe-border bg-ankahe-surface-soft p-2">
         <VisibilityButton
           active={visibility === "share"}
           onClick={() => onVisibilityChange("share")}
-          label="Included"
+          label="Share"
           icon={<Eye size={14} />}
         />
         <VisibilityButton
           active={visibility === "private"}
           onClick={() => onVisibilityChange("private")}
           label="Private"
-          icon={<Lock size={14} />}
+          icon={<LockKey size={14} />}
         />
         <VisibilityButton
           active={visibility === "hide"}
           onClick={() => onVisibilityChange("hide")}
-          label="Omitted"
-          icon={<EyeOff size={14} />}
+          label="Hide"
+          icon={<EyeSlash size={14} />}
         />
       </div>
 
@@ -104,7 +104,7 @@ function VisibilityButton({ active, onClick, label, icon }: any) {
       className={cn(
         "type-ui-label min-h-11 flex items-center gap-2 px-3 py-1.5 rounded-sm transition-all border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
         active 
-          ? "bg-ankahe-surface text-ankahe-text shadow-sm border-ankahe-border" 
+          ? "bg-ankahe-surface text-ankahe-text shadow-sm border-ankahe-border"
           : "text-ankahe-muted hover:text-ankahe-text hover:bg-ankahe-surface/50"
       )}
     >

@@ -11,7 +11,7 @@ import { generateSharedUrl } from "../lib/stateCompression";
 import { SoftButton } from "./SoftButton";
 import { ManualPreview } from "./ManualPreview";
 import { useArtifactExport } from "../hooks/useArtifactExport";
-import { Download, Printer, Share2, Copy, Check, QrCode, AlertCircle } from "lucide-react";
+import { Check, Copy, DownloadSimple, Printer, QrCode, ShareNetwork, WarningCircle } from "@phosphor-icons/react";
 import { QRCodeSVG } from "qrcode.react";
 import { cn } from "../lib/utils";
 import { motion } from "motion/react";
@@ -60,21 +60,21 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
       </div>
       <div className="space-y-4 text-center md:text-left">
         <h2 className="type-display text-ankahe-text">Artifact Studio</h2>
-        <p className="type-lead text-ankahe-muted">Transform your manual into a shareable asset.</p>
+        <p className="type-lead text-ankahe-muted">Shape your manual into a finished document for saving, printing, or sharing.</p>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         {/* Preview Container */}
         <div className="space-y-8">
-          <div className="bg-ankahe-surface p-4 md:p-12 rounded-sm border border-ankahe-border overflow-hidden">
-            <div ref={artifactRef} className="bg-ankahe-bg shadow-lg rounded-sm overflow-hidden w-full max-w-2xl mx-auto origin-top">
+          <div className="overflow-hidden rounded-xl border border-ankahe-border bg-ankahe-surface p-4 md:p-12">
+            <div ref={artifactRef} className="mx-auto w-full max-w-2xl origin-top overflow-hidden rounded-md border border-ankahe-border bg-ankahe-bg shadow-[0_18px_48px_color-mix(in_oklch,var(--color-accent)_8%,transparent)]">
               <ManualPreview manual={manual} mode={mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>
           
           <div className="flex flex-wrap justify-center gap-4">
             <SoftButton onClick={exportAsImage} disabled={isExporting} className="gap-2 bg-ankahe-accent text-ankahe-on-accent border-none py-3">
-              <Download size={18} />
+              <DownloadSimple size={18} />
               {isExporting ? "Exporting..." : "Save Image"}
             </SoftButton>
             <SoftButton variant="secondary" onClick={printManual} className="gap-2 bg-ankahe-surface text-ankahe-text py-3">
@@ -86,7 +86,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
 
         {/* Sharing Side */}
         <div className="space-y-8 sticky top-8">
-          <div className="bg-ankahe-surface p-8 space-y-8 rounded-sm border border-ankahe-border shadow-sm">
+          <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
             <div>
               <h3 className="type-panel-title text-ankahe-text mb-4">Manual view</h3>
               <div className="flex bg-ankahe-surface-soft p-1 rounded-sm w-fit border border-ankahe-border">
@@ -137,9 +137,9 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
             </div>
           </div>
 
-          <div className="bg-ankahe-surface p-8 space-y-8 rounded-sm border border-ankahe-border shadow-sm">
+          <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
             <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
-              <Share2 size={18} className="text-ankahe-accent" />
+              <ShareNetwork size={18} className="text-ankahe-accent" />
               Share Link
             </h3>
 
@@ -154,13 +154,13 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
                     aria-label={copied ? "Link copied" : "Copy share link"}
                     className="min-h-11 min-w-11 p-2 bg-ankahe-surface rounded-sm shadow-sm hover:bg-ankahe-surface-soft transition-colors text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
                   >
-                    {copied ? <Check size={16} className="text-ankahe-success" /> : <Copy size={16} />}
+                    {copied ? <Check size={16} className="text-ankahe-accent" /> : <Copy size={16} />}
                   </button>
                 </div>
 
                 {secureSharedUrl.length > 2000 && (
                   <div className="type-caption p-3 bg-ankahe-warning-soft rounded-sm border border-ankahe-warning/25 flex gap-3 text-ankahe-warning">
-                    <AlertCircle size={16} className="shrink-0 text-ankahe-warning" />
+                    <WarningCircle size={16} className="shrink-0 text-ankahe-warning" />
                     <p>
                       This URL is very long. Some older apps or browsers might struggle to open it. Saving it as an image or PDF is recommended.
                     </p>
@@ -203,7 +203,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
             )}
           </div>
 
-          <div className="bg-ankahe-surface p-8 space-y-4 rounded-sm border border-ankahe-border shadow-sm">
+          <div className="bg-ankahe-surface p-8 space-y-4 rounded-lg border border-ankahe-border shadow-sm">
             <h3 className="type-panel-title text-ankahe-text">Visibility Note</h3>
             <div className="space-y-3">
               <div className="type-caption flex items-center justify-between">

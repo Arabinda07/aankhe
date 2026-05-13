@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
+import { AnkaheMark } from "./AnkaheMark";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 bg-ankahe-bg/90 backdrop-blur-md border-b border-ankahe-border/50">
+    <header className="sticky top-0 z-50 border-b border-ankahe-border/70 bg-ankahe-bg/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link 
           to="/" 
-          className="min-h-11 inline-flex items-center font-display text-2xl sm:text-3xl font-bold leading-none text-ankahe-accent-dark hover:text-ankahe-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+          className="min-h-11 inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+          aria-label="Ankahe home"
         >
-          Ankahe
+          <AnkaheMark />
         </Link>
         <nav className="type-ui-label flex gap-4 sm:gap-8 text-ankahe-muted">
           <Link

@@ -54,7 +54,7 @@ export function FormRenderer({
         </div>
         
         {/* Progress Bar */}
-        <div className="w-full h-1.5 bg-ankahe-surface-soft rounded-full overflow-hidden">
+        <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-ankahe-surface-soft">
           <motion.div 
             className={cn("h-full bg-ankahe-accent")}
             initial={{ width: 0 }}
@@ -99,7 +99,7 @@ export function FormRenderer({
           >
             <span
               className={cn(
-                "block h-2 rounded-full transition-all",
+                "block h-2 rounded-[3px] transition-all",
                 i === currentStepIndex ? "w-6 bg-ankahe-accent-dark" : (state.answers[q.id] ? "w-2 bg-ankahe-accent/60" : "w-2 bg-ankahe-surface-soft group-hover:bg-ankahe-border")
               )}
             />

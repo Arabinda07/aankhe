@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { AnkaheMark } from "./AnkaheMark";
 
 export function SiteFooter() {
   return (
@@ -7,9 +8,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-display text-2xl font-bold leading-none text-ankahe-accent-dark">
-              Ankahe
-            </h3>
+            <AnkaheMark tileClassName="h-9 w-9 rounded-md" wordmarkClassName="text-[1.55rem]" />
             <p className="type-caption text-ankahe-muted max-w-xs">
               A private place to write what usually goes unsaid. Built for
               clarity, empathy, and better understanding.
@@ -57,7 +56,7 @@ export function SiteFooter() {
         </div>
 
         <div className="type-meta mt-16 pt-8 border-t border-ankahe-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-ankahe-muted">
-          <span>&copy; {new Date().getFullYear()} Ankahe</span>
+          <span>Copyright {new Date().getFullYear()} Ankahe</span>
           <span>v1.0 MVP</span>
         </div>
       </div>

@@ -15,9 +15,12 @@ export function useArtifactExport(artifactRef: React.RefObject<HTMLElement | nul
     if (!artifactRef.current) return;
     setIsExporting(true);
     try {
+      const pageColor =
+        getComputedStyle(document.documentElement).getPropertyValue("--color-page").trim() ||
+        "rgb(248 240 234)";
       const dataUrl = await toPng(artifactRef.current, {
         cacheBust: true,
-        backgroundColor: "#F8F1EA",
+        backgroundColor: pageColor,
         pixelRatio: 2
       });
       const link = document.createElement("a");

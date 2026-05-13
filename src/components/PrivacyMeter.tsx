@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Shield, Info } from "lucide-react";
+import { Info, ShieldCheck } from "@phosphor-icons/react";
 import { ManualState } from "../lib/schemaTypes";
 import { getCurrentURLSize } from "../lib/urlSize";
 
@@ -15,7 +15,7 @@ interface PrivacyMeterProps {
 export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
   const { length, category } = getCurrentURLSize();
   const urlStatus = {
-    safe: { label: "QR-Safe", color: "text-ankahe-success" },
+    safe: { label: "Link Ready", color: "text-ankahe-accent" },
     long: { label: "Getting Long", color: "text-ankahe-warning" },
     excessive: { label: "Too Large", color: "text-ankahe-danger" }
   };
@@ -24,10 +24,10 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
     return (
       <div className="type-meta flex items-center gap-4 text-ankahe-muted">
         <div className="flex items-center gap-1.5">
-          <Shield size={14} className="text-ankahe-success" />
+          <ShieldCheck size={14} className="text-ankahe-accent" />
           No Account / No Database
         </div>
-        <div className="w-1 h-1 bg-ankahe-border rounded-full" />
+        <div className="h-1 w-1 rounded-[2px] bg-ankahe-border" />
         <div>{state.storageMode === "url" ? "Save in link" : "Memory only"}</div>
       </div>
     );
@@ -37,10 +37,10 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
     <div className="bg-ankahe-surface rounded-sm border border-ankahe-border p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
-          <Shield size={18} className="text-ankahe-success" />
+          <ShieldCheck size={18} className="text-ankahe-accent" />
           Privacy Meter
         </h3>
-        <span className="type-caption bg-ankahe-success-soft text-ankahe-success px-2 py-0.5 rounded-sm">Safe</span>
+        <span className="type-caption rounded-sm bg-ankahe-success-soft px-2 py-0.5 text-ankahe-accent">Local</span>
       </div>
 
       <div className="space-y-3">

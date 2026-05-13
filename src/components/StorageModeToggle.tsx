@@ -5,7 +5,7 @@
 
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { Link, Monitor } from "lucide-react";
+import { Link, Monitor } from "@phosphor-icons/react";
 
 interface StorageModeToggleProps {
   value: StorageMode;

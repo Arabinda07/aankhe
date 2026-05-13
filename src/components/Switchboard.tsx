@@ -3,13 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { ArrowRight, FileText, SealCheck, ShieldCheck, Sparkle } from "@phosphor-icons/react";
+import type React from "react";
 import { ModeId, StorageMode } from "../lib/schemaTypes";
+import { SAMPLE_PERSONAL_STATE, SAMPLE_WORK_STATE } from "../lib/sampleState";
+import { cn } from "../lib/utils";
+import { AnkaheMark } from "./AnkaheMark";
 import { SoftButton } from "./SoftButton";
 import { StorageModeToggle } from "./StorageModeToggle";
 import { motion } from "motion/react";
-import { SAMPLE_PERSONAL_STATE, SAMPLE_WORK_STATE } from "../lib/sampleState";
-import { cn } from "../lib/utils";
-import { ArrowRight } from "lucide-react";
 
 interface SwitchboardProps {
   onStart: (mode: ModeId) => void;
@@ -18,141 +20,224 @@ interface SwitchboardProps {
   onStorageModeChange: (mode: StorageMode) => void;
 }
 
-export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeChange }: SwitchboardProps) {
+interface ModeCardProps {
+  id: "me" | "work";
+  title: string;
+  label: string;
+  description: string;
+  tone: "lac" | "sandal";
+  onClick: () => void;
+  onSampleClick: () => void;
+}
+
+export function Switchboard({
+  onStart,
+  onTrySample,
+  storageMode,
+  onStorageModeChange,
+}: SwitchboardProps) {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 md:py-16 space-y-16 md:space-y-20 bg-ankahe-bg">
-      {/* Hero */}
-      <section className="grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10 lg:gap-16 items-end">
-        <div className="space-y-8 text-center lg:text-left">
-          <motion.h1
-            className="type-hero text-ankahe-text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Say it once. <br className="hidden md:block" />
-            <span className="type-hero-emphasis">Be understood.</span>
-          </motion.h1>
-          <motion.p
-            className="type-lead text-ankahe-muted mx-auto lg:mx-0"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            A private place to write what usually goes unsaid. <br className="hidden md:block" />
-            For work, care, hard conversations, and the people who matter.
-          </motion.p>
+    <div className="bg-ankahe-bg">
+      <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 gap-12 px-6 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.82fr)] lg:items-center lg:gap-16">
+        <div className="min-w-0 max-w-[680px] space-y-10">
           <motion.div
-            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3"
-            initial={{ opacity: 0, y: 16 }}
+            className="space-y-8"
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <AnkaheMark className="hidden sm:inline-flex" />
+            <div className="space-y-6">
+              <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
+                Say it once.{" "}
+                <span className="type-hero-emphasis">Be understood.</span>
+              </h1>
+              <p className="type-lead text-ankahe-muted">
+                A private studio for writing the things about yourself that usually go unsaid, then shaping them into a manual worth keeping.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-3 sm:flex-row"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             <SoftButton size="md" onClick={() => onStart("me")} icon={<ArrowRight size={16} />}>
-              Start Me Manual
+              Begin your manual
             </SoftButton>
             <SoftButton size="md" variant="secondary" onClick={() => onStart("work")}>
               Start Work Manual
             </SoftButton>
           </motion.div>
+
+          <motion.div
+            className="grid max-w-2xl gap-3 sm:grid-cols-3"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <PromiseItem icon={<ShieldCheck size={18} />} title="No account" text="No backend or database." />
+            <PromiseItem icon={<SealCheck size={18} />} title="Your choice" text="Included, private, or omitted." />
+            <PromiseItem icon={<FileText size={18} />} title="Real artifact" text="Link, QR, image, or PDF." />
+          </motion.div>
         </div>
 
         <motion.aside
-          aria-label="Manual preview"
-          className="hidden lg:block bg-ankahe-surface border border-ankahe-border rounded-sm p-7 shadow-sm"
+          aria-label="Manual document preview"
+          className="relative min-w-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.14 }}
+          transition={{ delay: 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="space-y-6">
-            <div className="space-y-2 border-b border-ankahe-border pb-5">
-              <p className="type-eyebrow text-ankahe-accent">Sample manual</p>
-              <h2 className="font-display text-4xl font-bold leading-none text-ankahe-accent-dark">
-                A useful artifact
-              </h2>
-            </div>
-            <div className="space-y-4">
-              <p className="type-caption text-ankahe-muted">
-                Included answers become the shareable manual.
-              </p>
-              <p className="type-caption text-ankahe-muted">
-                Private answers stay available for your own copy.
-              </p>
-              <p className="type-caption text-ankahe-muted">
-                Omitted answers are left out without penalty.
-              </p>
+          <div className="absolute -inset-3 rounded-shell border border-ankahe-border/60 bg-ankahe-surface-muted/40" />
+          <div className="relative rounded-shell border border-ankahe-border bg-ankahe-surface p-5 shadow-[0_24px_70px_color-mix(in_oklch,var(--color-accent)_10%,transparent)]">
+            <div className="rounded-xl border border-ankahe-border bg-ankahe-bg px-7 py-8 md:px-9 md:py-10">
+              <div className="mb-9 flex items-start justify-between gap-6 border-b border-ankahe-border pb-8">
+                <div className="space-y-2">
+                  <p className="type-eyebrow text-ankahe-accent">Sample manual</p>
+                  <h2 className="font-display text-4xl leading-none text-ankahe-accent-dark md:text-5xl">
+                    How to understand me
+                  </h2>
+                </div>
+                <span className="grid h-11 w-11 place-items-center rounded-lg bg-ankahe-accent-soft text-ankahe-accent">
+                  <Sparkle size={20} weight="regular" />
+                </span>
+              </div>
+
+              <div className="space-y-8">
+                <DocumentSection
+                  label="When I am quiet"
+                  text="I may be thinking, not withdrawing. A steady question usually helps more than pressure to answer quickly."
+                />
+                <DocumentSection
+                  label="How care reaches me"
+                  text="Specific, practical care lands best. I trust warmth that leaves room for me to respond in my own time."
+                />
+                <div className="grid gap-3 border-t border-ankahe-border pt-7 text-sm sm:grid-cols-3">
+                  <VisibilityChip label="Included" className="bg-ankahe-accent-soft text-ankahe-accent-dark" />
+                  <VisibilityChip label="Private" className="bg-private-soft text-private" />
+                  <VisibilityChip label="Omitted" className="bg-hidden-soft text-hidden" />
+                </div>
+              </div>
             </div>
           </div>
         </motion.aside>
       </section>
 
-      <section className="flex justify-center">
-        <div className="max-w-lg text-center space-y-4">
-          <p className="type-meta text-ankahe-muted/80">
-            Nothing is saved. Keep your link, QR, image, or PDF before leaving.
-          </p>
+      <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
+          <div className="space-y-4 lg:col-span-4 lg:pt-10">
+            <p className="type-eyebrow text-ankahe-accent">Choose a context</p>
+            <h2 className="type-display max-w-lg text-ankahe-text">One manual, shaped for the room it enters.</h2>
+          </div>
+          <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2">
+            <ModeCard
+              id="me"
+              title="Me"
+              label="For care and connection"
+              description="Write context for people who know you personally, before they have to guess."
+              tone="lac"
+              onClick={() => onStart("me")}
+              onSampleClick={() => onTrySample(SAMPLE_PERSONAL_STATE)}
+            />
+            <ModeCard
+              id="work"
+              title="Work"
+              label="For collaboration"
+              description="Share how you focus, decide, communicate, and build trust at work."
+              tone="sandal"
+              onClick={() => onStart("work")}
+              onSampleClick={() => onTrySample(SAMPLE_WORK_STATE)}
+            />
+          </div>
         </div>
       </section>
 
-      {/* Modes */}
-      <section className="grid lg:grid-cols-12 gap-6 items-start">
-        <div className="lg:col-span-7">
-          <ModeCard 
-            id="me"
-            title="Me"
-            label="How to understand me"
-            description="Write the things people should know before they guess wrong. Context for care, boundaries, and personal connection."
-            themeColor="ankahe-clay"
-            onClick={() => onStart("me")}
-            onSampleClick={() => onTrySample(SAMPLE_PERSONAL_STATE)}
-          />
-        </div>
-        <div className="lg:col-span-5 lg:mt-12">
-          <ModeCard 
-            id="work"
-            title="Work"
-            label="How to work with me"
-            description="Share how you focus, decide, talk, and build trust in a professional context."
-            themeColor="ankahe-sage"
-            onClick={() => onStart("work")}
-            onSampleClick={() => onTrySample(SAMPLE_WORK_STATE)}
-          />
-        </div>
-      </section>
-
-      {/* Settings / Footer */}
-      <section className="flex flex-col items-center gap-6 border-t border-ankahe-border pt-16 pb-12">
-        <div className="space-y-4 text-center pb-8 border-b border-ankahe-border/50 max-w-xl mx-auto">
-          <h3 className="type-panel-title text-ankahe-text">Where answers live</h3>
-          <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-          <p className="type-caption text-ankahe-muted">
-            {storageMode === "url" 
-              ? "Answers are saved inside your link. If you share the link, others see your answers."
-              : "Answers live only in this tab's memory. They vanish if you refresh or close."}
-          </p>
+      <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
+        <div className="grid gap-8 border-y border-ankahe-border py-12 md:grid-cols-[1fr_1.2fr] md:items-center">
+          <div className="space-y-3">
+            <p className="type-eyebrow text-ankahe-accent">Where answers live</p>
+            <h3 className="type-artifact-heading text-ankahe-text">Nothing is stored unless you put it in a link.</h3>
+          </div>
+          <div className="space-y-4 md:justify-self-end">
+            <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
+            <p className="type-caption max-w-xl text-ankahe-muted">
+              {storageMode === "url"
+                ? "Only answers marked included are saved inside your link. Private and omitted answers are left out."
+                : "Answers live only in this tab's memory. They vanish if you refresh or close."}
+            </p>
+          </div>
         </div>
       </section>
     </div>
   );
 }
 
-function ModeCard({ title, label, description, onClick, onSampleClick }: any) {
+function PromiseItem({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
-    <motion.article 
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="p-1.5 rounded-[2rem] bg-ankahe-surface-soft/50 ring-1 ring-ankahe-border/50 group"
+    <div className="rounded-lg border border-ankahe-border bg-ankahe-surface px-4 py-4">
+      <div className="mb-3 text-ankahe-accent">{icon}</div>
+      <p className="type-panel-title text-ankahe-text">{title}</p>
+      <p className="type-caption mt-1 text-ankahe-muted">{text}</p>
+    </div>
+  );
+}
+
+function DocumentSection({ label, text }: { label: string; text: string }) {
+  return (
+    <section className="grid gap-3 sm:grid-cols-[0.7fr_1.3fr] sm:gap-7">
+      <h3 className="type-meta text-ankahe-muted">{label}</h3>
+      <p className="type-artifact-prose text-ankahe-text">{text}</p>
+    </section>
+  );
+}
+
+function VisibilityChip({ label, className }: { label: string; className?: string }) {
+  return (
+    <span className={cn("type-caption inline-flex min-h-9 items-center justify-center rounded-md px-3 font-semibold", className)}>
+      {label}
+    </span>
+  );
+}
+
+function ModeCard({
+  title,
+  label,
+  description,
+  tone,
+  onClick,
+  onSampleClick,
+}: ModeCardProps) {
+  const toneClasses = {
+    lac: "border-ankahe-accent/30 bg-ankahe-accent-soft/35 text-ankahe-accent-dark",
+    sandal: "border-sandal/30 bg-sandal-soft/65 text-sandal",
+  };
+
+  return (
+    <motion.article
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      className="rounded-xl border border-ankahe-border bg-ankahe-surface p-6 md:p-8"
     >
-      <div className="bg-ankahe-surface rounded-[calc(2rem-0.375rem)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] p-8 md:p-12 h-full flex flex-col justify-between min-h-[320px]">
-        <div className="space-y-4 mb-12">
-          <p className="type-eyebrow text-ankahe-accent">{label}</p>
-          <h2 className="type-mode-title text-ankahe-text">{title}</h2>
-          <p className="type-lead text-ankahe-muted">{description}</p>
+      <div className="flex min-h-[300px] flex-col justify-between gap-10">
+        <div className="space-y-5">
+          <span className={cn("type-caption inline-flex rounded-md border px-3 py-2 font-bold", toneClasses[tone])}>
+            {label}
+          </span>
+          <div className="space-y-4">
+            <h3 className="type-mode-title text-ankahe-text">{title}</h3>
+            <p className="type-lead text-ankahe-muted">{description}</p>
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-4 mt-auto pt-8 border-t border-ankahe-border/40">
-          <SoftButton size="md" onClick={onClick} icon={<ArrowRight size={16} />}>Start a manual</SoftButton>
-          <button 
+        <div className="flex flex-wrap items-center gap-4 border-t border-ankahe-border pt-6">
+          <SoftButton size="md" onClick={onClick} icon={<ArrowRight size={16} />}>
+            Start manual
+          </SoftButton>
+          <button
             onClick={onSampleClick}
-            className="type-ui-label min-h-11 px-2 inline-flex items-center text-ankahe-muted hover:text-ankahe-text transition-colors underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+            className="type-ui-label inline-flex min-h-11 items-center px-1 text-ankahe-muted underline underline-offset-4 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           >
             See a sample
           </button>

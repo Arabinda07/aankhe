@@ -5,9 +5,7 @@
 
 import { ComposedManual, ComposedSection } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { THEME_ENGINE } from "../lib/themeEngine";
 import { ModeId } from "../lib/schemaTypes";
-import { AlertCircle } from "lucide-react";
 
 interface ManualPreviewProps {
   manual: ComposedManual;
@@ -16,10 +14,8 @@ interface ManualPreviewProps {
 }
 
 export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
-  const theme = THEME_ENGINE[mode];
-
   return (
-    <div className={cn("bg-ankahe-surface md:rounded-sm md:border md:border-ankahe-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
+    <div data-mode={mode} className={cn("bg-ankahe-surface md:rounded-sm md:border md:border-ankahe-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
       <div className="max-w-3xl mx-auto space-y-16">
         {/* Header */}
         <div className="space-y-6 border-b border-ankahe-border pb-12 text-center">
@@ -36,7 +32,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           <section className="bg-ankahe-bg/50 p-8 md:p-12 rounded-sm border border-ankahe-border">
             <h2 className="type-meta text-ankahe-muted mb-4 text-center">At a Glance</h2>
             <p className="type-artifact-prose text-center italic text-ankahe-accent-dark">
-              “{manual.atAGlance}”
+              "{manual.atAGlance}"
             </p>
           </section>
         )}
@@ -75,7 +71,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         <div className="pt-16 pb-8 border-t border-ankahe-border text-center">
           <p className="type-meta text-ankahe-muted/70">
-            Made with Ankahe · No account · No database
+            Made with Ankahe. No account. No database.
           </p>
         </div>
       </div>

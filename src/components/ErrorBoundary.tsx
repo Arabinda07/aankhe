@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { ShieldAlert } from 'lucide-react';
+import { ShieldWarning } from '@phosphor-icons/react';
 import { SoftButton } from './SoftButton';
 
 interface Props {
@@ -38,9 +38,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen flex items-center justify-center bg-ankahe-bg p-6">
-          <div className="glass-card max-w-md w-full p-8 space-y-6 text-center">
-            <div className="w-16 h-16 bg-ankahe-danger-soft text-ankahe-danger rounded-full flex items-center justify-center mx-auto">
-              <ShieldAlert size={32} />
+          <div className="paper-card max-w-md w-full p-8 space-y-6 text-center">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-ankahe-danger-soft text-ankahe-danger">
+              <ShieldWarning size={32} />
             </div>
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-ankahe-text">Something went wrong</h2>
@@ -51,7 +51,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
             </div>
             <div className="pt-4 flex flex-col gap-3">
               <SoftButton onClick={this.handleReset} variant="primary" className="w-full">
-                Reset & Start Over
+                Reset and start over
               </SoftButton>
             </div>
           </div>
