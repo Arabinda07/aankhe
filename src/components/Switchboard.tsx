@@ -48,8 +48,8 @@ export function Switchboard({
             <div className="space-y-6">
               <h1 className="type-hero max-w-[8.6ch] text-ankahe-text">
                 A guide to{" "}
-                <span className="type-hero-emphasis">understanding</span>{" "}
-                you
+                <span className="font-display italic font-normal text-ankahe-accent">your</span>{" "}
+                mind
               </h1>
               <p className="type-lead text-ankahe-muted">
                 Write what usually goes unsaid, then shape it into a manual worth keeping.
@@ -126,11 +126,16 @@ export function Switchboard({
       </section>
 
       <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
-        <div className="grid gap-6 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-4 lg:pt-10">
+        <div className="grid gap-10 lg:gap-8 lg:grid-cols-12 lg:items-start">
+          <div className="flex flex-col gap-10 lg:col-span-4 lg:pt-2 lg:pr-4">
             <h2 className="type-eyebrow text-ankahe-accent">Choose a context</h2>
+            <StoragePanel 
+              storageMode={storageMode} 
+              onStorageModeChange={onStorageModeChange} 
+              className="hidden lg:block"
+            />
           </div>
-          <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2">
+          <div className="grid gap-5 lg:col-span-8 lg:grid-cols-2 lg:pt-2">
             <ModeCard
               id="me"
               title="Me"
@@ -150,25 +155,34 @@ export function Switchboard({
               onSampleClick={() => onTrySample(SAMPLE_WORK_STATE)}
             />
           </div>
+          <StoragePanel 
+            storageMode={storageMode} 
+            onStorageModeChange={onStorageModeChange} 
+            className="lg:hidden lg:col-span-12"
+          />
         </div>
       </section>
+    </div>
+  );
+}
 
-      <section className="mx-auto max-w-7xl px-6 pb-20 md:pb-28">
-        <div className="grid gap-8 border-y border-ankahe-border py-12 md:grid-cols-[1fr_1.2fr] md:items-center">
-          <div className="space-y-3">
-            <p className="type-eyebrow text-ankahe-accent">Where answers live</p>
-            <h3 className="type-artifact-heading text-ankahe-text">Nothing is stored unless you put it in a link.</h3>
-          </div>
-          <div className="space-y-4 md:justify-self-end">
-            <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-            <p className="type-caption max-w-xl text-ankahe-muted">
-              {storageMode === "url"
-                ? "Only answers marked included are saved inside your link. Private and omitted answers are left out."
-                : "Answers live only in this tab's memory. They vanish if you refresh or close."}
-            </p>
-          </div>
-        </div>
-      </section>
+function StoragePanel({ storageMode, onStorageModeChange, className }: { storageMode: StorageMode, onStorageModeChange: (mode: StorageMode) => void, className?: string }) {
+  return (
+    <div className={cn("space-y-6 rounded-2xl bg-ankahe-surface-muted/30 border border-ankahe-border/60 p-6 md:p-8", className)}>
+      <div className="space-y-2">
+        <p className="type-eyebrow text-ankahe-muted">Where answers live</p>
+        <h3 className="font-sans text-xl font-bold tracking-tight text-ankahe-text md:text-2xl leading-tight">
+          Nothing is stored unless you put it in a link.
+        </h3>
+      </div>
+      <div className="space-y-5">
+        <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
+        <p className="type-caption text-ankahe-muted">
+          {storageMode === "url"
+            ? "Only answers marked included are saved inside your link. Private and omitted answers are left out."
+            : "Answers live only in this tab's memory. They vanish if you refresh or close."}
+        </p>
+      </div>
     </div>
   );
 }
