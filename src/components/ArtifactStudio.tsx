@@ -59,8 +59,8 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
         {isExporting ? "Exporting image..." : ""}
       </div>
       <div className="space-y-4 text-center md:text-left">
-        <h2 className="text-4xl font-display font-medium text-ankahe-text">Artifact Studio</h2>
-        <p className="text-ankahe-muted">Transform your manual into a shareable asset.</p>
+        <h2 className="type-display text-ankahe-text">Artifact Studio</h2>
+        <p className="type-lead text-ankahe-muted">Transform your manual into a shareable asset.</p>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
@@ -88,24 +88,24 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
         <div className="space-y-8 sticky top-8">
           <div className="bg-ankahe-surface p-8 space-y-8 rounded-sm border border-ankahe-border shadow-sm">
             <div>
-              <h3 className="font-medium font-display text-ankahe-text mb-4">Export Settings</h3>
+              <h3 className="type-panel-title text-ankahe-text mb-4">Export Settings</h3>
               <div className="flex bg-ankahe-surface-soft p-1 rounded-sm w-fit border border-ankahe-border">
                 <button
                   onClick={() => setViewMode("public")}
                   aria-pressed={viewMode === "public"}
-                  className={cn("min-h-11 px-4 py-1.5 rounded-sm text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "public" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
+                  className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "public" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
                 >
                   Share Version
                 </button>
                 <button
                   onClick={() => setViewMode("private")}
                   aria-pressed={viewMode === "private"}
-                  className={cn("min-h-11 px-4 py-1.5 rounded-sm text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "private" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
+                  className={cn("type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2", viewMode === "private" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text")}
                 >
                   Private Version
                 </button>
               </div>
-              <p className="text-xs text-ankahe-muted mt-3 leading-relaxed">
+              <p className="type-caption text-ankahe-muted mt-3">
                 {viewMode === "public" 
                   ? "Currently previewing what others will see. Private fields are hidden." 
                   : "Currently previewing everything, including private fields for your own viewing."}
@@ -113,7 +113,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
             </div>
 
             <div className="space-y-4">
-              <h4 className="text-sm font-medium font-display text-ankahe-text">Include Sections</h4>
+              <h4 className="type-panel-title text-ankahe-text">Include Sections</h4>
               <div className="flex flex-wrap gap-2">
                 {config.sections.map(sec => {
                   const isExcluded = excludedSections.includes(sec.id);
@@ -123,7 +123,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
                       onClick={() => toggleSection(sec.id)}
                       aria-pressed={!isExcluded}
                       className={cn(
-                        "min-h-11 px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+                        "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
                         isExcluded 
                           ? "bg-ankahe-surface-soft border-ankahe-border text-ankahe-muted" 
                           : "bg-ankahe-accent/10 border-ankahe-accent text-ankahe-accent-dark"
@@ -138,7 +138,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
           </div>
 
           <div className="bg-ankahe-surface p-8 space-y-8 rounded-sm border border-ankahe-border shadow-sm">
-            <h3 className="font-medium font-display text-ankahe-text flex items-center gap-2">
+            <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
               <Share2 size={18} className="text-ankahe-accent" />
               Share Link
             </h3>
@@ -146,7 +146,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
             {storageMode === "url" ? (
               <div className="space-y-6">
                 <div className="flex items-center gap-2 p-2 bg-ankahe-bg rounded-sm border border-ankahe-border">
-                  <div className="flex-1 truncate text-xs text-ankahe-muted font-mono pl-2">
+                  <div className="type-caption flex-1 truncate text-ankahe-muted pl-2">
                     {secureSharedUrl}
                   </div>
                   <button 
@@ -159,7 +159,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
                 </div>
 
                 {secureSharedUrl.length > 2000 && (
-                  <div className="p-3 bg-ankahe-warning-soft rounded-sm border border-ankahe-warning/25 flex gap-3 text-xs text-ankahe-warning leading-relaxed">
+                  <div className="type-caption p-3 bg-ankahe-warning-soft rounded-sm border border-ankahe-warning/25 flex gap-3 text-ankahe-warning">
                     <AlertCircle size={16} className="shrink-0 text-ankahe-warning" />
                     <p>
                       This URL is very long. Some older apps or browsers might struggle to open it. Saving it as an image or PDF is recommended.
@@ -184,7 +184,7 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
                       className="bg-ankahe-on-accent p-6 rounded-sm border border-ankahe-border flex flex-col items-center gap-4 shadow-sm"
                     >
                       <QRCodeSVG value={secureSharedUrl} size={200} level="M" />
-                      <p className="text-xs text-ankahe-muted font-medium text-center">
+                      <p className="type-caption text-ankahe-muted text-center">
                         Scan to open this manual on another device.
                       </p>
                     </motion.div>
@@ -193,10 +193,10 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
               </div>
             ) : (
               <div className="p-6 bg-ankahe-bg rounded-sm border border-ankahe-border space-y-4 text-center">
-                <p className="text-sm text-ankahe-text leading-relaxed">
+                <p className="type-body text-ankahe-text">
                   You are in <strong>Memory Only</strong> mode. Your link does not contain your answers.
                 </p>
-                <p className="text-xs text-ankahe-muted">
+                <p className="type-caption text-ankahe-muted">
                   Switch to <strong>Save in Link</strong> to generate a shareable QR or URL.
                 </p>
               </div>
@@ -204,18 +204,18 @@ export function ArtifactStudio({ state, url, storageMode }: ArtifactStudioProps)
           </div>
 
           <div className="bg-ankahe-surface p-8 space-y-4 rounded-sm border border-ankahe-border shadow-sm">
-            <h3 className="font-medium font-display text-ankahe-text">Visibility Note</h3>
+            <h3 className="type-panel-title text-ankahe-text">Visibility Note</h3>
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-medium">
+              <div className="type-caption flex items-center justify-between">
                 <span className="text-ankahe-muted">Shared Entries</span>
                 <span className="text-ankahe-text">{manual.shareableCount}</span>
               </div>
-              <div className="flex items-center justify-between text-xs font-medium">
+              <div className="type-caption flex items-center justify-between">
                 <span className="text-ankahe-muted">Private Only</span>
                 <span className="text-ankahe-accent-dark">{manual.privateCount}</span>
               </div>
             </div>
-            <p className="text-xs text-ankahe-muted leading-relaxed pt-2">
+            <p className="type-caption text-ankahe-muted pt-2">
               Private entries appear in your live preview but are excluded from exports and shared links unless explicitly trusted.
             </p>
           </div>

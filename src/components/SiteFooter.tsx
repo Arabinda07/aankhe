@@ -7,10 +7,10 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-display font-semibold text-ankahe-accent-dark tracking-tight text-xl">
+            <h3 className="font-display text-2xl font-bold leading-none text-ankahe-accent-dark">
               Ankahe
             </h3>
-            <p className="text-ankahe-muted text-sm leading-relaxed max-w-xs">
+            <p className="type-caption text-ankahe-muted max-w-xs">
               A private place to write what usually goes unsaid. Built for
               clarity, empathy, and better understanding.
             </p>
@@ -18,10 +18,10 @@ export function SiteFooter() {
 
           {/* Links */}
           <div className="space-y-4">
-            <h4 className="text-xs font-bold text-ankahe-accent-dark uppercase tracking-widest">
+            <h4 className="type-meta text-ankahe-accent-dark">
               Manuals
             </h4>
-            <nav aria-label="Manuals" className="flex flex-col gap-2 text-sm text-ankahe-muted">
+            <nav aria-label="Manuals" className="type-ui-label flex flex-col gap-2 text-ankahe-muted">
               <Link
                 to="/manual/me"
                 className="min-h-11 inline-flex items-center hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
@@ -45,10 +45,10 @@ export function SiteFooter() {
 
           {/* Privacy Promise */}
           <div className="space-y-4">
-            <h4 className="text-xs font-bold text-ankahe-accent-dark uppercase tracking-widest">
+            <h4 className="type-meta text-ankahe-accent-dark">
               Our Promise
             </h4>
-            <p className="text-sm text-ankahe-muted leading-relaxed">
+            <p className="type-caption text-ankahe-muted">
               No accounts. No databases. Your data lives only in your browser
               memory or specifically crafted URLs. When you close the tab, it's
               gone for good.
@@ -56,7 +56,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-ankahe-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-ankahe-muted uppercase tracking-widest">
+        <div className="type-meta mt-16 pt-8 border-t border-ankahe-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-ankahe-muted">
           <span>&copy; {new Date().getFullYear()} Ankahe</span>
           <span>v1.0 MVP</span>
         </div>

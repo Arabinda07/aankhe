@@ -56,11 +56,11 @@ export function QuestionStep({
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-3xl md:text-4xl font-display font-medium text-ankahe-text leading-tight">
+        <h2 className="type-question text-ankahe-text">
           {question.label}
         </h2>
         {question.helperText && (
-          <p className="text-lg text-ankahe-muted leading-relaxed max-w-xl">
+          <p className="type-lead text-ankahe-muted">
             {question.helperText}
           </p>
         )}
@@ -102,7 +102,7 @@ function VisibilityButton({ active, onClick, label, icon }: any) {
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "min-h-11 flex items-center gap-2 px-3 py-1.5 rounded-sm text-xs font-bold transition-all border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+        "type-ui-label min-h-11 flex items-center gap-2 px-3 py-1.5 rounded-sm transition-all border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
         active 
           ? "bg-ankahe-surface text-ankahe-text shadow-sm border-ankahe-border" 
           : "text-ankahe-muted hover:text-ankahe-text hover:bg-ankahe-surface/50"
@@ -122,7 +122,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || "Type your answer..."}
-        className="w-full text-2xl font-display bg-transparent border-b-2 border-ankahe-border py-2 focus:border-ankahe-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent/40 transition-colors rounded-none outline-none text-ankahe-text placeholder:text-ankahe-muted/50"
+        className="type-answer-field w-full bg-transparent border-b-2 border-ankahe-border py-2 focus:border-ankahe-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent/40 transition-colors rounded-none outline-none text-ankahe-text placeholder:text-ankahe-muted/50"
         aria-label={placeholder || "Answer to question"}
       />
     );
@@ -135,7 +135,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || "Type your answer..."}
         rows={4}
-        className="w-full text-xl font-display bg-ankahe-surface border border-ankahe-border rounded-sm p-6 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-accent/50 transition-colors resize-none shadow-sm text-ankahe-text placeholder:text-ankahe-muted/50"
+        className="type-answer-field w-full bg-ankahe-surface border border-ankahe-border rounded-sm p-6 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-accent/50 transition-colors resize-none shadow-sm text-ankahe-text placeholder:text-ankahe-muted/50"
         aria-label={placeholder || "Answer to question"}
       />
     );
@@ -153,9 +153,9 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
           className="w-full accent-ankahe-accent focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ankahe-accent outline-none"
           aria-label={`Scale from ${min} to ${max}`}
         />
-        <div className="flex justify-between text-sm font-bold text-ankahe-muted uppercase tracking-widest px-1">
+        <div className="type-meta flex justify-between text-ankahe-muted px-1">
           <span>Min</span>
-          <span className="text-ankahe-text text-xl font-display">{value || min}</span>
+          <span className="type-tabular text-ankahe-text text-2xl font-semibold">{value || min}</span>
           <span>Max</span>
         </div>
       </div>
@@ -181,7 +181,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
                 onChange(nextVal);
               }}
               className={cn(
-                "min-h-11 px-6 py-3 rounded-sm text-lg font-medium transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+                "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
                 isSelected 
                   ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
                   : "bg-ankahe-surface border-ankahe-border text-ankahe-text hover:border-ankahe-accent/50"
@@ -204,7 +204,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
             onClick={() => onChange(opt)}
             aria-pressed={value === opt}
             className={cn(
-              "min-h-11 px-6 py-3 rounded-sm text-lg font-medium transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+              "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
               value === opt 
                 ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
                 : "bg-ankahe-surface border-ankahe-border text-ankahe-text hover:border-ankahe-accent/50"

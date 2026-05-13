@@ -33,7 +33,7 @@ export function SoftButton({
   };
 
   const sizes = {
-    sm: 'min-h-9 px-4 py-2 text-sm',
+    sm: 'min-h-11 px-4 py-2 text-sm',
     md: 'min-h-12 px-6 py-3 text-base',
     lg: 'min-h-14 px-8 py-4 text-lg'
   };
@@ -43,7 +43,7 @@ export function SoftButton({
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
       className={cn(
-        'group inline-flex items-center justify-center gap-3 font-medium rounded-full disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2',
+        'group inline-flex items-center justify-center gap-3 font-semibold leading-none rounded-full disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2',
         variants[variant],
         sizes[size],
         className

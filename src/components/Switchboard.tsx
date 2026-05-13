@@ -20,18 +20,19 @@ interface SwitchboardProps {
 
 export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeChange }: SwitchboardProps) {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-24 bg-ankahe-bg">
+    <div className="max-w-5xl mx-auto px-6 py-12 md:py-24 space-y-24 bg-ankahe-bg">
       {/* Hero */}
-      <section className="text-center space-y-6">
+      <section className="text-center space-y-8">
         <motion.h1 
-          className="text-5xl md:text-7xl font-display font-medium tracking-tight text-ankahe-text leading-[1.1]"
+          className="type-hero text-ankahe-text"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Say it once. <br className="hidden md:block" /> Be understood.
+          Say it once. <br className="hidden md:block" />
+          <span className="type-hero-emphasis">Be understood.</span>
         </motion.h1>
         <motion.p 
-          className="text-xl text-ankahe-muted max-w-2xl mx-auto pt-4"
+          className="type-lead text-ankahe-muted mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -43,7 +44,7 @@ export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeCh
 
       <section className="flex justify-center">
         <div className="max-w-lg text-center space-y-4">
-          <p className="text-sm font-mono text-ankahe-muted/80 uppercase tracking-wide">
+          <p className="type-meta text-ankahe-muted/80">
             Nothing is saved. Keep your link, QR, image, or PDF before leaving.
           </p>
         </div>
@@ -78,9 +79,9 @@ export function Switchboard({ onStart, onTrySample, storageMode, onStorageModeCh
       {/* Settings / Footer */}
       <section className="flex flex-col items-center gap-6 border-t border-ankahe-border pt-16 pb-12">
         <div className="space-y-4 text-center pb-8 border-b border-ankahe-border/50 max-w-xl mx-auto">
-          <h3 className="font-semibold text-ankahe-text">Storage Mode</h3>
+          <h3 className="type-panel-title text-ankahe-text">Storage Mode</h3>
           <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-          <p className="text-sm text-ankahe-muted leading-relaxed">
+          <p className="type-caption text-ankahe-muted">
             {storageMode === "url" 
               ? "Answers are saved inside your link. If you share the link, others see your answers."
               : "Answers live only in this tab's memory. They vanish if you refresh or close."}
@@ -100,15 +101,15 @@ function ModeCard({ title, label, description, onClick, onSampleClick }: any) {
     >
       <div className="bg-ankahe-surface rounded-[calc(2rem-0.375rem)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] p-8 md:p-12 h-full flex flex-col justify-between min-h-[320px]">
         <div className="space-y-4 mb-12">
-          <p className="text-xs font-bold text-ankahe-accent uppercase tracking-[0.2em]">{label}</p>
-          <h2 className="text-4xl md:text-5xl font-display font-medium text-ankahe-text">{title}</h2>
-          <p className="text-ankahe-muted leading-relaxed text-lg">{description}</p>
+          <p className="type-eyebrow text-ankahe-accent">{label}</p>
+          <h2 className="type-mode-title text-ankahe-text">{title}</h2>
+          <p className="type-lead text-ankahe-muted">{description}</p>
         </div>
         <div className="flex flex-wrap items-center gap-4 mt-auto pt-8 border-t border-ankahe-border/40">
           <SoftButton size="md" onClick={onClick} icon={<ArrowRight size={16} />}>Start a manual</SoftButton>
           <button 
             onClick={onSampleClick}
-            className="min-h-11 px-2 inline-flex items-center text-sm font-medium text-ankahe-muted hover:text-ankahe-text transition-colors underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+            className="type-ui-label min-h-11 px-2 inline-flex items-center text-ankahe-muted hover:text-ankahe-text transition-colors underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           >
             See a sample
           </button>

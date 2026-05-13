@@ -22,7 +22,7 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
 
   if (compact) {
     return (
-      <div className="flex items-center gap-4 text-xs font-medium text-ankahe-muted uppercase tracking-wider">
+      <div className="type-meta flex items-center gap-4 text-ankahe-muted">
         <div className="flex items-center gap-1.5">
           <Shield size={14} className="text-ankahe-success" />
           No Account / No Database
@@ -36,42 +36,42 @@ export function PrivacyMeter({ state, compact }: PrivacyMeterProps) {
   return (
     <div className="bg-ankahe-surface rounded-sm border border-ankahe-border p-6 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-medium font-display text-ankahe-text flex items-center gap-2">
+        <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
           <Shield size={18} className="text-ankahe-success" />
           Privacy Meter
         </h3>
-        <span className="text-xs bg-ankahe-success-soft text-ankahe-success font-mono px-2 py-0.5 rounded-sm">Safe</span>
+        <span className="type-caption bg-ankahe-success-soft text-ankahe-success px-2 py-0.5 rounded-sm">Safe</span>
       </div>
 
       <div className="space-y-3">
-        <div className="flex justify-between items-center text-sm">
+        <div className="type-caption flex justify-between items-center">
           <span className="text-ankahe-muted">Storage Mode</span>
-          <span className="font-medium text-ankahe-text capitalize">{state.storageMode}</span>
+          <span className="font-semibold text-ankahe-text capitalize">{state.storageMode}</span>
         </div>
         
-        <div className="flex justify-between items-center text-sm">
+        <div className="type-caption flex justify-between items-center">
           <span className="text-ankahe-muted">Account / Database</span>
-          <span className="font-medium text-ankahe-text">None</span>
+          <span className="font-semibold text-ankahe-text">None</span>
         </div>
 
-        <div className="flex justify-between items-center text-sm">
+        <div className="type-caption flex justify-between items-center">
           <span className="text-ankahe-muted">Visibility</span>
-          <span className="font-medium text-ankahe-text">
+          <span className="font-semibold text-ankahe-text type-tabular">
             {Object.keys(state.answers).length} Answered
           </span>
         </div>
 
         {state.storageMode === "url" && (
-          <div className="flex justify-between items-center text-sm border-t border-ankahe-border pt-3">
+          <div className="type-caption flex justify-between items-center border-t border-ankahe-border pt-3">
             <span className="text-ankahe-muted">URL Integrity</span>
-            <span className={urlStatus[category].color + " font-medium"}>
+            <span className={urlStatus[category].color + " font-semibold type-tabular"}>
               {urlStatus[category].label} ({length} ch)
             </span>
           </div>
         )}
       </div>
 
-      <div className="p-3 bg-ankahe-surface-soft rounded-sm border border-ankahe-border flex gap-3 text-xs text-ankahe-text leading-relaxed">
+      <div className="type-caption p-3 bg-ankahe-surface-soft rounded-sm border border-ankahe-border flex gap-3 text-ankahe-text">
         <Info size={16} className="shrink-0 text-ankahe-accent" />
         <p>
           Nothing is saved automatically. Keep your link, QR, image, or PDF before leaving.

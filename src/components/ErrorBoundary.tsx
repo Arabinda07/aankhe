@@ -43,8 +43,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
               <ShieldAlert size={32} />
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-display font-medium text-ankahe-text">Something went wrong</h2>
-              <p className="text-ankahe-muted text-sm">
+              <h2 className="type-artifact-heading text-ankahe-text">Something went wrong</h2>
+              <p className="type-caption text-ankahe-muted">
                 We encountered an unexpected error while composing your manual.
                 Your data in the URL might be corrupted, or memory state failed.
               </p>

@@ -11,11 +11,11 @@ export function SiteHeader({ onStart }: SiteHeaderProps) {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link 
           to="/" 
-          className="min-h-11 inline-flex items-center font-display font-semibold text-ankahe-accent-dark text-xl sm:text-2xl hover:text-ankahe-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+          className="min-h-11 inline-flex items-center font-display text-2xl sm:text-3xl font-bold leading-none text-ankahe-accent-dark hover:text-ankahe-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
         >
           Ankahe
         </Link>
-        <nav className="flex gap-4 sm:gap-8 text-sm font-medium text-ankahe-muted">
+        <nav className="type-ui-label flex gap-4 sm:gap-8 text-ankahe-muted">
           <Link
             to="/manual/me"
             className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"

@@ -43,7 +43,7 @@ export function FormRenderer({
     <div className="space-y-12">
       {/* Header / Section Indicator */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs font-bold text-ankahe-muted uppercase tracking-widest">
+        <div className="type-meta flex items-center justify-between text-ankahe-muted">
           <div className="flex items-center gap-2">
             <span className={cn("px-2 py-0.5 rounded bg-ankahe-surface-soft text-ankahe-text")}>
               Section {sectionIndex + 1}
@@ -88,7 +88,7 @@ export function FormRenderer({
       </AnimatePresence>
 
       {/* Quick Nav */}
-      <div className="hidden md:flex flex-wrap gap-2 pt-12 border-t border-ankahe-border">
+      <div className="hidden md:flex flex-wrap gap-2 pt-12 border-t border-ankahe-border" aria-label="Question shortcuts">
         {config.questions.map((q, i) => (
           <button
             key={q.id}

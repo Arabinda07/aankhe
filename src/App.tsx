@@ -53,10 +53,10 @@ function AppContent() {
                     <div className="max-w-4xl mx-auto px-6 pt-6">
                       <div className="bg-ankahe-surface-soft border border-ankahe-border text-ankahe-text p-4 rounded-lg flex items-start gap-4 shadow-sm">
                         <div className="flex-1 space-y-1">
-                          <h4 className="font-semibold text-ankahe-accent-dark">
+                          <h4 className="type-panel-title text-ankahe-accent-dark">
                             Link could not be restored
                           </h4>
-                          <p className="text-sm">
+                          <p className="type-caption">
                             The manual link appears to be corrupted or
                             incomplete. You can start fresh or try another link.
                           </p>

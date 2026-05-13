@@ -23,10 +23,10 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
       <div className="max-w-3xl mx-auto space-y-16">
         {/* Header */}
         <div className="space-y-6 border-b border-ankahe-border pb-12 text-center">
-          <p className="text-ankahe-accent font-bold uppercase tracking-[0.2em] text-[10px]">
+          <p className="type-eyebrow text-ankahe-accent">
             {manual.subtitle}
           </p>
-          <h1 className={cn("text-4xl md:text-5xl lg:text-6xl font-display font-medium text-ankahe-accent-dark tracking-tight leading-none")}>
+          <h1 className={cn("type-artifact-title text-ankahe-accent-dark")}>
             {manual.title}
           </h1>
         </div>
@@ -34,8 +34,8 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         {/* At a Glance */}
         {manual.atAGlance && (
           <section className="bg-ankahe-bg/50 p-8 md:p-12 rounded-sm border border-ankahe-border">
-            <h2 className="text-[10px] font-bold text-ankahe-muted uppercase tracking-[0.15em] mb-4 text-center">At a Glance</h2>
-            <p className="text-xl md:text-2xl text-ankahe-text font-display leading-relaxed text-center italic text-ankahe-accent-dark">
+            <h2 className="type-meta text-ankahe-muted mb-4 text-center">At a Glance</h2>
+            <p className="type-artifact-prose text-center italic text-ankahe-accent-dark">
               “{manual.atAGlance}”
             </p>
           </section>
@@ -46,17 +46,17 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           {manual.sections.map((section: ComposedSection) => (
             <section key={section.id} className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-16 items-start">
               <div className="space-y-4 md:sticky md:top-8">
-                <h3 className="text-2xl md:text-3xl font-display font-medium text-ankahe-accent-dark">
+                <h3 className="type-artifact-heading text-ankahe-accent-dark">
                   {section.title}
                 </h3>
-                <p className="text-sm text-ankahe-muted leading-relaxed max-w-xs">{section.description}</p>
+                <p className="type-caption text-ankahe-muted max-w-xs">{section.description}</p>
               </div>
 
               <div className="space-y-6">
                 {section.details.length > 0 && (
                   <div className="space-y-4">
                     {section.details.map((p, i) => (
-                      <p key={i} className="text-ankahe-text leading-relaxed text-lg">
+                      <p key={i} className="type-artifact-prose text-ankahe-text">
                         {p}
                       </p>
                     ))}
@@ -69,12 +69,12 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.answeredCount === 0 && (
           <div className="text-center py-24 space-y-4">
-            <p className="text-ankahe-muted font-display italic text-lg">Your manual will start taking shape here.</p>
+            <p className="type-artifact-prose text-ankahe-muted italic">Your manual will start taking shape here.</p>
           </div>
         )}
 
         <div className="pt-16 pb-8 border-t border-ankahe-border text-center">
-          <p className="text-[10px] text-ankahe-muted/70 uppercase tracking-[0.2em] font-medium">
+          <p className="type-meta text-ankahe-muted/70">
             Made with Ankahe · No account · No database
           </p>
         </div>

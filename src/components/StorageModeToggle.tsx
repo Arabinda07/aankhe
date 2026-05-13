@@ -19,7 +19,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
         onClick={() => onChange("memory")}
         aria-pressed={value === "memory"}
         className={cn(
-          "min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
           value === "memory" 
             ? "bg-ankahe-surface text-ankahe-text shadow-sm" 
             : "text-ankahe-muted hover:text-ankahe-text"
@@ -32,7 +32,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
         onClick={() => onChange("url")}
         aria-pressed={value === "url"}
         className={cn(
-          "min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
           value === "url" 
             ? "bg-ankahe-surface text-ankahe-text shadow-sm" 
             : "text-ankahe-muted hover:text-ankahe-text"

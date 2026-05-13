@@ -47,7 +47,7 @@ export function ManualBuilder({
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <button
             onClick={onBack}
-            className="min-h-11 min-w-11 flex items-center justify-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors font-medium text-sm"
+            className="type-ui-label min-h-11 min-w-11 flex items-center justify-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
             <ChevronLeft size={18} />
@@ -58,7 +58,7 @@ export function ManualBuilder({
             <button
               onClick={() => setView('build')}
               className={cn(
-                "flex items-center gap-2 px-4 py-1.5 rounded-sm text-xs font-bold transition-all",
+                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
                 view === 'build' ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
               )}
             >
@@ -68,7 +68,7 @@ export function ManualBuilder({
             <button
               onClick={() => setView('artifact')}
               className={cn(
-                "flex items-center gap-2 px-4 py-1.5 rounded-sm text-xs font-bold transition-all",
+                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
                 view === 'artifact' ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
               )}
             >
@@ -107,7 +107,7 @@ export function ManualBuilder({
               {/* Preview Side (Desktop only) */}
               <div className="hidden lg:block space-y-8 sticky top-28">
                 <div className="space-y-4">
-                  <h3 className="text-xs font-bold text-ankahe-muted uppercase tracking-widest px-1">
+                  <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview
                   </h3>
                   <div className="p-1.5 rounded-[2rem] bg-ankahe-surface-soft/50 ring-1 ring-ankahe-border/50">
