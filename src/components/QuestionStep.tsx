@@ -31,6 +31,9 @@ export function QuestionStep({
   isFirst,
   isLast
 }: QuestionStepProps) {
+  const questionLabelId = `question-${question.id}-label`;
+  const helperTextId = question.helperText ? `question-${question.id}-helper` : undefined;
+
   return (
     <div className="space-y-8">
       {/* Visibility Control */}
@@ -56,11 +59,11 @@ export function QuestionStep({
       </div>
 
       <div className="space-y-4">
-        <h2 className="type-question text-ankahe-text">
+        <h2 id={questionLabelId} className="type-question text-ankahe-text">
           {question.label}
         </h2>
         {question.helperText && (
-          <p className="type-lead text-ankahe-muted">
+          <p id={helperTextId} className="type-lead text-ankahe-muted">
             {question.helperText}
           </p>
         )}
@@ -75,6 +78,8 @@ export function QuestionStep({
           value={value} 
           onChange={onChange} 
           placeholder={question.helperText}
+          labelledBy={questionLabelId}
+          describedBy={helperTextId}
         />
       </div>
 
@@ -114,7 +119,7 @@ function VisibilityButton({ active, onClick, label, icon }: any) {
   );
 }
 
-function InputComponent({ type, options, min, max, value, onChange, placeholder }: any) {
+function InputComponent({ type, options, min, max, value, onChange, placeholder, labelledBy, describedBy }: any) {
   if (type === "text") {
     return (
       <input
@@ -123,7 +128,8 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || "Type your answer..."}
         className="type-answer-field w-full bg-transparent border-b-2 border-ankahe-border py-2 focus:border-ankahe-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent/40 transition-colors rounded-none outline-none text-ankahe-text placeholder:text-ankahe-muted/50"
-        aria-label={placeholder || "Answer to question"}
+        aria-labelledby={labelledBy}
+        aria-describedby={describedBy}
       />
     );
   }
@@ -136,7 +142,8 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
         placeholder={placeholder || "Type your answer..."}
         rows={4}
         className="type-answer-field w-full bg-ankahe-surface border border-ankahe-border rounded-sm p-6 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-accent/50 transition-colors resize-none shadow-sm text-ankahe-text placeholder:text-ankahe-muted/50"
-        aria-label={placeholder || "Answer to question"}
+        aria-labelledby={labelledBy}
+        aria-describedby={describedBy}
       />
     );
   }
@@ -151,7 +158,8 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
           value={value || min}
           onChange={(e) => onChange(parseInt(e.target.value))}
           className="w-full accent-ankahe-accent focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ankahe-accent outline-none"
-          aria-label={`Scale from ${min} to ${max}`}
+          aria-labelledby={labelledBy}
+          aria-describedby={describedBy}
         />
         <div className="type-meta flex justify-between text-ankahe-muted px-1">
           <span>Min</span>
@@ -164,7 +172,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
 
   if (type === "multiSelect") {
     return (
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
         {options.map((opt: string) => {
           const isSelected = Array.isArray(value) ? value.includes(opt) : value === opt;
           return (
@@ -197,7 +205,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder 
 
   if (type === "select") {
     return (
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
         {options.map((opt: string) => (
           <button
             key={opt}

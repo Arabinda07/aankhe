@@ -11,7 +11,7 @@ export function PrivacyPage() {
   return (
     <InfoShell
       eyebrow="Privacy"
-      title="Nothing is stored. Nothing is uploaded."
+      title="Nothing is stored"
       lead="You choose what leaves the page."
     >
       <div className="grid gap-5 md:grid-cols-2">
@@ -75,7 +75,7 @@ export function HowItWorksPage() {
   return (
     <InfoShell
       eyebrow="How it works"
-      title="A quiet way to make yourself easier to understand."
+      title="Your inner context"
       lead="Ankahe turns careful answers into a personal manual you can keep, send, or revise."
     >
       <div className="grid gap-4">

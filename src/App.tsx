@@ -87,6 +87,7 @@ function AppContent() {
                     onStorageModeChange={setStorageMode}
                     onStart={handleStart}
                     onTrySample={handleTrySample}
+                    onLearnMore={() => navigate("/how-it-works")}
                   />
                 </div>
               }

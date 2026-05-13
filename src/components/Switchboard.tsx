@@ -15,6 +15,7 @@ import { motion } from "motion/react";
 interface SwitchboardProps {
   onStart: (mode: ModeId) => void;
   onTrySample: (sample: any) => void;
+  onLearnMore: () => void;
   storageMode: StorageMode;
   onStorageModeChange: (mode: StorageMode) => void;
 }
@@ -32,6 +33,7 @@ interface ModeCardProps {
 export function Switchboard({
   onStart,
   onTrySample,
+  onLearnMore,
   storageMode,
   onStorageModeChange,
 }: SwitchboardProps) {
@@ -66,8 +68,8 @@ export function Switchboard({
             <SoftButton size="md" onClick={() => onStart("me")} icon={<ArrowRight size={16} />}>
               Begin your manual
             </SoftButton>
-            <SoftButton size="md" variant="secondary" onClick={() => onStart("work")}>
-              Start Work Manual
+            <SoftButton size="md" variant="secondary" onClick={onLearnMore}>
+              How it works
             </SoftButton>
           </motion.div>
 
