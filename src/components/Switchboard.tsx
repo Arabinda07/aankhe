@@ -91,9 +91,9 @@ export function Switchboard({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="absolute -inset-3 rounded-shell border border-ankahe-border/60 bg-ankahe-surface-halo transition-colors duration-500 group-hover:bg-ankahe-surface-halo-hover" />
-          <div className="relative rounded-shell border border-ankahe-border bg-ankahe-surface p-5 shadow-[0_24px_70px_color-mix(in_oklch,var(--color-accent)_10%,transparent)] transition-shadow duration-500 group-hover:shadow-[0_32px_80px_color-mix(in_oklch,var(--color-accent)_14%,transparent)]">
-            <div className="rounded-xl border border-ankahe-border bg-ankahe-bg px-7 py-8 md:px-9 md:py-10">
+          <div className="absolute -inset-2 rounded-lg border border-ankahe-border/60 bg-ankahe-surface-halo transition-colors duration-500 group-hover:bg-ankahe-surface-halo-hover" />
+          <div className="relative rounded-lg border border-ankahe-border bg-ankahe-surface p-3 shadow-[0_18px_48px_color-mix(in_oklch,var(--color-accent)_8%,transparent)] transition-shadow duration-500 group-hover:shadow-[0_22px_56px_color-mix(in_oklch,var(--color-accent)_10%,transparent)]">
+            <div className="rounded-md border border-ankahe-border bg-ankahe-bg px-7 py-8 md:px-9 md:py-10">
               <div className="mb-9 flex items-start justify-between gap-6 border-b border-ankahe-border pb-8">
                 <div className="space-y-2">
                   <p className="type-eyebrow text-ankahe-accent">Sample manual</p>
@@ -101,7 +101,7 @@ export function Switchboard({
                     How to understand me
                   </h2>
                 </div>
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-ankahe-accent-soft text-ankahe-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:rotate-12 group-hover:scale-110">
+                <span className="grid h-11 w-11 place-items-center rounded-md bg-ankahe-accent-soft text-ankahe-accent transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:rotate-12 group-hover:scale-110">
                   <Sparkle size={20} weight="regular" />
                 </span>
               </div>
@@ -180,7 +180,7 @@ export function Switchboard({
 
 function StoragePanel({ storageMode, onStorageModeChange, className }: { storageMode: StorageMode, onStorageModeChange: (mode: StorageMode) => void, className?: string }) {
   return (
-    <div className={cn("space-y-6 rounded-2xl bg-ankahe-surface-translucent border border-ankahe-border/60 p-6 md:p-8", className)}>
+    <div className={cn("space-y-6 rounded-md bg-ankahe-surface-translucent border border-ankahe-border/60 p-6 md:p-8", className)}>
       <div className="space-y-2">
         <p className="type-eyebrow text-ankahe-muted">Storage</p>
         <h3 className="font-sans text-xl font-bold tracking-tight text-ankahe-text md:text-2xl leading-tight">
@@ -230,7 +230,7 @@ function DocumentSection({
 
 function VisibilityChip({ label, className }: { label: string; className?: string }) {
   return (
-    <span className={cn("type-caption inline-flex min-h-9 items-center justify-center rounded-md px-3 font-semibold", className)}>
+    <span className={cn("type-caption inline-flex min-h-9 items-center justify-center rounded-sm px-3 font-semibold", className)}>
       {label}
     </span>
   );
@@ -253,7 +253,7 @@ function ModeCard({
     <motion.article
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      className="rounded-xl border border-ankahe-border bg-ankahe-surface p-6 md:p-8"
+      className="rounded-md border border-ankahe-border bg-ankahe-surface p-6 md:p-8"
     >
       <div className="flex min-h-[300px] flex-col justify-between gap-10">
         <div className="space-y-5">

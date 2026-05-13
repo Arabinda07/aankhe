@@ -37,7 +37,7 @@ export function QuestionStep({
   return (
     <div className="space-y-8">
       {/* Visibility Control */}
-      <div className="flex w-fit flex-wrap items-center gap-2 rounded-lg border border-ankahe-border bg-ankahe-surface-soft p-2">
+      <div className="flex w-fit flex-wrap items-center gap-2 rounded-lg border border-ankahe-border bg-ankahe-control-selected p-2">
         <VisibilityButton
           active={visibility === "share"}
           onClick={() => onVisibilityChange("share")}
@@ -107,10 +107,10 @@ function VisibilityButton({ active, onClick, label, icon }: any) {
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "type-ui-label min-h-11 flex items-center gap-2 px-3 py-1.5 rounded-sm transition-all border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+        "type-ui-label min-h-11 flex items-center gap-2 px-3 py-1.5 rounded-sm transition-all border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active 
-          ? "bg-ankahe-surface text-ankahe-text shadow-sm border-ankahe-border"
-          : "text-ankahe-muted hover:text-ankahe-text hover:bg-ankahe-surface/50"
+          ? "bg-ankahe-control text-ankahe-text shadow-sm border-ankahe-border"
+          : "text-ankahe-muted hover:text-ankahe-text hover:bg-ankahe-control-hover"
       )}
     >
       {icon}
@@ -141,7 +141,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder || "Type your answer..."}
         rows={4}
-        className="type-answer-field w-full bg-ankahe-surface border border-ankahe-border rounded-sm p-6 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-accent/50 transition-colors resize-none shadow-sm text-ankahe-text placeholder:text-ankahe-muted/50"
+        className="type-answer-field w-full bg-ankahe-paper border border-ankahe-paper-border rounded-sm p-6 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus transition-colors resize-none shadow-sm text-ankahe-text placeholder:text-ankahe-muted/50"
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
       />
@@ -189,10 +189,10 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
                 onChange(nextVal);
               }}
               className={cn(
-                "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+                "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 isSelected 
                   ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
-                  : "bg-ankahe-surface border-ankahe-border text-ankahe-text hover:border-ankahe-accent/50"
+                  : "bg-ankahe-control border-ankahe-border text-ankahe-text hover:bg-ankahe-control-hover hover:border-ankahe-accent/50"
               )}
             >
               {opt}
@@ -212,10 +212,10 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
             onClick={() => onChange(opt)}
             aria-pressed={value === opt}
             className={cn(
-              "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+              "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               value === opt 
                 ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
-                : "bg-ankahe-surface border-ankahe-border text-ankahe-text hover:border-ankahe-accent/50"
+                : "bg-ankahe-control border-ankahe-border text-ankahe-text hover:bg-ankahe-control-hover hover:border-ankahe-accent/50"
             )}
           >
             {opt}

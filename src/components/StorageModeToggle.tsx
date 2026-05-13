@@ -14,15 +14,15 @@ interface StorageModeToggleProps {
 
 export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
   return (
-    <div className="flex p-1 bg-ankahe-surface-soft rounded-sm w-fit border border-ankahe-border">
+    <div className="flex p-1 bg-ankahe-control-selected rounded-sm w-fit border border-ankahe-border">
       <button
         onClick={() => onChange("memory")}
         aria-pressed={value === "memory"}
         className={cn(
-          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "memory" 
-            ? "bg-ankahe-surface text-ankahe-text shadow-sm" 
-            : "text-ankahe-muted hover:text-ankahe-text"
+            ? "bg-ankahe-control text-ankahe-text shadow-sm" 
+            : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
         )}
       >
         <Monitor size={16} />
@@ -32,10 +32,10 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
         onClick={() => onChange("url")}
         aria-pressed={value === "url"}
         className={cn(
-          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+          "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "url" 
-            ? "bg-ankahe-surface text-ankahe-text shadow-sm" 
-            : "text-ankahe-muted hover:text-ankahe-text"
+            ? "bg-ankahe-control text-ankahe-text shadow-sm" 
+            : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
         )}
       >
         <Link size={16} />

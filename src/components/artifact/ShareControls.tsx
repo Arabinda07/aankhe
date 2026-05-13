@@ -35,14 +35,14 @@ export function ShareControls({
 
       {storageMode === "url" ? (
         <div className="space-y-6">
-          <div className="flex items-center gap-2 p-2 bg-ankahe-bg rounded-sm border border-ankahe-border">
+          <div className="flex items-center gap-2 p-2 bg-ankahe-control-selected rounded-sm border border-ankahe-border">
             <div className="type-caption flex-1 truncate text-ankahe-muted pl-2">
               {sharedUrl}
             </div>
             <button
               onClick={onCopyLink}
               aria-label={copied ? "Link copied" : "Copy share link"}
-              className="min-h-11 min-w-11 p-2 bg-ankahe-surface rounded-sm shadow-sm hover:bg-ankahe-surface-soft transition-colors text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+              className="min-h-11 min-w-11 p-2 bg-ankahe-control rounded-sm shadow-sm hover:bg-ankahe-control-hover transition-colors text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               {copied ? <Check size={16} className="text-ankahe-accent" /> : <Copy size={16} />}
             </button>
@@ -60,7 +60,7 @@ export function ShareControls({
           <div className="pt-4 space-y-4">
             <SoftButton
               variant="secondary"
-              className="w-full gap-2 bg-ankahe-surface-soft text-ankahe-text border-ankahe-border"
+              className="w-full gap-2 bg-ankahe-control-selected text-ankahe-text border-ankahe-border"
               onClick={() => setShowQR((current) => !current)}
               aria-expanded={showQR}
               aria-controls={qrPanelId}
@@ -74,7 +74,7 @@ export function ShareControls({
                 id={qrPanelId}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-ankahe-on-accent p-6 rounded-sm border border-ankahe-border flex flex-col items-center gap-4 shadow-sm"
+                className="bg-ankahe-paper p-6 rounded-sm border border-ankahe-paper-border flex flex-col items-center gap-4 shadow-sm"
               >
                 <QRCodeSVG value={sharedUrl} size={200} level="M" />
                 <p className="type-caption text-ankahe-muted text-center">
@@ -85,7 +85,7 @@ export function ShareControls({
           </div>
         </div>
       ) : (
-        <div className="p-6 bg-ankahe-bg rounded-sm border border-ankahe-border space-y-4 text-center">
+        <div className="p-6 bg-ankahe-control-selected rounded-sm border border-ankahe-border space-y-4 text-center">
           <p className="type-body text-ankahe-text">
             Memory Only keeps answers in this tab.
           </p>

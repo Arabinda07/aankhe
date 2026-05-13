@@ -23,7 +23,7 @@ export function PrivacyPage() {
         </InfoCard>
       </div>
 
-      <section className="rounded-xl border border-ankahe-border bg-ankahe-surface px-6 py-7 md:px-8">
+      <section className="border-y border-ankahe-border bg-ankahe-surface/45 py-8">
         <h2 className="type-artifact-heading text-ankahe-text">What can leave the page</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={20} />} title="Included">
@@ -78,11 +78,11 @@ export function HowItWorksPage() {
       title="Your inner context"
       lead="Ankahe turns careful answers into a personal manual you can keep, send, or revise."
     >
-      <div className="grid gap-4">
+      <div className="border-y border-ankahe-border">
         {steps.map((step, index) => (
           <section
             key={step.title}
-            className="grid gap-5 rounded-xl border border-ankahe-border bg-ankahe-surface px-6 py-6 md:grid-cols-[5rem_1fr] md:items-start md:px-8"
+            className="grid gap-5 border-b border-ankahe-border py-7 last:border-b-0 md:grid-cols-[5rem_1fr] md:items-start md:py-8"
           >
             <span className="type-meta text-ankahe-accent">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
@@ -93,7 +93,7 @@ export function HowItWorksPage() {
         ))}
       </div>
 
-      <section className="rounded-xl border border-ankahe-border bg-sandal-soft/55 px-6 py-7 md:px-8">
+      <section className="border-y border-ankahe-border bg-sandal-soft/45 py-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl space-y-2">
             <p className="type-eyebrow text-sandal">Begin</p>
@@ -147,7 +147,7 @@ function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-xl border border-ankahe-border bg-ankahe-surface px-6 py-7">
+    <section className="rounded-md border border-ankahe-border bg-ankahe-surface px-6 py-7">
       <div className="mb-5 text-ankahe-accent">{icon}</div>
       <h2 className="type-artifact-heading text-ankahe-text">{title}</h2>
       <p className="type-lead mt-3 text-ankahe-muted">{children}</p>
@@ -165,7 +165,7 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-ankahe-border bg-ankahe-bg px-4 py-5">
+    <div className="rounded-sm border border-ankahe-border bg-ankahe-bg px-4 py-5">
       <div className="mb-3 text-ankahe-accent">{icon}</div>
       <h3 className="type-panel-title text-ankahe-text">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>

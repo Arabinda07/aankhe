@@ -10,29 +10,15 @@ import { getCurrentURLSize } from "../lib/urlSize";
 interface PrivacyMeterProps {
   storageMode: StorageMode;
   answeredCount: number;
-  compact?: boolean;
 }
 
-export function PrivacyMeter({ storageMode, answeredCount, compact }: PrivacyMeterProps) {
+export function PrivacyMeter({ storageMode, answeredCount }: PrivacyMeterProps) {
   const { length, category } = getCurrentURLSize();
   const urlStatus = {
     safe: { label: "Link Ready", color: "text-ankahe-accent" },
     long: { label: "Getting Long", color: "text-ankahe-warning" },
     excessive: { label: "Too Large", color: "text-ankahe-danger" }
   };
-
-  if (compact) {
-    return (
-      <div className="type-meta flex items-center gap-4 text-ankahe-muted">
-        <div className="flex items-center gap-1.5">
-          <ShieldCheck size={14} className="text-ankahe-accent" />
-          Local first
-        </div>
-        <div className="h-1 w-1 rounded-[2px] bg-ankahe-border" />
-        <div>{storageMode === "url" ? "Save in link" : "Memory only"}</div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-ankahe-surface rounded-sm border border-ankahe-border p-6 space-y-4">
@@ -74,7 +60,7 @@ export function PrivacyMeter({ storageMode, answeredCount, compact }: PrivacyMet
         )}
       </div>
 
-      <div className="type-caption p-3 bg-ankahe-surface-soft rounded-sm border border-ankahe-border flex gap-3 text-ankahe-text">
+      <div className="type-caption p-3 bg-ankahe-control-selected rounded-sm border border-ankahe-border flex gap-3 text-ankahe-text">
         <Info size={16} className="shrink-0 text-ankahe-accent" />
         <p>
           Nothing is saved automatically. Keep your link, QR, image, or PDF before leaving.

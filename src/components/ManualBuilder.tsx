@@ -47,22 +47,22 @@ export function ManualBuilder({
     <div className="w-full font-sans transition-colors duration-700 bg-ankahe-bg text-ankahe-text relative">
       {/* Top Nav */}
       <nav aria-label="Manual builder" className="sticky top-16 z-40 bg-ankahe-bg/80 backdrop-blur-md border-b border-ankahe-border/50">
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-14 grid grid-cols-[1fr_auto_1fr] items-center">
           <button
             onClick={onBack}
-            className="type-ui-label min-h-11 min-w-11 flex items-center justify-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+            className="type-ui-label min-h-11 min-w-11 flex items-center justify-center justify-self-start gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
             <CaretLeft size={18} />
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
-          <div className="flex bg-ankahe-border/30 p-1 rounded-sm" aria-label="Manual view selector">
+          <div className="flex justify-self-center bg-ankahe-control-selected p-1 rounded-sm border border-ankahe-border" aria-label="Manual view selector">
             <button
               onClick={() => setView('build')}
               className={cn(
-                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
-                view === 'build' ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
+                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                view === 'build' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
               )}
             >
               <FileText size={14} />
@@ -71,8 +71,8 @@ export function ManualBuilder({
             <button
               onClick={() => setView('artifact')}
               className={cn(
-                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
-                view === 'artifact' ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
+                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                view === 'artifact' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
               )}
             >
               <Sparkle size={14} />
@@ -80,13 +80,7 @@ export function ManualBuilder({
             </button>
           </div>
 
-          <div className="hidden md:block">
-            <PrivacyMeter
-              storageMode={manual.storageMode}
-              answeredCount={manual.visibilityCounts.answeredCount}
-              compact
-            />
-          </div>
+          <div aria-hidden="true" className="hidden md:block" />
         </div>
       </nav>
 
@@ -119,7 +113,7 @@ export function ManualBuilder({
                     Live Manual Preview
                   </h3>
                   <div className="rounded-xl border border-ankahe-border bg-ankahe-surface-preview p-1.5">
-                    <div className="overflow-hidden rounded-lg border border-ankahe-border bg-ankahe-bg">
+                    <div className="overflow-hidden rounded-lg border border-ankahe-paper-border bg-ankahe-paper-muted">
                       <ManualPreview
                         manual={composed}
                         mode={manual.mode}

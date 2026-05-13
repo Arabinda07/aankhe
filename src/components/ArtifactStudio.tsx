@@ -58,7 +58,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         {/* Preview Container */}
         <div className="space-y-8">
           <div className="overflow-hidden rounded-xl border border-ankahe-border bg-ankahe-surface p-4 md:p-12">
-            <div ref={artifactRef} className="mx-auto w-full max-w-2xl origin-top overflow-hidden rounded-md border border-ankahe-border bg-ankahe-bg shadow-[0_18px_48px_color-mix(in_oklch,var(--color-accent)_8%,transparent)]">
+            <div ref={artifactRef} className="mx-auto w-full max-w-2xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper shadow-[0_18px_48px_color-mix(in_oklch,var(--color-accent)_8%,transparent)]">
               <ManualPreview manual={manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>

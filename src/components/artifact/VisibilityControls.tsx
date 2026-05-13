@@ -28,13 +28,13 @@ export function VisibilityControls({
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <div>
         <h3 className="type-panel-title text-ankahe-text mb-4">Manual view</h3>
-        <div className="flex bg-ankahe-surface-soft p-1 rounded-sm w-fit border border-ankahe-border">
+        <div className="flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border">
           <button
             onClick={() => onViewModeChange("included")}
             aria-pressed={viewMode === "included"}
             className={cn(
-              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
-              viewMode === "included" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
+              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+              viewMode === "included" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
             Included only
@@ -43,8 +43,8 @@ export function VisibilityControls({
             onClick={() => onViewModeChange("private")}
             aria-pressed={viewMode === "private"}
             className={cn(
-              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
-              viewMode === "private" ? "bg-ankahe-surface text-ankahe-text shadow-sm" : "text-ankahe-muted hover:text-ankahe-text"
+              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+              viewMode === "private" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
             Full private copy
@@ -68,9 +68,9 @@ export function VisibilityControls({
                 onClick={() => onSectionToggle(section.id)}
                 aria-pressed={!isExcluded}
                 className={cn(
-                  "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2",
+                  "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                   isExcluded
-                    ? "bg-ankahe-surface-soft border-ankahe-border text-ankahe-muted"
+                    ? "bg-ankahe-control-selected border-ankahe-border text-ankahe-muted"
                     : "bg-ankahe-accent/10 border-ankahe-accent text-ankahe-accent-dark"
                 )}
               >
