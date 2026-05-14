@@ -39,13 +39,13 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "A manager", description: "Work vibes, focus hours, and how you handle stress.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "teammate", label: "A teammate", description: "Collab rhythm and how to actually hand things off to you.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
-  { id: "partner", label: "A partner", description: "Care, boundaries, and the stuff they usually misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
-  { id: "friend", label: "A friend", description: "How to support you without having to guess.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "talk", label: "Someone I need to talk to", description: "A cheat sheet for a conversation you're dreading.", mode: "talk", icon: <FileText size={22} weight="light" /> },
+  { id: "manager", label: "Manager", description: "Work vibes, focus hours, and how you handle stress.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
+  { id: "teammate", label: "Teammate", description: "Collab rhythm and how to actually hand things off to you.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
+  { id: "partner", label: "Partner", description: "Care, boundaries, and the stuff they usually misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
+  { id: "friend", label: "Friend", description: "How to support you without having to guess.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
+  { id: "talk", label: "Difficult talk", description: "A cheat sheet for a conversation you're dreading.", mode: "talk", icon: <FileText size={22} weight="light" /> },
   { id: "self", label: "Myself", description: "Just a private brain dump to figure your own head out.", mode: "me", icon: <User size={22} weight="light" /> },
-  { id: "sync", label: "Both of us", description: "A shared note so we can actually get on the same page.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "sync", label: "Shared note", description: "A shared note so we can actually get on the same page.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
@@ -98,13 +98,13 @@ export function Switchboard({
               <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-lg text-ankahe-muted">
-              Explaining your whole deal to new people is exhausting. Write it down once, keep the messy parts private, and just hand them the link. Skip the guessing games.
+              Explaining your whole deal to new people is exhausting. Write it down once. Keep the messy parts to yourself. Hand them the link. Skip the guessing games.
             </p>
           </div>
 
           <div className="ankahe-enter ankahe-enter-1 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <SoftButton size="md" onClick={scrollToOnboarding} icon={<CaretDown size={16} className="lg:hidden" />} className="w-full sm:w-auto">
-              Start building
+              Start your manual
             </SoftButton>
             <SoftButton
               variant="secondary"
@@ -112,14 +112,14 @@ export function Switchboard({
               onClick={onLearnMore}
               className="w-full sm:w-auto"
             >
-              How does this work?
+              See how it works
             </SoftButton>
           </div>
 
           <div className="ankahe-enter ankahe-enter-2 flex flex-col items-start gap-5">
             <div className="flex items-center gap-3">
               <ShieldCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
-              <p className="type-caption text-ankahe-muted">Nothing is saved to a server. This tab is a burner space.</p>
+              <p className="type-caption text-ankahe-muted">No servers. No accounts. This tab is a burner space.</p>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
           </div>

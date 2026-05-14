@@ -12,14 +12,14 @@ export function PrivacyPage() {
     <InfoShell
       eyebrow="Privacy"
       titleLines={{ main: "Nothing leaves", emphasis: "until you say so" }}
-      lead="No accounts. No databases. Just a burner space in your browser. You control what stays and what goes."
+      lead="No accounts. No databases. Just a burner space in your browser. You decide what stays and what goes."
     >
       <div className="grid gap-5 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
           Your answers live right here in this tab. Close it, refresh it, whatever—they disappear. We literally never see them.
         </InfoCard>
         <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
-          When you're ready, the answers you explicitly chose to share get squished into a web address. Anyone with that specific link can read it. Lose the link? It's gone.
+          When you're ready, the answers you explicitly share get compressed into a secure web address. Anyone with that link can read it. Lose the link? It's gone forever.
         </InfoCard>
       </div>
 
@@ -41,7 +41,7 @@ export function PrivacyPage() {
       <section className="grid gap-5 border-y border-ankahe-border py-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
         <p className="type-lead text-ankahe-muted">
-          You decide exactly what makes it into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays exactly where you put it.
+          You decide exactly what goes into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays right where you put it.
         </p>
       </section>
     </InfoShell>
@@ -52,15 +52,15 @@ export function HowItWorksPage() {
   const items = [
     {
       title: "Why actually use this?",
-      text: "Because people aren't mind readers. Whether it's a new boss, a new situationship, or a friend who keeps misreading your texts—handing them the cheat sheet saves everyone a lot of unnecessary friction.",
+      text: "Because people aren't mind readers. Whether it's a new boss, a new situationship, or a friend who misreads your texts. Handing them the cheat sheet saves everyone unnecessary friction.",
     },
     {
       title: "How do I use it?",
-      text: "Treat it like your private notes app. Pick a category. Write the feral, unedited truth first. Then, decide what stays just for you and what actually makes it into the final link.",
+      text: "Treat it like a private notes app. Pick a category. Write the feral, unedited truth. Keep the messy parts for yourself. Put the clean version in the final link.",
     },
     {
       title: "Is this actually private?",
-      text: "Yes. Nothing is saved to a server. We don't want your data, and we don't want your email. If you close this tab, your answers are gone forever. You only keep them if you generate a link or download the PDF.",
+      text: "Yes. Nothing saves to a server. We don't want your data. We don't want your email. Close this tab, and your answers vanish. You only keep them if you generate a link or save the PDF.",
     },
     {
       title: "What do the buttons do?",
@@ -99,7 +99,7 @@ export function HowItWorksPage() {
             to="/"
             className="type-ui-label inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-ankahe-accent px-8 py-3 text-ankahe-on-accent transition-colors hover:bg-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           >
-            Pick who this is for
+            Choose your manual
             <ArrowRight size={18} weight="light" />
           </Link>
         </div>
