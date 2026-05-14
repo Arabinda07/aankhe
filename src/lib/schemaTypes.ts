@@ -17,6 +17,14 @@ export type ArtifactFormat = "full" | "onePage" | "note" | "conversation" | "wor
 
 export type TonePreference = "default" | "softer" | "direct" | "warmer" | "professional" | "shorter";
 
+export type QuestionDepth = "mvp" | "deep";
+
+export interface QuestionOption {
+  value: string;
+  label: string;
+  manualMeaning?: string;
+}
+
 export interface OnboardingContext {
   recipient: string;
   misunderstanding: string;
@@ -30,8 +38,11 @@ export interface Question {
   label: string; // The UI question string
   helperText?: string;
   type: QuestionType;
+  depth?: QuestionDepth;
+  priority?: number;
+  dimension?: string;
   answerIntent?: "reflective" | "administrative";
-  options?: string[];
+  options?: Array<string | QuestionOption>;
   min?: number;
   max?: number;
   leftLabel?: string;

@@ -58,8 +58,8 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
       <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         {/* Preview Container */}
         <div className="space-y-8">
-          <div className="overflow-hidden rounded-xl border border-ankahe-border bg-ankahe-surface p-4 md:p-12">
-            <div ref={artifactRef} className="mx-auto w-full max-w-2xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper shadow-[0_18px_48px_color-mix(in_oklch,var(--color-accent)_8%,transparent)]">
+          <div className="overflow-hidden rounded-xl border border-ankahe-border bg-ankahe-surface-preview p-3 md:p-8">
+            <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper">
               <ManualPreview manual={manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>
@@ -74,7 +74,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         </div>
 
         {/* Sharing Side */}
-        <div className="space-y-8 sticky top-8">
+        <div className="space-y-8 lg:sticky lg:top-28">
           <VisibilityControls
             config={workspace.config}
             manual={manual}

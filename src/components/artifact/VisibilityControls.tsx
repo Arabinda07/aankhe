@@ -5,6 +5,8 @@
 
 import type { ArtifactFormat, ComposedManual, ModeConfig, TonePreference } from "../../lib/schemaTypes";
 import type { ManualViewMode } from "../../lib/visibilityPolicy";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from "../../lib/utils";
 
 interface VisibilityControlsProps {
@@ -32,28 +34,28 @@ export function VisibilityControls({
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <div>
         <h3 className="type-panel-title text-ankahe-text mb-4">Public preview</h3>
-        <div className="flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border">
-          <button
-            onClick={() => onViewModeChange("included")}
-            aria-pressed={viewMode === "included"}
+        <Tabs.Root value={viewMode} onValueChange={(value) => onViewModeChange(value as ManualViewMode)}>
+          <Tabs.List className="flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border" aria-label="Public preview mode">
+          <Tabs.Trigger
+            value="included"
             className={cn(
               "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               viewMode === "included" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
             What they see
-          </button>
-          <button
-            onClick={() => onViewModeChange("private")}
-            aria-pressed={viewMode === "private"}
+          </Tabs.Trigger>
+          <Tabs.Trigger
+            value="private"
             className={cn(
               "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               viewMode === "private" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
             What I see
-          </button>
-        </div>
+          </Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>
         <p className="type-caption text-ankahe-muted mt-3">
           {viewMode === "included"
             ? "Reviewing included answers. Private and omitted answers are removed."
@@ -63,12 +65,16 @@ export function VisibilityControls({
 
       <div className="space-y-4 border-t border-ankahe-border pt-6">
         <h4 className="type-panel-title text-ankahe-text">Share format</h4>
-        <div className="grid gap-2">
+        <RadioGroup.Root
+          value={manual.artifactFormat}
+          onValueChange={(value) => onFormatChange(value as ArtifactFormat)}
+          aria-label="Share format"
+          className="grid gap-2"
+        >
           {FORMAT_OPTIONS.map((format) => (
-            <button
+            <RadioGroup.Item
               key={format.id}
-              onClick={() => onFormatChange(format.id)}
-              aria-pressed={manual.artifactFormat === format.id}
+              value={format.id}
               className={cn(
                 "type-caption min-h-11 rounded-sm border px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 manual.artifactFormat === format.id
@@ -78,19 +84,23 @@ export function VisibilityControls({
             >
               <span className="block font-semibold">{format.label}</span>
               <span className="block text-ankahe-muted">{format.description}</span>
-            </button>
+            </RadioGroup.Item>
           ))}
-        </div>
+        </RadioGroup.Root>
       </div>
 
       <div className="space-y-4 border-t border-ankahe-border pt-6">
         <h4 className="type-panel-title text-ankahe-text">Tone</h4>
-        <div className="flex flex-wrap gap-2">
+        <RadioGroup.Root
+          value={manual.tone}
+          onValueChange={(value) => onToneChange(value as TonePreference)}
+          aria-label="Manual tone"
+          className="flex flex-wrap gap-2"
+        >
           {TONE_OPTIONS.map((tone) => (
-            <button
+            <RadioGroup.Item
               key={tone.id}
-              onClick={() => onToneChange(tone.id)}
-              aria-pressed={manual.tone === tone.id}
+              value={tone.id}
               className={cn(
                 "type-caption min-h-11 rounded-sm border px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 manual.tone === tone.id
@@ -99,9 +109,9 @@ export function VisibilityControls({
               )}
             >
               {tone.label}
-            </button>
+            </RadioGroup.Item>
           ))}
-        </div>
+        </RadioGroup.Root>
       </div>
 
       <div className="space-y-4">

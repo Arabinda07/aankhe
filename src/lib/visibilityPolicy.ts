@@ -1,4 +1,4 @@
-import { PROTOCOL_MANIFEST } from "./protocolManifest";
+import { getModeConfigForDepth } from "./protocolManifest";
 import type { ManualState, Question, Visibility } from "./schemaTypes";
 
 export type ManualViewMode = "included" | "private";
@@ -29,7 +29,7 @@ function canVisibilityAppearInManual(visibility: Visibility, viewMode: ManualVie
 }
 
 export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
-  const config = PROTOCOL_MANIFEST[state.mode];
+  const config = getModeConfigForDepth(state.mode, state.onboarding?.depth || "manual");
 
   const visibilityFor = (question: Question) => resolveVisibility(state, question);
 

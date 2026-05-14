@@ -6,6 +6,7 @@
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { Link, Monitor } from "@phosphor-icons/react";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 
 interface StorageModeToggleProps {
   value: StorageMode;
@@ -14,10 +15,14 @@ interface StorageModeToggleProps {
 
 export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
   return (
-    <div className="flex p-1 bg-ankahe-control-selected rounded-sm w-fit border border-ankahe-border">
-      <button
-        onClick={() => onChange("memory")}
-        aria-pressed={value === "memory"}
+    <RadioGroup.Root
+      value={value}
+      onValueChange={(nextValue) => onChange(nextValue as StorageMode)}
+      aria-label="Answer storage mode"
+      className="flex p-1 bg-ankahe-control-selected rounded-sm w-fit border border-ankahe-border"
+    >
+      <RadioGroup.Item
+        value="memory"
         className={cn(
           "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "memory" 
@@ -27,10 +32,9 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
       >
         <Monitor size={18} weight="light" />
         Memory Only
-      </button>
-      <button
-        onClick={() => onChange("url")}
-        aria-pressed={value === "url"}
+      </RadioGroup.Item>
+      <RadioGroup.Item
+        value="url"
         className={cn(
           "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "url" 
@@ -40,7 +44,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
       >
         <Link size={18} weight="light" />
         Save in Link
-      </button>
-    </div>
+      </RadioGroup.Item>
+    </RadioGroup.Root>
   );
 }

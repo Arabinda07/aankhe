@@ -27,7 +27,7 @@ export function PrivacyMeter({ storageMode, answeredCount }: PrivacyMeterProps) 
           <ShieldCheck size={18} className="text-ankahe-accent" />
           Privacy Meter
         </h3>
-        <span className="type-caption rounded-sm bg-ankahe-success-soft px-2 py-0.5 text-ankahe-accent">Local</span>
+        <span className="type-caption rounded-sm bg-ankahe-accent-soft px-2 py-0.5 text-ankahe-accent-dark">Local</span>
       </div>
 
       <div className="space-y-3">

@@ -10,6 +10,7 @@ import type { ModeId } from '../lib/schemaTypes';
 import { FormRenderer } from './FormRenderer';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
+import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from '../lib/utils';
 import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
 
@@ -60,9 +61,14 @@ export function ManualBuilder({
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
-          <div className="flex justify-self-center bg-ankahe-control-selected p-1 rounded-sm border border-ankahe-border" aria-label="Manual view selector">
-            <button
-              onClick={() => setView('build')}
+          <Tabs.Root
+            value={view}
+            onValueChange={(nextView) => setView(nextView as "build" | "artifact")}
+            className="justify-self-center"
+          >
+            <Tabs.List className="flex bg-ankahe-control-selected p-1 rounded-sm border border-ankahe-border" aria-label="Manual view selector">
+            <Tabs.Trigger
+              value="build"
               className={cn(
                 "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 view === 'build' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
@@ -70,9 +76,9 @@ export function ManualBuilder({
             >
               <FileText size={18} weight="light" />
               Draft
-            </button>
-            <button
-              onClick={() => setView('artifact')}
+            </Tabs.Trigger>
+            <Tabs.Trigger
+              value="artifact"
               className={cn(
                 "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 view === 'artifact' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
@@ -80,8 +86,9 @@ export function ManualBuilder({
             >
               <Sparkle size={18} weight="light" />
               Artifact
-            </button>
-          </div>
+            </Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
 
           <div aria-hidden="true" className="hidden md:block" />
         </div>

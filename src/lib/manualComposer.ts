@@ -12,7 +12,7 @@ import {
   Question,
   TonePreference,
 } from "./schemaTypes";
-import { PROTOCOL_MANIFEST } from "./protocolManifest";
+import { findQuestionOption, getModeConfigForDepth, getOptionManualMeaning } from "./protocolManifest";
 import { createVisibilityPolicy } from "./visibilityPolicy";
 import type { ManualViewMode } from "./visibilityPolicy";
 
@@ -26,7 +26,7 @@ export function composeManual(
   options: ManualComposeOptions = {}
 ): ComposedManual {
   const { viewMode = "private", excludedSections = [] } = options;
-  const config = PROTOCOL_MANIFEST[state.mode];
+  const config = getModeConfigForDepth(state.mode, state.onboarding?.depth || "manual");
   const answers = state.answers;
   const answerNotes = state.answerNotes || {};
   const artifactFormat = state.artifactFormat || "full";
@@ -50,7 +50,7 @@ export function composeManual(
         const val = answers[q.id];
         if (!visibilityPolicy.canAppearInManual(q, viewMode)) return;
 
-        let formattedAnswer = formatAnswer(val);
+        let formattedAnswer = formatAnswer(q, val);
         
         if (q.manualTemplate) {
           if (["select", "multiSelect", "yesNoMaybe", "pairedChoice"].includes(q.type)) {
@@ -97,15 +97,25 @@ export function composeManual(
   };
 }
 
-function formatAnswer(value: ManualState["answers"][string]): string {
+function formatAnswer(question: Question, value: ManualState["answers"][string]): string {
   if (Array.isArray(value)) {
-    if (value.length === 1) return value[0];
-    if (value.length === 2) return value.join(" and ");
-    if (value.length > 2) return `${value.slice(0, -1).join(", ")}, and ${value[value.length - 1]}`;
+    const labels = value.map((item) => formatSingleAnswer(question, item));
+    if (labels.length === 1) return labels[0];
+    if (labels.length === 2) return labels.join(" and ");
+    if (labels.length > 2) return `${labels.slice(0, -1).join(", ")}, and ${labels[labels.length - 1]}`;
     return "";
   }
 
+  if (typeof value === "string") {
+    return formatSingleAnswer(question, value);
+  }
+
   return String(value);
+}
+
+function formatSingleAnswer(question: Question, value: string): string {
+  const option = findQuestionOption(question, value);
+  return option ? getOptionManualMeaning(option) : value;
 }
 
 function defaultAudience(mode: ModeId): string {
@@ -187,11 +197,11 @@ function shortenSentence(text: string): string {
 }
 
 function buildRecognitionSummaries(state: ManualState, viewMode: ManualViewMode): string[] {
-  const config = PROTOCOL_MANIFEST[state.mode];
+  const config = getModeConfigForDepth(state.mode, state.onboarding?.depth || "manual");
   const visibilityPolicy = createVisibilityPolicy(state);
   const visibleAnswers = config.questions
     .filter((question) => state.answers[question.id] && visibilityPolicy.canAppearInManual(question, viewMode))
-    .map((question) => formatAnswer(state.answers[question.id]).toLowerCase());
+    .map((question) => formatAnswer(question, state.answers[question.id]).toLowerCase());
   const joined = visibleAnswers.join(" ");
   const summaries: string[] = [];
 

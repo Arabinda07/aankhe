@@ -250,8 +250,6 @@
   --color-ankahe-accent-dark: var(--color-accent-hover);
   --color-ankahe-accent-soft: var(--color-accent-soft);
   --color-ankahe-on-accent: var(--color-on-accent);
-  --color-ankahe-success: var(--color-accent);
-  --color-ankahe-success-soft: var(--color-accent-soft);
   --color-ankahe-warning: var(--color-sandal);
   --color-ankahe-warning-soft: var(--color-sandal-soft);
   --color-ankahe-danger: var(--color-danger);

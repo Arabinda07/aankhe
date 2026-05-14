@@ -51,8 +51,14 @@ function AppContent() {
 
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans selection:bg-ankahe-accent-soft selection:text-ankahe-text">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:border focus:border-ankahe-border focus:bg-ankahe-surface focus:px-4 focus:py-3 focus:text-ankahe-text focus:shadow-sm focus:outline-none focus:ring-2 focus:ring-ankahe-focus"
+      >
+        Skip to content
+      </a>
       <SiteHeader />
-      <main className="flex-1 flex flex-col items-center w-full">
+      <main id="main-content" className="flex-1 flex flex-col items-center w-full">
         <div className="w-full">
           <Routes>
             <Route

@@ -5,9 +5,11 @@
 
 import { useState } from "react";
 import { Eye, EyeSlash, LockKey, PencilSimple } from "@phosphor-icons/react";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 import { answerValueIsPresent } from "../../lib/answerUiPolicy";
 import type { ManualWorkspace } from "../../hooks/useManualState";
 import type { Question, Visibility } from "../../lib/schemaTypes";
+import { findQuestionOption, getOptionLabel } from "../../lib/protocolManifest";
 import { cn } from "../../lib/utils";
 import { AnswerInput } from "../QuestionStep";
 
@@ -156,7 +158,7 @@ function ReviewAnswer({
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="type-body text-ankahe-text">{formatAnswer(value)}</p>
+          <p className="type-body text-ankahe-text">{formatAnswer(value, question)}</p>
           {note && <p className="type-caption text-ankahe-muted">In my words: {note}</p>}
           <VisibilityBadge visibility={visibility} />
         </div>
@@ -175,37 +177,36 @@ function ReviewVisibility({
   onVisibilityChange: (visibility: Visibility) => void;
 }) {
   return (
-    <fieldset>
-      <legend className="type-ui-label mb-2 text-ankahe-text">Visibility</legend>
-      <div className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit">
+    <div>
+      <p className="type-ui-label mb-2 text-ankahe-text" id={`review-visibility-${questionId}-label`}>Visibility</p>
+      <RadioGroup.Root
+        value={visibility}
+        onValueChange={(value) => onVisibilityChange(value as Visibility)}
+        aria-labelledby={`review-visibility-${questionId}-label`}
+        className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit"
+      >
         {[
           { id: "share" as const, label: "Share", icon: <Eye size={16} weight={visibility === "share" ? "fill" : "light"} /> },
           { id: "private" as const, label: "Private", icon: <LockKey size={16} weight={visibility === "private" ? "fill" : "light"} /> },
           { id: "hide" as const, label: "Hide", icon: <EyeSlash size={16} weight={visibility === "hide" ? "fill" : "light"} /> },
         ].map((option) => (
-          <label
+          <RadioGroup.Item
             key={option.id}
+            value={option.id}
             className={cn(
               "type-ui-label min-h-11 flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border border-transparent px-3 py-1.5 transition-all sm:flex-none",
-              "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               visibility === option.id
                 ? "border-ankahe-border bg-ankahe-control text-ankahe-text shadow-sm"
                 : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
-            <input
-              type="radio"
-              name={`review-visibility-${questionId}`}
-              checked={visibility === option.id}
-              onChange={() => onVisibilityChange(option.id)}
-              className="sr-only"
-            />
             {option.icon}
             {option.label}
-          </label>
+          </RadioGroup.Item>
         ))}
-      </div>
-    </fieldset>
+      </RadioGroup.Root>
+    </div>
   );
 }
 
@@ -224,14 +225,16 @@ function VisibilityBadge({ visibility }: { visibility: Visibility }) {
   );
 }
 
-function formatAnswer(value: unknown): string {
+function formatAnswer(value: unknown, question?: Question): string {
   if (Array.isArray(value)) {
-    return value.join(", ");
+    return value.map((item) => formatAnswer(item, question)).join(", ");
   }
 
   if (value === undefined || value === null || value === "") {
     return "No answer yet.";
   }
 
-  return String(value);
+  const stringValue = String(value);
+  const option = question ? findQuestionOption(question, stringValue) : undefined;
+  return option ? getOptionLabel(option) : stringValue;
 }

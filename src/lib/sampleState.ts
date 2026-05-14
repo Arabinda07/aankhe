@@ -17,26 +17,24 @@ export const SAMPLE_PERSONAL_STATE: ManualState = {
   artifactFormat: "full",
   tone: "warmer",
   answers: {
-    "M_01": "Alex",
-    "M_03": "I observe first",
-    "M_05": "Write it out",
-    "M_06": "a calm tone and enough time to finish the thought",
-    "M_07": ["Space", "Quiet company"],
-    "M_10": "quiet usually means I am processing, not withdrawing",
-    "M_12": ["A little time", "A gentle check-in"]
+    "M_M_01": ["space", "quiet_company"],
+    "M_M_03": ["time_then_return", "reassurance"],
+    "M_M_05": "I linger nearby or send something small instead of asking directly",
+    "M_M_06": "quiet as distance",
+    "M_M_10": "write_first",
+    "M_D_18": "a calm tone and enough time to finish the thought",
   },
   answerNotes: {
-    "M_06": "If I pause, it usually means I am trying to answer carefully.",
-    "M_10": "This is okay for my private copy, but I may omit it when sharing."
+    "M_D_18": "If I pause, it usually means I am trying to answer carefully.",
+    "M_M_06": "This is okay for my private copy, but I may omit it when sharing."
   },
   visibilityByQuestion: {
-    "M_01": "share",
-    "M_03": "share",
-    "M_05": "share",
-    "M_06": "share",
-    "M_07": "share",
-    "M_10": "private",
-    "M_12": "hide"
+    "M_M_01": "share",
+    "M_M_03": "share",
+    "M_M_05": "share",
+    "M_M_06": "private",
+    "M_M_10": "share",
+    "M_D_18": "hide"
   }
 };
 
@@ -52,24 +50,24 @@ export const SAMPLE_WORK_STATE: ManualState = {
   artifactFormat: "work",
   tone: "professional",
   answers: {
-    "W_01": ["Early morning", "Long quiet blocks", "After a clear brief"],
-    "W_02": "unexpected rapid-fire messages when I am head-down",
-    "W_03": "Shared doc",
-    "W_04": "the problem, the decision needed, and the deadline",
-    "W_06": "Written",
-    "W_08": "the work is blocked or a decision will become expensive",
-    "W_10": "go quiet and narrow my attention"
+    "W_M_01": "pre_read",
+    "W_M_02": "context_first",
+    "W_M_03": "clear_brief",
+    "W_M_05": ["quiet", "narrow_focus"],
+    "W_M_07": "long_blocks",
+    "W_M_08": "call once, then send a short message with the deadline",
+    "W_M_09": "quiet focus as disinterest",
   },
   answerNotes: {
-    "W_04": "A little context upfront saves a lot of back-and-forth.",
+    "W_M_02": "A little context upfront saves a lot of back-and-forth.",
   },
   visibilityByQuestion: {
-    "W_01": "share",
-    "W_02": "share",
-    "W_03": "share",
-    "W_04": "share",
-    "W_06": "share",
-    "W_08": "share",
-    "W_10": "private"
+    "W_M_01": "share",
+    "W_M_02": "share",
+    "W_M_03": "share",
+    "W_M_05": "private",
+    "W_M_07": "share",
+    "W_M_08": "share",
+    "W_M_09": "private"
   }
 };

@@ -5,8 +5,10 @@
 
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { CaretDown, CaretUp, Eye, EyeSlash, LockKey } from "@phosphor-icons/react";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 import { answerValueIsPresent, getAnswerComponentForQuestion, getSensitiveSkipAction } from "../lib/answerUiPolicy";
-import { Question, Visibility } from "../lib/schemaTypes";
+import { getOptionLabel, getOptionValue } from "../lib/protocolManifest";
+import { Question, QuestionOption, Visibility } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
 
@@ -184,74 +186,63 @@ function VisibilityControl({
   describedBy: string;
 }) {
   return (
-    <fieldset className="space-y-3" aria-describedby={describedBy}>
-      <legend className="type-ui-label text-ankahe-text">Visibility</legend>
-      <div className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit">
+    <div className="space-y-3">
+      <p className="type-ui-label text-ankahe-text" id={`${questionId}-visibility-label`}>Visibility</p>
+      <RadioGroup.Root
+        aria-labelledby={`${questionId}-visibility-label`}
+        aria-describedby={describedBy}
+        value={visibility}
+        onValueChange={(value) => onVisibilityChange(value as Visibility)}
+        className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit"
+      >
         <VisibilityOption
-          name={`visibility-${questionId}`}
           value="share"
           active={visibility === "share"}
-          onChange={onVisibilityChange}
           icon={<Eye size={16} weight={visibility === "share" ? "fill" : "light"} />}
           label="Share"
         />
         <VisibilityOption
-          name={`visibility-${questionId}`}
           value="private"
           active={visibility === "private"}
-          onChange={onVisibilityChange}
           icon={<LockKey size={16} weight={visibility === "private" ? "fill" : "light"} />}
           label="Private"
         />
         <VisibilityOption
-          name={`visibility-${questionId}`}
           value="hide"
           active={visibility === "hide"}
-          onChange={onVisibilityChange}
           icon={<EyeSlash size={16} weight={visibility === "hide" ? "fill" : "light"} />}
           label="Hide"
         />
-      </div>
-    </fieldset>
+      </RadioGroup.Root>
+    </div>
   );
 }
 
 function VisibilityOption({
-  name,
   value,
   active,
-  onChange,
   icon,
   label,
 }: {
-  name: string;
   value: Visibility;
   active: boolean;
-  onChange: (visibility: Visibility) => void;
   icon: ReactNode;
   label: string;
 }) {
   return (
-    <label
+    <RadioGroup.Item
+      value={value}
       className={cn(
         "type-ui-label min-h-11 flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border border-transparent px-3 py-1.5 transition-all sm:flex-none",
-        "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
           ? "border-ankahe-border bg-ankahe-control text-ankahe-text shadow-sm"
           : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
       )}
     >
-      <input
-        type="radio"
-        name={name}
-        value={value}
-        checked={active}
-        onChange={() => onChange(value)}
-        className="sr-only"
-      />
       {icon}
       {label}
-    </label>
+    </RadioGroup.Item>
   );
 }
 
@@ -309,8 +300,8 @@ export function AnswerInput({
       >
         <option value="">Choose one</option>
         {(question.options || []).map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option key={getOptionValue(option)} value={getOptionValue(option)}>
+            {getOptionLabel(option)}
           </option>
         ))}
       </select>
@@ -319,18 +310,23 @@ export function AnswerInput({
 
   if (component === "radioCards") {
     return (
-      <ChoiceFieldset labelledBy={labelledBy} describedBy={describedBy}>
+      <RadioGroup.Root
+        className="grid gap-3 sm:grid-cols-2"
+        aria-labelledby={labelledBy}
+        aria-describedby={describedBy}
+        value={typeof value === "string" ? value : ""}
+        onValueChange={onChange}
+      >
         {(question.options || []).map((option) => (
-          <div key={option}>
+          <div key={getOptionValue(option)}>
             <ChoiceRadio
-              name={`answer-${question.id}`}
               option={option}
-              checked={value === option}
-              onChange={() => onChange(option)}
+              value={getOptionValue(option)}
+              checked={value === getOptionValue(option)}
             />
           </div>
         ))}
-      </ChoiceFieldset>
+      </RadioGroup.Root>
     );
   }
 
@@ -340,16 +336,17 @@ export function AnswerInput({
     return (
       <ChoiceFieldset labelledBy={labelledBy} describedBy={describedBy}>
         {(question.options || []).map((option) => {
-          const checked = selected.includes(option);
+          const optionValue = getOptionValue(option);
+          const checked = selected.includes(optionValue);
           return (
-            <div key={option}>
+            <div key={optionValue}>
               <ChoiceCheckbox
                 option={option}
                 checked={checked}
                 onChange={() => {
                   const nextValue = checked
-                    ? selected.filter((item) => item !== option)
-                    : [...selected, option];
+                    ? selected.filter((item) => item !== optionValue)
+                    : [...selected, optionValue];
                   onChange(nextValue);
                 }}
               />
@@ -381,10 +378,16 @@ export function AnswerInput({
   }
 
   if (component === "pairedChoice") {
-    const left = question.leftLabel || question.options?.[0] || "More like the first option";
-    const right = question.rightLabel || question.options?.[1] || "More like the second option";
+    const left = question.leftLabel || (question.options?.[0] ? getOptionLabel(question.options[0]) : "More like the first option");
+    const right = question.rightLabel || (question.options?.[1] ? getOptionLabel(question.options[1]) : "More like the second option");
     return (
-      <ChoiceFieldset labelledBy={labelledBy} describedBy={describedBy}>
+      <RadioGroup.Root
+        className="grid gap-3 sm:grid-cols-2"
+        aria-labelledby={labelledBy}
+        aria-describedby={describedBy}
+        value={typeof value === "string" ? value : ""}
+        onValueChange={onChange}
+      >
         {[
           left,
           right,
@@ -393,14 +396,13 @@ export function AnswerInput({
         ].map((option) => (
           <div key={option}>
             <ChoiceRadio
-              name={`answer-${question.id}`}
               option={option}
+              value={option}
               checked={value === option}
-              onChange={() => onChange(option)}
             />
           </div>
         ))}
-      </ChoiceFieldset>
+      </RadioGroup.Root>
     );
   }
 
@@ -452,21 +454,18 @@ function ChoiceFieldset({
 }
 
 function ChoiceRadio({
-  name,
   option,
+  value,
   checked,
-  onChange,
 }: {
-  name: string;
-  option: string;
+  option: string | QuestionOption;
+  value: string;
   checked: boolean;
-  onChange: () => void;
 }) {
   return (
-    <label className={choiceClassName(checked)}>
-      <input type="radio" name={name} checked={checked} onChange={onChange} className="sr-only" />
-      <span>{option}</span>
-    </label>
+    <RadioGroup.Item value={value} className={choiceClassName(checked, "focus-visible")}>
+      <span>{getOptionLabel(option)}</span>
+    </RadioGroup.Item>
   );
 }
 
@@ -475,22 +474,24 @@ function ChoiceCheckbox({
   checked,
   onChange,
 }: {
-  option: string;
+  option: string | QuestionOption;
   checked: boolean;
   onChange: () => void;
 }) {
   return (
     <label className={choiceClassName(checked)}>
       <input type="checkbox" checked={checked} onChange={onChange} className="sr-only" />
-      <span>{option}</span>
+      <span>{getOptionLabel(option)}</span>
     </label>
   );
 }
 
-function choiceClassName(checked: boolean) {
+function choiceClassName(checked: boolean, focusMode: "focus-within" | "focus-visible" = "focus-within") {
   return cn(
     "flex min-h-20 cursor-pointer items-center rounded-sm border px-5 py-4 text-left text-base font-semibold leading-snug transition-all",
-    "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
+    focusMode === "focus-visible"
+      ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+      : "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
     checked
       ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
       : "border-ankahe-paper-border bg-ankahe-paper text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-paper-muted"
@@ -513,37 +514,32 @@ function SegmentedAnswer({
   options: string[];
 }) {
   return (
-    <fieldset
+    <RadioGroup.Root
       className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit"
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
+      value={value}
+      onValueChange={onChange}
     >
       {options.map((option) => {
         const checked = value === option;
         return (
-          <label
+          <RadioGroup.Item
             key={option}
+            value={option}
             className={cn(
               "type-ui-label min-h-11 flex flex-1 cursor-pointer items-center justify-center rounded-sm border border-transparent px-4 py-1.5 transition-all sm:flex-none",
-              "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               checked
                 ? "border-ankahe-border bg-ankahe-control text-ankahe-text shadow-sm"
                 : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
             )}
           >
-            <input
-              type="radio"
-              name={`answer-${questionId}`}
-              value={option}
-              checked={checked}
-              onChange={() => onChange(option)}
-              className="sr-only"
-            />
             {option}
-          </label>
+          </RadioGroup.Item>
         );
       })}
-    </fieldset>
+    </RadioGroup.Root>
   );
 }
 
@@ -636,7 +632,9 @@ function RankedAnswer({
   describedBy?: string;
 }) {
   const options = question.options || [];
-  const ordered = value.length > 0 ? value : options;
+  const optionLabels = new Map(options.map((option) => [getOptionValue(option), getOptionLabel(option)]));
+  const optionValues = options.map(getOptionValue);
+  const ordered = value.length > 0 ? value : optionValues;
 
   const move = (fromIndex: number, direction: -1 | 1) => {
     const toIndex = fromIndex + direction;
@@ -658,16 +656,16 @@ function RankedAnswer({
             <span className="type-tabular flex h-9 w-9 items-center justify-center rounded-sm bg-ankahe-paper-muted text-ankahe-text">
               {index + 1}
             </span>
-            <span className="type-body font-semibold text-ankahe-text">{option}</span>
+            <span className="type-body font-semibold text-ankahe-text">{optionLabels.get(option) || option}</span>
             <span className="flex gap-1">
               <RankButton
-                label={`Move ${option} up`}
+                label={`Move ${optionLabels.get(option) || option} up`}
                 disabled={index === 0}
                 onClick={() => move(index, -1)}
                 icon={<CaretUp size={16} weight="light" />}
               />
               <RankButton
-                label={`Move ${option} down`}
+                label={`Move ${optionLabels.get(option) || option} down`}
                 disabled={index === ordered.length - 1}
                 onClick={() => move(index, 1)}
                 icon={<CaretDown size={16} weight="light" />}
@@ -679,14 +677,14 @@ function RankedAnswer({
       {value.length === 0 && options.length > 0 && (
         <button
           type="button"
-          onClick={() => onChange(options)}
+          onClick={() => onChange(optionValues)}
           className="type-ui-label min-h-11 rounded-sm border border-ankahe-border bg-ankahe-control px-4 py-1.5 text-ankahe-text transition-colors hover:bg-ankahe-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
           Use this order
         </button>
       )}
       <p className="type-caption text-ankahe-muted" aria-live="polite">
-        {value.length > 0 ? `Current order: ${ordered.join(", ")}` : "Move items or use the current order."}
+        {value.length > 0 ? `Current order: ${ordered.map((item) => optionLabels.get(item) || item).join(", ")}` : "Move items or use the current order."}
       </p>
     </div>
   );

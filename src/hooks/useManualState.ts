@@ -16,7 +16,7 @@ import {
   TonePreference,
   Visibility,
 } from "../lib/schemaTypes";
-import { PROTOCOL_MANIFEST } from "../lib/protocolManifest";
+import { getModeConfigForDepth } from "../lib/protocolManifest";
 import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
 import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
 import { readStateFromHash, writeStateToHash, clearStateFromHash, generateSharedUrl } from "../lib/stateCompression";
@@ -172,7 +172,7 @@ export function useManualState() {
       state.mode === routeMode
         ? state
         : createDefaultState(routeMode, state.storageMode);
-    const config = PROTOCOL_MANIFEST[routeMode];
+    const config = getModeConfigForDepth(routeMode, workingState.onboarding?.depth || "manual");
     const visibilityPolicy = createVisibilityPolicy(workingState);
 
     return {
