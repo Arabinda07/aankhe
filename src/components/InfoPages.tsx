@@ -51,24 +51,24 @@ export function PrivacyPage() {
 export function HowItWorksPage() {
   const items = [
     {
-      title: "Where do my answers live?",
-      text: "If you're in Memory Only mode, they live right here in this browser tab. Close it, and they vanish. If you choose 'Save in Link', the answers you mark as 'Included' get compressed straight into the URL so you can open them later.",
+      title: "Where do my answers actually live once I type them?",
+      text: "It depends entirely on the mode you pick before you start writing. In 'Memory Only' mode, your words exist solely in your browser's active memory. The moment you close the tab, refresh the page, or navigate away, everything is permanently gone. We don't have a server to save them to, even if we wanted to.\n\nIf you choose 'Save in Link', things work differently. We take the text you write, compress it, and tuck it directly into the web address—the URL itself. That means your data is stored inside the link, not in a database. You can bookmark that long link to return to your work later. Just know that if you lose the link, you lose the answers. We have no way to recover them for you.",
     },
     {
-      title: "What does 'Private' actually do?",
-      text: "Private means private. Those answers stay on your device. They might help you think through a problem, but they will never end up in a shared link, a QR code, or an exported PDF.",
+      title: "What does marking an answer as 'Private' actually do?",
+      text: "When you mark an answer as 'Private', you're drawing a hard boundary. Sometimes you need to write out the messy, unfiltered version of a thought before you can figure out what you actually want to communicate. 'Private' gives you the space to do that safely.\n\nThose specific private answers never leave your device. If you're using 'Save in Link' mode, your private notes are deliberately excluded from the URL compression process. They will never appear when you export a PDF, they won't show up in a generated QR code, and if you send your link to someone else, the private sections simply won't exist for them. They remain entirely for your eyes only.",
     },
     {
-      title: "What gets shared?",
-      text: "Only the answers you explicitly mark as 'Share'. That's it. Those are the ones that show up when you send someone a link or download the manual.",
+      title: "Exactly what gets shared when I send a link or export?",
+      text: "You are entirely in control of what makes it into the final document. The only things that get shared are the specific answers you explicitly decide to 'Share'. Everything else is left behind.\n\nWhen you generate a link to send to someone, or when you export your manual as a PDF, only those included answers are bundled up. Think of the workspace as your drafting table, and the final manual as the polished document you hand to a friend. You get to decide exactly which pieces make it into the envelope. We don't sneak anything extra in.",
     },
     {
-      title: "What's the point of 'Hide'?",
-      text: "Sometimes you write an answer and realize you don't actually want to include it. 'Hide' just leaves it out completely. It's skipped in the final manual.",
+      title: "What is the point of the 'Hide' option if we already have 'Private'?",
+      text: "You might be wondering why we have both 'Hide' and 'Private'. It comes down to intent. You use 'Private' for sensitive context you want to keep visible for your own reference while you work.\n\nYou use 'Hide' for things you just don't need anymore. Maybe you started answering a prompt, realized you were going off-topic, and decided to scrap it. Instead of forcing you to delete the text completely, 'Hide' simply omits it. The omitted answer is tucked out of sight. It won't clutter up your preview, and it certainly won't make it into the final shared manual.",
     },
     {
-      title: "Do I need an account?",
-      text: "No. We don't have a database, and we don't track you. You're just writing on a blank page in your browser.",
+      title: "Do I need to create an account or sign in?",
+      text: "No, and we will never ask you to create one. We don't ask for your email address, we don't require a password, and we don't use analytics to track your behavior.\n\nThe reason is simple: we don't have a database to store your information in the first place. Ankahe is designed as a standalone tool that runs entirely inside your web browser. When you load the page, you download the application, and from that point on, you're just writing on a blank digital piece of paper. You own your words. We never see them, and we don't want to.",
     },
   ];
 
@@ -87,7 +87,7 @@ export function HowItWorksPage() {
             <span className="type-meta text-ankahe-muted">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-ankahe-text">{item.title}</h2>
-              <p className="type-lead text-ankahe-muted">{item.text}</p>
+              <p className="type-lead whitespace-pre-wrap text-ankahe-muted">{item.text}</p>
             </div>
           </section>
         ))}
