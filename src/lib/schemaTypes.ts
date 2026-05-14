@@ -17,6 +17,9 @@ export type ArtifactFormat = "full" | "onePage" | "note" | "conversation" | "wor
 
 export type TonePreference = "default" | "softer" | "direct" | "warmer" | "professional" | "shorter";
 
+/** Controls which answers are visible in manual preview: included (share-only) or private (local full view). */
+export type ManualViewMode = "included" | "private";
+
 export type QuestionDepth = "mvp" | "deep";
 
 export interface QuestionOption {

@@ -1,7 +1,27 @@
-import { getModeConfigForDepth } from "./protocolManifest";
-import type { ManualState, Question, Visibility } from "./schemaTypes";
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-export type ManualViewMode = "included" | "private";
+/**
+ * Visibility Policy module.
+ *
+ * Owns the invariants for which answers appear in which view mode,
+ * and produces a share-safe copy of ManualState for URL encoding.
+ *
+ * Interface:
+ *   createVisibilityPolicy(state) → VisibilityPolicy
+ *   createShareSafeState(state)   → ManualState (convenience wrapper)
+ *
+ * ManualViewMode now lives in schemaTypes.ts — re-exported here for
+ * backward compatibility so existing imports don't break.
+ */
+
+import { getModeConfigForDepth } from "./protocolManifest";
+import type { ManualState, ManualViewMode, Question, Visibility } from "./schemaTypes";
+
+// Re-export from its canonical home so existing `import { ManualViewMode } from "visibilityPolicy"` still works.
+export type { ManualViewMode } from "./schemaTypes";
 
 export interface VisibilityCounts {
   answeredCount: number;
@@ -87,6 +107,7 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
   };
 }
 
+/** Convenience: strips non-share answers for URL encoding. */
 export function createShareSafeState(state: ManualState): ManualState {
   return createVisibilityPolicy(state).createShareSafeState();
 }
