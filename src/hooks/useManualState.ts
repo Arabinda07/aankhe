@@ -20,7 +20,7 @@ import { getModeConfigForDepth } from "../lib/protocolManifest";
 import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
 import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
 import { generateSharedUrl } from "../lib/stateCompression";
-import { useHashPersistence } from "./useHashPersistence";
+import { createStorageProvider, StorageProvider } from "../lib/storageProvider";
 
 type ManualAnswer = ManualState["answers"][string];
 
@@ -65,16 +65,46 @@ export function useManualState() {
   const [state, setState] = useState<ManualState>(() => createDefaultState());
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // ── Hash persistence (debounced) ──────────────────────────────────
-  const { restoredState, hashError, clearHashError } = useHashPersistence(state, isInitialized);
+  const [hashError, setHashError] = useState(false);
+  const [provider, setProvider] = useState<StorageProvider>(() => 
+    createStorageProvider(state.storageMode, () => setHashError(true))
+  );
 
-  // Apply restored state from hash (one-time)
+  // ── Initialize from storage ──────────────────────────────────────
   useEffect(() => {
-    if (restoredState) {
-      setState(restoredState);
+    if (!isInitialized) {
+      // Create initial provider based on current hash state if it exists
+      const initialProvider = createStorageProvider("url", () => setHashError(true));
+      const saved = initialProvider.load();
+      if (saved) {
+        setState(saved);
+        setProvider(createStorageProvider(saved.storageMode, () => setHashError(true)));
+      }
+      setIsInitialized(true);
     }
-    setIsInitialized(true);
-  }, [restoredState]);
+  }, [isInitialized]);
+
+  // ── Sync state changes to storage ────────────────────────────────
+  useEffect(() => {
+    if (isInitialized) {
+      provider.save(state);
+    }
+  }, [state, isInitialized, provider]);
+
+  // ── Handle storage mode changes ──────────────────────────────────
+  useEffect(() => {
+    if (isInitialized) {
+      setProvider(prev => {
+        prev.clear(); // Clear old storage
+        return createStorageProvider(state.storageMode, () => setHashError(true));
+      });
+    }
+  }, [state.storageMode, isInitialized]);
+
+  const clearHashError = useCallback(() => {
+    setHashError(false);
+    provider.clear();
+  }, [provider]);
 
   const setMode = useCallback((mode: ModeId, onboarding?: OnboardingContext) => {
     setState(prev => ({
