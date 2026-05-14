@@ -87,18 +87,6 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
   };
 }
 
-export function getAnswerVisibility(state: ManualState, question: Question): Visibility {
-  return createVisibilityPolicy(state).visibilityFor(question);
-}
-
-export function canAnswerAppearInManual(visibility: Visibility, viewMode: ManualViewMode): boolean {
-  return canVisibilityAppearInManual(visibility, viewMode);
-}
-
 export function createShareSafeState(state: ManualState): ManualState {
   return createVisibilityPolicy(state).createShareSafeState();
-}
-
-export function getVisibilityCounts(state: ManualState): VisibilityCounts {
-  return createVisibilityPolicy(state).getCounts();
 }

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ManualWorkspace } from '../hooks/useManualState';
 import type { ModeId } from '../lib/schemaTypes';
@@ -32,7 +32,7 @@ export function ManualBuilder({
   const [view, setView] = useState<"build" | "artifact">("build");
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
-  const composed = manual?.composeManual();
+  const composed = useMemo(() => manual?.composeManual(), [manual]);
   const hasManualContent = manual?.config.questions.some((question) => (
     answerValueIsPresent(manual.getAnswer(question.id)) ||
     manual.getAnswerNote(question.id).trim().length > 0

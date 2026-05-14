@@ -16,7 +16,7 @@ import {
 } from "@phosphor-icons/react";
 import type React from "react";
 import { useMemo, useState } from "react";
-import { ManualDepth, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
+import { ManualDepth, ManualState, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SAMPLE_PERSONAL_STATE } from "../lib/sampleState";
 import { SoftButton } from "./SoftButton";
@@ -24,7 +24,7 @@ import { StorageModeToggle } from "./StorageModeToggle";
 
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
-  onTrySample: (sample: any) => void;
+  onTrySample: (sample: ManualState) => void;
   onLearnMore: () => void;
   storageMode: StorageMode;
   onStorageModeChange: (mode: StorageMode) => void;

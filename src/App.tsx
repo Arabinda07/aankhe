@@ -5,8 +5,9 @@
 
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
-import { ModeId, OnboardingContext } from './lib/schemaTypes';
+import { ManualState, ModeId, OnboardingContext } from './lib/schemaTypes';
 import { useManualState } from './hooks/useManualState';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
@@ -53,7 +54,7 @@ function AppContent() {
     navigate(`/manual/${mode}`);
   };
 
-  const handleTrySample = (sample: any) => {
+  const handleTrySample = (sample: ManualState) => {
     resetState(sample);
     navigate(`/manual/${sample.mode}`);
   };
@@ -151,8 +152,6 @@ function RouteFallback({ label }: { label: string }) {
     </div>
   );
 }
-
-import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export default function App() {
   return (

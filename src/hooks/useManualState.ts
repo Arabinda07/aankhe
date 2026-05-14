@@ -19,7 +19,8 @@ import {
 import { getModeConfigForDepth } from "../lib/protocolManifest";
 import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
 import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
-import { readStateFromHash, writeStateToHash, clearStateFromHash, generateSharedUrl } from "../lib/stateCompression";
+import { generateSharedUrl } from "../lib/stateCompression";
+import { useHashPersistence } from "./useHashPersistence";
 
 type ManualAnswer = ManualState["answers"][string];
 
@@ -63,32 +64,17 @@ function isSupportedManualMode(mode: string | undefined): mode is ModeId {
 export function useManualState() {
   const [state, setState] = useState<ManualState>(() => createDefaultState());
   const [isInitialized, setIsInitialized] = useState(false);
-  const [hashError, setHashError] = useState(false);
 
-  // Initialize from hash
+  // ── Hash persistence (debounced) ──────────────────────────────────
+  const { restoredState, hashError, clearHashError } = useHashPersistence(state, isInitialized);
+
+  // Apply restored state from hash (one-time)
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.startsWith("#s=")) {
-      const saved = readStateFromHash();
-      if (saved) {
-        setState(saved);
-      } else {
-        setHashError(true);
-      }
+    if (restoredState) {
+      setState(restoredState);
     }
     setIsInitialized(true);
-  }, []);
-
-  // Sync with hash if storage mode is URL
-  useEffect(() => {
-    if (!isInitialized) return;
-
-    if (state.storageMode === "url") {
-      writeStateToHash(state);
-    } else {
-      clearStateFromHash();
-    }
-  }, [state, isInitialized]);
+  }, [restoredState]);
 
   const setMode = useCallback((mode: ModeId, onboarding?: OnboardingContext) => {
     setState(prev => ({
@@ -160,10 +146,6 @@ export function useManualState() {
     setState(newState || createDefaultState());
   }, []);
 
-  const clearHashError = useCallback(() => {
-    setHashError(false);
-    clearStateFromHash();
-  }, []);
 
   const getManualForRoute = useCallback((routeMode: string | undefined): ManualWorkspace | null => {
     if (!isSupportedManualMode(routeMode)) return null;

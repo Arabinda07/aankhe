@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
+import { type RefObject, useState } from "react";
 import type { ManualViewMode } from "../lib/visibilityPolicy";
 
 export function useArtifactExport(
-  artifactRef: React.RefObject<HTMLElement | null>,
+  artifactRef: RefObject<HTMLElement | null>,
   mode: string,
   secureSharedUrl: string,
   viewMode: ManualViewMode
