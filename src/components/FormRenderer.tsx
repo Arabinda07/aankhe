@@ -39,7 +39,6 @@ export function FormRenderer({
     progress,
     next,
     back,
-    jumpToStep,
     isFirst,
     isLast
   } = useStepNavigation(config.questions.length, onFinish);
@@ -49,9 +48,8 @@ export function FormRenderer({
   const sectionIndex = config.sections.findIndex(s => s.id === section?.id);
 
   return (
-    <div className="space-y-12">
-      {/* Header / Section Indicator */}
-      <div className="space-y-4">
+    <div className="space-y-8 md:space-y-10">
+      <div className="space-y-3 md:space-y-4">
         <div className="type-meta flex items-center justify-between text-ankahe-muted">
           <div className="flex items-center gap-2">
             <span className={cn("px-2 py-0.5 rounded bg-ankahe-surface-soft text-ankahe-text")}>
@@ -62,7 +60,6 @@ export function FormRenderer({
           <span>{currentStepIndex + 1} / {config.questions.length}</span>
         </div>
         
-        {/* Progress Bar */}
         <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-ankahe-surface-soft">
           <motion.div 
             className={cn("h-full w-full bg-ankahe-accent origin-left")}
@@ -73,7 +70,6 @@ export function FormRenderer({
         </div>
       </div>
 
-      {/* Main Form Area */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuestion.id}
@@ -106,25 +102,6 @@ export function FormRenderer({
         </div>
       )}
 
-      {/* Quick Nav */}
-      <div className="hidden md:flex flex-wrap gap-2 pt-12 border-t border-ankahe-border" aria-label="Question shortcuts">
-        {config.questions.map((q, i) => (
-          <button
-            key={q.id}
-            onClick={() => jumpToStep(i)}
-            className="group min-w-11 min-h-11 inline-flex items-center justify-center rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
-            aria-label={`Go to question ${i + 1}: ${q.label}`}
-            aria-current={i === currentStepIndex ? "step" : undefined}
-          >
-            <span
-              className={cn(
-                "block h-2 rounded-[3px] transition-all group-focus-visible:bg-ankahe-accent-dark",
-                i === currentStepIndex ? "w-6 bg-ankahe-accent-dark" : (getAnswer(q.id) ? "w-2 bg-ankahe-accent/60" : "w-2 bg-ankahe-surface-soft group-hover:bg-ankahe-border")
-              )}
-            />
-          </button>
-        ))}
-      </div>
     </div>
   );
 }

@@ -367,6 +367,16 @@
     text-wrap: balance;
   }
 
+  .type-question-builder {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0;
+    max-width: min(100%, 22ch);
+  }
+
   .type-answer-field {
     font-family: var(--font-display);
     font-size: 1.75rem;
@@ -466,6 +476,43 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .ankahe-enter {
+    animation: ankahe-enter 450ms var(--ease-out-expo) both;
+  }
+
+  .ankahe-enter-0 {
+    animation-delay: 0ms;
+  }
+
+  .ankahe-enter-1 {
+    animation-delay: 80ms;
+  }
+
+  .ankahe-enter-2 {
+    animation-delay: 160ms;
+  }
+
+  .ankahe-enter-3 {
+    animation-delay: 220ms;
+  }
+
+  .ankahe-enter-aside {
+    animation-delay: 120ms;
+    animation-duration: 500ms;
+  }
+
+  @keyframes ankahe-enter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .manual-preview-shell {
     container-type: inline-size;
   }
@@ -474,6 +521,14 @@
     .manual-preview-shell .type-artifact-title {
       font-size: 2.75rem;
       overflow-wrap: normal;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .type-question-builder {
+      font-size: 2.25rem;
+      line-height: 1.14;
+      max-width: min(100%, 26ch);
     }
   }
 
@@ -496,6 +551,12 @@
       font-size: 3rem;
       line-height: 1.1;
       max-width: min(100%, 24ch);
+    }
+
+    .type-question-builder {
+      font-size: 2.25rem;
+      line-height: 1.14;
+      max-width: min(100%, 26ch);
     }
 
     .type-answer-field {
@@ -532,6 +593,12 @@
       max-width: min(100%, 28ch);
     }
 
+    .type-question-builder {
+      font-size: 2.5rem;
+      line-height: 1.12;
+      max-width: min(100%, 30ch);
+    }
+
     .type-display {
       font-size: 5.5rem;
     }
@@ -547,6 +614,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ankahe-enter {
+    animation: none !important;
+  }
+
   *,
   ::before,
   ::after {

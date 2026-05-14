@@ -11,11 +11,22 @@ import { useManualState } from './hooks/useManualState';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
 import { SoftButton } from './components/SoftButton';
-import { HowItWorksPage, PrivacyPage } from './components/InfoPages';
 
 const ManualBuilder = lazy(() =>
   import("./components/ManualBuilder").then((module) => ({
     default: module.ManualBuilder,
+  }))
+);
+
+const PrivacyPage = lazy(() =>
+  import("./components/InfoPages").then((module) => ({
+    default: module.PrivacyPage,
+  }))
+);
+
+const HowItWorksPage = lazy(() =>
+  import("./components/InfoPages").then((module) => ({
+    default: module.HowItWorksPage,
   }))
 );
 
@@ -98,8 +109,22 @@ function AppContent() {
                 </div>
               }
             />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
+            <Route
+              path="/privacy"
+              element={
+                <Suspense fallback={<RouteFallback label="Preparing privacy note" />}>
+                  <PrivacyPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/how-it-works"
+              element={
+                <Suspense fallback={<RouteFallback label="Preparing FAQ" />}>
+                  <HowItWorksPage />
+                </Suspense>
+              }
+            />
             <Route
               path="/manual/:mode"
               element={

@@ -86,6 +86,7 @@ Use these classes before inventing ad hoc font sizes.
 | `type-display` | Manrope | 3.25rem mobile, 4.5rem tablet, 5.5rem desktop | 800 | 0.96 | Major page titles |
 | `type-mode-title` | Manrope | 3.25rem mobile, 4.25rem tablet, 5.25rem desktop | 800 | 0.95 | Mode selection titles |
 | `type-question` | Spectral italic | 2.625rem mobile, 3rem tablet | 400 | 1.05-1.1 | Active form question |
+| `type-question-builder` | Spectral italic | 2rem mobile, 2.25rem tablet, 2.5rem desktop | 400 | 1.15/1.14/1.12 | Focused builder question prompt |
 | `type-answer-field` | Spectral | 1.75rem mobile, 2rem tablet | 400 | 1.45 | Main writing inputs |
 | `type-artifact-title` | Manrope | 3rem mobile, 3.75rem tablet, 4.25rem desktop | 800 | 0.98 | Manual title |
 | `type-artifact-heading` | Manrope | 2rem | 700 | 1.05 | Artifact section headings |
@@ -247,8 +248,8 @@ Inputs should feel like writing on warm paper.
 ### Select And Multi-Select Options
 
 - Use button groups, not native selects, when the options are short and meaningful.
-- Layout: `grid gap-3 sm:grid-cols-2`.
-- Option button: `min-h-20 px-5 py-4 rounded-sm text-left text-base font-semibold leading-snug`.
+- Layout: `grid gap-3`, one column on mobile, two columns only from tablet/desktop when each card can keep a readable measure.
+- Option button: `min-h-16 md:min-h-20 px-4 md:px-5 py-3 md:py-4 rounded-sm text-left text-base font-semibold leading-snug`.
 - Selected state must use lac border and soft lac background.
 - Use `role="group"` with `aria-labelledby` and `aria-describedby` where applicable.
 
@@ -256,14 +257,28 @@ Inputs should feel like writing on warm paper.
 
 - Progress rail: `h-1.5 rounded-[3px] bg-ankahe-surface-soft`.
 - Progress fill: `bg-ankahe-accent`, animated via transform/scale only.
-- Question shortcuts: small bars inside 44px targets, not tiny inaccessible dots.
-- Current step can widen from `w-2` to `w-6`; answered steps may use `bg-ankahe-accent/60`.
+- Focused question pages use the section label, question count, and progress rail only.
+- Do not add bottom dot rails or shortcut bars to the focused question flow.
+
+### Focused Question Pages
+
+- The visible hierarchy is question, answer choices, quiet escape actions, and one primary next action.
+- Keep active prompts on `type-question-builder`; do not use landing/display scale inside the builder.
+- Before an answer exists, hide optional nuance and the full visibility control. A small privacy reassurance may say: "Privacy can be changed before sharing."
+- After an answer exists, show `Add nuance` as a text action and `Visibility: Share/Private/Hide · Change` as a collapsed row.
+- Reveal the full Share/Private/Hide segmented control only after the user chooses Change.
+- Put the visibility explanation behind a disclosure. Use included/private/omitted language in explanatory copy.
+- Escape actions such as "None of these fit" and "I am not ready to answer this" are text actions, not answer cards.
+- Skip is a quiet text action. Continue or Review Manual is the only strong action in the question footer.
+- The builder top navigation should be quiet: back to hub on the left, optional preview/manual return on the right, no Draft/Artifact segmented selector while answering.
 
 ### Header And Footer
 
 - Header stays sticky with warm page translucency and a soft bottom border.
 - Header links use `type-ui-label`, muted text, 44px minimum target, and visible focus rings.
 - Footer uses dedicated footer tokens and `type-footer-nav`.
+- Footer remains a dark band in light and dark modes. Do not make it paper-colored in light mode.
+- Footer links wrap horizontally at all widths and should not become a vertical mobile link list.
 - Navigation and footer items must be real links or clearly non-interactive text.
 
 ### Artifact Studio And Manual Preview

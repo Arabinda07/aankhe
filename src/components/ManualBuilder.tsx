@@ -10,9 +10,8 @@ import type { ModeId } from '../lib/schemaTypes';
 import { FormRenderer } from './FormRenderer';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
-import * as Tabs from "@radix-ui/react-tabs";
-import { cn } from '../lib/utils';
 import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
+import { answerValueIsPresent } from '../lib/answerUiPolicy';
 
 const ArtifactStudio = lazy(() =>
   import("./ArtifactStudio").then((module) => ({
@@ -34,6 +33,10 @@ export function ManualBuilder({
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
   const composed = manual?.composeManual();
+  const hasManualContent = manual?.config.questions.some((question) => (
+    answerValueIsPresent(manual.getAnswer(question.id)) ||
+    manual.getAnswerNote(question.id).trim().length > 0
+  )) ?? false;
 
   useEffect(() => {
     manual?.activate();
@@ -61,40 +64,34 @@ export function ManualBuilder({
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
-          <Tabs.Root
-            value={view}
-            onValueChange={(nextView) => setView(nextView as "build" | "artifact")}
-            className="justify-self-center"
-          >
-            <Tabs.List className="flex bg-ankahe-control-selected p-1 rounded-sm border border-ankahe-border" aria-label="Manual view selector">
-            <Tabs.Trigger
-              value="build"
-              className={cn(
-                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
-                view === 'build' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
-              )}
-            >
-              <FileText size={18} weight="light" />
-              Draft
-            </Tabs.Trigger>
-            <Tabs.Trigger
-              value="artifact"
-              className={cn(
-                "type-ui-label min-h-11 flex items-center gap-2 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
-                view === 'artifact' ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
-              )}
-            >
-              <Sparkle size={18} weight="light" />
-              Artifact
-            </Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
+          <div aria-hidden="true" />
 
-          <div aria-hidden="true" className="hidden md:block" />
+          <div className="justify-self-end">
+            {view === "build" && hasManualContent && (
+              <button
+                type="button"
+                onClick={() => setView("artifact")}
+                className="type-ui-label min-h-11 inline-flex items-center gap-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              >
+                <Sparkle size={18} weight="light" />
+                <span className="hidden sm:inline">Preview manual</span>
+              </button>
+            )}
+            {view === "artifact" && (
+              <button
+                type="button"
+                onClick={() => setView("build")}
+                className="type-ui-label min-h-11 inline-flex items-center gap-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              >
+                <FileText size={18} weight="light" />
+                <span className="hidden sm:inline">Back to answers</span>
+              </button>
+            )}
+          </div>
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 py-8 md:py-12 lg:py-16">
         <AnimatePresence mode="wait">
           {view === "build" ? (
             <motion.div
@@ -102,7 +99,7 @@ export function ManualBuilder({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="grid lg:grid-cols-[1fr_450px] gap-12"
+              className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_450px]"
             >
               {/* Form Side */}
               <div className="space-y-12">
@@ -121,7 +118,7 @@ export function ManualBuilder({
               </div>
 
               {/* Preview Side (Desktop only) */}
-              <div className="hidden lg:block space-y-8 sticky top-28">
+              <div className="hidden space-y-8 xl:sticky xl:top-28 xl:block">
                 <div className="space-y-4">
                   <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview

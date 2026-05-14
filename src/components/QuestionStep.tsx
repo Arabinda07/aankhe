@@ -14,6 +14,8 @@ import { SoftButton } from "./SoftButton";
 
 type AnswerValue = string | string[] | number | undefined;
 
+const choiceGridClassName = "grid gap-3 md:grid-cols-[repeat(2,minmax(16rem,1fr))]";
+
 interface QuestionStepProps {
   question: Question;
   value: AnswerValue;
@@ -44,11 +46,15 @@ export function QuestionStep({
   isLast
 }: QuestionStepProps) {
   const [isNuanceOpen, setIsNuanceOpen] = useState(note.trim().length > 0);
+  const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
+  const [isVisibilityHelpOpen, setIsVisibilityHelpOpen] = useState(false);
   const noteRef = useRef<HTMLTextAreaElement>(null);
   const questionLabelId = `question-${question.id}-label`;
   const helperTextId = question.helperText ? `question-${question.id}-helper` : undefined;
   const visibilityDescriptionId = `question-${question.id}-visibility-description`;
   const hasAnswer = answerValueIsPresent(value);
+  const hasNote = note.trim().length > 0;
+  const showAnswerDetails = hasAnswer || hasNote;
 
   useEffect(() => {
     if (note.trim().length > 0) setIsNuanceOpen(true);
@@ -70,9 +76,9 @@ export function QuestionStep({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-7">
       <div className="space-y-4">
-        <h2 id={questionLabelId} className="type-question text-ankahe-text">
+        <h2 id={questionLabelId} className="type-question-builder text-ankahe-text">
           {question.label}
         </h2>
         {question.helperText && (
@@ -96,82 +102,136 @@ export function QuestionStep({
         <button
           type="button"
           onClick={() => handleSensitiveSkip("doesNotFit")}
-          className="type-caption min-h-11 rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted px-3 py-2 text-ankahe-text transition-colors hover:border-ankahe-border-strong hover:bg-ankahe-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
-          This does not fit me
+          None of these fit
         </button>
         <button
           type="button"
           onClick={() => handleSensitiveSkip("notReady")}
-          className="type-caption min-h-11 rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted px-3 py-2 text-ankahe-text transition-colors hover:border-ankahe-border-strong hover:bg-ankahe-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
           I am not ready to answer this
         </button>
       </div>
 
-      <div className="space-y-3 rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="type-ui-label text-ankahe-text">Optional nuance</p>
-            <p className="type-caption text-ankahe-muted">
-              Add context only if the structured answer needs your words.
-            </p>
+      {!showAnswerDetails && (
+        <p className="type-caption max-w-2xl text-ankahe-muted">
+          Privacy can be changed before sharing.
+        </p>
+      )}
+
+      {showAnswerDetails && (
+        <div className="space-y-5">
+          <div className="space-y-3">
+            {!isNuanceOpen ? (
+              <button
+                type="button"
+                onClick={revealNuance}
+                className="type-ui-label min-h-11 px-1 py-2 text-ankahe-accent underline-offset-4 transition-colors hover:text-ankahe-accent-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              >
+                Add nuance
+              </button>
+            ) : (
+              <div className="space-y-2">
+                <label htmlFor={`${question.id}-note`} className="type-ui-label block text-ankahe-text">
+                  Add nuance
+                </label>
+                <textarea
+                  ref={noteRef}
+                  id={`${question.id}-note`}
+                  value={note}
+                  onChange={(event) => onNoteChange(event.target.value)}
+                  rows={3}
+                  placeholder="Add context only if this answer needs your words."
+                  className="type-body w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-4 text-ankahe-text placeholder:text-ankahe-muted/60 transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
+                />
+              </div>
+            )}
           </div>
-          {!isNuanceOpen && (
-            <button
-              type="button"
-              onClick={revealNuance}
-              className="type-ui-label min-h-11 rounded-sm border border-ankahe-border bg-ankahe-control px-4 py-1.5 text-ankahe-text transition-colors hover:bg-ankahe-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
-            >
-              Add nuance
-            </button>
-          )}
+
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="type-caption text-ankahe-muted">Visibility:</span>
+              <span className="type-caption font-semibold text-ankahe-text">{getVisibilityLabel(visibility)}</span>
+              <span className="type-caption text-ankahe-muted" aria-hidden="true">·</span>
+              <button
+                type="button"
+                onClick={() => setIsVisibilityOpen((isOpen) => !isOpen)}
+                className="type-caption min-h-11 px-1 py-2 font-semibold text-ankahe-accent underline-offset-4 transition-colors hover:text-ankahe-accent-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                aria-expanded={isVisibilityOpen}
+                aria-controls={`${question.id}-visibility-panel`}
+              >
+                {isVisibilityOpen ? "Close" : "Change"}
+              </button>
+            </div>
+
+            {isVisibilityOpen && (
+              <div id={`${question.id}-visibility-panel`} className="space-y-3">
+                <VisibilityControl
+                  questionId={question.id}
+                  visibility={visibility}
+                  onVisibilityChange={onVisibilityChange}
+                  describedBy={isVisibilityHelpOpen ? visibilityDescriptionId : undefined}
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsVisibilityHelpOpen((isOpen) => !isOpen)}
+                  className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                  aria-expanded={isVisibilityHelpOpen}
+                  aria-controls={visibilityDescriptionId}
+                >
+                  What does this mean?
+                </button>
+                {isVisibilityHelpOpen && (
+                  <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-ankahe-muted">
+                    Share means included in links and exports. Private stays local. Hide is omitted from the manual.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
         </div>
+      )}
 
-        {isNuanceOpen && (
-          <textarea
-            ref={noteRef}
-            id={`${question.id}-note`}
-            value={note}
-            onChange={(event) => onNoteChange(event.target.value)}
-            rows={3}
-            placeholder="Add an optional sentence in your own words."
-            className="type-body w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-4 text-ankahe-text placeholder:text-ankahe-muted/60 transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
-            aria-label={`Optional nuance for ${question.label}`}
-          />
-        )}
-      </div>
-
-      <VisibilityControl
-        questionId={question.id}
-        visibility={visibility}
-        onVisibilityChange={onVisibilityChange}
-        describedBy={visibilityDescriptionId}
-      />
-      <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-ankahe-muted">
-        Share means included in links and exports. Private stays local. Hide is omitted from the manual.
-      </p>
-
-      <div className="flex flex-wrap items-center gap-4 pt-8">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-3 md:pt-5">
         {!isFirst && (
-          <SoftButton variant="secondary" onClick={onBack}>
+          <button
+            type="button"
+            onClick={onBack}
+            className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          >
             Back
-          </SoftButton>
+          </button>
         )}
-        <SoftButton variant="secondary" onClick={onNext}>
-          Skip
-        </SoftButton>
+        <button
+          type="button"
+          onClick={onNext}
+          className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+        >
+          Skip this question
+        </button>
         <SoftButton
-          className="flex-1 md:flex-none"
+          className="ml-auto min-w-36"
           onClick={onNext}
           disabled={!hasAnswer}
-          variant={hasAnswer ? "primary" : "secondary"}
+          variant="primary"
         >
           {isLast ? "Review Manual" : "Continue"}
         </SoftButton>
       </div>
     </div>
   );
+}
+
+function getVisibilityLabel(visibility: Visibility): string {
+  const labels: Record<Visibility, string> = {
+    share: "Share",
+    private: "Private",
+    hide: "Hide",
+  };
+
+  return labels[visibility];
 }
 
 function VisibilityControl({
@@ -183,7 +243,7 @@ function VisibilityControl({
   questionId: string;
   visibility: Visibility;
   onVisibilityChange: (visibility: Visibility) => void;
-  describedBy: string;
+  describedBy?: string;
 }) {
   return (
     <div className="space-y-3">
@@ -311,7 +371,7 @@ export function AnswerInput({
   if (component === "radioCards") {
     return (
       <RadioGroup.Root
-        className="grid gap-3 sm:grid-cols-2"
+        className={choiceGridClassName}
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         value={typeof value === "string" ? value : ""}
@@ -353,13 +413,6 @@ export function AnswerInput({
             </div>
           );
         })}
-        <button
-          type="button"
-          onClick={() => onChange([])}
-          className="type-caption min-h-11 rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted px-3 py-2 text-left text-ankahe-text transition-colors hover:border-ankahe-border-strong hover:bg-ankahe-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2 sm:col-span-2"
-        >
-          None of these fit
-        </button>
       </ChoiceFieldset>
     );
   }
@@ -382,7 +435,7 @@ export function AnswerInput({
     const right = question.rightLabel || (question.options?.[1] ? getOptionLabel(question.options[1]) : "More like the second option");
     return (
       <RadioGroup.Root
-        className="grid gap-3 sm:grid-cols-2"
+        className={choiceGridClassName}
         aria-labelledby={labelledBy}
         aria-describedby={describedBy}
         value={typeof value === "string" ? value : ""}
@@ -444,7 +497,7 @@ function ChoiceFieldset({
 }) {
   return (
     <fieldset
-      className="grid gap-3 sm:grid-cols-2"
+      className={choiceGridClassName}
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
     >
@@ -488,7 +541,7 @@ function ChoiceCheckbox({
 
 function choiceClassName(checked: boolean, focusMode: "focus-within" | "focus-visible" = "focus-within") {
   return cn(
-    "flex min-h-20 cursor-pointer items-center rounded-sm border px-5 py-4 text-left text-base font-semibold leading-snug transition-all",
+    "flex min-h-16 cursor-pointer items-center rounded-sm border px-4 py-3 text-left text-base font-semibold leading-snug transition-all md:min-h-20 md:px-5 md:py-4",
     focusMode === "focus-visible"
       ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
       : "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",

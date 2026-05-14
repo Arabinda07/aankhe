@@ -21,7 +21,6 @@ import { cn } from "../lib/utils";
 import { SAMPLE_PERSONAL_STATE } from "../lib/sampleState";
 import { SoftButton } from "./SoftButton";
 import { StorageModeToggle } from "./StorageModeToggle";
-import { motion } from "motion/react";
 
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
@@ -92,12 +91,7 @@ export function Switchboard({
     <div className="bg-ankahe-bg">
       <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 gap-12 px-6 py-10 md:py-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(420px,1fr)] lg:items-center lg:gap-16">
         <div className="min-w-0 max-w-[680px] space-y-9">
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="ankahe-enter ankahe-enter-0 space-y-6">
             <h1 className="type-mixed-heading max-w-[680px] text-ankahe-text">
               <span className="type-mixed-heading-main">Say it once</span>
               <span className="type-mixed-heading-emphasis">be understood</span>
@@ -105,14 +99,9 @@ export function Switchboard({
             <p className="type-lead max-w-xl text-ankahe-muted">
               Write the things people usually have to guess. Ankahe turns them into a private manual you can keep for yourself or share on purpose.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="space-y-5 rounded-lg border border-ankahe-border bg-ankahe-surface px-5 py-5 md:px-6"
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="ankahe-enter ankahe-enter-1 space-y-5 rounded-lg border border-ankahe-border bg-ankahe-surface px-5 py-5 md:px-6">
             <div className="flex items-start gap-3">
               <ShieldCheck size={22} className="mt-0.5 text-ankahe-muted" weight="light" />
               <div className="space-y-1">
@@ -121,14 +110,9 @@ export function Switchboard({
               </div>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="flex flex-col gap-3 sm:flex-row"
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.16, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-3 sm:flex-row">
             <SoftButton size="md" onClick={() => onStart(recipient.mode, onboarding)} icon={<ArrowRight size={16} />}>
               Begin privately
             </SoftButton>
@@ -138,24 +122,16 @@ export function Switchboard({
             <SoftButton size="md" variant="secondary" onClick={onLearnMore}>
               FAQ
             </SoftButton>
-          </motion.div>
+          </div>
 
-          <motion.ul
-            className="flex flex-col gap-5 pt-2 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-5"
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.22, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <ul className="ankahe-enter ankahe-enter-3 flex flex-col gap-5 pt-2 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-5">
             <PromiseItem icon={<SealCheck size={22} weight="light" />} title="You choose what leaves" text="Included answers can travel. Private answers stay here. Omitted answers are left out." />
-          </motion.ul>
+          </ul>
         </div>
 
-        <motion.aside
+        <aside
           aria-label="Manual setup"
-          className="min-w-0 rounded-lg border border-ankahe-border bg-ankahe-surface p-4 md:p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-lg border border-ankahe-border bg-ankahe-surface p-4 md:p-6"
         >
           <div className="rounded-md border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-7 md:py-8">
             <div className="space-y-8">
@@ -200,7 +176,7 @@ export function Switchboard({
               </ChoiceGroup>
             </div>
           </div>
-        </motion.aside>
+        </aside>
       </section>
     </div>
   );

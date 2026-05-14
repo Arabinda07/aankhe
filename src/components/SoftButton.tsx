@@ -5,7 +5,6 @@
 
 import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 import { cn } from '../lib/utils';
-import { motion } from 'motion/react';
 
 export interface SoftButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -39,12 +38,9 @@ export function SoftButton({
   };
 
   return (
-    <motion.button
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+    <button
       className={cn(
-        'group inline-flex items-center justify-center gap-3 rounded-md font-semibold leading-none transition-[background-color,border-color,color,box-shadow] duration-200 ease-[var(--ease-out-expo)] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2',
+        'group inline-flex items-center justify-center gap-3 rounded-md font-semibold leading-none transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2',
         variants[variant],
         sizes[size],
         className
@@ -61,6 +57,6 @@ export function SoftButton({
           {icon}
         </span>
       )}
-    </motion.button>
+    </button>
   );
 }
