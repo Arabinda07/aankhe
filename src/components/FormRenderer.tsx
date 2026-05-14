@@ -15,6 +15,7 @@ interface FormRendererProps {
   getAnswerNote: (questionId: string) => string;
   getVisibility: (question: Question) => Visibility;
   updateAnswer: (id: string, val: any) => void;
+  clearAnswer: (id: string) => void;
   updateAnswerNote: (id: string, note: string) => void;
   updateVisibility: (id: string, vis: Visibility) => void;
   recognitionSummaries: string[];
@@ -27,6 +28,7 @@ export function FormRenderer({
   getAnswerNote,
   getVisibility,
   updateAnswer,
+  clearAnswer,
   updateAnswerNote,
   updateVisibility,
   recognitionSummaries,
@@ -84,6 +86,7 @@ export function FormRenderer({
             question={currentQuestion}
             value={getAnswer(currentQuestion.id)}
             onChange={(val) => updateAnswer(currentQuestion.id, val)}
+            onClear={() => clearAnswer(currentQuestion.id)}
             note={getAnswerNote(currentQuestion.id)}
             onNoteChange={(note) => updateAnswerNote(currentQuestion.id, note)}
             visibility={getVisibility(currentQuestion)}

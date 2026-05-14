@@ -30,6 +30,7 @@ export interface Question {
   label: string; // The UI question string
   helperText?: string;
   type: QuestionType;
+  answerIntent?: "reflective" | "administrative";
   options?: string[];
   min?: number;
   max?: number;

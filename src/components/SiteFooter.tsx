@@ -12,7 +12,7 @@ export function SiteFooter() {
           className="type-footer-nav flex flex-col items-start gap-y-1 sm:flex-row sm:items-center sm:flex-wrap sm:gap-x-9 sm:gap-y-3 text-ankahe-footer-text"
         >
           <FooterLink to="/">Home</FooterLink>
-          <FooterLink to="/how-it-works">How it works</FooterLink>
+          <FooterLink to="/how-it-works">FAQ</FooterLink>
           <FooterLink to="/privacy">Privacy</FooterLink>
           <FooterLink to="/manual/me">Me</FooterLink>
           <FooterLink to="/manual/work">Work</FooterLink>

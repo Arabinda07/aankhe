@@ -105,6 +105,7 @@ export function ManualBuilder({
                   getAnswerNote={manual.getAnswerNote}
                   getVisibility={manual.getVisibility}
                   updateAnswer={manual.updateAnswer}
+                  clearAnswer={manual.clearAnswer}
                   updateAnswerNote={manual.updateAnswerNote}
                   updateVisibility={manual.updateVisibility}
                   recognitionSummaries={composed.recognitionSummaries}

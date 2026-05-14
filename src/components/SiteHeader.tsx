@@ -19,7 +19,7 @@ export function SiteHeader() {
               to="/how-it-works"
               className="hidden sm:inline-flex min-h-11 items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
-              How it works
+              FAQ
             </Link>
             <Link
               to="/privacy"

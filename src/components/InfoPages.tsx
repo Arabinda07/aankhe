@@ -11,14 +11,14 @@ export function PrivacyPage() {
   return (
     <InfoShell
       eyebrow="Privacy"
-      title="Nothing is stored"
-      lead="You choose what leaves the page."
+      titleLines={{ main: "Nothing leaves", emphasis: "until you choose" }}
+      lead="Ankahe runs in the browser. You decide which answers become included, which stay private, and which are left out entirely."
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory only">
-          Answers live in this tab's React memory. Refresh or close the tab and they are gone.
+        <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
+          Answers live in this tab’s React memory. Close or refresh the tab and they are gone.
         </InfoCard>
-        <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in link">
+        <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
           Included answers can be compressed into the URL. Anyone with that link can open the included manual.
         </InfoCard>
       </div>
@@ -41,7 +41,7 @@ export function PrivacyPage() {
       <section className="grid gap-5 border-y border-ankahe-border py-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
         <p className="type-lead text-ankahe-muted">
-          No accounts. No databases. No analytics. Your manual only becomes shareable when you choose to create a link or export an artifact.
+          No accounts. No databases. No analytics. A manual becomes shareable only when you create a link, QR code, image, or PDF from the included view.
         </p>
       </section>
     </InfoShell>
@@ -49,45 +49,45 @@ export function PrivacyPage() {
 }
 
 export function HowItWorksPage() {
-  const steps = [
+  const items = [
     {
-      title: "Choose a manual",
-      text: "Start with a Me Manual for personal context or a Work Manual for collaboration.",
+      title: "Where do my answers live",
+      text: "In Memory Only mode, answers live in this tab. Refresh or close it and they are gone. Save in Link stores included answers inside the URL hash so the manual can reopen later.",
     },
     {
-      title: "Answer only what you want",
-      text: "Skip anything that does not belong in the room yet.",
+      title: "What does private mean",
+      text: "Private answers stay local. They can help shape your own view, but they do not enter shared links, QR codes, or public exports.",
     },
     {
-      title: "Set visibility",
-      text: "Mark each answer included, private, or omitted before it becomes part of the artifact.",
+      title: "What gets shared",
+      text: "Only answers marked Share become included. Those answers can appear in the public preview, exported files, QR code, and shared link.",
     },
     {
-      title: "Review the artifact",
-      text: "Read the finished manual as a document, not a raw form summary.",
+      title: "What does Hide do",
+      text: "Hide leaves an answer out. It will not appear in the manual preview, shared link, QR code, or export.",
     },
     {
-      title: "Share what you chose",
-      text: "Copy a link, make a QR code, or export only the answers you marked included.",
+      title: "Do I need an account",
+      text: "No. There is no account, database, or analytics layer unless you explicitly add one later.",
     },
   ];
 
   return (
     <InfoShell
-      eyebrow="How it works"
-      title="Your inner context"
-      lead="Ankahe turns careful answers into a personal manual you can keep, send, or revise."
+      eyebrow="FAQ"
+      titleLines={{ main: "Before you write", emphasis: "a few honest answers" }}
+      lead="Ankahe is small on purpose. It helps you make a manual, choose what belongs in it, and send only the parts you marked included."
     >
       <div className="border-y border-ankahe-border">
-        {steps.map((step, index) => (
+        {items.map((item, index) => (
           <section
-            key={step.title}
+            key={item.title}
             className="grid gap-5 border-b border-ankahe-border py-7 last:border-b-0 md:grid-cols-[5rem_1fr] md:items-start md:py-8"
           >
             <span className="type-meta text-ankahe-accent">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
-              <h2 className="type-artifact-heading text-ankahe-text">{step.title}</h2>
-              <p className="type-lead text-ankahe-muted">{step.text}</p>
+              <h2 className="type-artifact-heading text-ankahe-text">{item.title}</h2>
+              <p className="type-lead text-ankahe-muted">{item.text}</p>
             </div>
           </section>
         ))}
@@ -97,7 +97,7 @@ export function HowItWorksPage() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl space-y-2">
             <p className="type-eyebrow text-sandal">Begin</p>
-            <h2 className="type-artifact-heading text-ankahe-text">Start with the manual that matches the conversation.</h2>
+            <h2 className="type-artifact-heading text-ankahe-text">Start with the manual that fits the conversation</h2>
           </div>
           <Link
             to="/"
@@ -115,11 +115,16 @@ export function HowItWorksPage() {
 function InfoShell({
   eyebrow,
   title,
+  titleLines,
   lead,
   children,
 }: {
   eyebrow: string;
-  title: string;
+  title?: string;
+  titleLines?: {
+    main: string;
+    emphasis: string;
+  };
   lead: string;
   children: React.ReactNode;
 }) {
@@ -128,7 +133,14 @@ function InfoShell({
       <section className="mx-auto max-w-5xl px-6 py-16 md:py-24">
         <div className="mb-12 max-w-3xl space-y-5">
           <p className="type-eyebrow text-ankahe-accent">{eyebrow}</p>
-          <h1 className="type-display text-ankahe-text">{title}</h1>
+          {titleLines ? (
+            <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-text">
+              <span className="type-mixed-heading-main">{titleLines.main}</span>
+              <span className="type-mixed-heading-emphasis">{titleLines.emphasis}</span>
+            </h1>
+          ) : (
+            <h1 className="type-display text-ankahe-text">{title}</h1>
+          )}
           <p className="type-lead text-ankahe-muted">{lead}</p>
         </div>
         <div className="space-y-6">{children}</div>

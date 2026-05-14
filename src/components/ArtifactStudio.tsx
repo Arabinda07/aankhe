@@ -11,6 +11,7 @@ import type { ManualViewMode } from "../lib/visibilityPolicy";
 import { ExportControls } from "./artifact/ExportControls";
 import { ShareControls } from "./artifact/ShareControls";
 import { VisibilityControls } from "./artifact/VisibilityControls";
+import { AnswerReview } from "./artifact/AnswerReview";
 
 interface ArtifactStudioProps {
   manual: ManualWorkspace;
@@ -69,6 +70,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             onExportImage={exportAsImage}
             onPrint={printManual}
           />
+          <AnswerReview workspace={workspace} />
         </div>
 
         {/* Sharing Side */}

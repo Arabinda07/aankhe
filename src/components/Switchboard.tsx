@@ -98,11 +98,12 @@ export function Switchboard({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="type-hero max-w-[9ch] text-ankahe-text">
-              Give them the context.
+            <h1 className="type-mixed-heading max-w-[680px] text-ankahe-text">
+              <span className="type-mixed-heading-main">Say it once</span>
+              <span className="type-mixed-heading-emphasis">be understood</span>
             </h1>
             <p className="type-lead max-w-xl text-ankahe-muted">
-              Create a private manual for how you work, connect, handle tension, and need support. Share only what you choose.
+              Write the things people usually have to guess. Ankahe turns them into a private manual you can keep for yourself or share on purpose.
             </p>
           </motion.div>
 
@@ -115,8 +116,8 @@ export function Switchboard({
             <div className="flex items-start gap-3">
               <ShieldCheck size={22} className="mt-0.5 text-ankahe-accent" weight="light" />
               <div className="space-y-1">
-                <p className="type-ui-label text-ankahe-text">Nothing is saved. Nothing is uploaded.</p>
-                <p className="type-caption text-ankahe-muted">You choose what becomes shareable.</p>
+                <p className="type-ui-label text-ankahe-text">Nothing is saved here</p>
+                <p className="type-caption text-ankahe-muted">Answers stay in this tab unless you choose Save in Link</p>
               </div>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
@@ -132,10 +133,10 @@ export function Switchboard({
               Begin privately
             </SoftButton>
             <SoftButton size="md" variant="secondary" onClick={() => onTrySample(SAMPLE_PERSONAL_STATE)}>
-              See an example
+              Read a sample
             </SoftButton>
             <SoftButton size="md" variant="secondary" onClick={onLearnMore}>
-              How it works
+              FAQ
             </SoftButton>
           </motion.div>
 
@@ -145,7 +146,7 @@ export function Switchboard({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.22, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <PromiseItem icon={<SealCheck size={22} weight="light" />} title="Safe to shape" text="Share answers may leave the page. Private answers stay local. Omitted answers disappear." />
+            <PromiseItem icon={<SealCheck size={22} weight="light" />} title="You choose what leaves" text="Included answers can travel. Private answers stay here. Omitted answers are left out." />
           </motion.ul>
         </div>
 
@@ -158,7 +159,7 @@ export function Switchboard({
         >
           <div className="rounded-md border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-7 md:py-8">
             <div className="space-y-8">
-              <ChoiceGroup title="Who needs to understand you better?">
+              <ChoiceGroup title="Who should understand you better">
                 <div className="grid gap-3 sm:grid-cols-2">
                   {RECIPIENTS.map((item) => (
                     <ChoiceCard
@@ -173,7 +174,7 @@ export function Switchboard({
                 </div>
               </ChoiceGroup>
 
-              <ChoiceGroup title="What keeps getting misunderstood?">
+              <ChoiceGroup title="What keeps getting misread">
                 <div className="flex flex-wrap gap-2.5">
                   {MISUNDERSTANDINGS.map((item) => (
                     <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
@@ -183,7 +184,7 @@ export function Switchboard({
                 </div>
               </ChoiceGroup>
 
-              <ChoiceGroup title="How much do you want to build?">
+              <ChoiceGroup title="How much do you want to say">
                 <div className="grid gap-3">
                   {DEPTHS.map((item) => (
                     <ChoiceCard

@@ -35,6 +35,7 @@ export interface ManualWorkspace {
   getShareUrl: () => string;
   activate: () => void;
   updateAnswer: (questionId: string, value: ManualAnswer) => void;
+  clearAnswer: (questionId: string) => void;
   updateAnswerNote: (questionId: string, note: string) => void;
   updateVisibility: (questionId: string, visibility: Visibility) => void;
   updateArtifactFormat: (format: ArtifactFormat) => void;
@@ -111,6 +112,22 @@ export function useManualState() {
     }));
   }, []);
 
+  const clearAnswer = useCallback((questionId: string) => {
+    setState(prev => {
+      const answers = { ...prev.answers };
+      const answerNotes = { ...(prev.answerNotes || {}) };
+      delete answers[questionId];
+      delete answerNotes[questionId];
+
+      return {
+        ...prev,
+        answers,
+        answerNotes,
+        updatedAt: new Date().toISOString()
+      };
+    });
+  }, []);
+
   const updateAnswerNote = useCallback((questionId: string, note: string) => {
     setState(prev => ({
       ...prev,
@@ -174,13 +191,14 @@ export function useManualState() {
         }
       },
       updateAnswer,
+      clearAnswer,
       updateAnswerNote,
       updateVisibility,
       updateArtifactFormat,
       updateTone,
       setStorageMode,
     };
-  }, [setMode, setStorageMode, state, updateAnswer, updateAnswerNote, updateArtifactFormat, updateTone, updateVisibility]);
+  }, [clearAnswer, setMode, setStorageMode, state, updateAnswer, updateAnswerNote, updateArtifactFormat, updateTone, updateVisibility]);
 
   return {
     storageMode: state.storageMode,
