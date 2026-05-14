@@ -3,17 +3,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { ArtifactFormat, ComposedManual, ModeConfig, TonePreference } from "../../lib/schemaTypes";
+import type { ArtifactFormat, ModeConfig, TonePreference } from "../../lib/schemaTypes";
 import type { ManualViewMode } from "../../lib/visibilityPolicy";
+import type { ArtifactStudioPolicy } from "../../lib/artifactStudioPolicy";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import * as Tabs from "@radix-ui/react-tabs";
 import { cn } from "../../lib/utils";
 
 interface VisibilityControlsProps {
   config: ModeConfig;
-  manual: ComposedManual;
+  policy: ArtifactStudioPolicy;
   viewMode: ManualViewMode;
-  excludedSections: string[];
   onViewModeChange: (viewMode: ManualViewMode) => void;
   onSectionToggle: (sectionId: string) => void;
   onFormatChange: (format: ArtifactFormat) => void;
@@ -22,14 +22,15 @@ interface VisibilityControlsProps {
 
 export function VisibilityControls({
   config,
-  manual,
+  policy,
   viewMode,
-  excludedSections,
   onViewModeChange,
   onSectionToggle,
   onFormatChange,
   onToneChange,
 }: VisibilityControlsProps) {
+  const { manual } = policy;
+
   return (
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <div>
@@ -57,9 +58,7 @@ export function VisibilityControls({
           </Tabs.List>
         </Tabs.Root>
         <p className="type-caption text-ankahe-muted mt-3">
-          {viewMode === "included"
-            ? "Reviewing included answers. Private and omitted answers are removed."
-            : "Previewing your local private copy. Image and PDF exports include this view."}
+          {policy.previewDescription}
         </p>
       </div>
 
@@ -71,7 +70,7 @@ export function VisibilityControls({
           aria-label="Share format"
           className="grid gap-2"
         >
-          {FORMAT_OPTIONS.map((format) => (
+          {policy.formatOptions.map((format) => (
             <RadioGroup.Item
               key={format.id}
               value={format.id}
@@ -97,7 +96,7 @@ export function VisibilityControls({
           aria-label="Manual tone"
           className="flex flex-wrap gap-2"
         >
-          {TONE_OPTIONS.map((tone) => (
+          {policy.toneOptions.map((tone) => (
             <RadioGroup.Item
               key={tone.id}
               value={tone.id}
@@ -118,7 +117,7 @@ export function VisibilityControls({
         <h4 className="type-panel-title text-ankahe-heading">Sections</h4>
         <div className="flex flex-wrap gap-2">
           {config.sections.map((section) => {
-            const isExcluded = excludedSections.includes(section.id);
+            const isExcluded = policy.isSectionExcluded(section.id);
             return (
               <button
                 key={section.id}
@@ -157,7 +156,7 @@ export function VisibilityControls({
         <p className="type-caption text-ankahe-muted">
           Share links and QR codes use included answers only.
         </p>
-        {viewMode === "included" && (
+        {policy.showSafeToSendNote && (
           <p className="type-ui-label rounded-sm border border-ankahe-sandal/25 bg-ankahe-sandal-soft px-3 py-2 text-ankahe-sandal">
             This version is safe to send.
           </p>
@@ -166,21 +165,3 @@ export function VisibilityControls({
     </div>
   );
 }
-
-const FORMAT_OPTIONS: Array<{ id: ArtifactFormat; label: string; description: string }> = [
-  { id: "full", label: "Full manual", description: "A complete version with all included sections." },
-  { id: "onePage", label: "One-page version", description: "A shorter manual for quick reading." },
-  { id: "note", label: "Conversation note", description: "A compact note for one hard conversation." },
-  { id: "conversation", label: "Conversation brief", description: "A focused brief for opening a specific talk." },
-  { id: "work", label: "Work version", description: "A focused version for professional context." },
-  { id: "private", label: "Private copy", description: "A local copy for yourself." },
-];
-
-const TONE_OPTIONS: Array<{ id: TonePreference; label: string }> = [
-  { id: "default", label: "Default" },
-  { id: "softer", label: "Softer" },
-  { id: "direct", label: "More direct" },
-  { id: "warmer", label: "Warmer" },
-  { id: "professional", label: "Professional" },
-  { id: "shorter", label: "Shorter" },
-];

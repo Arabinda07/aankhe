@@ -6,23 +6,22 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   ArtifactFormat,
-  ComposedManual,
   ManualState,
-  ModeConfig,
   ModeId,
   OnboardingContext,
-  Question,
   StorageMode,
   TonePreference,
   Visibility,
 } from "../lib/schemaTypes";
-import { getModeConfigForDepth } from "../lib/protocolManifest";
-import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
-import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
-import { generateSharedUrl } from "../lib/stateCompression";
 import { createStorageProvider, StorageProvider } from "../lib/storageProvider";
-
-type ManualAnswer = ManualState["answers"][string];
+import {
+  createDefaultManualState,
+  createManualWorkspace,
+  defaultArtifactFormat,
+  isSupportedManualMode,
+  type ManualAnswer,
+} from "../lib/manualWorkspace";
+export type { ManualWorkspace } from "../lib/manualWorkspace";
 
 export interface UseManualStateOptions {
   initialMode?: string;
@@ -30,53 +29,11 @@ export interface UseManualStateOptions {
   initialStorageMode?: StorageMode;
 }
 
-export interface ManualWorkspace {
-  mode: ModeId;
-  storageMode: StorageMode;
-  config: ModeConfig;
-  visibilityCounts: VisibilityCounts;
-  getAnswer: (questionId: string) => ManualAnswer | undefined;
-  getAnswerNote: (questionId: string) => string;
-  getVisibility: (question: Question) => Visibility;
-  composeManual: (options?: ManualComposeOptions) => ComposedManual;
-  getShareUrl: () => string;
-  activate: () => void;
-  updateAnswer: (questionId: string, value: ManualAnswer) => void;
-  clearAnswer: (questionId: string) => void;
-  updateAnswerNote: (questionId: string, note: string) => void;
-  updateVisibility: (questionId: string, visibility: Visibility) => void;
-  updateArtifactFormat: (format: ArtifactFormat) => void;
-  updateTone: (tone: TonePreference) => void;
-  setStorageMode: (storageMode: StorageMode) => void;
-}
-
-function createDefaultState(
-  mode: ModeId = "me",
-  storageMode: StorageMode = "memory",
-  onboarding?: OnboardingContext
-): ManualState {
-  return {
-    mode,
-    answers: {},
-    answerNotes: {},
-    visibilityByQuestion: {},
-    storageMode,
-    onboarding,
-    artifactFormat: defaultArtifactFormat(onboarding),
-    tone: "default",
-    updatedAt: new Date().toISOString()
-  };
-}
-
-function isSupportedManualMode(mode: string | undefined): mode is ModeId {
-  return mode === "me" || mode === "work" || mode === "talk" || mode === "us";
-}
-
 export function useManualState(options: UseManualStateOptions = {}) {
   const initialMode = isSupportedManualMode(options.initialMode) ? options.initialMode : "me";
   const initialStorageMode = options.initialStorageMode || "memory";
   const [state, setState] = useState<ManualState>(() =>
-    createDefaultState(initialMode, initialStorageMode, options.initialOnboarding)
+    createDefaultManualState(initialMode, initialStorageMode, options.initialOnboarding)
   );
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -188,35 +145,13 @@ export function useManualState(options: UseManualStateOptions = {}) {
   }, []);
 
   const resetState = useCallback((newState?: ManualState) => {
-    setState(newState || createDefaultState());
+    setState(newState || createDefaultManualState());
   }, []);
 
 
-  const getManualForRoute = useCallback((routeMode: string | undefined): ManualWorkspace | null => {
-    if (!isSupportedManualMode(routeMode)) return null;
-
-    const workingState =
-      state.mode === routeMode
-        ? state
-        : createDefaultState(routeMode, state.storageMode);
-    const config = getModeConfigForDepth(routeMode, workingState.onboarding?.depth || "manual");
-    const visibilityPolicy = createVisibilityPolicy(workingState);
-
-    return {
-      mode: workingState.mode,
-      storageMode: workingState.storageMode,
-      config,
-      visibilityCounts: visibilityPolicy.getCounts(),
-      getAnswer: (questionId) => workingState.answers[questionId],
-      getAnswerNote: (questionId) => workingState.answerNotes?.[questionId] || "",
-      getVisibility: visibilityPolicy.visibilityFor,
-      composeManual: (options) => buildComposedManual(workingState, options),
-      getShareUrl: () => generateSharedUrl(workingState),
-      activate: () => {
-        if (state.mode !== routeMode) {
-          setMode(routeMode);
-        }
-      },
+  const getManualForRoute = useCallback((routeMode: string | undefined) =>
+    createManualWorkspace(state, routeMode, {
+      activate: setMode,
       updateAnswer,
       clearAnswer,
       updateAnswerNote,
@@ -224,8 +159,7 @@ export function useManualState(options: UseManualStateOptions = {}) {
       updateArtifactFormat,
       updateTone,
       setStorageMode,
-    };
-  }, [clearAnswer, setMode, setStorageMode, state, updateAnswer, updateAnswerNote, updateArtifactFormat, updateTone, updateVisibility]);
+    }), [clearAnswer, setMode, setStorageMode, state, updateAnswer, updateAnswerNote, updateArtifactFormat, updateTone, updateVisibility]);
 
   return {
     storageMode: state.storageMode,
@@ -237,14 +171,4 @@ export function useManualState(options: UseManualStateOptions = {}) {
     resetState,
     getManualForRoute
   };
-}
-
-function defaultArtifactFormat(onboarding?: OnboardingContext): ArtifactFormat {
-  if (!onboarding) return "full";
-  if (onboarding.depth === "note") return "note";
-  if (onboarding.recipient.includes("work") || onboarding.recipient.includes("manager") || onboarding.recipient.includes("teammate")) {
-    return "work";
-  }
-
-  return "full";
 }

@@ -4,10 +4,15 @@
  */
 
 import { useRef, useState, useMemo } from "react";
-import { ManualWorkspace } from "../hooks/useManualState";
+import type { ManualWorkspace } from "../hooks/useManualState";
 import { ManualPreview } from "./ManualPreview";
 import { useArtifactExport } from "../hooks/useArtifactExport";
 import type { ManualViewMode } from "../lib/visibilityPolicy";
+import {
+  createArtifactStudioPolicy,
+  getViewModeForArtifactFormat,
+  toggleExcludedSection,
+} from "../lib/artifactStudioPolicy";
 import { ExportControls } from "./artifact/ExportControls";
 import { ShareControls } from "./artifact/ShareControls";
 import { VisibilityControls } from "./artifact/VisibilityControls";
@@ -22,11 +27,10 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
   const [viewMode, setViewMode] = useState<ManualViewMode>("included");
   const [excludedSections, setExcludedSections] = useState<string[]>([]);
 
-  const manual = useMemo(
-    () => workspace.composeManual({ viewMode, excludedSections }),
+  const policy = useMemo(
+    () => createArtifactStudioPolicy(workspace, { viewMode, excludedSections }),
     [excludedSections, viewMode, workspace]
   );
-  const secureSharedUrl = useMemo(() => workspace.getShareUrl(), [workspace]);
 
   const {
     isExporting,
@@ -35,12 +39,10 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
     exportAsImage,
     printManual,
     copyLink
-  } = useArtifactExport(artifactRef, workspace.mode, secureSharedUrl, viewMode);
+  } = useArtifactExport(artifactRef, workspace.mode, policy.sharedUrl, viewMode);
 
   const toggleSection = (sectionId: string) => {
-    setExcludedSections(prev => 
-      prev.includes(sectionId) ? prev.filter(id => id !== sectionId) : [...prev, sectionId]
-    );
+    setExcludedSections((prev) => toggleExcludedSection(prev, sectionId));
   };
 
   return (
@@ -60,7 +62,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         <div className="space-y-8">
           <div className="overflow-hidden rounded-lg bg-ankahe-surface-preview p-3 md:p-6">
             <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper">
-              <ManualPreview manual={manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
+              <ManualPreview manual={policy.manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>
           
@@ -77,20 +79,19 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         <div className="space-y-8 lg:sticky lg:top-28">
           <VisibilityControls
             config={workspace.config}
-            manual={manual}
+            policy={policy}
             viewMode={viewMode}
-            excludedSections={excludedSections}
             onViewModeChange={setViewMode}
             onSectionToggle={toggleSection}
             onFormatChange={(format) => {
               workspace.updateArtifactFormat(format);
-              if (format === "private") setViewMode("private");
+              setViewMode((currentViewMode) => getViewModeForArtifactFormat(format, currentViewMode));
             }}
             onToneChange={workspace.updateTone}
           />
           <ShareControls
             storageMode={workspace.storageMode}
-            sharedUrl={secureSharedUrl}
+            sharedUrl={policy.sharedUrl}
             copied={copied}
             onCopyLink={copyLink}
           />
