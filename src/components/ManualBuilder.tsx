@@ -4,15 +4,16 @@
  */
 
 import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { ManualWorkspace } from '../hooks/useManualState';
-import type { ModeId } from '../lib/schemaTypes';
+import { useParams, Navigate, useLocation } from 'react-router-dom';
+import { useManualState } from '../hooks/useManualState';
+import type { ModeId, OnboardingContext, StorageMode } from '../lib/schemaTypes';
 import { useQuestionController } from '../hooks/useQuestionController';
 import { QuestionStep } from './QuestionStep';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
 import { BookOpenText, CaretLeft, FileText } from '@phosphor-icons/react';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
+import { SoftButton } from './SoftButton';
 
 const ArtifactStudio = lazy(() =>
   import("./ArtifactStudio").then((module) => ({
@@ -20,16 +21,32 @@ const ArtifactStudio = lazy(() =>
   }))
 );
 
+export interface ManualRouteState {
+  mode?: ModeId;
+  onboarding?: OnboardingContext;
+  storageMode?: StorageMode;
+}
+
 interface ManualBuilderProps {
-  getManualForRoute: (routeMode: string | undefined) => ManualWorkspace | null;
   onBack: () => void;
 }
 
 export function ManualBuilder({
-  getManualForRoute,
   onBack,
 }: ManualBuilderProps) {
   const { mode } = useParams<{ mode: ModeId }>();
+  const location = useLocation();
+  const routeState = location.state as ManualRouteState | null;
+  const {
+    isInitialized,
+    hashError,
+    clearHashError,
+    getManualForRoute,
+  } = useManualState({
+    initialMode: mode,
+    initialOnboarding: routeState?.onboarding,
+    initialStorageMode: routeState?.storageMode,
+  });
   const [view, setView] = useState<"build" | "artifact">("build");
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
@@ -48,6 +65,10 @@ export function ManualBuilder({
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [view]);
+
+  if (!isInitialized) {
+    return <ManualRouteFallback label="Preparing manual" />;
+  }
 
   if (!manual || !composed) {
     return <Navigate to="/" />;
@@ -93,6 +114,26 @@ export function ManualBuilder({
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32">
+        {hashError && (
+          <div className="mb-10 flex items-start gap-4 rounded-lg border border-ankahe-danger/25 bg-ankahe-danger-soft p-4 text-ankahe-text shadow-sm">
+            <div className="flex-1 space-y-1">
+              <h4 className="type-panel-title text-ankahe-heading">
+                Link could not be restored
+              </h4>
+              <p className="type-caption">
+                The manual link appears to be corrupted or incomplete. You can start fresh or try another link.
+              </p>
+            </div>
+            <SoftButton
+              size="sm"
+              variant="secondary"
+              onClick={clearHashError}
+              className="bg-ankahe-surface text-ankahe-text border-ankahe-border"
+            >
+              Dismiss
+            </SoftButton>
+          </div>
+        )}
         <AnimatePresence mode="wait">
           {view === "build" ? (
             <motion.div
@@ -148,8 +189,8 @@ export function ManualBuilder({
                   <h3 className="type-meta text-ankahe-heading px-1">
                     Live Manual Preview
                   </h3>
-                  <div className="rounded-[2rem] border border-ankahe-border bg-ankahe-surface-preview p-2 shadow-sm">
-                    <div className="overflow-hidden rounded-[calc(2rem-0.5rem)] border border-ankahe-paper-border bg-ankahe-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+                  <div className="rounded-lg bg-ankahe-surface-preview p-2">
+                    <div className="overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
                       <ManualPreview
                         manual={composed}
                         mode={manual.mode}
@@ -177,6 +218,14 @@ export function ManualBuilder({
         </AnimatePresence>
       </div>
 
+    </div>
+  );
+}
+
+function ManualRouteFallback({ label }: { label: string }) {
+  return (
+    <div className="min-h-[calc(100dvh-8rem)] bg-ankahe-bg px-6 py-16 text-center">
+      <p className="type-meta text-ankahe-muted">{label}</p>
     </div>
   );
 }

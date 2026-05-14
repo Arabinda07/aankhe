@@ -31,18 +31,18 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           </div>
         </div>
 
-        <section className="rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-7 md:p-9">
+        <section className="mx-auto max-w-2xl space-y-4 py-2 text-center">
           <h2 className="type-meta mb-4 text-center text-ankahe-heading">How to read this</h2>
-          <p className="type-artifact-prose text-center text-ankahe-text">
+          <p className="type-artifact-prose text-ankahe-text">
             {manual.recipientNote}
           </p>
         </section>
 
         {/* At a Glance */}
         {manual.atAGlance && (
-          <section className="bg-ankahe-paper-muted p-8 md:p-12 rounded-sm border border-ankahe-paper-border">
+          <section className="mx-auto max-w-2xl space-y-4 py-4 text-center">
             <h2 className="type-meta text-ankahe-heading mb-4 text-center">At a Glance</h2>
-            <p className="type-artifact-prose text-center italic text-ankahe-text">
+            <p className="type-artifact-prose italic text-ankahe-text">
               {manual.atAGlance}
             </p>
           </section>

@@ -92,7 +92,7 @@ export function Switchboard({
     <div className="bg-ankahe-bg">
       <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-5 py-12 text-left sm:px-8 md:py-20 lg:grid-cols-[1fr_minmax(auto,600px)] lg:items-start lg:gap-12 xl:gap-24 lg:py-28 xl:py-32">
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
-          <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading text-ankahe-heading lg:max-w-xl">
               Everything <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
@@ -101,7 +101,7 @@ export function Switchboard({
             </p>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-1 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <SoftButton size="md" onClick={scrollToOnboarding} className="w-full sm:w-auto">
               Start your manual
             </SoftButton>
@@ -115,7 +115,7 @@ export function Switchboard({
             </SoftButton>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-2 flex flex-col items-start gap-5">
+          <div className="flex flex-col items-start gap-5">
             <div className="flex items-center gap-3">
               <SealCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
               <p className="type-caption text-ankahe-muted">No servers. No accounts. This tab is a burner space.</p>

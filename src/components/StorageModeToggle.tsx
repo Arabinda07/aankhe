@@ -6,7 +6,6 @@
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { LinkSimpleHorizontal, Monitor } from "@phosphor-icons/react";
-import * as RadioGroup from "@radix-ui/react-radio-group";
 
 interface StorageModeToggleProps {
   value: StorageMode;
@@ -15,14 +14,15 @@ interface StorageModeToggleProps {
 
 export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
   return (
-    <RadioGroup.Root
-      value={value}
-      onValueChange={(nextValue) => onChange(nextValue as StorageMode)}
+    <div
+      role="group"
       aria-label="Answer storage mode"
       className="flex p-1 bg-ankahe-control-selected rounded-sm w-full sm:w-fit border border-ankahe-border"
     >
-      <RadioGroup.Item
-        value="memory"
+      <button
+        type="button"
+        aria-pressed={value === "memory"}
+        onClick={() => onChange("memory")}
         className={cn(
           "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "memory" 
@@ -32,9 +32,11 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
       >
         <Monitor size={18} weight="light" />
         Memory Only
-      </RadioGroup.Item>
-      <RadioGroup.Item
-        value="url"
+      </button>
+      <button
+        type="button"
+        aria-pressed={value === "url"}
+        onClick={() => onChange("url")}
         className={cn(
           "type-ui-label min-h-11 flex items-center gap-2 px-4 py-2 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
           value === "url" 
@@ -44,7 +46,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
       >
         <LinkSimpleHorizontal size={18} weight="light" />
         Save in Link
-      </RadioGroup.Item>
-    </RadioGroup.Root>
+      </button>
+    </div>
   );
 }

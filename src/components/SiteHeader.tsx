@@ -1,6 +1,12 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { AnkaheMark } from "./AnkaheMark";
-import { ThemeSwitcher } from "./ThemeSwitcher";
+
+const ThemeSwitcher = lazy(() =>
+  import("./ThemeSwitcher").then((module) => ({
+    default: module.ThemeSwitcher,
+  }))
+);
 
 export function SiteHeader() {
   return (
@@ -54,9 +60,20 @@ export function SiteHeader() {
             </Link>
           </nav>
           <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
-          <ThemeSwitcher />
+          <Suspense fallback={<ThemeSwitcherFallback />}>
+            <ThemeSwitcher />
+          </Suspense>
         </div>
       </div>
     </header>
+  );
+}
+
+function ThemeSwitcherFallback() {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ankahe-border bg-ankahe-control"
+    />
   );
 }

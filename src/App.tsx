@@ -3,15 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
-import { ModeId, OnboardingContext } from './lib/schemaTypes';
-import { useManualState } from './hooks/useManualState';
+import type { ModeId, OnboardingContext, StorageMode } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
-import { SoftButton } from './components/SoftButton';
 
 const ManualBuilder = lazy(() =>
   import("./components/ManualBuilder").then((module) => ({
@@ -32,16 +30,7 @@ const HowItWorksPage = lazy(() =>
 );
 
 function AppContent() {
-  const {
-    storageMode,
-    isInitialized,
-    hashError,
-    clearHashError,
-    setMode,
-    resetState,
-    setStorageMode,
-    getManualForRoute,
-  } = useManualState();
+  const [storageMode, setStorageMode] = useState<StorageMode>("memory");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -50,12 +39,14 @@ function AppContent() {
   }, [location.pathname]);
 
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
-    setMode(mode, onboarding);
-    navigate(`/manual/${mode}`);
+    navigate(`/manual/${mode}`, {
+      state: {
+        mode,
+        onboarding,
+        storageMode,
+      },
+    });
   };
-
-
-  if (!isInitialized) return null;
 
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans selection:bg-ankahe-accent-soft selection:text-ankahe-text">
@@ -73,29 +64,6 @@ function AppContent() {
               path="/"
               element={
                 <div className="bg-ankahe-bg">
-                  {hashError && (
-                    <div className="max-w-4xl mx-auto px-6 pt-6">
-                      <div className="flex items-start gap-4 rounded-lg border border-ankahe-danger/25 bg-ankahe-danger-soft p-4 text-ankahe-text shadow-sm">
-                        <div className="flex-1 space-y-1">
-                          <h4 className="type-panel-title text-ankahe-heading">
-                            Link could not be restored
-                          </h4>
-                          <p className="type-caption">
-                            The manual link appears to be corrupted or
-                            incomplete. You can start fresh or try another link.
-                          </p>
-                        </div>
-                        <SoftButton
-                          size="sm"
-                          variant="secondary"
-                          onClick={clearHashError}
-                          className="bg-ankahe-surface text-ankahe-text border-ankahe-border"
-                        >
-                          Dismiss
-                        </SoftButton>
-                      </div>
-                    </div>
-                  )}
                   <Switchboard
                     storageMode={storageMode}
                     onStorageModeChange={setStorageMode}
@@ -126,7 +94,6 @@ function AppContent() {
               element={
                 <Suspense fallback={<RouteFallback label="Preparing manual" />}>
                   <ManualBuilder
-                    getManualForRoute={getManualForRoute}
                     onBack={() => navigate("/")}
                   />
                 </Suspense>

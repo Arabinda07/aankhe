@@ -58,7 +58,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
       <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         {/* Preview Container */}
         <div className="space-y-8">
-          <div className="overflow-hidden rounded-xl border border-ankahe-border bg-ankahe-surface-preview p-3 md:p-8">
+          <div className="overflow-hidden rounded-lg bg-ankahe-surface-preview p-3 md:p-6">
             <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper">
               <ManualPreview manual={manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>

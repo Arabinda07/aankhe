@@ -409,10 +409,10 @@
 
   .type-question-builder {
     font-family: var(--font-editor);
-    font-size: 1.625rem;
+    font-size: 1.875rem;
     font-style: italic;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: 1.16;
     letter-spacing: 0;
     max-width: min(100%, 28ch);
     color: var(--color-ankahe-heading);
@@ -448,9 +448,9 @@
 
   .type-artifact-prose {
     font-family: var(--font-display);
-    font-size: 1.1875rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1.72;
+    line-height: 1.78;
     letter-spacing: 0;
   }
 
@@ -577,8 +577,8 @@
 
   @media (min-width: 640px) {
     .type-question-builder {
-      font-size: 1.875rem;
-      line-height: 1.18;
+      font-size: 2.125rem;
+      line-height: 1.14;
       max-width: min(100%, 30ch);
     }
   }
@@ -604,8 +604,8 @@
     }
 
     .type-question-builder {
-      font-size: 1.875rem;
-      line-height: 1.18;
+      font-size: 2.125rem;
+      line-height: 1.14;
       max-width: min(100%, 30ch);
     }
 
@@ -644,8 +644,8 @@
     }
 
     .type-question-builder {
-      font-size: 2rem;
-      line-height: 1.15;
+      font-size: 2.375rem;
+      line-height: 1.12;
       max-width: min(100%, 32ch);
     }
 

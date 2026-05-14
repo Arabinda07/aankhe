@@ -24,6 +24,12 @@ import { createStorageProvider, StorageProvider } from "../lib/storageProvider";
 
 type ManualAnswer = ManualState["answers"][string];
 
+export interface UseManualStateOptions {
+  initialMode?: string;
+  initialOnboarding?: OnboardingContext;
+  initialStorageMode?: StorageMode;
+}
+
 export interface ManualWorkspace {
   mode: ModeId;
   storageMode: StorageMode;
@@ -44,14 +50,19 @@ export interface ManualWorkspace {
   setStorageMode: (storageMode: StorageMode) => void;
 }
 
-function createDefaultState(mode: ModeId = "me", storageMode: StorageMode = "memory"): ManualState {
+function createDefaultState(
+  mode: ModeId = "me",
+  storageMode: StorageMode = "memory",
+  onboarding?: OnboardingContext
+): ManualState {
   return {
     mode,
     answers: {},
     answerNotes: {},
     visibilityByQuestion: {},
     storageMode,
-    artifactFormat: "full",
+    onboarding,
+    artifactFormat: defaultArtifactFormat(onboarding),
     tone: "default",
     updatedAt: new Date().toISOString()
   };
@@ -61,13 +72,17 @@ function isSupportedManualMode(mode: string | undefined): mode is ModeId {
   return mode === "me" || mode === "work" || mode === "talk" || mode === "us";
 }
 
-export function useManualState() {
-  const [state, setState] = useState<ManualState>(() => createDefaultState());
+export function useManualState(options: UseManualStateOptions = {}) {
+  const initialMode = isSupportedManualMode(options.initialMode) ? options.initialMode : "me";
+  const initialStorageMode = options.initialStorageMode || "memory";
+  const [state, setState] = useState<ManualState>(() =>
+    createDefaultState(initialMode, initialStorageMode, options.initialOnboarding)
+  );
   const [isInitialized, setIsInitialized] = useState(false);
 
   const [hashError, setHashError] = useState(false);
   const [provider, setProvider] = useState<StorageProvider>(() => 
-    createStorageProvider(state.storageMode, () => setHashError(true))
+    createStorageProvider(initialStorageMode, () => setHashError(true))
   );
 
   // ── Initialize from storage ──────────────────────────────────────
