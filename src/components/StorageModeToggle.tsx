@@ -19,7 +19,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
       value={value}
       onValueChange={(nextValue) => onChange(nextValue as StorageMode)}
       aria-label="Answer storage mode"
-      className="flex p-1 bg-ankahe-control-selected rounded-sm w-fit border border-ankahe-border"
+      className="flex p-1 bg-ankahe-control-selected rounded-sm w-full sm:w-fit border border-ankahe-border"
     >
       <RadioGroup.Item
         value="memory"

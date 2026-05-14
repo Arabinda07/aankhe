@@ -9,7 +9,6 @@ import {
   ChatCenteredText,
   FileText,
   HandHeart,
-  SealCheck,
   ShieldCheck,
   User,
   UsersThree,
@@ -18,13 +17,11 @@ import type React from "react";
 import { useMemo, useState } from "react";
 import { ManualDepth, ManualState, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { SAMPLE_PERSONAL_STATE } from "../lib/sampleState";
 import { SoftButton } from "./SoftButton";
 import { StorageModeToggle } from "./StorageModeToggle";
 
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
-  onTrySample: (sample: ManualState) => void;
   onLearnMore: () => void;
   storageMode: StorageMode;
   onStorageModeChange: (mode: StorageMode) => void;
@@ -67,7 +64,6 @@ const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
 
 export function Switchboard({
   onStart,
-  onTrySample,
   onLearnMore,
   storageMode,
   onStorageModeChange,
@@ -89,10 +85,10 @@ export function Switchboard({
 
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-7xl grid-cols-1 gap-12 px-6 py-10 md:py-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(420px,1fr)] lg:items-center lg:gap-16">
-        <div className="min-w-0 max-w-[680px] space-y-9">
-          <div className="ankahe-enter ankahe-enter-0 space-y-6">
-            <h1 className="type-mixed-heading max-w-[680px] text-ankahe-text">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(420px,1fr)] lg:items-start lg:gap-16 lg:py-14">
+        <div className="min-w-0 max-w-[680px] space-y-7">
+          <div className="ankahe-enter ankahe-enter-0 space-y-5">
+            <h1 className="type-mixed-heading max-w-[min(100%,680px)] text-ankahe-text">
               <span className="type-mixed-heading-main">Say it once</span>
               <span className="type-mixed-heading-emphasis">be understood</span>
             </h1>
@@ -101,40 +97,34 @@ export function Switchboard({
             </p>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-1 space-y-5 rounded-lg border border-ankahe-border bg-ankahe-surface px-5 py-5 md:px-6">
-            <div className="flex items-start gap-3">
-              <ShieldCheck size={22} className="mt-0.5 text-ankahe-muted" weight="light" />
-              <div className="space-y-1">
-                <p className="type-ui-label text-ankahe-text">Nothing is saved here</p>
-                <p className="type-caption text-ankahe-muted">Answers stay in this tab unless you choose Save in Link</p>
-              </div>
-            </div>
-            <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-          </div>
-
-          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-3 sm:flex-row">
+          <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-3 sm:flex-row sm:items-center">
             <SoftButton size="md" onClick={() => onStart(recipient.mode, onboarding)} icon={<ArrowRight size={16} />}>
               Begin privately
             </SoftButton>
-            <SoftButton size="md" variant="secondary" onClick={() => onTrySample(SAMPLE_PERSONAL_STATE)}>
-              Read a sample
-            </SoftButton>
-            <SoftButton size="md" variant="secondary" onClick={onLearnMore}>
+            <button
+              type="button"
+              onClick={onLearnMore}
+              className="type-ui-label min-h-11 px-3 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+            >
               FAQ
-            </SoftButton>
+            </button>
           </div>
 
-          <ul className="ankahe-enter ankahe-enter-3 flex flex-col gap-5 pt-2 sm:flex-row sm:flex-wrap sm:gap-x-10 sm:gap-y-5">
-            <PromiseItem icon={<SealCheck size={22} weight="light" />} title="You choose what leaves" text="Included answers can travel. Private answers stay here. Omitted answers are left out." />
-          </ul>
+          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <div className="flex items-center gap-2.5">
+              <ShieldCheck size={18} className="text-ankahe-muted" weight="light" />
+              <p className="type-caption text-ankahe-muted">Nothing is saved here. Answers stay in this tab.</p>
+            </div>
+            <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
+          </div>
         </div>
 
         <aside
           aria-label="Manual setup"
-          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-lg border border-ankahe-border bg-ankahe-surface p-4 md:p-6"
+          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-lg border border-ankahe-border bg-ankahe-surface p-3 sm:p-4 md:p-6"
         >
-          <div className="rounded-md border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-7 md:py-8">
-            <div className="space-y-8">
+          <div className="rounded-md border border-ankahe-paper-border bg-ankahe-paper px-4 py-5 md:px-7 md:py-8">
+            <div className="space-y-7">
               <ChoiceGroup title="Who should understand you better">
                 <div className="grid gap-3 sm:grid-cols-2">
                   {RECIPIENTS.map((item) => (
@@ -150,30 +140,34 @@ export function Switchboard({
                 </div>
               </ChoiceGroup>
 
-              <ChoiceGroup title="What keeps getting misread">
-                <div className="flex flex-wrap gap-2.5">
-                  {MISUNDERSTANDINGS.map((item) => (
-                    <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
-                      {item}
-                    </SmallChoice>
-                  ))}
-                </div>
-              </ChoiceGroup>
+              <div className="border-t border-ankahe-paper-border" />
 
-              <ChoiceGroup title="How much do you want to say">
-                <div className="grid gap-3">
-                  {DEPTHS.map((item) => (
-                    <ChoiceCard
-                      key={item.id}
-                      active={depth === item.id}
-                      title={item.label}
-                      description={item.description}
-                      icon={<FileText size={22} weight="light" />}
-                      onClick={() => setDepth(item.id)}
-                    />
-                  ))}
-                </div>
-              </ChoiceGroup>
+              <div className="space-y-6">
+                <ChoiceGroup title="What keeps getting misread" variant="secondary">
+                  <div className="flex flex-wrap gap-2.5">
+                    {MISUNDERSTANDINGS.map((item) => (
+                      <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
+                        {item}
+                      </SmallChoice>
+                    ))}
+                  </div>
+                </ChoiceGroup>
+
+                <ChoiceGroup title="How much do you want to say" variant="secondary">
+                  <div className="grid gap-3">
+                    {DEPTHS.map((item) => (
+                      <ChoiceCard
+                        key={item.id}
+                        active={depth === item.id}
+                        title={item.label}
+                        description={item.description}
+                        icon={<FileText size={22} weight="light" />}
+                        onClick={() => setDepth(item.id)}
+                      />
+                    ))}
+                  </div>
+                </ChoiceGroup>
+              </div>
             </div>
           </div>
         </aside>
@@ -182,22 +176,14 @@ export function Switchboard({
   );
 }
 
-function PromiseItem({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
-  return (
-    <li className="flex items-start gap-3.5">
-      <div className="mt-0.5 text-ankahe-muted">{icon}</div>
-      <div>
-        <p className="type-ui-label text-ankahe-text">{title}</p>
-        <p className="type-caption text-ankahe-muted">{text}</p>
-      </div>
-    </li>
-  );
-}
-
-function ChoiceGroup({ title, children }: { title: string; children: React.ReactNode }) {
+function ChoiceGroup({ title, children, variant = "primary" }: { title: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   return (
     <section className="space-y-3">
-      <h2 className="type-panel-title text-ankahe-text">{title}</h2>
+      <h2 className={cn(
+        variant === "primary"
+          ? "type-panel-title text-ankahe-text"
+          : "type-caption font-semibold uppercase tracking-wider text-ankahe-muted"
+      )}>{title}</h2>
       {children}
     </section>
   );
@@ -233,7 +219,10 @@ function ChoiceCard({
         <span className="type-ui-label">{title}</span>
         <span aria-hidden="true" className={active ? "text-ankahe-accent" : "text-ankahe-muted"}>{icon}</span>
       </span>
-      <span className="type-caption block text-ankahe-muted">{description}</span>
+      <span className={cn(
+        "type-caption block",
+        active ? "text-ankahe-accent-dark/70" : "text-ankahe-muted"
+      )}>{description}</span>
     </button>
   );
 }

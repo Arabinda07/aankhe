@@ -9,19 +9,17 @@
  * Responsibilities:
  *   - Render the question label and helper text
  *   - Delegate answer rendering to `AnswerInput` (from `inputs/`)
+ *   - Auto-advance on single-select answers (radio, paired, segmented, scale)
  *   - Manage nuance (note) disclosure
  *   - Manage per-question visibility controls
  *   - Handle sensitive skip actions
  *   - Render navigation (back / skip / continue)
- *
- * Answer input components live in `inputs/` — this file does not
- * contain any input rendering logic.
  */
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { Eye, EyeSlash, LockKey } from "@phosphor-icons/react";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { answerValueIsPresent, getSensitiveSkipAction } from "../lib/answerUiPolicy";
+import { answerValueIsPresent, getAnswerComponentForQuestion, getSensitiveSkipAction } from "../lib/answerUiPolicy";
 import type { Question, Visibility } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
@@ -30,6 +28,15 @@ import type { AnswerValue } from "./inputs";
 
 // Re-export AnswerInput for consumers that imported it from QuestionStep
 export { AnswerInput } from "./inputs";
+
+/** Single-select components that should auto-advance after choosing. */
+const AUTO_ADVANCE_COMPONENTS = new Set([
+  "radioCards",
+  "pairedChoice",
+  "segmentedTriState",
+  "labeledScale",
+  "nativeSelect",
+]);
 
 interface QuestionStepProps {
   question: Question;
@@ -64,6 +71,7 @@ export function QuestionStep({
   const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
   const [isVisibilityHelpOpen, setIsVisibilityHelpOpen] = useState(false);
   const noteRef = useRef<HTMLTextAreaElement>(null);
+  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout>>(null);
   const questionLabelId = `question-${question.id}-label`;
   const helperTextId = question.helperText ? `question-${question.id}-helper` : undefined;
   const visibilityDescriptionId = `question-${question.id}-visibility-description`;
@@ -71,9 +79,29 @@ export function QuestionStep({
   const hasNote = note.trim().length > 0;
   const showAnswerDetails = hasAnswer || hasNote;
 
+  const component = getAnswerComponentForQuestion(question);
+  const shouldAutoAdvance = AUTO_ADVANCE_COMPONENTS.has(component);
+  const needsExplicitContinue = !shouldAutoAdvance;
+
+  // Clean up auto-advance timer on unmount
+  useEffect(() => {
+    return () => {
+      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
+    };
+  }, []);
+
   useEffect(() => {
     if (note.trim().length > 0) setIsNuanceOpen(true);
   }, [note]);
+
+  const handleChange = useCallback((val: string | string[] | number) => {
+    onChange(val);
+    if (shouldAutoAdvance) {
+      // Brief delay so the user sees their selection highlight
+      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
+      autoAdvanceTimer.current = setTimeout(() => onNext(), 350);
+    }
+  }, [onChange, shouldAutoAdvance, onNext]);
 
   const revealNuance = () => {
     setIsNuanceOpen(true);
@@ -81,6 +109,7 @@ export function QuestionStep({
   };
 
   const handleSensitiveSkip = (reason: "doesNotFit" | "notReady") => {
+    if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
     const action = getSensitiveSkipAction(reason);
     if (action.shouldClearAnswer) {
       onClear();
@@ -91,8 +120,8 @@ export function QuestionStep({
   };
 
   return (
-    <div className="space-y-6 md:space-y-7">
-      <div className="space-y-4">
+    <div className="space-y-5 md:space-y-6">
+      <div className="space-y-3">
         <h2 id={questionLabelId} className="type-question-builder text-ankahe-text">
           {question.label}
         </h2>
@@ -103,31 +132,31 @@ export function QuestionStep({
         )}
       </div>
 
-      <div className="py-2">
-        <AnswerInput
-          question={question}
-          value={value}
-          onChange={onChange}
-          labelledBy={questionLabelId}
-          describedBy={helperTextId}
-        />
-      </div>
-
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <button
           type="button"
           onClick={() => handleSensitiveSkip("doesNotFit")}
-          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
           None of these fit
         </button>
         <button
           type="button"
           onClick={() => handleSensitiveSkip("notReady")}
-          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
-          I am not ready to answer this
+          Not ready to answer this
         </button>
+      </div>
+
+      <div className="py-1">
+        <AnswerInput
+          question={question}
+          value={value}
+          onChange={handleChange}
+          labelledBy={questionLabelId}
+          describedBy={helperTextId}
+        />
       </div>
 
       {!showAnswerDetails && (
@@ -137,13 +166,13 @@ export function QuestionStep({
       )}
 
       {showAnswerDetails && (
-        <div className="space-y-5">
+        <div className="space-y-4">
           <div className="space-y-3">
             {!isNuanceOpen ? (
               <button
                 type="button"
                 onClick={revealNuance}
-                className="type-ui-label min-h-11 px-1 py-2 text-ankahe-accent underline-offset-4 transition-colors hover:text-ankahe-accent-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label min-h-11 px-1 py-2 text-ankahe-accent transition-colors hover:text-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
               >
                 Add nuance
               </button>
@@ -173,7 +202,7 @@ export function QuestionStep({
               <button
                 type="button"
                 onClick={() => setIsVisibilityOpen((isOpen) => !isOpen)}
-                className="type-caption min-h-11 px-1 py-2 font-semibold text-ankahe-accent underline-offset-4 transition-colors hover:text-ankahe-accent-dark hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-caption min-h-11 px-1 py-2 font-semibold text-ankahe-accent transition-colors hover:text-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
                 aria-expanded={isVisibilityOpen}
                 aria-controls={`${question.id}-visibility-panel`}
               >
@@ -192,7 +221,7 @@ export function QuestionStep({
                 <button
                   type="button"
                   onClick={() => setIsVisibilityHelpOpen((isOpen) => !isOpen)}
-                  className="type-caption min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                  className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
                   aria-expanded={isVisibilityHelpOpen}
                   aria-controls={visibilityDescriptionId}
                 >
@@ -209,12 +238,12 @@ export function QuestionStep({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-3 md:pt-5">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2 md:pt-4">
         {!isFirst && (
           <button
             type="button"
             onClick={onBack}
-            className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+            className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
           >
             Back
           </button>
@@ -222,18 +251,20 @@ export function QuestionStep({
         <button
           type="button"
           onClick={onNext}
-          className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted underline-offset-4 transition-colors hover:text-ankahe-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
         >
-          Skip this question
+          Skip
         </button>
-        <SoftButton
-          className="ml-auto min-w-36"
-          onClick={onNext}
-          disabled={!hasAnswer}
-          variant="primary"
-        >
-          {isLast ? "Review Manual" : "Continue"}
-        </SoftButton>
+        {needsExplicitContinue && (
+          <SoftButton
+            className="ml-auto min-w-36"
+            onClick={onNext}
+            disabled={!hasAnswer}
+            variant="primary"
+          >
+            {isLast ? "Review Manual" : "Continue"}
+          </SoftButton>
+        )}
       </div>
     </div>
   );
