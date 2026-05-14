@@ -358,6 +358,7 @@
   .type-mixed-heading {
     font-family: var(--font-display);
     font-size: clamp(3.25rem, 8vw, 4rem);
+    font-style: italic;
     font-weight: 400;
     line-height: 1.05;
     letter-spacing: 0;
@@ -367,13 +368,6 @@
 
   .type-mixed-heading-page {
     font-size: 3rem;
-  }
-
-  .type-mixed-heading-emphasis {
-    color: var(--color-ankahe-heading);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
   }
 
   .type-display {

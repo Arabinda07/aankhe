@@ -94,10 +94,10 @@ export function Switchboard({
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading text-ankahe-heading lg:max-w-xl">
-              Everything <span className="type-mixed-heading-emphasis">before you ask</span>
+              Your Story Always Ready
             </h1>
             <p className="type-lead max-w-lg text-ankahe-muted">
-              Explaining your whole deal to new people gets old. Write the honest version first, keep the private parts local, then send the sealed copy.
+              Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
             </p>
           </div>
 

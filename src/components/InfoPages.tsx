@@ -10,7 +10,7 @@ export function PrivacyPage() {
   return (
     <InfoShell
       eyebrow="Privacy"
-      titleLines={{ main: "Nothing leaves", emphasis: "until you say so" }}
+      title="Nothing leaves until you say so"
       lead="No accounts. No database. Your tab is the room. You decide what stays and what goes."
     >
       <div className="grid gap-6 md:grid-cols-2">
@@ -22,9 +22,9 @@ export function PrivacyPage() {
         </InfoCard>
       </div>
 
-      <section className="rounded-lg bg-ankahe-surface/45 px-8 py-12">
+      <section className="px-2 py-12 md:px-8">
         <h2 className="type-artifact-heading text-ankahe-heading">What can leave the page</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-8 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
           </VisibilityRule>
@@ -70,17 +70,17 @@ export function HowItWorksPage() {
   return (
     <InfoShell
       eyebrow="Why & How"
-      titleLines={{ main: "Why are we", emphasis: "doing this?" }}
+      title="Why are we doing this?"
       lead="Repeating yourself is exhausting. Ankahe keeps the messy draft private and the finished version shareable."
     >
-      <div>
+      <div className="divide-y divide-ankahe-border/60">
         {items.map((item, index) => (
           <section
             key={item.title}
-            className="grid gap-5 py-10 md:grid-cols-[5rem_1fr] md:items-start md:py-12"
+            className="grid gap-6 py-12 md:grid-cols-[7rem_minmax(0,1fr)] md:items-start md:py-16"
           >
-            <span className="type-meta text-ankahe-muted">{String(index + 1).padStart(2, "0")}</span>
-            <div className="space-y-2">
+            <span className="type-meta text-ankahe-muted md:pt-2">{String(index + 1).padStart(2, "0")}</span>
+            <div className="max-w-3xl space-y-3">
               <h2 className="type-artifact-heading text-ankahe-heading">{item.title}</h2>
               <p className="type-lead whitespace-pre-wrap text-ankahe-muted">{item.text}</p>
             </div>
@@ -94,16 +94,11 @@ export function HowItWorksPage() {
 function InfoShell({
   eyebrow,
   title,
-  titleLines,
   lead,
   children,
 }: {
   eyebrow: string;
-  title?: string;
-  titleLines?: {
-    main: string;
-    emphasis: string;
-  };
+  title: string;
   lead: string;
   children: React.ReactNode;
 }) {
@@ -112,13 +107,7 @@ function InfoShell({
       <section className="mx-auto max-w-5xl px-6 py-24 md:py-32 lg:py-40">
         <div className="mb-12 max-w-3xl space-y-5">
           <p className="type-eyebrow text-ankahe-sandal">{eyebrow}</p>
-          {titleLines ? (
-            <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-heading">
-              {titleLines.main} <span className="type-mixed-heading-emphasis">{titleLines.emphasis}</span>
-            </h1>
-          ) : (
-            <h1 className="type-display text-ankahe-heading">{title}</h1>
-          )}
+          <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-heading">{title}</h1>
           <p className="type-lead text-ankahe-muted">{lead}</p>
         </div>
         <div className="space-y-10">{children}</div>
@@ -137,7 +126,7 @@ function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg bg-ankahe-surface px-8 py-10 shadow-sm">
+    <section className="px-2 py-6 md:px-0 md:py-8">
       <div className="mb-6 text-ankahe-muted">{icon}</div>
       <h2 className="type-artifact-heading text-ankahe-heading">{title}</h2>
       <p className="type-lead mt-4 text-ankahe-muted">{children}</p>
@@ -155,7 +144,7 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-md bg-ankahe-surface/60 px-6 py-6 transition-colors hover:bg-ankahe-surface">
+    <div className="py-2">
       <div className="mb-4 text-ankahe-muted">{icon}</div>
       <h3 className="type-panel-title text-ankahe-heading">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>

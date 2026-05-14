@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { cn } from "../lib/utils";
 import { AnkaheMark } from "./AnkaheMark";
 
 const ThemeSwitcher = lazy(() =>
@@ -21,18 +22,18 @@ export function SiteHeader() {
         </Link>
         <div className="flex items-center gap-2 sm:gap-4">
           <nav className="type-ui-label flex items-center gap-2 sm:gap-3 text-ankahe-muted">
-            <Link
+            <NavLink
               to="/how-it-works"
-              className="hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              className={infoNavClassName}
             >
               FAQ
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/privacy"
-              className="hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              className={infoNavClassName}
             >
               Privacy
-            </Link>
+            </NavLink>
             <div className="hidden sm:block w-px h-4 bg-ankahe-border mx-1" aria-hidden="true" />
             <Link
               to="/manual/me"
@@ -75,5 +76,12 @@ function ThemeSwitcherFallback() {
       aria-hidden="true"
       className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ankahe-border bg-ankahe-control"
     />
+  );
+}
+
+function infoNavClassName({ isActive }: { isActive: boolean }) {
+  return cn(
+    "hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+    isActive ? "text-ankahe-text underline decoration-ankahe-accent/45 underline-offset-8" : "text-ankahe-muted"
   );
 }

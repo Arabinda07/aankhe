@@ -76,7 +76,7 @@ function AppContent() {
             <Route
               path="/privacy"
               element={
-                <Suspense fallback={<RouteFallback label="Preparing privacy note" />}>
+                <Suspense fallback={<RouteFallback label="Preparing your page" />}>
                   <PrivacyPage />
                 </Suspense>
               }
@@ -84,7 +84,7 @@ function AppContent() {
             <Route
               path="/how-it-works"
               element={
-                <Suspense fallback={<RouteFallback label="Preparing FAQ" />}>
+                <Suspense fallback={<RouteFallback label="Preparing your page" />}>
                   <HowItWorksPage />
                 </Suspense>
               }
@@ -92,7 +92,7 @@ function AppContent() {
             <Route
               path="/manual/:mode"
               element={
-                <Suspense fallback={<RouteFallback label="Preparing manual" />}>
+                <Suspense fallback={<RouteFallback label="Preparing your manual" />}>
                   <ManualBuilder
                     onBack={() => navigate("/")}
                   />
@@ -110,7 +110,7 @@ function AppContent() {
 function RouteFallback({ label }: { label: string }) {
   return (
     <div className="min-h-[calc(100dvh-8rem)] bg-ankahe-bg px-6 py-16 text-center">
-      <p className="type-meta text-ankahe-muted">{label}</p>
+      <p className="type-caption text-ankahe-muted">{label}</p>
     </div>
   );
 }
