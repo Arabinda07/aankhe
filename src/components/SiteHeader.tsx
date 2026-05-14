@@ -5,7 +5,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 export function SiteHeader() {
   return (
     <div className="sticky top-6 z-50 px-4 flex justify-center pointer-events-none">
-      <header className="pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-ankahe-border/50 bg-ankahe-bg/80 px-4 sm:px-6 h-14 backdrop-blur-2xl shadow-sm">
+      <header className="pointer-events-auto flex items-center justify-between gap-4 rounded-md border border-ankahe-border bg-ankahe-surface px-4 sm:px-6 h-14 shadow-sm">
         <Link 
           to="/" 
           className="min-h-11 inline-flex items-center pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"

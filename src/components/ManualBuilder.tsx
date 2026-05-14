@@ -54,7 +54,7 @@ export function ManualBuilder({
     <div className="w-full font-sans transition-colors duration-700 bg-ankahe-bg text-ankahe-text relative">
       {/* Top Nav */}
       <div className="sticky top-6 z-40 px-4 flex justify-center pointer-events-none">
-        <nav aria-label="Manual builder" className="pointer-events-auto flex items-center justify-between gap-6 rounded-full border border-ankahe-border/50 bg-ankahe-bg/80 px-4 sm:px-6 h-14 backdrop-blur-2xl shadow-sm">
+        <nav aria-label="Manual builder" className="pointer-events-auto flex items-center justify-between gap-6 rounded-md border border-ankahe-border bg-ankahe-surface px-4 sm:px-6 h-14 shadow-sm">
           <button
             onClick={onBack}
             className="type-ui-label min-h-11 flex items-center justify-center gap-2 px-2 text-ankahe-muted hover:text-ankahe-text transition-colors"

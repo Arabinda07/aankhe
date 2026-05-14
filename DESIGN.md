@@ -129,6 +129,7 @@ Use Tailwind's 4px-based spacing scale. Preferred repeatable values:
 - **Panel padding:** `p-4`, `p-5`, `p-6`, `p-8`.
 - **Artifact padding:** `p-8 md:p-14 lg:p-16` for document canvas; `p-7 md:p-9` or `p-8 md:p-12` for artifact callouts.
 - **Major vertical rhythm:** `space-y-8`, `space-y-12`, `space-y-16`, `space-y-20`.
+- **Macro-whitespace:** `py-24`, `py-32`, `py-40` for major section pacing to enforce an unhurried, editorial reading rhythm.
 - **Control gaps:** `gap-2`, `gap-3`, `gap-4`.
 - **Grid gaps:** `gap-3` for choices, `gap-8 md:gap-16` for artifact sections, `gap-12` for main two-column layouts.
 
@@ -150,7 +151,8 @@ Ankahe uses modest rectangular geometry. The design may be soft, but it must not
 - **`rounded-md` (6px):** primary buttons, icon buttons, brand tile, document shell, small menus.
 - **`rounded-lg` (8px):** main setup panels and major app panels.
 - **`rounded-xl` (12px):** preview frames only, where a larger enclosing shell needs visible separation.
-- **Avoid:** `rounded-full` and pill buttons. Use only if a future component has a proven non-brand reason.
+- **Double-Bezel Architecture:** when creating deep, nested panels (like the ManualPreview shell), use calculated concentric radii: `rounded-[2rem]` for the outer shell and `rounded-[calc(2rem-0.75rem)]` for the inner core. 
+- **Avoid:** `rounded-full` and pill buttons. Use only if a future component has a proven non-brand reason (e.g., standard avatars). Never use pill buttons for navigation or primary actions.
 
 ### Borders
 
@@ -165,6 +167,7 @@ Ankahe uses modest rectangular geometry. The design may be soft, but it must not
   - `shadow-sm` for selected segmented buttons and small raised controls.
   - Lac-tinted soft shadow for primary buttons or artifact frames only.
   - Menu shadow may use a low-opacity tokenized text or accent color.
+  - **Optical Inner Highlights:** use `shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]` (tuned for dark mode) or similar subtle insets on Double-Bezel inner cores to create a machined, physical hardware feel.
 - Avoid heavy drop shadows, glass cards, blurred panels, neon glows, or dramatic depth.
 
 ## 6. Component Stylings
@@ -315,12 +318,11 @@ Motion should clarify state and make the interface feel responsive. It should ne
 
 - **Small interactions:** 150-250ms.
 - **Screen transitions:** 300-500ms only when the change benefits orientation.
-- **Default easing:** `var(--ease-out-expo)` or restrained spring settings already used in Motion components.
+- **Default easing:** `var(--ease-out-expo)` for standard transitions. Use a cinematic `cubic-bezier(0.32,0.72,0,1)` for heavy, staggered entry cascades (like `ankahe-enter`).
 - **Allowed animation properties:** transform and opacity.
 - **Avoid:** animating width, height, top, left, or expensive layout properties.
 - **Reduced motion:** respect `prefers-reduced-motion`; animations collapse to near-zero duration.
-- **Hover:** color, border, subtle lift, or selected surface changes.
-- **Tap:** small scale feedback is acceptable for buttons.
+- **Hover & Tap (CSS Pseudo-Physics):** use pure CSS pseudo-physics to simulate physical weight and internal tension. Apply `active:scale-[0.98]` on buttons/cards and `group-hover:translate-x-1` on internal icons. Do NOT use heavy JavaScript spring libraries (e.g., framer-motion) for simple hover physics.
 
 No bouncing chevrons, scroll hints, decorative loops, confetti, gamified progress, or perpetual attention-grabbing motion.
 
