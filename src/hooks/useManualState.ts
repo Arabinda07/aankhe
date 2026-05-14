@@ -4,7 +4,18 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { ComposedManual, ManualState, ModeConfig, ModeId, Question, StorageMode, Visibility } from "../lib/schemaTypes";
+import {
+  ArtifactFormat,
+  ComposedManual,
+  ManualState,
+  ModeConfig,
+  ModeId,
+  OnboardingContext,
+  Question,
+  StorageMode,
+  TonePreference,
+  Visibility,
+} from "../lib/schemaTypes";
 import { PROTOCOL_MANIFEST } from "../lib/protocolManifest";
 import { composeManual as buildComposedManual, ManualComposeOptions } from "../lib/manualComposer";
 import { createVisibilityPolicy, VisibilityCounts } from "../lib/visibilityPolicy";
@@ -18,12 +29,16 @@ export interface ManualWorkspace {
   config: ModeConfig;
   visibilityCounts: VisibilityCounts;
   getAnswer: (questionId: string) => ManualAnswer | undefined;
+  getAnswerNote: (questionId: string) => string;
   getVisibility: (question: Question) => Visibility;
   composeManual: (options?: ManualComposeOptions) => ComposedManual;
   getShareUrl: () => string;
   activate: () => void;
   updateAnswer: (questionId: string, value: ManualAnswer) => void;
+  updateAnswerNote: (questionId: string, note: string) => void;
   updateVisibility: (questionId: string, visibility: Visibility) => void;
+  updateArtifactFormat: (format: ArtifactFormat) => void;
+  updateTone: (tone: TonePreference) => void;
   setStorageMode: (storageMode: StorageMode) => void;
 }
 
@@ -31,14 +46,17 @@ function createDefaultState(mode: ModeId = "me", storageMode: StorageMode = "mem
   return {
     mode,
     answers: {},
+    answerNotes: {},
     visibilityByQuestion: {},
     storageMode,
+    artifactFormat: "full",
+    tone: "default",
     updatedAt: new Date().toISOString()
   };
 }
 
-function isSupportedManualMode(mode: string | undefined): mode is "me" | "work" {
-  return mode === "me" || mode === "work";
+function isSupportedManualMode(mode: string | undefined): mode is ModeId {
+  return mode === "me" || mode === "work" || mode === "talk" || mode === "us";
 }
 
 export function useManualState() {
@@ -71,12 +89,16 @@ export function useManualState() {
     }
   }, [state, isInitialized]);
 
-  const setMode = useCallback((mode: ModeId) => {
+  const setMode = useCallback((mode: ModeId, onboarding?: OnboardingContext) => {
     setState(prev => ({
       ...prev,
       mode,
       answers: {}, // Clear answers when switching major modes
+      answerNotes: {},
       visibilityByQuestion: {},
+      onboarding,
+      artifactFormat: defaultArtifactFormat(onboarding),
+      tone: "default",
       updatedAt: new Date().toISOString()
     }));
   }, []);
@@ -85,6 +107,14 @@ export function useManualState() {
     setState(prev => ({
       ...prev,
       answers: { ...prev.answers, [questionId]: value },
+      updatedAt: new Date().toISOString()
+    }));
+  }, []);
+
+  const updateAnswerNote = useCallback((questionId: string, note: string) => {
+    setState(prev => ({
+      ...prev,
+      answerNotes: { ...(prev.answerNotes || {}), [questionId]: note },
       updatedAt: new Date().toISOString()
     }));
   }, []);
@@ -99,6 +129,14 @@ export function useManualState() {
 
   const setStorageMode = useCallback((storageMode: StorageMode) => {
     setState(prev => ({ ...prev, storageMode, updatedAt: new Date().toISOString() }));
+  }, []);
+
+  const updateArtifactFormat = useCallback((artifactFormat: ArtifactFormat) => {
+    setState(prev => ({ ...prev, artifactFormat, updatedAt: new Date().toISOString() }));
+  }, []);
+
+  const updateTone = useCallback((tone: TonePreference) => {
+    setState(prev => ({ ...prev, tone, updatedAt: new Date().toISOString() }));
   }, []);
 
   const resetState = useCallback((newState?: ManualState) => {
@@ -126,6 +164,7 @@ export function useManualState() {
       config,
       visibilityCounts: visibilityPolicy.getCounts(),
       getAnswer: (questionId) => workingState.answers[questionId],
+      getAnswerNote: (questionId) => workingState.answerNotes?.[questionId] || "",
       getVisibility: visibilityPolicy.visibilityFor,
       composeManual: (options) => buildComposedManual(workingState, options),
       getShareUrl: () => generateSharedUrl(workingState),
@@ -135,10 +174,13 @@ export function useManualState() {
         }
       },
       updateAnswer,
+      updateAnswerNote,
       updateVisibility,
+      updateArtifactFormat,
+      updateTone,
       setStorageMode,
     };
-  }, [setMode, setStorageMode, state, updateAnswer, updateVisibility]);
+  }, [setMode, setStorageMode, state, updateAnswer, updateAnswerNote, updateArtifactFormat, updateTone, updateVisibility]);
 
   return {
     storageMode: state.storageMode,
@@ -150,4 +192,14 @@ export function useManualState() {
     resetState,
     getManualForRoute
   };
+}
+
+function defaultArtifactFormat(onboarding?: OnboardingContext): ArtifactFormat {
+  if (!onboarding) return "full";
+  if (onboarding.depth === "note") return "note";
+  if (onboarding.recipient.includes("work") || onboarding.recipient.includes("manager") || onboarding.recipient.includes("teammate")) {
+    return "work";
+  }
+
+  return "full";
 }

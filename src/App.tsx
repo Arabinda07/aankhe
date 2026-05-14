@@ -6,7 +6,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Switchboard } from './components/Switchboard';
-import { ModeId } from './lib/schemaTypes';
+import { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { useManualState } from './hooks/useManualState';
 import { SiteHeader } from './components/SiteHeader';
 import { SiteFooter } from './components/SiteFooter';
@@ -37,8 +37,8 @@ function AppContent() {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
-  const handleStart = (mode: ModeId) => {
-    setMode(mode);
+  const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
+    setMode(mode, onboarding);
     navigate(`/manual/${mode}`);
   };
 

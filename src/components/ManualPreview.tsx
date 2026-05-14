@@ -15,7 +15,7 @@ interface ManualPreviewProps {
 
 export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
   return (
-    <div data-mode={mode} className={cn("bg-ankahe-paper md:rounded-sm md:border md:border-ankahe-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
+    <div data-mode={mode} className={cn("manual-preview-shell bg-ankahe-paper md:rounded-sm md:border md:border-ankahe-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
       <div className="max-w-3xl mx-auto space-y-16">
         {/* Header */}
         <div className="space-y-6 border-b border-ankahe-paper-border pb-12 text-center">
@@ -25,15 +25,39 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           <h1 className={cn("type-artifact-title text-ankahe-accent-dark")}>
             {manual.title}
           </h1>
+          <div className="type-meta flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-ankahe-muted">
+            <span>For {manual.audience}</span>
+            <span>{new Date().toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}</span>
+          </div>
         </div>
+
+        <section className="rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-7 md:p-9">
+          <h2 className="type-meta mb-4 text-center text-ankahe-muted">How to read this</h2>
+          <p className="type-artifact-prose text-center text-ankahe-text">
+            {manual.recipientNote}
+          </p>
+        </section>
 
         {/* At a Glance */}
         {manual.atAGlance && (
           <section className="bg-ankahe-paper-muted p-8 md:p-12 rounded-sm border border-ankahe-paper-border">
             <h2 className="type-meta text-ankahe-muted mb-4 text-center">At a Glance</h2>
             <p className="type-artifact-prose text-center italic text-ankahe-accent-dark">
-              "{manual.atAGlance}"
+              {manual.atAGlance}
             </p>
+          </section>
+        )}
+
+        {manual.recognitionSummaries.length > 1 && (
+          <section className="space-y-4">
+            <h2 className="type-artifact-heading text-ankahe-accent-dark">What this is noticing</h2>
+            <div className="space-y-4">
+              {manual.recognitionSummaries.slice(1, 3).map((summary) => (
+                <p key={summary} className="type-artifact-prose text-ankahe-text">
+                  {summary}
+                </p>
+              ))}
+            </div>
           </section>
         )}
 

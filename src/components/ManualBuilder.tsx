@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ManualWorkspace } from '../hooks/useManualState';
 import type { ModeId } from '../lib/schemaTypes';
@@ -37,6 +37,10 @@ export function ManualBuilder({
   useEffect(() => {
     manual?.activate();
   }, [manualMode]);
+
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [view]);
 
   if (!manual || !composed) {
     return <Navigate to="/" />;
@@ -98,9 +102,12 @@ export function ManualBuilder({
                 <FormRenderer
                   config={manual.config}
                   getAnswer={manual.getAnswer}
+                  getAnswerNote={manual.getAnswerNote}
                   getVisibility={manual.getVisibility}
                   updateAnswer={manual.updateAnswer}
+                  updateAnswerNote={manual.updateAnswerNote}
                   updateVisibility={manual.updateVisibility}
+                  recognitionSummaries={composed.recognitionSummaries}
                   onFinish={() => setView("artifact")}
                 />
               </div>

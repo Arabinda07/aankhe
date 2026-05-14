@@ -12,6 +12,8 @@ interface QuestionStepProps {
   question: Question;
   value: any;
   onChange: (val: any) => void;
+  note: string;
+  onNoteChange: (note: string) => void;
   visibility: Visibility;
   onVisibilityChange: (vis: Visibility) => void;
   onNext: () => void;
@@ -24,6 +26,8 @@ export function QuestionStep({
   question,
   value,
   onChange,
+  note,
+  onNoteChange,
   visibility,
   onVisibilityChange,
   onNext,
@@ -80,6 +84,20 @@ export function QuestionStep({
           placeholder={question.helperText}
           labelledBy={questionLabelId}
           describedBy={helperTextId}
+        />
+      </div>
+
+      <div className="space-y-3 rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-5">
+        <label htmlFor={`${question.id}-note`} className="type-ui-label block text-ankahe-text">
+          Want to make this more yours?
+        </label>
+        <textarea
+          id={`${question.id}-note`}
+          value={note}
+          onChange={(event) => onNoteChange(event.target.value)}
+          rows={3}
+          placeholder="Add an optional sentence in your own words."
+          className="type-body w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-4 text-ankahe-text placeholder:text-ankahe-muted/60 transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
         />
       </div>
 
@@ -172,7 +190,7 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
 
   if (type === "multiSelect") {
     return (
-      <div className="flex flex-wrap gap-3" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
+      <div className="grid gap-3 sm:grid-cols-2" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
         {options.map((opt: string) => {
           const isSelected = Array.isArray(value) ? value.includes(opt) : value === opt;
           return (
@@ -189,10 +207,10 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
                 onChange(nextVal);
               }}
               className={cn(
-                "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                "min-h-20 px-5 py-4 rounded-sm text-left text-base font-semibold leading-snug transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                 isSelected 
-                  ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
-                  : "bg-ankahe-control border-ankahe-border text-ankahe-text hover:bg-ankahe-control-hover hover:border-ankahe-accent/50"
+                  ? "bg-ankahe-accent-soft text-ankahe-accent-dark border-ankahe-accent" 
+                  : "bg-ankahe-paper border-ankahe-paper-border text-ankahe-text hover:bg-ankahe-paper-muted hover:border-ankahe-border-strong"
               )}
             >
               {opt}
@@ -205,17 +223,17 @@ function InputComponent({ type, options, min, max, value, onChange, placeholder,
 
   if (type === "select") {
     return (
-      <div className="flex flex-wrap gap-3" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
+      <div className="grid gap-3 sm:grid-cols-2" role="group" aria-labelledby={labelledBy} aria-describedby={describedBy}>
         {options.map((opt: string) => (
           <button
             key={opt}
             onClick={() => onChange(opt)}
             aria-pressed={value === opt}
             className={cn(
-              "min-h-11 px-6 py-3 rounded-sm text-base font-semibold leading-snug transition-all border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+              "min-h-20 px-5 py-4 rounded-sm text-left text-base font-semibold leading-snug transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
               value === opt 
-                ? "bg-ankahe-accent text-ankahe-on-accent border-ankahe-accent" 
-                : "bg-ankahe-control border-ankahe-border text-ankahe-text hover:bg-ankahe-control-hover hover:border-ankahe-accent/50"
+                ? "bg-ankahe-accent-soft text-ankahe-accent-dark border-ankahe-accent" 
+                : "bg-ankahe-paper border-ankahe-paper-border text-ankahe-text hover:bg-ankahe-paper-muted hover:border-ankahe-border-strong"
             )}
           >
             {opt}

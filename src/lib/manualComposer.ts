@@ -3,7 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ComposedManual, ComposedSection, ManualState } from "./schemaTypes";
+import {
+  ArtifactFormat,
+  ComposedManual,
+  ComposedSection,
+  ManualState,
+  ModeId,
+  Question,
+  TonePreference,
+} from "./schemaTypes";
 import { PROTOCOL_MANIFEST } from "./protocolManifest";
 import { createVisibilityPolicy } from "./visibilityPolicy";
 import type { ManualViewMode } from "./visibilityPolicy";
@@ -20,14 +28,18 @@ export function composeManual(
   const { viewMode = "private", excludedSections = [] } = options;
   const config = PROTOCOL_MANIFEST[state.mode];
   const answers = state.answers;
+  const answerNotes = state.answerNotes || {};
+  const artifactFormat = state.artifactFormat || "full";
+  const tone = state.tone || "default";
   const visibilityPolicy = createVisibilityPolicy(state);
 
   const answeredQuestions = Object.keys(answers);
   const visibilityCounts = visibilityPolicy.getCounts();
 
-  // Manual generation logic
+  const sectionLimit = getFormatSectionLimit(artifactFormat);
   const composedSections: ComposedSection[] = config.sections
     .filter(section => !excludedSections.includes(section.id))
+    .slice(0, sectionLimit)
     .map(section => {
       const sectionQuestions = config.questions.filter(q => q.sectionId === section.id);
       const sectionAnswers = sectionQuestions.filter(q => !!answers[q.id]);
@@ -38,26 +50,20 @@ export function composeManual(
         const val = answers[q.id];
         if (!visibilityPolicy.canAppearInManual(q, viewMode)) return;
 
-        let formattedAnswer = "";
-        if (Array.isArray(val)) {
-          if (val.length === 1) formattedAnswer = val[0];
-          else if (val.length === 2) formattedAnswer = val.join(" and ");
-          else if (val.length > 2) formattedAnswer = val.slice(0, -1).join(", ") + ", and " + val[val.length - 1];
-        } else {
-          formattedAnswer = String(val);
-        }
+        let formattedAnswer = formatAnswer(val);
         
         if (q.manualTemplate) {
-          // ensure lowercase formatting for some things if we want, but letting the user's string fall through is better.
-          // if it's multiple choice, let's lowercase it so it fits into middle of sentences?
-          // Actually, our templates: "When I am overwhelmed, it helps if you offer {answer}."
-          // If the option is "Being listened to", we lowercase it: "being listened to".
           if (["select", "multiSelect", "yesNoMaybe", "pairedChoice"].includes(q.type)) {
             formattedAnswer = formattedAnswer.toLowerCase();
           }
-          details.push(q.manualTemplate.replace("{answer}", formattedAnswer));
+          details.push(applyTone(q.manualTemplate.replace("{answer}", formattedAnswer), tone, q));
         } else {
-          details.push(`${q.label} ${formattedAnswer}`);
+          details.push(applyTone(`${q.label} ${formattedAnswer}`, tone, q));
+        }
+
+        const note = answerNotes[q.id]?.trim();
+        if (note) {
+          details.push(applyTone(`In my words: ${note}`, tone, q));
         }
       });
 
@@ -69,28 +75,142 @@ export function composeManual(
       };
     }).filter(s => s.details.length > 0);
 
-  // Determine "At a Glance" - a bit hard without AI, but we use a template
-  let atAGlance = "Your manual will start taking shape as you answer a few more questions.";
+  const recognitionSummaries = buildRecognitionSummaries(state, viewMode);
+  let atAGlance = recognitionSummaries[0] || "Your manual will start taking shape as you answer a few more questions.";
   if (answeredQuestions.length > 3) {
-    if (state.mode === "me") {
-      const name = answers["M_01"];
-      if (name) {
-        atAGlance = `${name} connects best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with ${name}.`;
-      } else {
-        atAGlance = `I connect best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with me.`;
-      }
-    } else {
-      atAGlance = "I do my best work when expectations are clear and communication is transparent. This guide outlines my professional rhythm, focus needs, and feedback preferences.";
-    }
+    atAGlance = recognitionSummaries[0] || defaultAtAGlance(state.mode, answers);
   }
 
   return {
     id: `manual-${Date.now()}`,
     mode: state.mode,
-    title: config.name,
+    title: titleForFormat(config.name, artifactFormat),
     subtitle: config.label,
+    audience: state.onboarding?.recipient || defaultAudience(state.mode),
+    artifactFormat,
+    tone,
+    recipientNote: buildRecipientNote(artifactFormat),
     atAGlance,
+    recognitionSummaries,
     sections: composedSections,
     ...visibilityCounts
   };
+}
+
+function formatAnswer(value: ManualState["answers"][string]): string {
+  if (Array.isArray(value)) {
+    if (value.length === 1) return value[0];
+    if (value.length === 2) return value.join(" and ");
+    if (value.length > 2) return `${value.slice(0, -1).join(", ")}, and ${value[value.length - 1]}`;
+    return "";
+  }
+
+  return String(value);
+}
+
+function defaultAudience(mode: ModeId): string {
+  if (mode === "work") return "someone I work with";
+  if (mode === "talk") return "someone I need to talk to";
+  if (mode === "us") return "someone close to me";
+  return "someone who wants to understand me";
+}
+
+function titleForFormat(baseTitle: string, format: ArtifactFormat): string {
+  if (format === "onePage") return "One-page manual";
+  if (format === "note") return "Conversation note";
+  if (format === "conversation") return "Conversation brief";
+  if (format === "work") return "Work version";
+  if (format === "private") return "Private copy";
+  return baseTitle;
+}
+
+function buildRecipientNote(format: ArtifactFormat): string {
+  if (format === "note" || format === "conversation") {
+    return "This is not a demand or a diagnosis. It is context for a conversation with more care and less guessing.";
+  }
+
+  if (format === "work") {
+    return "This is not a performance profile. It is context for working with me clearly and respectfully.";
+  }
+
+  return "This is not a demand or a diagnosis. It is context: a way to understand me with more care and less guessing.";
+}
+
+function getFormatSectionLimit(format: ArtifactFormat): number {
+  if (format === "note") return 2;
+  if (format === "onePage" || format === "conversation" || format === "work") return 3;
+  return Number.POSITIVE_INFINITY;
+}
+
+function defaultAtAGlance(mode: ModeId, answers: ManualState["answers"]): string {
+  if (mode === "me") {
+    const name = answers["M_01"];
+    if (name) {
+      return `${name} connects best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with ${name}.`;
+    }
+
+    return "I connect best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with me.";
+  }
+
+  if (mode === "work") {
+    return "I do my best work when expectations are clear and communication is transparent. This guide outlines my professional rhythm, focus needs, and feedback preferences.";
+  }
+
+  if (mode === "talk") {
+    return "I can have hard conversations more clearly when directness comes with enough room to respond carefully.";
+  }
+
+  return "We understand each other better when we make fewer assumptions and name the context underneath our reactions.";
+}
+
+function applyTone(text: string, tone: TonePreference, question: Question): string {
+  if (tone === "default") return text;
+  if (tone === "shorter") return shortenSentence(text);
+  if (tone === "professional") return `I value clarity and follow-through. ${text}`;
+  if (tone === "warmer") return `${text} A little warmth helps this land well.`;
+  if (tone === "direct") return text.replace(/^Please /, "").replace("I usually need", "I need");
+  if (tone === "softer" && question.defaultVisibility !== "share") {
+    return `It may help to know that ${lowercaseFirst(text)}`;
+  }
+
+  if (tone === "softer") return `It helps when ${lowercaseFirst(text)}`;
+  return text;
+}
+
+function lowercaseFirst(text: string): string {
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+function shortenSentence(text: string): string {
+  const sentence = text.split(".")[0]?.trim();
+  return sentence ? `${sentence}.` : text;
+}
+
+function buildRecognitionSummaries(state: ManualState, viewMode: ManualViewMode): string[] {
+  const config = PROTOCOL_MANIFEST[state.mode];
+  const visibilityPolicy = createVisibilityPolicy(state);
+  const visibleAnswers = config.questions
+    .filter((question) => state.answers[question.id] && visibilityPolicy.canAppearInManual(question, viewMode))
+    .map((question) => formatAnswer(state.answers[question.id]).toLowerCase());
+  const joined = visibleAnswers.join(" ");
+  const summaries: string[] = [];
+
+  if (state.onboarding?.misunderstanding) {
+    summaries.push(`So far, your manual is saying this is about ${state.onboarding.misunderstanding}, not a generic profile.`);
+  }
+
+  if (joined.includes("direct") && (joined.includes("time to think") || joined.includes("room to pause") || joined.includes("process"))) {
+    summaries.push("You seem to value direct communication, but you may need time before you can respond well. The manual should say both, so people do not mistake your pause for avoidance.");
+  } else if (joined.includes("space") || joined.includes("quiet")) {
+    summaries.push("You seem to do better when people leave room for your pace instead of filling the silence with guesses.");
+  } else if (joined.includes("context") || joined.includes("clear")) {
+    summaries.push("Your answers point toward a need for clear context before people expect a useful response.");
+  }
+
+  const firstSection = config.sections[0];
+  if (firstSection && visibleAnswers.length > 0) {
+    summaries.push(`In ${firstSection.title.toLowerCase()}, your answers are beginning to name what helps people understand you with less guessing.`);
+  }
+
+  return [...new Set(summaries)];
 }

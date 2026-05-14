@@ -40,6 +40,18 @@ export function SiteHeader() {
             >
               Work
             </Link>
+            <Link
+              to="/manual/talk"
+              className="hidden md:inline-flex min-h-11 min-w-11 items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+            >
+              Talk
+            </Link>
+            <Link
+              to="/manual/us"
+              className="hidden md:inline-flex min-h-11 min-w-11 items-center justify-center px-1 hover:text-ankahe-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+            >
+              Sync
+            </Link>
           </nav>
           <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
           <ThemeSwitcher />

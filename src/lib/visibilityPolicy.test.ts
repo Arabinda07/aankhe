@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { composeManual } from "./manualComposer.ts";
+import { PROTOCOL_MANIFEST } from "./protocolManifest.ts";
 import { decodeState, generateSharedUrl, writeStateToHash } from "./stateCompression.ts";
-import type { ManualState } from "./schemaTypes.ts";
+import type { ArtifactFormat, ManualState, ModeId } from "./schemaTypes.ts";
 
 const privateAnswer = "please do not share this";
 const omittedAnswer = "leave this out entirely";
@@ -108,4 +109,99 @@ test("private manual view includes private answers and still omits hidden answer
 
   assert.equal(manualText.includes(privateAnswer.toLowerCase()), true);
   assert.equal(manualText.includes(omittedAnswer), false);
+});
+
+test("all manual modes have protocol manifests", () => {
+  const modes: ModeId[] = ["me", "work", "talk", "us"];
+
+  for (const mode of modes) {
+    assert.ok(PROTOCOL_MANIFEST[mode], `expected ${mode} manifest`);
+    assert.ok(PROTOCOL_MANIFEST[mode].questions.length > 0, `expected ${mode} questions`);
+  }
+});
+
+test("share URL preserves safe onboarding and artifact preferences but strips private notes", () => {
+  installWindowStub();
+
+  const state = makeState();
+  state.onboarding = {
+    recipient: "partner",
+    misunderstanding: "how I handle conflict",
+    depth: "manual",
+  };
+  state.answerNotes = {
+    M_01: "They can see this note.",
+    M_07: "They must not see this private note.",
+  };
+  state.artifactFormat = "conversation";
+  state.tone = "warmer";
+
+  const sharedState = decodeHashFromUrl(generateSharedUrl(state));
+
+  assert.deepEqual(sharedState.onboarding, state.onboarding);
+  assert.equal(sharedState.artifactFormat, "conversation");
+  assert.equal(sharedState.tone, "warmer");
+  assert.deepEqual(sharedState.answerNotes, {
+    M_01: "They can see this note.",
+  });
+  assert.equal(JSON.stringify(sharedState).includes("private note"), false);
+});
+
+test("composer creates recognition summaries and handles directness with time to process", () => {
+  const state: ManualState = {
+    mode: "talk",
+    storageMode: "memory",
+    updatedAt: "2026-05-13T00:00:00.000Z",
+    onboarding: {
+      recipient: "someone I need to talk to",
+      misunderstanding: "how I handle conflict",
+      depth: "manual",
+    },
+    answers: {
+      T_01: "direct conversation",
+      T_02: "time to think",
+      T_03: "urgency",
+    },
+    visibilityByQuestion: {
+      T_01: "share",
+      T_02: "share",
+      T_03: "share",
+    },
+  };
+
+  const manual = composeManual(state, { viewMode: "included" });
+  const manualText = JSON.stringify(manual);
+
+  assert.equal(manual.recognitionSummaries.length > 0, true);
+  assert.match(manualText, /direct/i);
+  assert.match(manualText, /time/i);
+  assert.match(manualText, /pause/i);
+});
+
+test("composer applies artifact formats and tone variants", () => {
+  const state = makeState();
+  state.artifactFormat = "note";
+  state.tone = "professional";
+
+  const manual = composeManual(state, { viewMode: "included" });
+
+  assert.equal(manual.artifactFormat, "note");
+  assert.equal(manual.tone, "professional");
+  assert.match(manual.recipientNote, /context/i);
+  assert.ok(manual.sections.length <= 3);
+  assert.equal(manual.sections.some((section) => section.details.some((detail) => /I value clarity/i.test(detail))), true);
+});
+
+test("each artifact format keeps private and hidden answers out of included view", () => {
+  const formats: ArtifactFormat[] = ["full", "onePage", "conversation", "work", "private"];
+
+  for (const artifactFormat of formats) {
+    const state = makeState();
+    state.artifactFormat = artifactFormat;
+    const manual = composeManual(state, { viewMode: "included" });
+    const manualText = JSON.stringify(manual);
+
+    assert.equal(manualText.includes(privateAnswer), false, `${artifactFormat} leaked private answer`);
+    assert.equal(manualText.includes(omittedAnswer), false, `${artifactFormat} leaked hidden answer`);
+  }
 });

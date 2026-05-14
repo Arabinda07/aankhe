@@ -3,9 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ModeConfig } from "./schemaTypes";
+import { ModeConfig, ModeId } from "./schemaTypes";
 
-export const PROTOCOL_MANIFEST: Record<string, ModeConfig> = {
+export const PROTOCOL_MANIFEST: Record<ModeId, ModeConfig> = {
   me: {
     id: "me",
     name: "Me Manual",
@@ -60,6 +60,45 @@ export const PROTOCOL_MANIFEST: Record<string, ModeConfig> = {
       { id: "W_09", mode: "work", sectionId: "pressure", type: "text", label: "If something is truly urgent, how should someone reach you?", defaultVisibility: "share", manualTemplate: "If it's an absolute emergency, reach me via {answer}." },
       { id: "W_10", mode: "work", sectionId: "pressure", type: "textarea", label: "What does stress look like on you at work?", defaultVisibility: "private", manualTemplate: "When I'm stressed at work, I tend to {answer}." },
       { id: "W_11", mode: "work", sectionId: "pressure", type: "textarea", label: "What is the best way to disagree with you?", defaultVisibility: "share", manualTemplate: "The most effective way to disagree with me is to {answer}." }
+    ]
+  },
+  talk: {
+    id: "talk",
+    name: "Conversation Manual",
+    label: "How to talk with me",
+    description: "Prepare a calmer conversation around what keeps getting missed.",
+    theme: "talk",
+    sections: [
+      { id: "opening", title: "How to begin", description: "The conditions that help the conversation start well." },
+      { id: "tension", title: "When tension appears", description: "What helps you stay open instead of guarded." },
+      { id: "repair", title: "How to repair", description: "What makes reconnection feel possible." }
+    ],
+    questions: [
+      { id: "T_01", mode: "talk", sectionId: "opening", type: "select", options: ["direct conversation", "gentle check-in", "written note first", "reassurance first"], label: "When something needs to be said, what kind of opening helps?", defaultVisibility: "share", manualTemplate: "I can usually stay more open when the conversation begins with {answer}." },
+      { id: "T_02", mode: "talk", sectionId: "opening", type: "select", options: ["time to think", "a clear question", "a slower pace", "space to write"], label: "Before you respond, what do you often need?", defaultVisibility: "share", manualTemplate: "Before I respond clearly, I often need {answer}." },
+      { id: "T_03", mode: "talk", sectionId: "tension", type: "multiSelect", options: ["urgency", "raised tone", "being interrupted", "too many questions", "assumptions about my intent"], label: "What makes it harder to stay open?", defaultVisibility: "private", manualTemplate: "It becomes harder for me to stay open when there is {answer}." },
+      { id: "T_04", mode: "talk", sectionId: "tension", type: "multiSelect", options: ["calmer tone", "specific examples", "room to pause", "a shared goal", "practical next steps"], label: "When tension appears, what helps?", defaultVisibility: "share", manualTemplate: "When tension appears, it helps when we have {answer}." },
+      { id: "T_05", mode: "talk", sectionId: "repair", type: "textarea", label: "What would make a hard conversation feel worth having?", defaultVisibility: "share", manualTemplate: "A hard conversation feels worth having when {answer}." },
+      { id: "T_06", mode: "talk", sectionId: "repair", type: "multiSelect", options: ["a clear apology", "a next step", "less guessing", "a check-in later", "time to settle"], label: "Afterward, what helps repair?", defaultVisibility: "private", manualTemplate: "Afterward, repair usually needs {answer}." }
+    ]
+  },
+  us: {
+    id: "us",
+    name: "Shared Manual",
+    label: "How we understand each other",
+    description: "Create a shared context note for two people trying to understand each other better.",
+    theme: "us",
+    sections: [
+      { id: "rhythm", title: "Our rhythm", description: "How connection works best between us." },
+      { id: "misreads", title: "What gets misread", description: "Patterns that deserve less guessing." },
+      { id: "agreement", title: "What we can practice", description: "Simple ways to make care easier to use." }
+    ],
+    questions: [
+      { id: "U_01", mode: "us", sectionId: "rhythm", type: "select", options: ["check in regularly", "give each other space", "write first", "talk things through live"], label: "What rhythm helps this relationship feel steady?", defaultVisibility: "share", manualTemplate: "We tend to do better when we {answer}." },
+      { id: "U_02", mode: "us", sectionId: "rhythm", type: "multiSelect", options: ["clear plans", "soft starts", "direct honesty", "time to respond", "small gestures"], label: "What helps both of you feel considered?", defaultVisibility: "share", manualTemplate: "We both feel more considered when there is {answer}." },
+      { id: "U_03", mode: "us", sectionId: "misreads", type: "multiSelect", options: ["silence", "speed", "tone", "forgetfulness", "needing space"], label: "What gets misread most often?", defaultVisibility: "private", manualTemplate: "We should be careful not to over-read {answer}." },
+      { id: "U_04", mode: "us", sectionId: "misreads", type: "textarea", label: "What should be understood with more care?", defaultVisibility: "share", manualTemplate: "A place where we need more care: {answer}." },
+      { id: "U_05", mode: "us", sectionId: "agreement", type: "multiSelect", options: ["ask before assuming", "pause before replying", "name the real need", "repair sooner", "make a smaller plan"], label: "What would be useful to practice?", defaultVisibility: "share", manualTemplate: "A useful practice for us is to {answer}." }
     ]
   }
 };

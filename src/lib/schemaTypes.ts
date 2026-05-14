@@ -11,6 +11,18 @@ export type Visibility = "share" | "private" | "hide";
 
 export type StorageMode = "memory" | "url";
 
+export type ManualDepth = "note" | "manual" | "deep";
+
+export type ArtifactFormat = "full" | "onePage" | "note" | "conversation" | "work" | "private";
+
+export type TonePreference = "default" | "softer" | "direct" | "warmer" | "professional" | "shorter";
+
+export interface OnboardingContext {
+  recipient: string;
+  misunderstanding: string;
+  depth: ManualDepth;
+}
+
 export interface Question {
   id: string;
   mode: ModeId;
@@ -47,8 +59,12 @@ export interface ModeConfig {
 export interface ManualState {
   mode: ModeId;
   answers: Record<string, string | string[] | number>;
+  answerNotes?: Record<string, string>;
   visibilityByQuestion: Record<string, Visibility>;
   storageMode: StorageMode;
+  onboarding?: OnboardingContext;
+  artifactFormat?: ArtifactFormat;
+  tone?: TonePreference;
   updatedAt: string;
 }
 
@@ -64,10 +80,16 @@ export interface ComposedManual {
   mode: ModeId;
   title: string;
   subtitle: string;
+  audience: string;
+  artifactFormat: ArtifactFormat;
+  tone: TonePreference;
+  recipientNote: string;
   atAGlance: string;
+  recognitionSummaries: string[];
   sections: ComposedSection[];
   answeredCount: number;
   shareableCount: number;
   privateCount: number;
+  hiddenCount: number;
   hasPrivateItems: boolean;
 }

@@ -12,18 +12,24 @@ import { useStepNavigation } from "../hooks/useStepNavigation";
 interface FormRendererProps {
   config: ModeConfig;
   getAnswer: (questionId: string) => string | string[] | number | undefined;
+  getAnswerNote: (questionId: string) => string;
   getVisibility: (question: Question) => Visibility;
   updateAnswer: (id: string, val: any) => void;
+  updateAnswerNote: (id: string, note: string) => void;
   updateVisibility: (id: string, vis: Visibility) => void;
+  recognitionSummaries: string[];
   onFinish: () => void;
 }
 
 export function FormRenderer({
   config,
   getAnswer,
+  getAnswerNote,
   getVisibility,
   updateAnswer,
+  updateAnswerNote,
   updateVisibility,
+  recognitionSummaries,
   onFinish
 }: FormRendererProps) {
   const {
@@ -78,6 +84,8 @@ export function FormRenderer({
             question={currentQuestion}
             value={getAnswer(currentQuestion.id)}
             onChange={(val) => updateAnswer(currentQuestion.id, val)}
+            note={getAnswerNote(currentQuestion.id)}
+            onNoteChange={(note) => updateAnswerNote(currentQuestion.id, note)}
             visibility={getVisibility(currentQuestion)}
             onVisibilityChange={(vis) => updateVisibility(currentQuestion.id, vis)}
             onNext={next}
@@ -87,6 +95,13 @@ export function FormRenderer({
           />
         </motion.div>
       </AnimatePresence>
+
+      {recognitionSummaries.length > 0 && (
+        <div className="rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-6">
+          <p className="type-meta mb-3 text-ankahe-accent-dark">So far, your manual is saying</p>
+          <p className="type-artifact-prose text-ankahe-text">{recognitionSummaries[0]}</p>
+        </div>
+      )}
 
       {/* Quick Nav */}
       <div className="hidden md:flex flex-wrap gap-2 pt-12 border-t border-ankahe-border" aria-label="Question shortcuts">

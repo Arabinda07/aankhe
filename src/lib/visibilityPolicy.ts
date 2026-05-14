@@ -7,6 +7,7 @@ export interface VisibilityCounts {
   answeredCount: number;
   shareableCount: number;
   privateCount: number;
+  hiddenCount: number;
   hasPrivateItems: boolean;
 }
 
@@ -38,6 +39,7 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
       canVisibilityAppearInManual(visibilityFor(question), viewMode),
     createShareSafeState: () => {
       const answers: ManualState["answers"] = {};
+      const answerNotes: ManualState["answerNotes"] = {};
       const visibilityByQuestion: ManualState["visibilityByQuestion"] = {};
 
       for (const question of config.questions) {
@@ -46,11 +48,15 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
 
         answers[question.id] = state.answers[question.id];
         visibilityByQuestion[question.id] = "share";
+        if (state.answerNotes?.[question.id]) {
+          answerNotes[question.id] = state.answerNotes[question.id];
+        }
       }
 
       return {
         ...state,
         answers,
+        answerNotes,
         visibilityByQuestion,
       };
     },
@@ -58,6 +64,7 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
       let answeredCount = 0;
       let shareableCount = 0;
       let privateCount = 0;
+      let hiddenCount = 0;
 
       for (const question of config.questions) {
         if (!(question.id in state.answers)) continue;
@@ -66,12 +73,14 @@ export function createVisibilityPolicy(state: ManualState): VisibilityPolicy {
         const visibility = visibilityFor(question);
         if (visibility === "share") shareableCount += 1;
         if (visibility === "private") privateCount += 1;
+        if (visibility === "hide") hiddenCount += 1;
       }
 
       return {
         answeredCount,
         shareableCount,
         privateCount,
+        hiddenCount,
         hasPrivateItems: privateCount > 0,
       };
     },

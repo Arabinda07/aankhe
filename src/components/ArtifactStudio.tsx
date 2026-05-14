@@ -80,6 +80,11 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             excludedSections={excludedSections}
             onViewModeChange={setViewMode}
             onSectionToggle={toggleSection}
+            onFormatChange={(format) => {
+              workspace.updateArtifactFormat(format);
+              if (format === "private") setViewMode("private");
+            }}
+            onToneChange={workspace.updateTone}
           />
           <ShareControls
             storageMode={workspace.storageMode}
