@@ -130,52 +130,53 @@ export function Switchboard({
           className="ankahe-enter ankahe-enter-aside w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
         >
           <div className="rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-            <div className="space-y-10">
+            <div className="space-y-12">
               <ChoiceGroup title="Who should understand you better">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {RECIPIENTS.map((item) => (
-                    <ChoiceCard
-                      key={item.id}
-                      active={recipientId === item.id}
-                      title={item.label}
-                      description={item.description}
-                      icon={item.icon}
-                      onClick={() => setRecipientId(item.id)}
-                    />
+                <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:gap-3">
+                  {RECIPIENTS.map((item, index) => (
+                    <div key={item.id} className={cn(index === 6 ? "sm:col-span-2" : "")}>
+                      <ChoiceCard
+                        active={recipientId === item.id}
+                        title={item.label}
+                        description={item.description}
+                        icon={item.icon}
+                        onClick={() => setRecipientId(item.id)}
+                      />
+                    </div>
                   ))}
                 </div>
               </ChoiceGroup>
-
-              <div className="border-t border-ankahe-paper-border" />
 
               <div className="space-y-10">
                 <ChoiceGroup title="What keeps getting misread" variant="secondary">
                   <div className="flex flex-wrap gap-3">
                     {MISREAD_TOPICS.map((item) => (
-                      <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
-                        {item}
-                      </SmallChoice>
+                      <span key={item}>
+                        <SmallChoice active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
+                          {item}
+                        </SmallChoice>
+                      </span>
                     ))}
                   </div>
                 </ChoiceGroup>
 
                 <ChoiceGroup title="How much do you want to say" variant="secondary">
-                  <div className="grid gap-4">
+                  <div className="grid gap-3">
                     {DEPTHS.map((item) => (
-                      <ChoiceCard
-                        key={item.id}
-                        active={depth === item.id}
-                        title={item.label}
-                        description={item.description}
-                        icon={<FileText size={22} weight="light" />}
-                        onClick={() => setDepth(item.id)}
-                      />
+                      <div key={item.id}>
+                        <ChoiceCard
+                          active={depth === item.id}
+                          title={item.label}
+                          description={item.description}
+                          icon={<FileText size={22} weight="light" />}
+                          onClick={() => setDepth(item.id)}
+                        />
+                      </div>
                     ))}
                   </div>
                 </ChoiceGroup>
               </div>
 
-              <div className="border-t border-ankahe-paper-border" />
 
               <SoftButton
                 size="md"
@@ -195,11 +196,11 @@ export function Switchboard({
 
 function ChoiceGroup({ title, children, variant = "primary" }: { title: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   return (
-    <section className="space-y-4">
+    <section className="space-y-5">
       <h2 className={cn(
         variant === "primary"
           ? "type-panel-title text-ankahe-text"
-          : "type-caption font-semibold uppercase tracking-wider text-ankahe-muted"
+          : "type-eyebrow text-ankahe-sandal"
       )}>{title}</h2>
       {children}
     </section>
@@ -213,7 +214,6 @@ function ChoiceCard({
   icon,
   onClick,
 }: {
-  key?: React.Key;
   active: boolean;
   title: string;
   description: string;
@@ -226,10 +226,10 @@ function ChoiceCard({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "group min-h-24 rounded-sm border p-4 text-left transition-[background-color,border-color,color,transform] duration-200 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "group h-full min-h-24 w-full rounded-[1rem] p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
-          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
-          : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-control-hover"
+          ? "bg-ankahe-accent-soft text-ankahe-accent-text ring-1 ring-inset ring-ankahe-accent/20"
+          : "bg-transparent text-ankahe-text hover:bg-ankahe-surface-halo-hover ring-1 ring-inset ring-transparent hover:ring-ankahe-border"
       )}
     >
       <span className="mb-3 flex items-center justify-between gap-4">
@@ -244,17 +244,17 @@ function ChoiceCard({
   );
 }
 
-function SmallChoice({ active, onClick, children }: { key?: React.Key; active: boolean; onClick: () => void; children: React.ReactNode }) {
+function SmallChoice({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "type-caption min-h-11 rounded-sm border px-3.5 py-2 transition-[background-color,border-color,color,transform] duration-200 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "type-caption min-h-10 rounded-full px-4 py-2 transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
-          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
-          : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong"
+          ? "bg-ankahe-accent text-ankahe-on-accent"
+          : "bg-transparent text-ankahe-text ring-1 ring-inset ring-ankahe-border hover:bg-ankahe-surface-halo-hover hover:ring-ankahe-border-strong"
       )}
     >
       {children}

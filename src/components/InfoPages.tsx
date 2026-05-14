@@ -14,7 +14,7 @@ export function PrivacyPage() {
       titleLines={{ main: "Nothing leaves", emphasis: "until you say so" }}
       lead="No accounts. No databases. Just a burner space in your browser. You decide what stays and what goes."
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
           Your answers live right here in this tab. Close it, refresh it, whatever—they disappear. We literally never see them.
         </InfoCard>
@@ -23,9 +23,9 @@ export function PrivacyPage() {
         </InfoCard>
       </div>
 
-      <section className="border-y border-ankahe-border bg-ankahe-surface/45 py-8">
+      <section className="rounded-[1.5rem] bg-ankahe-surface/45 px-8 py-12">
         <h2 className="type-artifact-heading text-ankahe-text">What can leave the page</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
           </VisibilityRule>
@@ -38,7 +38,7 @@ export function PrivacyPage() {
         </div>
       </section>
 
-      <section className="grid gap-5 border-y border-ankahe-border py-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
+      <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
         <p className="type-lead text-ankahe-muted">
           You decide exactly what goes into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays right where you put it.
@@ -74,11 +74,11 @@ export function HowItWorksPage() {
       titleLines={{ main: "Why are we", emphasis: "doing this?" }}
       lead="Because repeating yourself is exhausting. Here's the actual deal with how this works."
     >
-      <div className="border-y border-ankahe-border">
+      <div>
         {items.map((item, index) => (
           <section
             key={item.title}
-            className="grid gap-5 border-b border-ankahe-border py-7 last:border-b-0 md:grid-cols-[5rem_1fr] md:items-start md:py-8"
+            className="grid gap-5 py-10 md:grid-cols-[5rem_1fr] md:items-start md:py-12"
           >
             <span className="type-meta text-ankahe-muted">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
@@ -89,7 +89,7 @@ export function HowItWorksPage() {
         ))}
       </div>
 
-      <section className="border-t border-ankahe-border py-14 md:py-20">
+      <section className="py-16 md:py-24">
         <div className="mx-auto max-w-xl text-center space-y-6">
           <p className="type-eyebrow text-ankahe-sandal">Begin</p>
           <h2 className="type-panel-title text-ankahe-text text-lg md:text-xl">
@@ -138,7 +138,7 @@ function InfoShell({
           )}
           <p className="type-lead text-ankahe-muted">{lead}</p>
         </div>
-        <div className="space-y-6">{children}</div>
+        <div className="space-y-10">{children}</div>
       </section>
     </div>
   );
@@ -154,10 +154,10 @@ function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-md border border-ankahe-border bg-ankahe-surface px-6 py-7">
-      <div className="mb-5 text-ankahe-muted">{icon}</div>
+    <section className="rounded-[1.5rem] bg-ankahe-surface px-8 py-10 shadow-sm">
+      <div className="mb-6 text-ankahe-muted">{icon}</div>
       <h2 className="type-artifact-heading text-ankahe-text">{title}</h2>
-      <p className="type-lead mt-3 text-ankahe-muted">{children}</p>
+      <p className="type-lead mt-4 text-ankahe-muted">{children}</p>
     </section>
   );
 }
@@ -172,8 +172,8 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-sm border border-ankahe-border bg-ankahe-bg px-4 py-5">
-      <div className="mb-3 text-ankahe-muted">{icon}</div>
+    <div className="rounded-[1rem] bg-ankahe-surface/60 px-6 py-6 transition-colors hover:bg-ankahe-surface">
+      <div className="mb-4 text-ankahe-muted">{icon}</div>
       <h3 className="type-panel-title text-ankahe-text">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>
     </div>
