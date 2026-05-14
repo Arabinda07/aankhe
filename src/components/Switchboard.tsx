@@ -38,13 +38,13 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "A manager", description: "Work context, focus, feedback, and pressure.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "teammate", label: "A teammate", description: "Collaboration rhythm and clearer handoffs.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
-  { id: "partner", label: "A partner", description: "Care, silence, repair, and what gets misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
-  { id: "friend", label: "A friend", description: "How support reaches you without guessing.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "talk", label: "Someone I need to talk to", description: "A smaller brief for a hard conversation.", mode: "talk", icon: <FileText size={22} weight="light" /> },
-  { id: "self", label: "Myself", description: "A private copy for naming your own context.", mode: "me", icon: <User size={22} weight="light" /> },
-  { id: "sync", label: "Both of us", description: "A shared note for understanding each other.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "manager", label: "A manager", description: "Work vibes, focus hours, and how you handle stress.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
+  { id: "teammate", label: "A teammate", description: "Collab rhythm and how to actually hand things off to you.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
+  { id: "partner", label: "A partner", description: "Care, boundaries, and the stuff they usually misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
+  { id: "friend", label: "A friend", description: "How to support you without having to guess.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
+  { id: "talk", label: "Someone I need to talk to", description: "A cheat sheet for a conversation you're dreading.", mode: "talk", icon: <FileText size={22} weight="light" /> },
+  { id: "self", label: "Myself", description: "Just a private brain dump to figure your own head out.", mode: "me", icon: <User size={22} weight="light" /> },
+  { id: "sync", label: "Both of us", description: "A shared note so we can actually get on the same page.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISUNDERSTANDINGS = [
@@ -89,11 +89,11 @@ export function Switchboard({
         <div className="min-w-0 max-w-[760px] space-y-10 lg:space-y-12 lg:pt-8 xl:pt-12">
           <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
-              <span className="type-mixed-heading-main">Say it once</span>
-              <span className="type-mixed-heading-emphasis">be understood</span>
+              <span className="type-mixed-heading-main">Here's everything</span>
+              <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-xl text-ankahe-muted">
-              We all have operating instructions that other people just have to guess. Ankahe turns that invisible context into a private manual. Read it to yourself, or hand it to someone you trust.
+              Tired of typing "tell me about yourself" into the void? Same. Pick a vibe, answer the questions, and just hand them the link. Skip the small talk. Get understood.
             </p>
           </div>
 
@@ -106,7 +106,7 @@ export function Switchboard({
               size="md"
               onClick={onLearnMore}
             >
-              Read the FAQ
+              Wait, how does this work?
             </SoftButton>
           </div>
 

@@ -11,15 +11,15 @@ export function PrivacyPage() {
   return (
     <InfoShell
       eyebrow="Privacy"
-      titleLines={{ main: "Nothing leaves", emphasis: "until you choose" }}
-      lead="Ankahe runs entirely in your browser. You have complete control over what gets included, what stays private, and what gets tossed out."
+      titleLines={{ main: "Nothing leaves", emphasis: "until you say so" }}
+      lead="No accounts. No databases. Just a burner space in your browser. You control what stays and what goes."
     >
       <div className="grid gap-5 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
-          Your answers live right here in this tab's memory. If you close or refresh the page, they disappear. We never see them.
+          Your answers live right here in this tab. Close it, refresh it, whatever—they disappear. We literally never see them.
         </InfoCard>
         <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
-          If you want to share your manual, the answers you included get compressed directly into the web address. Anyone who has that specific link can read it.
+          When you're ready, the answers you explicitly chose to share get squished into a web address. Anyone with that specific link can read it. Lose the link? It's gone.
         </InfoCard>
       </div>
 
@@ -41,7 +41,7 @@ export function PrivacyPage() {
       <section className="grid gap-5 border-y border-ankahe-border py-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
         <p className="type-lead text-ankahe-muted">
-          No accounts. No databases. No analytics trackers looking over your shoulder. Your manual only becomes shareable the exact moment you decide to generate a link or export a PDF.
+          You decide exactly what makes it into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays exactly where you put it.
         </p>
       </section>
     </InfoShell>
@@ -51,32 +51,28 @@ export function PrivacyPage() {
 export function HowItWorksPage() {
   const items = [
     {
-      title: "Where do my answers actually live once I type them?",
-      text: "It depends entirely on the mode you pick before you start writing. In 'Memory Only' mode, your words exist solely in your browser's active memory. The moment you close the tab, refresh the page, or navigate away, everything is permanently gone. We don't have a server to save them to, even if we wanted to.\n\nIf you choose 'Save in Link', things work differently. We take the text you write, compress it, and tuck it directly into the web address—the URL itself. That means your data is stored inside the link, not in a database. You can bookmark that long link to return to your work later. Just know that if you lose the link, you lose the answers. We have no way to recover them for you.",
+      title: "Why actually use this?",
+      text: "Because people aren't mind readers. Whether it's a new boss, a new situationship, or a friend who keeps misreading your texts—handing them the cheat sheet saves everyone a lot of unnecessary friction.",
     },
     {
-      title: "What does marking an answer as 'Private' actually do?",
-      text: "When you mark an answer as 'Private', you're drawing a hard boundary. Sometimes you need to write out the messy, unfiltered version of a thought before you can figure out what you actually want to communicate. 'Private' gives you the space to do that safely.\n\nThose specific private answers never leave your device. If you're using 'Save in Link' mode, your private notes are deliberately excluded from the URL compression process. They will never appear when you export a PDF, they won't show up in a generated QR code, and if you send your link to someone else, the private sections simply won't exist for them. They remain entirely for your eyes only.",
+      title: "How do I use it?",
+      text: "Treat it like your private notes app. Pick a category. Write the feral, unedited truth first. Then, decide what stays just for you and what actually makes it into the final link.",
     },
     {
-      title: "Exactly what gets shared when I send a link or export?",
-      text: "You are entirely in control of what makes it into the final document. The only things that get shared are the specific answers you explicitly decide to 'Share'. Everything else is left behind.\n\nWhen you generate a link to send to someone, or when you export your manual as a PDF, only those included answers are bundled up. Think of the workspace as your drafting table, and the final manual as the polished document you hand to a friend. You get to decide exactly which pieces make it into the envelope. We don't sneak anything extra in.",
+      title: "Is this actually private?",
+      text: "Yes. Nothing is saved to a server. We don't want your data, and we don't want your email. If you close this tab, your answers are gone forever. You only keep them if you generate a link or download the PDF.",
     },
     {
-      title: "What is the point of the 'Hide' option if we already have 'Private'?",
-      text: "You might be wondering why we have both 'Hide' and 'Private'. It comes down to intent. You use 'Private' for sensitive context you want to keep visible for your own reference while you work.\n\nYou use 'Hide' for things you just don't need anymore. Maybe you started answering a prompt, realized you were going off-topic, and decided to scrap it. Instead of forcing you to delete the text completely, 'Hide' simply omits it. The omitted answer is tucked out of sight. It won't clutter up your preview, and it certainly won't make it into the final shared manual.",
-    },
-    {
-      title: "Do I need to create an account or sign in?",
-      text: "No, and we will never ask you to create one. We don't ask for your email address, we don't require a password, and we don't use analytics to track your behavior.\n\nThe reason is simple: we don't have a database to store your information in the first place. Ankahe is designed as a standalone tool that runs entirely inside your web browser. When you load the page, you download the application, and from that point on, you're just writing on a blank digital piece of paper. You own your words. We never see them, and we don't want to.",
+      title: "What do the buttons do?",
+      text: "'Share' puts the answer in your final link. 'Private' keeps it visible only to you on your screen. 'Hide' tosses it entirely. You control the narrative.",
     },
   ];
 
   return (
     <InfoShell
-      eyebrow="FAQ"
-      titleLines={{ main: "Before you write", emphasis: "a few honest answers" }}
-      lead="Ankahe is small on purpose. Write your manual, decide what actually belongs in it, and only share the parts you want people to read."
+      eyebrow="Why & How"
+      titleLines={{ main: "Why are we", emphasis: "doing this?" }}
+      lead="Because repeating yourself is exhausting. Here's the actual deal with how this works."
     >
       <div className="border-y border-ankahe-border">
         {items.map((item, index) => (
