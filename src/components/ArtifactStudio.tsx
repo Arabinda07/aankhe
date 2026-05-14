@@ -51,7 +51,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         {isExporting ? "Exporting image..." : ""}
       </div>
       <div className="space-y-4 text-center md:text-left">
-        <h2 className="type-display text-ankahe-text">Artifact Studio</h2>
+        <h2 className="type-display text-ankahe-heading">Artifact Studio</h2>
         <p className="type-lead text-ankahe-muted">Shape your manual into a finished document for saving, printing, or sharing.</p>
       </div>
 

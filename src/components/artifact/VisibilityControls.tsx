@@ -33,7 +33,7 @@ export function VisibilityControls({
   return (
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <div>
-        <h3 className="type-panel-title text-ankahe-text mb-4">Public preview</h3>
+        <h3 className="type-panel-title text-ankahe-heading mb-4">Public preview</h3>
         <Tabs.Root value={viewMode} onValueChange={(value) => onViewModeChange(value as ManualViewMode)}>
           <Tabs.List className="flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border" aria-label="Public preview mode">
           <Tabs.Trigger
@@ -64,7 +64,7 @@ export function VisibilityControls({
       </div>
 
       <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h4 className="type-panel-title text-ankahe-text">Share format</h4>
+        <h4 className="type-panel-title text-ankahe-heading">Share format</h4>
         <RadioGroup.Root
           value={manual.artifactFormat}
           onValueChange={(value) => onFormatChange(value as ArtifactFormat)}
@@ -90,7 +90,7 @@ export function VisibilityControls({
       </div>
 
       <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h4 className="type-panel-title text-ankahe-text">Tone</h4>
+        <h4 className="type-panel-title text-ankahe-heading">Tone</h4>
         <RadioGroup.Root
           value={manual.tone}
           onValueChange={(value) => onToneChange(value as TonePreference)}
@@ -115,7 +115,7 @@ export function VisibilityControls({
       </div>
 
       <div className="space-y-4">
-        <h4 className="type-panel-title text-ankahe-text">Sections</h4>
+        <h4 className="type-panel-title text-ankahe-heading">Sections</h4>
         <div className="flex flex-wrap gap-2">
           {config.sections.map((section) => {
             const isExcluded = excludedSections.includes(section.id);
@@ -139,7 +139,7 @@ export function VisibilityControls({
       </div>
 
       <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h3 className="type-panel-title text-ankahe-text">Visibility note</h3>
+        <h3 className="type-panel-title text-ankahe-heading">Visibility note</h3>
         <div className="space-y-3">
           <div className="type-caption flex items-center justify-between">
             <span className="text-ankahe-muted">Included answers</span>

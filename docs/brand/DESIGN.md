@@ -45,9 +45,9 @@ Color should guide action, state, and hierarchy. It should not decorate empty sp
 
 ## Typography
 
-Manrope is the product face. Spectral is the editorial/manual face.
+Geist is the product face. Source Serif 4 is the editorial/manual face. Geist Mono is reserved for technical/privacy microcopy.
 
-Use Manrope for task surfaces and Spectral for moments where the manual should feel composed. Avoid Spectral in small controls, dense labels, or data-like status rows.
+Use Geist for task surfaces and Source Serif 4 for moments where the manual should feel composed. Avoid Source Serif 4 in small controls, dense labels, or data-like status rows. Avoid Geist Mono except for URL hashes, timestamps, export metadata, and local-only technical details.
 
 ## Components
 
@@ -58,7 +58,7 @@ Use Manrope for task surfaces and Spectral for moments where the manual should f
 - Navigation and footer items must be real links or clearly non-interactive text.
 - Footer links wrap horizontally at all widths and remain inside the dark footer band.
 - The question builder should feel like a focused writing surface, not a configuration panel.
-- Use `type-question-builder` for active builder prompts. Keep Spectral italic, but use restrained scale and readable measure.
+- Use `type-question-builder` for active builder prompts. Keep Source Serif 4 italic, but use restrained scale and readable measure.
 - Before an answer exists, show the question, answer controls, quiet escape actions, and a short privacy reassurance only.
 - After an answer exists, reveal optional nuance and collapsed visibility controls.
 - Visibility controls may say Share, Private, and Hide. Explanation copy should say included, private, and omitted.

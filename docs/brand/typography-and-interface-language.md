@@ -6,26 +6,29 @@ Ankahe uses type to create calm structure. The interface should feel like a priv
 
 ## Font Families
 
-- Manrope is the product UI face.
-- Spectral is the editorial/manual face.
+- Geist is the product UI face.
+- Source Serif 4 is the editorial/manual face.
+- Geist Mono is reserved for technical/privacy microcopy.
 
-Manrope handles navigation, controls, labels, buttons, help text, and body UI. Spectral handles display headings, reflective prompts, artifact titles, and manual prose moments.
+Geist handles navigation, controls, labels, buttons, help text, progress, metadata, choice cards, privacy controls, and body UI. Source Serif 4 handles reflective prompts, question text, answer fields, editorial hooks, artifact titles, and manual prose moments. Geist Mono is only for URL hashes, timestamps, export metadata, and local-only technical details.
 
 ## Local Font Files
 
 The app loads fonts from `public/fonts`.
 
-- `Manrope-Variable.woff2` for UI weights.
-- `Spectral-Regular.woff2` for editorial regular text.
-- `Spectral-Bold.woff2` for editorial emphasis.
-- `Spectral-Italic.woff2` for quiet reflective emphasis.
+- `Geist[wght].woff2` for UI weights.
+- `Geist-Italic[wght].woff2` for UI italic fallback where needed.
+- `SourceSerif4Variable-Roman.otf.woff2` for editorial regular and weighted text.
+- `SourceSerif4Variable-Italic.otf.woff2` for quiet reflective emphasis.
+- `GeistMono[wght].woff2` for technical/privacy microcopy.
+- `GeistMono-Italic[wght].woff2` for technical italic fallback where needed.
 
-Do not declare Spectral 500 or 600 unless those files are added.
+Do not add another type family unless the brand system is intentionally revised.
 
 ## Scale
 
 - Use restrained product type in controls.
-- Reserve large Spectral for screen titles and artifact surfaces.
+- Reserve large Source Serif 4 for reflective hooks, question text, and artifact surfaces.
 - Keep labels compact and high contrast.
 - Keep prose line length around 65 to 75 characters.
 - Do not use viewport-scaled font sizes.

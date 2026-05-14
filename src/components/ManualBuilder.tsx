@@ -145,7 +145,7 @@ export function ManualBuilder({
               {/* Preview Side (Desktop only) */}
               <div className="hidden space-y-8 xl:sticky xl:top-36 xl:block">
                 <div className="space-y-4">
-                  <h3 className="type-meta text-ankahe-muted px-1">
+                  <h3 className="type-meta text-ankahe-heading px-1">
                     Live Manual Preview
                   </h3>
                   <div className="rounded-[2rem] border border-ankahe-border bg-ankahe-surface-preview p-2 shadow-sm">

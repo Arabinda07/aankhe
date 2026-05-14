@@ -77,7 +77,7 @@ function AppContent() {
                     <div className="max-w-4xl mx-auto px-6 pt-6">
                       <div className="flex items-start gap-4 rounded-lg border border-ankahe-danger/25 bg-ankahe-danger-soft p-4 text-ankahe-text shadow-sm">
                         <div className="flex-1 space-y-1">
-                          <h4 className="type-panel-title text-ankahe-danger">
+                          <h4 className="type-panel-title text-ankahe-heading">
                             Link could not be restored
                           </h4>
                           <p className="type-caption">

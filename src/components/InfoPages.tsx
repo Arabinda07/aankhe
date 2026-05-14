@@ -24,7 +24,7 @@ export function PrivacyPage() {
       </div>
 
       <section className="rounded-[1.5rem] bg-ankahe-surface/45 px-8 py-12">
-        <h2 className="type-artifact-heading text-ankahe-text">What can leave the page</h2>
+        <h2 className="type-artifact-heading text-ankahe-heading">What can leave the page</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
@@ -39,7 +39,7 @@ export function PrivacyPage() {
       </section>
 
       <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
-        <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
+        <h2 className="type-artifact-heading text-ankahe-heading">The promise</h2>
         <p className="type-lead text-ankahe-muted">
           You decide exactly what goes into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays right where you put it.
         </p>
@@ -82,7 +82,7 @@ export function HowItWorksPage() {
           >
             <span className="type-meta text-ankahe-muted">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
-              <h2 className="type-artifact-heading text-ankahe-text">{item.title}</h2>
+              <h2 className="type-artifact-heading text-ankahe-heading">{item.title}</h2>
               <p className="type-lead whitespace-pre-wrap text-ankahe-muted">{item.text}</p>
             </div>
           </section>
@@ -92,7 +92,7 @@ export function HowItWorksPage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-xl text-center space-y-6">
           <p className="type-eyebrow text-ankahe-sandal">Begin</p>
-          <h2 className="type-panel-title text-ankahe-text text-lg md:text-xl">
+          <h2 className="type-panel-title text-ankahe-heading text-lg md:text-xl">
             Start with the manual that fits the conversation
           </h2>
           <Link
@@ -130,11 +130,11 @@ function InfoShell({
         <div className="mb-12 max-w-3xl space-y-5">
           <p className="type-eyebrow text-ankahe-sandal">{eyebrow}</p>
           {titleLines ? (
-            <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-text">
+            <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-heading">
               {titleLines.main} <span className="type-mixed-heading-emphasis">{titleLines.emphasis}</span>
             </h1>
           ) : (
-            <h1 className="type-display text-ankahe-text">{title}</h1>
+            <h1 className="type-display text-ankahe-heading">{title}</h1>
           )}
           <p className="type-lead text-ankahe-muted">{lead}</p>
         </div>
@@ -156,7 +156,7 @@ function InfoCard({
   return (
     <section className="rounded-[1.5rem] bg-ankahe-surface px-8 py-10 shadow-sm">
       <div className="mb-6 text-ankahe-muted">{icon}</div>
-      <h2 className="type-artifact-heading text-ankahe-text">{title}</h2>
+      <h2 className="type-artifact-heading text-ankahe-heading">{title}</h2>
       <p className="type-lead mt-4 text-ankahe-muted">{children}</p>
     </section>
   );
@@ -174,7 +174,7 @@ function VisibilityRule({
   return (
     <div className="rounded-[1rem] bg-ankahe-surface/60 px-6 py-6 transition-colors hover:bg-ankahe-surface">
       <div className="mb-4 text-ankahe-muted">{icon}</div>
-      <h3 className="type-panel-title text-ankahe-text">{title}</h3>
+      <h3 className="type-panel-title text-ankahe-heading">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>
     </div>
   );

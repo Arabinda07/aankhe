@@ -24,7 +24,7 @@ Pass. The current direction does not read as generic AI product styling. The str
 - Category: Performance / Typography
 - Location: `src/index.css`, `public/fonts`
 - Impact: Prevents remote or package-based font assumptions and keeps typography predictable.
-- Recommendation: Load Manrope and Spectral from `/fonts/`, remove `@fontsource` dependencies, and avoid declaring missing Spectral weights.
+- Recommendation: Load Geist, Source Serif 4, and Geist Mono from `/fonts/`, remove `@fontsource` dependencies, and keep mono usage limited to technical/privacy microcopy.
 - Suggested command: `$impeccable optimize`
 
 ### P2: Keep Mobile Targets Protected

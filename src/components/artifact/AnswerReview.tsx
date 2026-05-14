@@ -47,7 +47,7 @@ export function AnswerReview({ workspace }: AnswerReviewProps) {
   return (
     <section className="space-y-6 rounded-lg border border-ankahe-border bg-ankahe-surface p-5 md:p-6">
       <div className="space-y-2">
-        <h3 className="type-panel-title text-ankahe-text">Review answers before sharing</h3>
+        <h3 className="type-panel-title text-ankahe-heading">Review answers before sharing</h3>
         <p className="type-caption max-w-2xl text-ankahe-muted">
           Check what is included, what stays private, and what is omitted before you send anything.
         </p>
@@ -65,7 +65,7 @@ export function AnswerReview({ workspace }: AnswerReviewProps) {
               <div key={group.id} className="space-y-3 border-t border-ankahe-border pt-5 first:border-t-0 first:pt-0">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h4 className="type-ui-label text-ankahe-text">{group.title}</h4>
+                    <h4 className="type-ui-label text-ankahe-heading">{group.title}</h4>
                     <p className="type-caption text-ankahe-muted">{group.description}</p>
                   </div>
                   <span className="type-tabular type-caption text-ankahe-muted">{groupQuestions.length}</span>
@@ -113,7 +113,7 @@ function ReviewAnswer({
     <article className="space-y-4 rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
-          <h5 id={labelId} className="type-body font-semibold text-ankahe-text">
+          <h5 id={labelId} className="type-body font-semibold text-ankahe-heading">
             {question.label}
           </h5>
           {question.helperText && (

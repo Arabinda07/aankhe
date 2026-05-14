@@ -29,7 +29,7 @@ export function ShareControls({
 
   return (
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
-      <h3 className="type-panel-title text-ankahe-text flex items-center gap-2">
+      <h3 className="type-panel-title text-ankahe-heading flex items-center gap-2">
         <ShareNetwork size={20} className="text-ankahe-accent" weight="light" />
         Share link
       </h3>
@@ -37,7 +37,7 @@ export function ShareControls({
       {storageMode === "url" ? (
         <div className="space-y-6">
           <div className="flex items-center gap-2 p-2 bg-ankahe-control-selected rounded-sm border border-ankahe-border">
-            <div className="type-caption flex-1 truncate text-ankahe-muted pl-2">
+            <div className="type-caption font-mono flex-1 truncate text-ankahe-muted pl-2">
               {sharedUrl}
             </div>
             <Tooltip.Provider delayDuration={250}>

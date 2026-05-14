@@ -45,7 +45,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               <ShieldWarning size={36} weight="light" />
             </div>
             <div className="space-y-2">
-              <h2 className="type-artifact-heading text-ankahe-text">Something went wrong</h2>
+              <h2 className="type-artifact-heading text-ankahe-heading">Something went wrong</h2>
               <p className="type-caption text-ankahe-muted">
                 We encountered an unexpected error while composing your manual.
                 Your data in the URL might be corrupted, or memory state failed.

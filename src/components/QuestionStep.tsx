@@ -96,7 +96,7 @@ export function QuestionStep({
   return (
     <div className="space-y-5 md:space-y-6">
       <div className="space-y-3">
-        <h2 id={questionLabelId} className="type-question-builder text-ankahe-text">
+        <h2 id={questionLabelId} className="type-question-builder text-ankahe-heading">
           {question.label}
         </h2>
         {question.helperText && (

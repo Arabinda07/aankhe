@@ -6,7 +6,7 @@ Ankahe is a sister site to Reflections, not a clone. Preserve Reflections' calm 
 
 Ankahe's identity is **Smoked Lac + Sandal Paper**. It should feel like sealed letters, warm paper, rosewood ink, private manuals, high-end stationery, quiet intimacy, and emotional precision. It must not feel like a wellness app, green journaling app, SaaS dashboard, AI tool, HR assessment, chatbot, or therapy replacement.
 
-Use Spectral for headings, artifact prose, composed manual text, wordmark, and literary moments. Use Manrope for UI, controls, labels, metadata, buttons, and navigation. Do not use Inter.
+Use Geist for UI, structure, navigation, buttons, labels, captions, metadata, choice cards, privacy controls, progress text, and product chrome. Use Source Serif 4 for reflective prompts, question text, answer fields, generated manual prose, artifact reading surfaces, editorial hooks, and human/authored text. Use Geist Mono only for technical/privacy microcopy such as URL hashes, timestamps, export metadata, and local-only technical details. Do not use Inter.
 
 ## Non-Negotiables
 

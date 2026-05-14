@@ -24,11 +24,12 @@ Brand-level rules live in `docs/brand/`.
 
 ### Typography
 
-- Primary Sans (`font-sans`): `Manrope`, self-hosted from `public/fonts/Manrope-Variable.woff2`.
-- Display Serif (`font-display`): `Spectral`, self-hosted from `public/fonts/Spectral-Regular.woff2`, `Spectral-Bold.woff2`, and `Spectral-Italic.woff2`.
-- Use Manrope for product controls, labels, and dense UI.
-- Use Spectral for screen titles, reflective prompts, and artifact prose.
-- Do not declare Spectral 500 or 600 unless matching local files are added.
+- Primary Sans (`font-sans`): `Geist`, self-hosted from `public/fonts/Geist[wght].woff2`.
+- Display/Serif (`font-display`, `font-serif`, `font-editor`): `Source Serif 4`, self-hosted from `public/fonts/SourceSerif4Variable-Roman.otf.woff2` and `SourceSerif4Variable-Italic.otf.woff2`.
+- Technical Mono (`font-mono`): `Geist Mono`, self-hosted from `public/fonts/GeistMono[wght].woff2`.
+- Use Geist for product controls, labels, dense UI, navigation, progress, metadata, and structure.
+- Use Source Serif 4 for reflective prompts, answer fields, artifact titles, and manual prose.
+- Use Geist Mono only for technical/privacy microcopy such as URL hashes, timestamps, export metadata, and local-only technical details.
 
 ### Interaction Standards
 

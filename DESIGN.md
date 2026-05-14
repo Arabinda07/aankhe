@@ -66,13 +66,15 @@ Light mode should feel like warm paper in natural light: calm, readable, high-tr
 
 ## 3. Typography Rules
 
-Use the locally hosted fonts from `public/fonts`.
+- Use the locally hosted fonts from `public/fonts`.
 
-- **Spectral:** headings that should feel literary, artifact prose, composed manual text, wordmark, reflective moments.
-- **Manrope:** UI, controls, labels, metadata, buttons, navigation, helper text, dense panels.
+- **Geist:** UI, structure, navigation, buttons, labels, captions, metadata, choice cards, privacy controls, progress text, and product chrome.
+- **Source Serif 4:** reflective prompts, question text, answer fields, generated manual prose, artifact reading surfaces, editorial hooks, and human/authored text.
+- **Geist Mono:** technical/privacy microcopy only: URL hashes, timestamps, export metadata, and local-only technical details.
 - **Banned:** Inter, generic system-only typography for branded surfaces, remote font imports, and undeclared font weights.
-- **Spectral weights available:** 400 regular, 400 italic, 700 bold.
-- **Manrope weights available:** variable 200-800 plus static files.
+- **Geist weights available:** variable 100-900 plus static files.
+- **Source Serif 4 weights available:** variable roman and italic.
+- **Geist Mono weights available:** variable 100-900 plus static files.
 - **Letter spacing:** keep at `0` for most text. Use positive uppercase tracking only for eyebrow/meta styles.
 
 ### Canonical Type Classes
@@ -81,29 +83,30 @@ Use these classes before inventing ad hoc font sizes.
 
 | Class | Font | Size | Weight | Line Height | Use |
 | --- | --- | ---: | ---: | ---: | --- |
-| `type-hero` | Manrope | 3.5rem mobile, 5.5rem tablet, 5.875rem desktop | 760 | 0.98/0.95 | Landing hero only |
-| `type-hero-emphasis` | Manrope | inherit | 800 | inherit | Lac emphasis inside hero |
-| `type-display` | Manrope | 3.25rem mobile, 4.5rem tablet, 5.5rem desktop | 800 | 0.96 | Major page titles |
-| `type-mode-title` | Manrope | 3.25rem mobile, 4.25rem tablet, 5.25rem desktop | 800 | 0.95 | Mode selection titles |
-| `type-question` | Spectral italic | 2.625rem mobile, 3rem tablet | 400 | 1.05-1.1 | Active form question |
-| `type-question-builder` | Spectral italic | 2rem mobile, 2.25rem tablet, 2.5rem desktop | 400 | 1.15/1.14/1.12 | Focused builder question prompt |
-| `type-answer-field` | Spectral | 1.75rem mobile, 2rem tablet | 400 | 1.45 | Main writing inputs |
-| `type-artifact-title` | Manrope | 3rem mobile, 3.75rem tablet, 4.25rem desktop | 800 | 0.98 | Manual title |
-| `type-artifact-heading` | Manrope | 2rem | 700 | 1.05 | Artifact section headings |
-| `type-artifact-prose` | Spectral | 1.1875rem | 400 | 1.72 | Manual paragraphs and composed prose |
-| `type-lead` | Manrope | 1.1875rem | 400 | 1.65 | Intro copy and explanation |
-| `type-body` | Manrope | 1rem | 400 | 1.65 | Standard UI body |
-| `type-ui-label` | Manrope | 0.875rem | 700 | 1.2 | Buttons, labels, nav |
-| `type-panel-title` | Manrope | 0.9375rem | 700 | 1.25 | Panel headings |
-| `type-eyebrow` | Manrope | 0.75rem | 800 | 1.2 | Uppercase section markers |
-| `type-caption` | Manrope | 0.8125rem | 500 | 1.45 | Supporting text, chips, small descriptions |
-| `type-meta` | Manrope | 0.8125rem | 700 | 1.2 | Uppercase metadata and counters |
-| `type-footer-nav` | Manrope | 0.8125rem | 800 | 1.2 | Footer links |
+| `type-hero` | Source Serif 4 | 3.5rem mobile, 5.5rem tablet, 5.875rem desktop | 650 | 1.02/1 | Landing editorial hook only |
+| `type-hero-emphasis` | Source Serif 4 italic | inherit | 650 | inherit | Lac emphasis inside hero |
+| `type-display` | Geist | 3.25rem mobile, 4.5rem tablet, 5.5rem desktop | 800 | 0.96 | Major structural page titles |
+| `type-mode-title` | Geist | 3.25rem mobile, 4.25rem tablet, 5.25rem desktop | 800 | 0.95 | Mode selection titles |
+| `type-question` | Source Serif 4 italic | 2.625rem mobile, 3rem tablet | 400 | 1.05-1.1 | Active form question |
+| `type-question-builder` | Source Serif 4 italic | 2rem mobile, 2.25rem tablet, 2.5rem desktop | 400 | 1.15/1.14/1.12 | Focused builder question prompt |
+| `type-answer-field` | Source Serif 4 | 1.75rem mobile, 2rem tablet | 400 | 1.45 | Main writing inputs |
+| `type-artifact-title` | Source Serif 4 | 3rem mobile, 3.75rem tablet, 4.25rem desktop | 650 | 1.02 | Manual title |
+| `type-artifact-heading` | Source Serif 4 | 2rem | 650 | 1.12 | Artifact section headings |
+| `type-artifact-prose` | Source Serif 4 | 1.1875rem | 400 | 1.72 | Manual paragraphs and composed prose |
+| `type-lead` | Geist | 1.1875rem | 400 | 1.65 | Intro copy and explanation |
+| `type-body` | Geist | 1rem | 400 | 1.65 | Standard UI body |
+| `type-ui-label` | Geist | 0.875rem | 700 | 1.2 | Buttons, labels, nav |
+| `type-panel-title` | Geist | 0.9375rem | 700 | 1.25 | Panel headings |
+| `type-eyebrow` | Geist | 0.75rem | 800 | 1.2 | Uppercase section markers |
+| `type-caption` | Geist | 0.8125rem | 500 | 1.45 | Supporting text, chips, small descriptions |
+| `type-meta` | Geist | 0.8125rem | 700 | 1.2 | Uppercase metadata and counters |
+| `type-footer-nav` | Geist | 0.8125rem | 800 | 1.2 | Footer links |
 
 ### Typography Usage
 
-- Use Spectral for what the user is writing or reading as a manual.
-- Use Manrope for every control the user clicks, toggles, copies, exports, or navigates with.
+- Use Source Serif 4 for what the user is writing or reading as a manual.
+- Use Geist for every control the user clicks, toggles, copies, exports, or navigates with.
+- Use Geist Mono only for technical/privacy microcopy, not normal captions or metadata.
 - Do not use hero-scale type inside cards, sidebars, chips, buttons, or compact panels.
 - Keep prose columns readable: body and artifact prose should generally stay near 60-65 characters per line.
 - Use `type-tabular` for counters, dates, step numbers, URL length, and scale values.

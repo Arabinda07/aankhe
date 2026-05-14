@@ -93,7 +93,7 @@ export function Switchboard({
       <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-5 py-12 text-left sm:px-8 md:py-20 lg:grid-cols-[1fr_minmax(auto,600px)] lg:items-start lg:gap-12 xl:gap-24 lg:py-28 xl:py-32">
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
-            <h1 className="type-mixed-heading text-ankahe-text lg:max-w-xl">
+            <h1 className="type-mixed-heading text-ankahe-heading lg:max-w-xl">
               Everything <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-lg text-ankahe-muted">
@@ -199,8 +199,8 @@ function ChoiceGroup({ title, children, variant = "primary" }: { title: string; 
     <section className="space-y-5">
       <h2 className={cn(
         variant === "primary"
-          ? "type-panel-title text-ankahe-text"
-          : "type-eyebrow text-ankahe-sandal"
+          ? "type-panel-title text-ankahe-heading"
+          : "type-eyebrow text-ankahe-heading"
       )}>{title}</h2>
       {children}
     </section>

@@ -2,60 +2,83 @@
 @plugin "@tailwindcss/typography";
 
 @font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-Variable.woff2") format("woff2");
+  font-family: "Geist";
+  src: url("/fonts/Geist[wght].woff2") format("woff2");
   font-display: swap;
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Manrope Fallback";
-  src: local("Arial");
-  size-adjust: 103%;
-  ascent-override: 101%;
-  descent-override: 27%;
-  line-gap-override: 0%;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("/fonts/Spectral-Regular.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 400;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("/fonts/Spectral-Bold.woff2") format("woff2");
-  font-display: swap;
-  font-style: normal;
-  font-weight: 700;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Spectral";
-  src: url("/fonts/Spectral-Italic.woff2") format("woff2");
+  font-family: "Geist";
+  src: url("/fonts/Geist-Italic[wght].woff2") format("woff2");
   font-display: swap;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 100 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: "Spectral Fallback";
-  src: local("Georgia");
-  size-adjust: 99%;
-  ascent-override: 94%;
-  descent-override: 28%;
+  font-family: "Geist Fallback";
+  src: local("Arial");
+  size-adjust: 100%;
+  ascent-override: 95%;
+  descent-override: 24%;
   line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/SourceSerif4Variable-Italic.otf.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 200 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Source Serif 4 Fallback";
+  src: local("Georgia");
+  size-adjust: 96%;
+  ascent-override: 93%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono[wght].woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Italic[wght].woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 100 900;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
+  --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
+  --font-display: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --font-editor: var(--font-serif);
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --ankahe-page: oklch(0.96 0.012 60);
   --ankahe-surface: oklch(0.983 0.012 68);
   --ankahe-surface-raised: oklch(0.965 0.014 55);
@@ -67,6 +90,7 @@
   --ankahe-text: oklch(0.239 0.02 357);
   --ankahe-text-muted: oklch(0.504 0.024 7);
   --ankahe-text-soft: oklch(0.64 0.031 14);
+  --ankahe-heading: var(--ankahe-accent);
   --ankahe-border: oklch(0.886 0.026 52);
   --ankahe-border-strong: oklch(0.805 0.039 47);
   --ankahe-focus: oklch(0.56 0.111 10);
@@ -109,6 +133,7 @@
   --color-text: var(--ankahe-text);
   --color-text-muted: var(--ankahe-text-muted);
   --color-text-soft: var(--ankahe-text-soft);
+  --color-heading: var(--ankahe-heading);
   --color-border: var(--ankahe-border);
   --color-border-strong: var(--ankahe-border-strong);
   --color-focus: var(--ankahe-focus);
@@ -155,6 +180,7 @@
   --ankahe-text: oklch(0.94 0.014 62);
   --ankahe-text-muted: oklch(0.78 0.022 38);
   --ankahe-text-soft: oklch(0.66 0.025 32);
+  --ankahe-heading: var(--ankahe-accent);
   --ankahe-border: oklch(0.32 0.03 24);
   --ankahe-border-strong: oklch(0.4 0.036 24);
   --ankahe-focus: oklch(0.68 0.097 18);
@@ -189,8 +215,10 @@
 }
 
 @theme {
-  --font-sans: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Spectral", "Spectral Fallback", Georgia, serif;
+  --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
+  --font-display: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-shell: 12px;
 
   --color-page: var(--ankahe-page);
@@ -204,6 +232,7 @@
   --color-text: var(--ankahe-text);
   --color-text-muted: var(--ankahe-text-muted);
   --color-text-soft: var(--ankahe-text-soft);
+  --color-heading: var(--ankahe-heading);
   --color-border: var(--ankahe-border);
   --color-border-strong: var(--ankahe-border-strong);
   --color-focus: var(--ankahe-focus);
@@ -243,6 +272,7 @@
   --color-ankahe-surface-preview: var(--color-surface-preview);
   --color-ankahe-text: var(--color-text);
   --color-ankahe-muted: var(--color-text-muted);
+  --color-ankahe-heading: var(--color-heading);
   --color-ankahe-border: var(--color-border);
   --color-ankahe-border-strong: var(--color-border-strong);
   --color-ankahe-focus: var(--color-focus);
@@ -285,7 +315,11 @@
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-ankahe-heading);
     text-wrap: balance;
   }
 
@@ -305,18 +339,20 @@
 
 @layer components {
   .type-hero {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 8vw, 3.5rem);
-    font-weight: 760;
-    line-height: 0.98;
+    font-weight: 650;
+    line-height: 1.02;
     letter-spacing: 0;
+    color: var(--color-ankahe-heading);
     text-wrap: balance;
   }
 
   .type-hero-emphasis {
-    font-family: var(--font-sans);
-    font-weight: 800;
-    color: var(--color-ankahe-accent);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 650;
+    color: var(--color-ankahe-heading);
   }
 
   .type-mixed-heading {
@@ -324,7 +360,8 @@
     font-size: clamp(3.25rem, 8vw, 4rem);
     font-weight: 400;
     line-height: 1.05;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    color: var(--color-ankahe-heading);
     text-wrap: balance;
   }
 
@@ -333,7 +370,7 @@
   }
 
   .type-mixed-heading-emphasis {
-    color: var(--color-ankahe-accent);
+    color: var(--color-ankahe-heading);
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
@@ -345,6 +382,7 @@
     font-weight: 800;
     line-height: 0.96;
     letter-spacing: 0;
+    color: var(--color-ankahe-heading);
     text-wrap: balance;
   }
 
@@ -354,31 +392,34 @@
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: 0;
+    color: var(--color-ankahe-heading);
   }
 
   .type-question {
-    font-family: var(--font-display);
+    font-family: var(--font-editor);
     font-size: 2.625rem;
     font-style: italic;
     font-weight: 400;
     line-height: 1.05;
     letter-spacing: 0;
     max-width: 13ch;
+    color: var(--color-ankahe-heading);
     text-wrap: balance;
   }
 
   .type-question-builder {
-    font-family: var(--font-display);
+    font-family: var(--font-editor);
     font-size: 1.625rem;
     font-style: italic;
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0;
     max-width: min(100%, 28ch);
+    color: var(--color-ankahe-heading);
   }
 
   .type-answer-field {
-    font-family: var(--font-display);
+    font-family: var(--font-editor);
     font-size: 1.375rem;
     font-weight: 400;
     line-height: 1.45;
@@ -386,21 +427,23 @@
   }
 
   .type-artifact-title {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 3rem;
-    font-weight: 800;
-    line-height: 0.98;
+    font-weight: 650;
+    line-height: 1.02;
     letter-spacing: 0;
     text-wrap: balance;
+    color: var(--color-ankahe-heading);
     overflow-wrap: anywhere;
   }
 
   .type-artifact-heading {
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.05;
+    font-weight: 650;
+    line-height: 1.12;
     letter-spacing: 0;
+    color: var(--color-ankahe-heading);
   }
 
   .type-artifact-prose {
@@ -412,6 +455,7 @@
   }
 
   .type-lead {
+    font-family: var(--font-sans);
     font-size: 1.1875rem;
     font-weight: 400;
     line-height: 1.65;
@@ -420,6 +464,7 @@
   }
 
   .type-body {
+    font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.65;
@@ -427,6 +472,7 @@
   }
 
   .type-ui-label {
+    font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1.2;
@@ -434,6 +480,7 @@
   }
 
   .type-panel-title {
+    font-family: var(--font-sans);
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.25;
@@ -441,6 +488,7 @@
   }
 
   .type-eyebrow {
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 800;
     line-height: 1.2;
@@ -449,6 +497,7 @@
   }
 
   .type-caption {
+    font-family: var(--font-sans);
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.45;
@@ -456,6 +505,7 @@
   }
 
   .type-meta {
+    font-family: var(--font-sans);
     font-size: 0.8125rem;
     font-weight: 700;
     line-height: 1.2;
@@ -465,6 +515,7 @@
   }
 
   .type-footer-nav {
+    font-family: var(--font-sans);
     font-size: 0.8125rem;
     font-weight: 800;
     line-height: 1.2;
@@ -535,7 +586,7 @@
   @media (min-width: 768px) {
     .type-hero {
       font-size: 5.5rem;
-      line-height: 0.95;
+      line-height: 1;
     }
 
     .type-mixed-heading {
