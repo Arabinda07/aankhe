@@ -131,8 +131,7 @@ function InfoShell({
           <p className="type-eyebrow text-ankahe-sandal">{eyebrow}</p>
           {titleLines ? (
             <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-text">
-              <span className="type-mixed-heading-main">{titleLines.main}</span>
-              <span className="type-mixed-heading-emphasis">{titleLines.emphasis}</span>
+              {titleLines.main} <span className="type-mixed-heading-emphasis">{titleLines.emphasis}</span>
             </h1>
           ) : (
             <h1 className="type-display text-ankahe-text">{title}</h1>
