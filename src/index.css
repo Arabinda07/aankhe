@@ -140,7 +140,7 @@
   --color-footer-text-strong: var(--ankahe-footer-text-strong);
   --color-footer-text-hover: var(--ankahe-footer-text-hover);
   --color-footer-focus: var(--ankahe-footer-focus);
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .dark {
@@ -485,7 +485,7 @@
   }
 
   .ankahe-enter {
-    animation: ankahe-enter 450ms var(--ease-out-expo) both;
+    animation: ankahe-enter 800ms var(--ease-out-expo) both;
   }
 
   .ankahe-enter-0 {
@@ -506,7 +506,7 @@
 
   .ankahe-enter-aside {
     animation-delay: 120ms;
-    animation-duration: 500ms;
+    animation-duration: 900ms;
   }
 
   @keyframes ankahe-enter {

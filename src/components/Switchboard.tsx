@@ -85,7 +85,7 @@ export function Switchboard({
 
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto grid max-w-[90rem] grid-cols-1 gap-12 px-5 py-10 sm:px-8 md:py-16 lg:grid-cols-[1.1fr_minmax(420px,1fr)] xl:grid-cols-[1.25fr_minmax(460px,1fr)] lg:items-start lg:gap-20 lg:py-20 xl:py-24">
+      <section className="mx-auto grid max-w-[90rem] grid-cols-1 gap-12 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[1.1fr_minmax(420px,1fr)] xl:grid-cols-[1.25fr_minmax(460px,1fr)] lg:items-start lg:gap-20 lg:py-32 xl:py-40">
         <div className="min-w-0 max-w-[760px] space-y-10 lg:space-y-12 lg:pt-8 xl:pt-12">
           <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
@@ -121,9 +121,9 @@ export function Switchboard({
 
         <aside
           aria-label="Manual setup"
-          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-xl border border-ankahe-border bg-ankahe-surface p-4 sm:p-6 md:p-8"
+          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm"
         >
-          <div className="rounded-lg border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10">
+          <div className="rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
             <div className="space-y-10">
               <ChoiceGroup title="Who should understand you better">
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -209,7 +209,7 @@ function ChoiceCard({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "min-h-24 rounded-sm border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "group min-h-24 rounded-sm border p-4 text-left transition-[background-color,border-color,color,transform] duration-200 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
           ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
           : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-control-hover"
@@ -217,7 +217,7 @@ function ChoiceCard({
     >
       <span className="mb-3 flex items-center justify-between gap-4">
         <span className="type-ui-label">{title}</span>
-        <span aria-hidden="true" className={active ? "text-ankahe-accent" : "text-ankahe-muted"}>{icon}</span>
+        <span aria-hidden="true" className={cn("transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1", active ? "text-ankahe-accent" : "text-ankahe-muted")}>{icon}</span>
       </span>
       <span className={cn(
         "type-caption block",
@@ -234,7 +234,7 @@ function SmallChoice({ active, onClick, children }: { key?: React.Key; active: b
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "type-caption min-h-11 rounded-sm border px-3.5 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "type-caption min-h-11 rounded-sm border px-3.5 py-2 transition-[background-color,border-color,color,transform] duration-200 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
           ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
           : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong"

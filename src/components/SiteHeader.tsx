@@ -4,26 +4,26 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-ankahe-border/70 bg-ankahe-bg/95 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <div className="sticky top-6 z-50 px-4 flex justify-center pointer-events-none">
+      <header className="pointer-events-auto flex items-center justify-between gap-4 rounded-full border border-ankahe-border/50 bg-ankahe-bg/80 px-4 sm:px-6 h-14 backdrop-blur-2xl shadow-sm">
         <Link 
           to="/" 
-          className="min-h-11 inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="min-h-11 inline-flex items-center pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
           aria-label="Ankahe home"
         >
           <AnkaheMark wordmarkClassName="hidden sm:inline" />
         </Link>
         <div className="flex items-center gap-2 sm:gap-4">
-          <nav className="type-ui-label flex items-center gap-2 sm:gap-5 text-ankahe-muted">
+          <nav className="type-ui-label flex items-center gap-2 sm:gap-3 text-ankahe-muted">
             <Link
               to="/how-it-works"
-              className="hidden sm:inline-flex min-h-11 items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              className="hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               FAQ
             </Link>
             <Link
               to="/privacy"
-              className="hidden sm:inline-flex min-h-11 items-center justify-center px-1 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+              className="hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
               Privacy
             </Link>
@@ -56,7 +56,7 @@ export function SiteHeader() {
           <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
           <ThemeSwitcher />
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }

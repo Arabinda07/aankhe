@@ -130,7 +130,7 @@ function InfoShell({
 }) {
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto max-w-5xl px-6 py-16 md:py-24">
+      <section className="mx-auto max-w-5xl px-6 py-24 md:py-32 lg:py-40">
         <div className="mb-12 max-w-3xl space-y-5">
           <p className="type-eyebrow text-ankahe-sandal">{eyebrow}</p>
           {titleLines ? (

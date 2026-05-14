@@ -53,25 +53,25 @@ export function ManualBuilder({
   return (
     <div className="w-full font-sans transition-colors duration-700 bg-ankahe-bg text-ankahe-text relative">
       {/* Top Nav */}
-      <nav aria-label="Manual builder" className="sticky top-16 z-40 bg-ankahe-bg/80 backdrop-blur-md border-b border-ankahe-border/50">
-        <div className="max-w-7xl mx-auto px-6 h-14 grid grid-cols-[1fr_auto_1fr] items-center">
+      <div className="sticky top-6 z-40 px-4 flex justify-center pointer-events-none">
+        <nav aria-label="Manual builder" className="pointer-events-auto flex items-center justify-between gap-6 rounded-full border border-ankahe-border/50 bg-ankahe-bg/80 px-4 sm:px-6 h-14 backdrop-blur-2xl shadow-sm">
           <button
             onClick={onBack}
-            className="type-ui-label min-h-11 min-w-11 flex items-center justify-center justify-self-start gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+            className="type-ui-label min-h-11 flex items-center justify-center gap-2 px-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
             <CaretLeft size={20} weight="light" />
             <span className="hidden md:inline">Back to Hub</span>
           </button>
 
-          <div aria-hidden="true" />
+          <div aria-hidden="true" className="w-px h-4 bg-ankahe-border/50" />
 
-          <div className="justify-self-end">
+          <div>
             {view === "build" && hasManualContent && (
               <button
                 type="button"
                 onClick={() => setView("artifact")}
-                className="type-ui-label min-h-11 inline-flex items-center gap-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label min-h-11 inline-flex items-center gap-2 px-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
               >
                 <Sparkle size={18} weight="light" />
                 <span className="hidden sm:inline">Preview manual</span>
@@ -81,17 +81,17 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("build")}
-                className="type-ui-label min-h-11 inline-flex items-center gap-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label min-h-11 inline-flex items-center gap-2 px-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
               >
                 <FileText size={18} weight="light" />
                 <span className="hidden sm:inline">Back to answers</span>
               </button>
             )}
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8 md:py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32">
         <AnimatePresence mode="wait">
           {view === "build" ? (
             <motion.div
@@ -123,8 +123,8 @@ export function ManualBuilder({
                   <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview
                   </h3>
-                  <div className="rounded-xl border border-ankahe-border bg-ankahe-surface-preview p-1.5">
-                    <div className="overflow-hidden rounded-lg border border-ankahe-paper-border bg-ankahe-paper-muted">
+                  <div className="rounded-[2rem] border border-ankahe-border bg-ankahe-surface-preview p-2 shadow-sm">
+                    <div className="overflow-hidden rounded-[calc(2rem-0.5rem)] border border-ankahe-paper-border bg-ankahe-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
                       <ManualPreview
                         manual={composed}
                         mode={manual.mode}
