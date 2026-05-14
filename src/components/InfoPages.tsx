@@ -12,14 +12,14 @@ export function PrivacyPage() {
     <InfoShell
       eyebrow="Privacy"
       titleLines={{ main: "Nothing leaves", emphasis: "until you choose" }}
-      lead="Ankahe runs in the browser. You decide which answers become included, which stay private, and which are left out entirely."
+      lead="Ankahe runs entirely in your browser. You have complete control over what gets included, what stays private, and what gets tossed out."
     >
       <div className="grid gap-5 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
-          Answers live in this tab’s React memory. Close or refresh the tab and they are gone.
+          Your answers live right here in this tab's memory. If you close or refresh the page, they disappear. We never see them.
         </InfoCard>
         <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
-          Included answers can be compressed into the URL. Anyone with that link can open the included manual.
+          If you want to share your manual, the answers you included get compressed directly into the web address. Anyone who has that specific link can read it.
         </InfoCard>
       </div>
 
@@ -41,7 +41,7 @@ export function PrivacyPage() {
       <section className="grid gap-5 border-y border-ankahe-border py-8 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-text">The promise</h2>
         <p className="type-lead text-ankahe-muted">
-          No accounts. No databases. No analytics. A manual becomes shareable only when you create a link, QR code, image, or PDF from the included view.
+          No accounts. No databases. No analytics trackers looking over your shoulder. Your manual only becomes shareable the exact moment you decide to generate a link or export a PDF.
         </p>
       </section>
     </InfoShell>
@@ -51,24 +51,24 @@ export function PrivacyPage() {
 export function HowItWorksPage() {
   const items = [
     {
-      title: "Where do my answers live",
-      text: "In Memory Only mode, answers live in this tab. Refresh or close it and they are gone. Save in Link stores included answers inside the URL hash so the manual can reopen later.",
+      title: "Where do my answers live?",
+      text: "If you're in Memory Only mode, they live right here in this browser tab. Close it, and they vanish. If you choose 'Save in Link', the answers you mark as 'Included' get compressed straight into the URL so you can open them later.",
     },
     {
-      title: "What does private mean",
-      text: "Private answers stay local. They can help shape your own view, but they do not enter shared links, QR codes, or public exports.",
+      title: "What does 'Private' actually do?",
+      text: "Private means private. Those answers stay on your device. They might help you think through a problem, but they will never end up in a shared link, a QR code, or an exported PDF.",
     },
     {
-      title: "What gets shared",
-      text: "Only answers marked Share become included. Those answers can appear in the public preview, exported files, QR code, and shared link.",
+      title: "What gets shared?",
+      text: "Only the answers you explicitly mark as 'Share'. That's it. Those are the ones that show up when you send someone a link or download the manual.",
     },
     {
-      title: "What does Hide do",
-      text: "Hide leaves an answer out. It will not appear in the manual preview, shared link, QR code, or export.",
+      title: "What's the point of 'Hide'?",
+      text: "Sometimes you write an answer and realize you don't actually want to include it. 'Hide' just leaves it out completely. It's skipped in the final manual.",
     },
     {
-      title: "Do I need an account",
-      text: "No. There is no account, database, or analytics layer unless you explicitly add one later.",
+      title: "Do I need an account?",
+      text: "No. We don't have a database, and we don't track you. You're just writing on a blank page in your browser.",
     },
   ];
 
@@ -76,7 +76,7 @@ export function HowItWorksPage() {
     <InfoShell
       eyebrow="FAQ"
       titleLines={{ main: "Before you write", emphasis: "a few honest answers" }}
-      lead="Ankahe is small on purpose. It helps you make a manual, choose what belongs in it, and send only the parts you marked included."
+      lead="Ankahe is small on purpose. Write your manual, decide what actually belongs in it, and only share the parts you want people to read."
     >
       <div className="border-y border-ankahe-border">
         {items.map((item, index) => (

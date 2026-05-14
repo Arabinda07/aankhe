@@ -85,34 +85,34 @@ export function Switchboard({
 
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(420px,1fr)] lg:items-start lg:gap-16 lg:py-14">
-        <div className="min-w-0 max-w-[680px] space-y-7">
-          <div className="ankahe-enter ankahe-enter-0 space-y-5">
-            <h1 className="type-mixed-heading max-w-[min(100%,680px)] text-ankahe-text">
+      <section className="mx-auto grid max-w-[90rem] grid-cols-1 gap-12 px-5 py-10 sm:px-8 md:py-16 lg:grid-cols-[1.1fr_minmax(420px,1fr)] xl:grid-cols-[1.25fr_minmax(460px,1fr)] lg:items-start lg:gap-20 lg:py-20 xl:py-24">
+        <div className="min-w-0 max-w-[760px] space-y-10 lg:space-y-12 lg:pt-8 xl:pt-12">
+          <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
+            <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
               <span className="type-mixed-heading-main">Say it once</span>
               <span className="type-mixed-heading-emphasis">be understood</span>
             </h1>
             <p className="type-lead max-w-xl text-ankahe-muted">
-              Write the things people usually have to guess. Ankahe turns them into a private manual you can keep for yourself or share on purpose.
+              We all have operating instructions that other people just have to guess. Ankahe turns that invisible context into a private manual. Read it to yourself, or hand it to someone you trust.
             </p>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-4 sm:flex-row sm:items-center">
             <SoftButton size="md" onClick={() => onStart(recipient.mode, onboarding)} icon={<ArrowRight size={16} />}>
               Begin privately
             </SoftButton>
-            <button
-              type="button"
+            <SoftButton
+              variant="secondary"
+              size="md"
               onClick={onLearnMore}
-              className="type-ui-label min-h-11 px-3 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
             >
-              FAQ
-            </button>
+              Read the FAQ
+            </SoftButton>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-            <div className="flex items-center gap-2.5">
-              <ShieldCheck size={18} className="text-ankahe-muted" weight="light" />
+          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+            <div className="flex items-center gap-3">
+              <ShieldCheck size={20} className="text-ankahe-muted" weight="light" />
               <p className="type-caption text-ankahe-muted">Nothing is saved here. Answers stay in this tab.</p>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
@@ -121,12 +121,12 @@ export function Switchboard({
 
         <aside
           aria-label="Manual setup"
-          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-lg border border-ankahe-border bg-ankahe-surface p-3 sm:p-4 md:p-6"
+          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-xl border border-ankahe-border bg-ankahe-surface p-4 sm:p-6 md:p-8"
         >
-          <div className="rounded-md border border-ankahe-paper-border bg-ankahe-paper px-4 py-5 md:px-7 md:py-8">
-            <div className="space-y-7">
+          <div className="rounded-lg border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10">
+            <div className="space-y-10">
               <ChoiceGroup title="Who should understand you better">
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                   {RECIPIENTS.map((item) => (
                     <ChoiceCard
                       key={item.id}
@@ -142,9 +142,9 @@ export function Switchboard({
 
               <div className="border-t border-ankahe-paper-border" />
 
-              <div className="space-y-6">
+              <div className="space-y-10">
                 <ChoiceGroup title="What keeps getting misread" variant="secondary">
-                  <div className="flex flex-wrap gap-2.5">
+                  <div className="flex flex-wrap gap-3">
                     {MISUNDERSTANDINGS.map((item) => (
                       <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
                         {item}
@@ -154,7 +154,7 @@ export function Switchboard({
                 </ChoiceGroup>
 
                 <ChoiceGroup title="How much do you want to say" variant="secondary">
-                  <div className="grid gap-3">
+                  <div className="grid gap-4">
                     {DEPTHS.map((item) => (
                       <ChoiceCard
                         key={item.id}
@@ -178,7 +178,7 @@ export function Switchboard({
 
 function ChoiceGroup({ title, children, variant = "primary" }: { title: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   return (
-    <section className="space-y-3">
+    <section className="space-y-4">
       <h2 className={cn(
         variant === "primary"
           ? "type-panel-title text-ankahe-text"
@@ -211,7 +211,7 @@ function ChoiceCard({
       className={cn(
         "min-h-24 rounded-sm border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
-          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
+          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
           : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-control-hover"
       )}
     >
@@ -221,7 +221,7 @@ function ChoiceCard({
       </span>
       <span className={cn(
         "type-caption block",
-        active ? "text-ankahe-accent-dark/70" : "text-ankahe-muted"
+        active ? "text-ankahe-accent-text-muted" : "text-ankahe-muted"
       )}>{description}</span>
     </button>
   );
@@ -236,7 +236,7 @@ function SmallChoice({ active, onClick, children }: { key?: React.Key; active: b
       className={cn(
         "type-caption min-h-11 rounded-sm border px-3.5 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
-          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
+          ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-text"
           : "border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong"
       )}
     >

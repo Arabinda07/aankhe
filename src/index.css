@@ -79,6 +79,8 @@
   --ankahe-accent: oklch(0.477 0.109 7);
   --ankahe-accent-hover: oklch(0.431 0.103 6);
   --ankahe-accent-soft: oklch(0.89 0.052 7);
+  --ankahe-accent-text: oklch(0.28 0.06 7);
+  --ankahe-accent-text-muted: oklch(0.38 0.04 7);
   --ankahe-on-accent: oklch(0.983 0.012 68);
   --ankahe-sandal: oklch(0.625 0.1 50);
   --ankahe-sandal-soft: oklch(0.9 0.045 55);
@@ -119,6 +121,8 @@
   --color-accent: var(--ankahe-accent);
   --color-accent-hover: var(--ankahe-accent-hover);
   --color-accent-soft: var(--ankahe-accent-soft);
+  --color-accent-text: var(--ankahe-accent-text);
+  --color-accent-text-muted: var(--ankahe-accent-text-muted);
   --color-on-accent: var(--ankahe-on-accent);
   --color-sandal: var(--ankahe-sandal);
   --color-sandal-soft: var(--ankahe-sandal-soft);
@@ -163,6 +167,8 @@
   --ankahe-accent: oklch(0.61 0.095 18);
   --ankahe-accent-hover: oklch(0.67 0.09 20);
   --ankahe-accent-soft: oklch(0.255 0.044 18);
+  --ankahe-accent-text: oklch(0.92 0.03 18);
+  --ankahe-accent-text-muted: oklch(0.82 0.04 18);
   --ankahe-on-accent: oklch(0.96 0.015 42);
   --ankahe-sandal: oklch(0.7 0.085 64);
   --ankahe-sandal-soft: oklch(0.255 0.036 55);
@@ -249,6 +255,8 @@
   --color-ankahe-accent: var(--color-accent);
   --color-ankahe-accent-dark: var(--color-accent-hover);
   --color-ankahe-accent-soft: var(--color-accent-soft);
+  --color-ankahe-accent-text: var(--color-accent-text);
+  --color-ankahe-accent-text-muted: var(--color-accent-text-muted);
   --color-ankahe-on-accent: var(--color-on-accent);
   --color-ankahe-sandal: var(--color-sandal);
   --color-ankahe-sandal-soft: var(--color-sandal-soft);
