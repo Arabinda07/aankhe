@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ArrowRight, Eye, EyeSlash, LinkSimple, LockKey } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { Eye, EyeSlash, LinkSimple, LockKey } from "@phosphor-icons/react";
 import type React from "react";
 
 export function PrivacyPage() {
@@ -12,14 +11,14 @@ export function PrivacyPage() {
     <InfoShell
       eyebrow="Privacy"
       titleLines={{ main: "Nothing leaves", emphasis: "until you say so" }}
-      lead="No accounts. No databases. Just a burner space in your browser. You decide what stays and what goes."
+      lead="No accounts. No database. Your tab is the room. You decide what stays and what goes."
     >
       <div className="grid gap-6 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
-          Your answers live right here in this tab. Close it, refresh it, whatever—they disappear. We literally never see them.
+          Your answers live in this tab. Close it or refresh it and they disappear. Generate a link or export before you leave if you want to keep them.
         </InfoCard>
         <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
-          When you're ready, the answers you explicitly share get compressed into a secure web address. Anyone with that link can read it. Lose the link? It's gone forever.
+          Only answers marked Share are compressed into the link. Anyone with that link can read those included answers. Lose the link and it's gone.
         </InfoCard>
       </div>
 
@@ -41,7 +40,7 @@ export function PrivacyPage() {
       <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-artifact-heading text-ankahe-heading">The promise</h2>
         <p className="type-lead text-ankahe-muted">
-          You decide exactly what goes into the final envelope. We don't sneak anything extra in. Your weirdly specific boundary about texting stays right where you put it.
+          You decide what goes into the final envelope. We don't add private answers behind your back. The boundary you wrote for yourself stays right where you put it.
         </p>
       </section>
     </InfoShell>
@@ -52,19 +51,19 @@ export function HowItWorksPage() {
   const items = [
     {
       title: "Why actually use this?",
-      text: "Because people aren't mind readers. Whether it's a new boss, a new situationship, or a friend who misreads your texts. Handing them the cheat sheet saves everyone unnecessary friction.",
+      text: "Because repeating yourself gets old. New manager, new partner, friend who reads your silence wrong, same problem: they need context, and you don't want to rebuild it from scratch every time.",
     },
     {
       title: "How do I use it?",
-      text: "Treat it like a private notes app. Pick a category. Write the feral, unedited truth. Keep the messy parts for yourself. Put the clean version in the final link.",
+      text: "Pick a manual. Answer what fits. Mark each answer Share, Private, or Hide. The honest draft can stay local; the cleaner version becomes the link.",
     },
     {
       title: "Is this actually private?",
-      text: "Yes. Nothing saves to a server. We don't want your data. We don't want your email. Close this tab, and your answers vanish. You only keep them if you generate a link or save the PDF.",
+      text: "Yes. Nothing saves to a server. There's no account and no email. Close the tab and unsaved answers vanish. To keep a manual, generate a link or export it before you leave.",
     },
     {
       title: "What do the buttons do?",
-      text: "'Share' puts the answer in your final link. 'Private' keeps it visible only to you on your screen. 'Hide' tosses it entirely. You control the narrative.",
+      text: "'Share' goes into the final link or export. 'Private' stays visible only in your tab. 'Hide' leaves it out. You can change your mind before sending.",
     },
   ];
 
@@ -72,7 +71,7 @@ export function HowItWorksPage() {
     <InfoShell
       eyebrow="Why & How"
       titleLines={{ main: "Why are we", emphasis: "doing this?" }}
-      lead="Because repeating yourself is exhausting. Here's the actual deal with how this works."
+      lead="Repeating yourself is exhausting. Ankahe keeps the messy draft private and the finished version shareable."
     >
       <div>
         {items.map((item, index) => (
@@ -88,22 +87,6 @@ export function HowItWorksPage() {
           </section>
         ))}
       </div>
-
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-xl text-center space-y-6">
-          <p className="type-eyebrow text-ankahe-sandal">Begin</p>
-          <h2 className="type-panel-title text-ankahe-heading text-lg md:text-xl">
-            Start with the manual that fits the conversation
-          </h2>
-          <Link
-            to="/"
-            className="type-ui-label inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-ankahe-accent px-8 py-3 text-ankahe-on-accent transition-colors hover:bg-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
-          >
-            Choose your manual
-            <ArrowRight size={18} weight="light" />
-          </Link>
-        </div>
-      </section>
     </InfoShell>
   );
 }

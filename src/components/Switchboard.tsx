@@ -16,7 +16,7 @@ import {
 } from "@phosphor-icons/react";
 import type React from "react";
 import { useMemo, useState } from "react";
-import { ManualDepth, ManualState, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
+import { ManualDepth, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
 import { StorageModeToggle } from "./StorageModeToggle";
@@ -39,13 +39,13 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "Manager", description: "Work vibes, focus hours, and how you handle stress.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "teammate", label: "Teammate", description: "Collab rhythm and how to actually hand things off to you.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
-  { id: "partner", label: "Partner", description: "Care, boundaries, and the stuff they usually misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
-  { id: "friend", label: "Friend", description: "How to support you without having to guess.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "talk", label: "Difficult talk", description: "A cheat sheet for a conversation you're dreading.", mode: "talk", icon: <FileText size={22} weight="light" /> },
-  { id: "self", label: "Myself", description: "Just a private brain dump to figure your own head out.", mode: "me", icon: <User size={22} weight="light" /> },
-  { id: "sync", label: "Shared note", description: "A shared note so we can actually get on the same page.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "manager", label: "Manager", description: "How you work, focus, and handle pressure.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
+  { id: "teammate", label: "Teammate", description: "Collaboration rhythm, handoffs, and what helps work move.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
+  { id: "partner", label: "Partner", description: "Care, boundaries, and what tends to get misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
+  { id: "friend", label: "Friend", description: "What support looks like when guessing is getting old.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
+  { id: "talk", label: "Difficult talk", description: "A small brief for a conversation you keep putting off.", mode: "talk", icon: <FileText size={22} weight="light" /> },
+  { id: "self", label: "Myself", description: "A private place to get your thoughts out first.", mode: "me", icon: <User size={22} weight="light" /> },
+  { id: "sync", label: "Shared note", description: "A note for getting on the same page without circling it.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
@@ -59,8 +59,8 @@ const MISREAD_TOPICS = [
 
 const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
   { id: "note", label: "5-minute note", description: "Just the essentials for a quick sync." },
-  { id: "manual", label: "10-minute manual", description: "Enough detail to actually be useful." },
-  { id: "deep", label: "Deeper manual", description: "The full deep dive. Take your time." },
+  { id: "manual", label: "10-minute manual", description: "Enough context to be useful." },
+  { id: "deep", label: "Deeper manual", description: "The full version. Go slowly." },
 ];
 
 export function Switchboard({
@@ -97,7 +97,7 @@ export function Switchboard({
               Everything <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-lg text-ankahe-muted">
-              Explaining your whole deal to new people is exhausting. Write it down once. Keep the messy parts to yourself. Hand them the link. Skip the guessing games.
+              Explaining your whole deal to new people gets old. Write the honest version first, keep the private parts local, then send the clean link.
             </p>
           </div>
 

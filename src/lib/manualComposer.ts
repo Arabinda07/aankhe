@@ -136,14 +136,14 @@ function titleForFormat(baseTitle: string, format: ArtifactFormat): string {
 
 function buildRecipientNote(format: ArtifactFormat): string {
   if (format === "note" || format === "conversation") {
-    return "This is not a demand or a diagnosis. It is context for a conversation with more care and less guessing.";
+    return "This is context for the conversation, not a demand or a diagnosis. Read it as a way to guess less and ask better.";
   }
 
   if (format === "work") {
-    return "This is not a performance profile. It is context for working with me clearly and respectfully.";
+    return "This is not a performance profile. It is context for working with me clearly and with fewer assumptions.";
   }
 
-  return "This is not a demand or a diagnosis. It is context: a way to understand me with more care and less guessing.";
+  return "This is not a demand or a diagnosis. It is context: a way to understand me without making me start from zero.";
 }
 
 function getFormatSectionLimit(format: ArtifactFormat): number {
@@ -156,21 +156,21 @@ function defaultAtAGlance(mode: ModeId, answers: ManualState["answers"]): string
   if (mode === "me") {
     const name = answers["M_01"];
     if (name) {
-      return `${name} connects best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with ${name}.`;
+      return `${name} connects best when people ask clearly, listen closely, and do not make them start from zero.`;
     }
 
-    return "I connect best through intentional communication and thoughtful attention. This manual reflects how to understand, care for, and collaborate with me.";
+    return "I connect best when people ask clearly, listen closely, and do not make me start from zero.";
   }
 
   if (mode === "work") {
-    return "I do my best work when expectations are clear and communication is transparent. This guide outlines my professional rhythm, focus needs, and feedback preferences.";
+    return "I do my best work when expectations are clear, context is visible, and feedback arrives early enough to use.";
   }
 
   if (mode === "talk") {
     return "I can have hard conversations more clearly when directness comes with enough room to respond carefully.";
   }
 
-  return "We understand each other better when we make fewer assumptions and name the context underneath our reactions.";
+  return "We understand each other better when we make fewer assumptions and say what is underneath the reaction.";
 }
 
 function applyTone(text: string, tone: TonePreference, question: Question): string {
@@ -206,13 +206,13 @@ function buildRecognitionSummaries(state: ManualState, viewMode: ManualViewMode)
   const summaries: string[] = [];
 
   if (state.onboarding?.misunderstanding) {
-    summaries.push(`So far, your manual is saying this is about ${state.onboarding.misunderstanding}, not a generic profile.`);
+    summaries.push(`So far, your manual is about ${state.onboarding.misunderstanding}, not a generic profile.`);
   }
 
   if (joined.includes("direct") && (joined.includes("time to think") || joined.includes("room to pause") || joined.includes("process"))) {
-    summaries.push("You seem to value direct communication, but you may need time before you can respond well. The manual should say both, so people do not mistake your pause for avoidance.");
+    summaries.push("You value direct communication, but you may need time before you can respond well. The manual should say both, so people do not mistake your pause for avoidance.");
   } else if (joined.includes("space") || joined.includes("quiet")) {
-    summaries.push("You seem to do better when people leave room for your pace instead of filling the silence with guesses.");
+    summaries.push("You do better when people leave room for your pace instead of filling the silence with guesses.");
   } else if (joined.includes("context") || joined.includes("clear")) {
     summaries.push("Your answers point toward a need for clear context before people expect a useful response.");
   }
