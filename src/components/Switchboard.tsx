@@ -6,6 +6,7 @@
 import {
   ArrowRight,
   Briefcase,
+  CaretDown,
   ChatCenteredText,
   FileText,
   HandHeart,
@@ -47,7 +48,7 @@ const RECIPIENTS: RecipientOption[] = [
   { id: "sync", label: "Both of us", description: "A shared note so we can actually get on the same page.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
-const MISUNDERSTANDINGS = [
+const MISREAD_TOPICS = [
   "how I actually communicate",
   "what happens when I'm stressed",
   "how I fight",
@@ -69,7 +70,7 @@ export function Switchboard({
   onStorageModeChange,
 }: SwitchboardProps) {
   const [recipientId, setRecipientId] = useState<RecipientId>("manager");
-  const [misunderstanding, setMisunderstanding] = useState(MISUNDERSTANDINGS[0]);
+  const [misunderstanding, setMisunderstanding] = useState(MISREAD_TOPICS[0]);
   const [depth, setDepth] = useState<ManualDepth>("manual");
 
   const recipient = useMemo(
@@ -83,11 +84,15 @@ export function Switchboard({
     depth,
   };
 
+  const scrollToOnboarding = () => {
+    document.getElementById("onboarding")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="bg-ankahe-bg">
       <section className="mx-auto grid max-w-[90rem] grid-cols-1 gap-12 px-5 py-16 sm:px-8 md:py-24 lg:grid-cols-[1.1fr_minmax(420px,1fr)] xl:grid-cols-[1.25fr_minmax(460px,1fr)] lg:items-start lg:gap-20 lg:py-32 xl:py-40">
         <div className="min-w-0 max-w-[760px] space-y-10 lg:space-y-12 lg:pt-8 xl:pt-12">
-          <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
+          <div className="ankahe-enter ankahe-enter-0 space-y-8 md:space-y-10">
             <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
               <span className="type-mixed-heading-main">Everything</span>
               <span className="type-mixed-heading-emphasis">before you ask</span>
@@ -98,8 +103,8 @@ export function Switchboard({
           </div>
 
           <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <SoftButton size="md" onClick={() => onStart(recipient.mode, onboarding)} icon={<ArrowRight size={16} />}>
-              Start writing
+            <SoftButton size="md" onClick={scrollToOnboarding} icon={<CaretDown size={16} />}>
+              Pick who this is for
             </SoftButton>
             <SoftButton
               variant="secondary"
@@ -109,19 +114,12 @@ export function Switchboard({
               How does this actually work?
             </SoftButton>
           </div>
-
-          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-            <div className="flex items-center gap-3">
-              <ShieldCheck size={20} className="text-ankahe-muted" weight="light" />
-              <p className="type-caption text-ankahe-muted">Nothing is saved to a server. This tab is a burner space.</p>
-            </div>
-            <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
-          </div>
         </div>
 
         <aside
+          id="onboarding"
           aria-label="Manual setup"
-          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm"
+          className="ankahe-enter ankahe-enter-aside min-w-0 rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-20"
         >
           <div className="rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
             <div className="space-y-10">
@@ -145,7 +143,7 @@ export function Switchboard({
               <div className="space-y-10">
                 <ChoiceGroup title="What keeps getting misread" variant="secondary">
                   <div className="flex flex-wrap gap-3">
-                    {MISUNDERSTANDINGS.map((item) => (
+                    {MISREAD_TOPICS.map((item) => (
                       <SmallChoice key={item} active={misunderstanding === item} onClick={() => setMisunderstanding(item)}>
                         {item}
                       </SmallChoice>
@@ -168,6 +166,25 @@ export function Switchboard({
                   </div>
                 </ChoiceGroup>
               </div>
+
+              <div className="border-t border-ankahe-paper-border" />
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck size={20} className="text-ankahe-muted" weight="light" />
+                  <p className="type-caption text-ankahe-muted">Nothing is saved to a server. This tab is a burner space.</p>
+                </div>
+                <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
+              </div>
+
+              <SoftButton
+                size="md"
+                onClick={() => onStart(recipient.mode, onboarding)}
+                icon={<ArrowRight size={16} />}
+                className="w-full"
+              >
+                {ctaTextForRecipient(recipientId)}
+              </SoftButton>
             </div>
           </div>
         </aside>
@@ -243,4 +260,17 @@ function SmallChoice({ active, onClick, children }: { key?: React.Key; active: b
       {children}
     </button>
   );
+}
+
+function ctaTextForRecipient(id: RecipientId): string {
+  const labels: Record<RecipientId, string> = {
+    manager: "Build your work manual",
+    teammate: "Build your work manual",
+    partner: "Build your personal manual",
+    friend: "Build your personal manual",
+    talk: "Prep the talk",
+    self: "Start your brain dump",
+    sync: "Write your shared note",
+  };
+  return labels[id];
 }
