@@ -48,18 +48,18 @@ const RECIPIENTS: RecipientOption[] = [
 ];
 
 const MISUNDERSTANDINGS = [
-  "how I communicate",
-  "what I need under pressure",
-  "how I handle conflict",
+  "how I actually communicate",
+  "what happens when I'm stressed",
+  "how I fight",
   "how I show care",
-  "how I work best",
-  "what I need but struggle to ask for",
+  "how I actually work",
+  "what I won't ask for",
 ];
 
 const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
-  { id: "note", label: "5-minute note", description: "A compact version for one conversation." },
-  { id: "manual", label: "10-minute manual", description: "The clearest balance of depth and speed." },
-  { id: "deep", label: "Deeper manual", description: "More room for nuance and private context." },
+  { id: "note", label: "5-minute note", description: "Just the essentials for a quick sync." },
+  { id: "manual", label: "10-minute manual", description: "Enough detail to actually be useful." },
+  { id: "deep", label: "Deeper manual", description: "The full deep dive. Take your time." },
 ];
 
 export function Switchboard({
@@ -89,31 +89,31 @@ export function Switchboard({
         <div className="min-w-0 max-w-[760px] space-y-10 lg:space-y-12 lg:pt-8 xl:pt-12">
           <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
-              <span className="type-mixed-heading-main">Here's everything</span>
+              <span className="type-mixed-heading-main">Everything</span>
               <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-xl text-ankahe-muted">
-              Tired of typing "tell me about yourself" into the void? Same. Pick a vibe, answer the questions, and just hand them the link. Skip the small talk. Get understood.
+              Explaining your whole deal to new people is exhausting. Write it down once, keep the messy parts private, and just hand them the link. Skip the guessing games.
             </p>
           </div>
 
           <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-4 sm:flex-row sm:items-center">
             <SoftButton size="md" onClick={() => onStart(recipient.mode, onboarding)} icon={<ArrowRight size={16} />}>
-              Begin privately
+              Start writing
             </SoftButton>
             <SoftButton
               variant="secondary"
               size="md"
               onClick={onLearnMore}
             >
-              Wait, how does this work?
+              How does this actually work?
             </SoftButton>
           </div>
 
           <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
             <div className="flex items-center gap-3">
               <ShieldCheck size={20} className="text-ankahe-muted" weight="light" />
-              <p className="type-caption text-ankahe-muted">Nothing is saved here. Answers stay in this tab.</p>
+              <p className="type-caption text-ankahe-muted">Nothing is saved to a server. This tab is a burner space.</p>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
           </div>
