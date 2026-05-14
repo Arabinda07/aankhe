@@ -89,17 +89,17 @@ export function HowItWorksPage() {
         ))}
       </div>
 
-      <section className="border-y border-ankahe-border bg-ankahe-sandal-soft/45 py-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-2xl space-y-2">
-            <p className="type-eyebrow text-ankahe-sandal">Begin</p>
-            <h2 className="type-artifact-heading text-ankahe-text">Start with the manual that fits the conversation</h2>
-          </div>
+      <section className="border-t border-ankahe-border py-14 md:py-20">
+        <div className="mx-auto max-w-xl text-center space-y-6">
+          <p className="type-eyebrow text-ankahe-sandal">Begin</p>
+          <h2 className="type-panel-title text-ankahe-text text-lg md:text-xl">
+            Start with the manual that fits the conversation
+          </h2>
           <Link
             to="/"
-            className="type-ui-label inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-ankahe-accent px-6 py-3 text-ankahe-on-accent transition-colors hover:bg-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
+            className="type-ui-label inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-ankahe-accent px-8 py-3 text-ankahe-on-accent transition-colors hover:bg-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-accent focus-visible:ring-offset-2"
           >
-            Choose a manual
+            Pick who this is for
             <ArrowRight size={18} weight="light" />
           </Link>
         </div>
