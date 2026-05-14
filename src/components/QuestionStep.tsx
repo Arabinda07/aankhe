@@ -29,14 +29,6 @@ import type { AnswerValue } from "./inputs";
 // Re-export AnswerInput for consumers that imported it from QuestionStep
 export { AnswerInput } from "./inputs";
 
-/** Single-select components that should auto-advance after choosing. */
-const AUTO_ADVANCE_COMPONENTS = new Set([
-  "radioCards",
-  "pairedChoice",
-  "segmentedTriState",
-  "labeledScale",
-  "nativeSelect",
-]);
 
 interface QuestionStepProps {
   question: Question;
@@ -49,6 +41,7 @@ interface QuestionStepProps {
   onVisibilityChange: (vis: Visibility) => void;
   onNext: () => void;
   onBack?: () => void;
+  onSensitiveSkip: (action: { shouldClearAnswer: boolean, visibility: any }) => void;
   isFirst: boolean;
   isLast: boolean;
 }
@@ -64,6 +57,7 @@ export function QuestionStep({
   onVisibilityChange,
   onNext,
   onBack,
+  onSensitiveSkip,
   isFirst,
   isLast
 }: QuestionStepProps) {
@@ -71,7 +65,6 @@ export function QuestionStep({
   const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
   const [isVisibilityHelpOpen, setIsVisibilityHelpOpen] = useState(false);
   const noteRef = useRef<HTMLTextAreaElement>(null);
-  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout>>(null);
   const questionLabelId = `question-${question.id}-label`;
   const helperTextId = question.helperText ? `question-${question.id}-helper` : undefined;
   const visibilityDescriptionId = `question-${question.id}-visibility-description`;
@@ -80,15 +73,7 @@ export function QuestionStep({
   const showAnswerDetails = hasAnswer || hasNote;
 
   const component = getAnswerComponentForQuestion(question);
-  const shouldAutoAdvance = AUTO_ADVANCE_COMPONENTS.has(component);
-  const needsExplicitContinue = !shouldAutoAdvance;
-
-  // Clean up auto-advance timer on unmount
-  useEffect(() => {
-    return () => {
-      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
-    };
-  }, []);
+  const needsExplicitContinue = !["radioCards", "pairedChoice", "segmentedTriState", "labeledScale", "nativeSelect"].includes(component);
 
   useEffect(() => {
     if (note.trim().length > 0) setIsNuanceOpen(true);
@@ -96,12 +81,7 @@ export function QuestionStep({
 
   const handleChange = useCallback((val: string | string[] | number) => {
     onChange(val);
-    if (shouldAutoAdvance) {
-      // Brief delay so the user sees their selection highlight
-      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
-      autoAdvanceTimer.current = setTimeout(() => onNext(), 350);
-    }
-  }, [onChange, shouldAutoAdvance, onNext]);
+  }, [onChange]);
 
   const revealNuance = () => {
     setIsNuanceOpen(true);
@@ -109,14 +89,8 @@ export function QuestionStep({
   };
 
   const handleSensitiveSkip = (reason: "doesNotFit" | "notReady") => {
-    if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
     const action = getSensitiveSkipAction(reason);
-    if (action.shouldClearAnswer) {
-      onClear();
-      onNoteChange("");
-    }
-    onVisibilityChange(action.visibility);
-    onNext();
+    onSensitiveSkip(action);
   };
 
   return (

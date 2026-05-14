@@ -90,34 +90,35 @@ export function Switchboard({
 
   return (
     <div className="bg-ankahe-bg">
-      <section className="mx-auto flex max-w-4xl flex-col items-center gap-16 px-5 py-16 text-center sm:px-8 md:gap-24 md:py-24 lg:py-32 xl:py-40">
-        <div className="flex w-full min-w-0 flex-col items-center space-y-10 lg:space-y-12">
-          <div className="ankahe-enter ankahe-enter-0 space-y-8 md:space-y-10">
-            <h1 className="type-mixed-heading max-w-[min(100%,720px)] text-ankahe-text">
+      <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-5 py-12 text-left sm:px-8 md:py-20 lg:grid-cols-[1fr_minmax(auto,600px)] lg:items-start lg:gap-12 xl:gap-24 lg:py-28 xl:py-32">
+        <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
+          <div className="ankahe-enter ankahe-enter-0 space-y-6 md:space-y-8">
+            <h1 className="type-mixed-heading text-ankahe-text">
               <span className="type-mixed-heading-main">Everything</span>
               <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
-            <p className="type-lead max-w-xl text-ankahe-muted">
+            <p className="type-lead max-w-lg text-ankahe-muted">
               Explaining your whole deal to new people is exhausting. Write it down once, keep the messy parts private, and just hand them the link. Skip the guessing games.
             </p>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-1 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center">
-            <SoftButton size="md" onClick={scrollToOnboarding} icon={<CaretDown size={16} />}>
-              Pick who this is for
+          <div className="ankahe-enter ankahe-enter-1 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <SoftButton size="md" onClick={scrollToOnboarding} icon={<CaretDown size={16} className="lg:hidden" />} className="w-full sm:w-auto">
+              Start building
             </SoftButton>
             <SoftButton
               variant="secondary"
               size="md"
               onClick={onLearnMore}
+              className="w-full sm:w-auto"
             >
-              How does this actually work?
+              How does this work?
             </SoftButton>
           </div>
 
-          <div className="ankahe-enter ankahe-enter-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center sm:gap-8">
-            <div className="flex items-center justify-center gap-3">
-              <ShieldCheck size={20} className="text-ankahe-muted" weight="light" />
+          <div className="ankahe-enter ankahe-enter-2 flex flex-col items-start gap-5">
+            <div className="flex items-center gap-3">
+              <ShieldCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
               <p className="type-caption text-ankahe-muted">Nothing is saved to a server. This tab is a burner space.</p>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
@@ -127,7 +128,7 @@ export function Switchboard({
         <aside
           id="onboarding"
           aria-label="Manual setup"
-          className="ankahe-enter ankahe-enter-aside w-full min-w-0 max-w-2xl text-left rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-20"
+          className="ankahe-enter ankahe-enter-aside w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
         >
           <div className="rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
             <div className="space-y-10">

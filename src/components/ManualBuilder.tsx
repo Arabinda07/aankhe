@@ -7,7 +7,8 @@ import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'r
 import { useParams, Navigate } from 'react-router-dom';
 import { ManualWorkspace } from '../hooks/useManualState';
 import type { ModeId } from '../lib/schemaTypes';
-import { FormRenderer } from './FormRenderer';
+import { useQuestionController } from '../hooks/useQuestionController';
+import { QuestionStep } from './QuestionStep';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
 import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
@@ -37,6 +38,8 @@ export function ManualBuilder({
     answerValueIsPresent(manual.getAnswer(question.id)) ||
     manual.getAnswerNote(question.id).trim().length > 0
   )) ?? false;
+
+  const controller = manual ? useQuestionController(manual.config, manual, () => setView("artifact")) : null;
 
   useEffect(() => {
     manual?.activate();
@@ -101,18 +104,42 @@ export function ManualBuilder({
             >
               {/* Form Side */}
               <div className="space-y-12">
-                <FormRenderer
-                  config={manual.config}
-                  getAnswer={manual.getAnswer}
-                  getAnswerNote={manual.getAnswerNote}
-                  getVisibility={manual.getVisibility}
-                  updateAnswer={manual.updateAnswer}
-                  clearAnswer={manual.clearAnswer}
-                  updateAnswerNote={manual.updateAnswerNote}
-                  updateVisibility={manual.updateVisibility}
-                  recognitionSummaries={composed.recognitionSummaries}
-                  onFinish={() => setView("artifact")}
-                />
+                {controller && (
+                  <div className="space-y-8 md:space-y-10">
+                    <div className="space-y-3 md:space-y-4">
+                      <div className="type-meta flex items-center justify-between text-ankahe-muted">
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-ankahe-surface-soft text-ankahe-text">
+                            Section {controller.sectionIndex + 1}
+                          </span>
+                          <span>{controller.section?.title}</span>
+                        </div>
+                        <span>{controller.currentStepIndex + 1} / {controller.totalSteps}</span>
+                      </div>
+                      
+                      <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-ankahe-surface-soft">
+                        <motion.div 
+                          className="h-full w-full bg-ankahe-accent origin-left"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: controller.progress / 100 }}
+                          transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+                        />
+                      </div>
+                    </div>
+
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={controller.currentQuestion.id}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <QuestionStep {...controller.getStepProps()} />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                )}
               </div>
 
               {/* Preview Side (Desktop only) */}
