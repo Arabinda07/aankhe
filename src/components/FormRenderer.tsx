@@ -101,7 +101,7 @@ export function FormRenderer({
 
       {recognitionSummaries.length > 0 && (
         <div className="rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-6">
-          <p className="type-meta mb-3 text-ankahe-accent-dark">So far, your manual is saying</p>
+          <p className="type-meta mb-3 text-ankahe-sandal">So far, your manual is saying</p>
           <p className="type-artifact-prose text-ankahe-text">{recognitionSummaries[0]}</p>
         </div>
       )}

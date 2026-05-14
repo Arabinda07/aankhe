@@ -19,10 +19,10 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
       <div className="max-w-3xl mx-auto space-y-16">
         {/* Header */}
         <div className="space-y-6 border-b border-ankahe-paper-border pb-12 text-center">
-          <p className="type-eyebrow text-ankahe-accent">
+          <p className="type-eyebrow text-ankahe-sandal">
             {manual.subtitle}
           </p>
-          <h1 className={cn("type-artifact-title text-ankahe-accent-dark")}>
+          <h1 className={cn("type-artifact-title text-ankahe-text")}>
             {manual.title}
           </h1>
           <div className="type-meta flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-ankahe-muted">
@@ -42,7 +42,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         {manual.atAGlance && (
           <section className="bg-ankahe-paper-muted p-8 md:p-12 rounded-sm border border-ankahe-paper-border">
             <h2 className="type-meta text-ankahe-muted mb-4 text-center">At a Glance</h2>
-            <p className="type-artifact-prose text-center italic text-ankahe-accent-dark">
+            <p className="type-artifact-prose text-center italic text-ankahe-text">
               {manual.atAGlance}
             </p>
           </section>
@@ -50,7 +50,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.recognitionSummaries.length > 1 && (
           <section className="space-y-4">
-            <h2 className="type-artifact-heading text-ankahe-accent-dark">What this is noticing</h2>
+            <h2 className="type-artifact-heading text-ankahe-text">What this is noticing</h2>
             <div className="space-y-4">
               {manual.recognitionSummaries.slice(1, 3).map((summary) => (
                 <p key={summary} className="type-artifact-prose text-ankahe-text">
@@ -66,7 +66,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           {manual.sections.map((section: ComposedSection) => (
             <section key={section.id} className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-16 items-start">
               <div className="space-y-4 md:sticky md:top-8">
-                <h3 className="type-artifact-heading text-ankahe-accent-dark">
+                <h3 className="type-artifact-heading text-ankahe-text">
                   {section.title}
                 </h3>
                 <p className="type-caption text-ankahe-muted max-w-xs">{section.description}</p>

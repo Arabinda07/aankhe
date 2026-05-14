@@ -22,7 +22,8 @@ export function useArtifactExport(
     try {
       const pageColor =
         getComputedStyle(document.documentElement).getPropertyValue("--color-page").trim() ||
-        "rgb(248 240 234)";
+        getComputedStyle(document.body).backgroundColor ||
+        "transparent";
       const { toPng } = await import("html-to-image");
       const dataUrl = await toPng(artifactRef.current, {
         cacheBust: true,

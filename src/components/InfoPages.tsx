@@ -84,7 +84,7 @@ export function HowItWorksPage() {
             key={item.title}
             className="grid gap-5 border-b border-ankahe-border py-7 last:border-b-0 md:grid-cols-[5rem_1fr] md:items-start md:py-8"
           >
-            <span className="type-meta text-ankahe-accent">{String(index + 1).padStart(2, "0")}</span>
+            <span className="type-meta text-ankahe-muted">{String(index + 1).padStart(2, "0")}</span>
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-ankahe-text">{item.title}</h2>
               <p className="type-lead text-ankahe-muted">{item.text}</p>
@@ -93,10 +93,10 @@ export function HowItWorksPage() {
         ))}
       </div>
 
-      <section className="border-y border-ankahe-border bg-sandal-soft/45 py-8">
+      <section className="border-y border-ankahe-border bg-ankahe-sandal-soft/45 py-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl space-y-2">
-            <p className="type-eyebrow text-sandal">Begin</p>
+            <p className="type-eyebrow text-ankahe-sandal">Begin</p>
             <h2 className="type-artifact-heading text-ankahe-text">Start with the manual that fits the conversation</h2>
           </div>
           <Link
@@ -132,7 +132,7 @@ function InfoShell({
     <div className="bg-ankahe-bg">
       <section className="mx-auto max-w-5xl px-6 py-16 md:py-24">
         <div className="mb-12 max-w-3xl space-y-5">
-          <p className="type-eyebrow text-ankahe-accent">{eyebrow}</p>
+          <p className="type-eyebrow text-ankahe-sandal">{eyebrow}</p>
           {titleLines ? (
             <h1 className="type-mixed-heading type-mixed-heading-page text-ankahe-text">
               <span className="type-mixed-heading-main">{titleLines.main}</span>
@@ -160,7 +160,7 @@ function InfoCard({
 }) {
   return (
     <section className="rounded-md border border-ankahe-border bg-ankahe-surface px-6 py-7">
-      <div className="mb-5 text-ankahe-accent">{icon}</div>
+      <div className="mb-5 text-ankahe-muted">{icon}</div>
       <h2 className="type-artifact-heading text-ankahe-text">{title}</h2>
       <p className="type-lead mt-3 text-ankahe-muted">{children}</p>
     </section>
@@ -178,7 +178,7 @@ function VisibilityRule({
 }) {
   return (
     <div className="rounded-sm border border-ankahe-border bg-ankahe-bg px-4 py-5">
-      <div className="mb-3 text-ankahe-accent">{icon}</div>
+      <div className="mb-3 text-ankahe-muted">{icon}</div>
       <h3 className="type-panel-title text-ankahe-text">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>
     </div>

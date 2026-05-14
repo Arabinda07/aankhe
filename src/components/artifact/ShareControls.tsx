@@ -65,8 +65,8 @@ export function ShareControls({
           </div>
 
           {sharedUrl.length > 2000 && (
-            <div className="type-caption p-3 bg-ankahe-warning-soft rounded-sm border border-ankahe-warning/25 flex gap-3 text-ankahe-warning">
-              <WarningCircle size={18} className="shrink-0 text-ankahe-warning" weight="light" />
+            <div className="type-caption flex gap-3 rounded-sm border border-ankahe-danger/25 bg-ankahe-danger-soft p-3 text-ankahe-danger">
+              <WarningCircle size={18} className="shrink-0 text-ankahe-danger" weight="light" />
               <p>
                 This URL is long. Saving an image or PDF may be more reliable in older apps.
               </p>

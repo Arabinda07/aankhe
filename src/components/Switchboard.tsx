@@ -114,7 +114,7 @@ export function Switchboard({
             transition={{ delay: 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex items-start gap-3">
-              <ShieldCheck size={22} className="mt-0.5 text-ankahe-accent" weight="light" />
+              <ShieldCheck size={22} className="mt-0.5 text-ankahe-muted" weight="light" />
               <div className="space-y-1">
                 <p className="type-ui-label text-ankahe-text">Nothing is saved here</p>
                 <p className="type-caption text-ankahe-muted">Answers stay in this tab unless you choose Save in Link</p>
@@ -209,7 +209,7 @@ export function Switchboard({
 function PromiseItem({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
     <li className="flex items-start gap-3.5">
-      <div className="mt-0.5 text-ankahe-accent/80">{icon}</div>
+      <div className="mt-0.5 text-ankahe-muted">{icon}</div>
       <div>
         <p className="type-ui-label text-ankahe-text">{title}</p>
         <p className="type-caption text-ankahe-muted">{text}</p>

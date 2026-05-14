@@ -128,7 +128,7 @@ export function VisibilityControls({
                   "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
                   isExcluded
                     ? "bg-ankahe-control-selected border-ankahe-border text-ankahe-muted"
-                    : "bg-ankahe-accent/10 border-ankahe-accent text-ankahe-accent-dark"
+                    : "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
                 )}
               >
                 {section.title}
@@ -147,7 +147,7 @@ export function VisibilityControls({
           </div>
           <div className="type-caption flex items-center justify-between">
             <span className="text-ankahe-muted">Private answers</span>
-            <span className="text-ankahe-accent-dark">{manual.privateCount}</span>
+            <span className="text-ankahe-private">{manual.privateCount}</span>
           </div>
           <div className="type-caption flex items-center justify-between">
             <span className="text-ankahe-muted">Omitted answers</span>
@@ -158,7 +158,7 @@ export function VisibilityControls({
           Share links and QR codes use included answers only.
         </p>
         {viewMode === "included" && (
-          <p className="type-ui-label rounded-sm border border-ankahe-accent/25 bg-ankahe-accent-soft px-3 py-2 text-ankahe-accent-dark">
+          <p className="type-ui-label rounded-sm border border-ankahe-sandal/25 bg-ankahe-sandal-soft px-3 py-2 text-ankahe-sandal">
             This version is safe to send.
           </p>
         )}

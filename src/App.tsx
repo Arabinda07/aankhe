@@ -67,9 +67,9 @@ function AppContent() {
                 <div className="bg-ankahe-bg">
                   {hashError && (
                     <div className="max-w-4xl mx-auto px-6 pt-6">
-                      <div className="bg-ankahe-surface-soft border border-ankahe-border text-ankahe-text p-4 rounded-lg flex items-start gap-4 shadow-sm">
+                      <div className="flex items-start gap-4 rounded-lg border border-ankahe-danger/25 bg-ankahe-danger-soft p-4 text-ankahe-text shadow-sm">
                         <div className="flex-1 space-y-1">
-                          <h4 className="type-panel-title text-ankahe-accent-dark">
+                          <h4 className="type-panel-title text-ankahe-danger">
                             Link could not be restored
                           </h4>
                           <p className="type-caption">
