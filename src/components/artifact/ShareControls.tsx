@@ -4,7 +4,7 @@
  */
 
 import { useId, useState } from "react";
-import { Check, Copy, QrCode, ShareNetwork, WarningCircle } from "@phosphor-icons/react";
+import { Check, Copy, EnvelopeSimple, QrCode, WarningCircle } from "@phosphor-icons/react";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { QRCodeSVG } from "qrcode.react";
@@ -30,7 +30,7 @@ export function ShareControls({
   return (
     <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
       <h3 className="type-panel-title text-ankahe-heading flex items-center gap-2">
-        <ShareNetwork size={20} className="text-ankahe-accent" weight="light" />
+        <EnvelopeSimple size={20} className="text-ankahe-accent" weight="light" />
         Share link
       </h3>
 

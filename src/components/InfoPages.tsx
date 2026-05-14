@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Eye, EyeSlash, LinkSimple, LockKey } from "@phosphor-icons/react";
+import { Eye, EyeSlash, LinkSimpleHorizontal, LockKey } from "@phosphor-icons/react";
 import type React from "react";
 
 export function PrivacyPage() {
@@ -17,12 +17,12 @@ export function PrivacyPage() {
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
           Your answers live in this tab. Close it or refresh it and they disappear. Generate a link or export before you leave if you want to keep them.
         </InfoCard>
-        <InfoCard icon={<LinkSimple size={24} weight="light" />} title="Save in Link">
+        <InfoCard icon={<LinkSimpleHorizontal size={24} weight="light" />} title="Save in Link">
           Only answers marked Share are compressed into the link. Anyone with that link can read those included answers. Lose the link and it's gone.
         </InfoCard>
       </div>
 
-      <section className="rounded-[1.5rem] bg-ankahe-surface/45 px-8 py-12">
+      <section className="rounded-lg bg-ankahe-surface/45 px-8 py-12">
         <h2 className="type-artifact-heading text-ankahe-heading">What can leave the page</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
@@ -137,7 +137,7 @@ function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-[1.5rem] bg-ankahe-surface px-8 py-10 shadow-sm">
+    <section className="rounded-lg bg-ankahe-surface px-8 py-10 shadow-sm">
       <div className="mb-6 text-ankahe-muted">{icon}</div>
       <h2 className="type-artifact-heading text-ankahe-heading">{title}</h2>
       <p className="type-lead mt-4 text-ankahe-muted">{children}</p>
@@ -155,7 +155,7 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[1rem] bg-ankahe-surface/60 px-6 py-6 transition-colors hover:bg-ankahe-surface">
+    <div className="rounded-md bg-ankahe-surface/60 px-6 py-6 transition-colors hover:bg-ankahe-surface">
       <div className="mb-4 text-ankahe-muted">{icon}</div>
       <h3 className="type-panel-title text-ankahe-heading">{title}</h3>
       <p className="type-caption mt-2 text-ankahe-muted">{children}</p>

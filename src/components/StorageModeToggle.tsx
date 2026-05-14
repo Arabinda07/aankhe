@@ -5,7 +5,7 @@
 
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { Link, Monitor } from "@phosphor-icons/react";
+import { LinkSimpleHorizontal, Monitor } from "@phosphor-icons/react";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
 interface StorageModeToggleProps {
@@ -42,7 +42,7 @@ export function StorageModeToggle({ value, onChange }: StorageModeToggleProps) {
             : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
         )}
       >
-        <Link size={18} weight="light" />
+        <LinkSimpleHorizontal size={18} weight="light" />
         Save in Link
       </RadioGroup.Item>
     </RadioGroup.Root>

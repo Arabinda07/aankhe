@@ -11,7 +11,7 @@ import { useQuestionController } from '../hooks/useQuestionController';
 import { QuestionStep } from './QuestionStep';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
-import { CaretLeft, FileText, Sparkle } from '@phosphor-icons/react';
+import { BookOpenText, CaretLeft, FileText } from '@phosphor-icons/react';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
 
 const ArtifactStudio = lazy(() =>
@@ -74,7 +74,7 @@ export function ManualBuilder({
                 onClick={() => setView("artifact")}
                 className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
               >
-                <Sparkle size={18} weight="light" />
+                <BookOpenText size={18} weight="light" />
                 <span className="hidden sm:inline">Preview manual</span>
               </button>
             )}

@@ -6,11 +6,11 @@
 import {
   ArrowRight,
   Briefcase,
-  CaretDown,
   ChatCenteredText,
+  EnvelopeSimple,
   FileText,
-  HandHeart,
-  ShieldCheck,
+  Handshake,
+  SealCheck,
   User,
   UsersThree,
 } from "@phosphor-icons/react";
@@ -41,9 +41,9 @@ interface RecipientOption {
 const RECIPIENTS: RecipientOption[] = [
   { id: "manager", label: "Manager", description: "How you work, focus, and handle pressure.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
   { id: "teammate", label: "Teammate", description: "Collaboration rhythm, handoffs, and what helps work move.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
-  { id: "partner", label: "Partner", description: "Care, boundaries, and what tends to get misread.", mode: "me", icon: <HandHeart size={22} weight="light" /> },
+  { id: "partner", label: "Partner", description: "Care, boundaries, and what tends to get misread.", mode: "me", icon: <Handshake size={22} weight="light" /> },
   { id: "friend", label: "Friend", description: "What support looks like when guessing is getting old.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "talk", label: "Difficult talk", description: "A small brief for a conversation you keep putting off.", mode: "talk", icon: <FileText size={22} weight="light" /> },
+  { id: "talk", label: "Difficult talk", description: "A small brief for a conversation you keep putting off.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
   { id: "self", label: "Myself", description: "A private place to get your thoughts out first.", mode: "me", icon: <User size={22} weight="light" /> },
   { id: "sync", label: "Shared note", description: "A note for getting on the same page without circling it.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
@@ -97,12 +97,12 @@ export function Switchboard({
               Everything <span className="type-mixed-heading-emphasis">before you ask</span>
             </h1>
             <p className="type-lead max-w-lg text-ankahe-muted">
-              Explaining your whole deal to new people gets old. Write the honest version first, keep the private parts local, then send the clean link.
+              Explaining your whole deal to new people gets old. Write the honest version first, keep the private parts local, then send the sealed copy.
             </p>
           </div>
 
           <div className="ankahe-enter ankahe-enter-1 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <SoftButton size="md" onClick={scrollToOnboarding} icon={<CaretDown size={16} className="lg:hidden" />} className="w-full sm:w-auto">
+            <SoftButton size="md" onClick={scrollToOnboarding} className="w-full sm:w-auto">
               Start your manual
             </SoftButton>
             <SoftButton
@@ -117,7 +117,7 @@ export function Switchboard({
 
           <div className="ankahe-enter ankahe-enter-2 flex flex-col items-start gap-5">
             <div className="flex items-center gap-3">
-              <ShieldCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
+              <SealCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
               <p className="type-caption text-ankahe-muted">No servers. No accounts. This tab is a burner space.</p>
             </div>
             <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
@@ -226,7 +226,7 @@ function ChoiceCard({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "group h-full min-h-24 w-full rounded-[1rem] p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "group h-full min-h-24 w-full rounded-md p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
           ? "bg-ankahe-accent-soft text-ankahe-accent-text ring-1 ring-inset ring-ankahe-accent/20"
           : "bg-transparent text-ankahe-text hover:bg-ankahe-surface-halo-hover ring-1 ring-inset ring-transparent hover:ring-ankahe-border"
@@ -251,7 +251,7 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "type-caption min-h-10 rounded-full px-4 py-2 transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "type-caption min-h-11 rounded-sm px-4 py-2 transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
         active
           ? "bg-ankahe-accent text-ankahe-on-accent"
           : "bg-transparent text-ankahe-text ring-1 ring-inset ring-ankahe-border hover:bg-ankahe-surface-halo-hover hover:ring-ankahe-border-strong"
