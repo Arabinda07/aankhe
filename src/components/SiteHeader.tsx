@@ -4,8 +4,8 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function SiteHeader() {
   return (
-    <div className="sticky top-6 z-50 px-4 flex justify-center pointer-events-none">
-      <header className="pointer-events-auto flex items-center justify-between gap-4 rounded-md border border-ankahe-border bg-ankahe-surface px-4 sm:px-6 h-14 shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-ankahe-border bg-ankahe-surface shadow-sm">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link 
           to="/" 
           className="min-h-11 inline-flex items-center pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
@@ -56,7 +56,7 @@ export function SiteHeader() {
           <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
           <ThemeSwitcher />
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

@@ -52,26 +52,24 @@ export function ManualBuilder({
 
   return (
     <div className="w-full font-sans transition-colors duration-700 bg-ankahe-bg text-ankahe-text relative">
-      {/* Top Nav */}
-      <div className="sticky top-6 z-40 px-4 flex justify-center pointer-events-none">
-        <nav aria-label="Manual builder" className="pointer-events-auto flex items-center justify-between gap-6 rounded-md border border-ankahe-border bg-ankahe-surface px-4 sm:px-6 h-14 shadow-sm">
+      {/* Builder Toolbar */}
+      <div className="sticky top-14 z-40 w-full border-b border-ankahe-border bg-ankahe-bg/95 backdrop-blur-sm">
+        <nav aria-label="Manual builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <button
             onClick={onBack}
-            className="type-ui-label min-h-11 flex items-center justify-center gap-2 px-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+            className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
             aria-label="Back to Hub"
           >
             <CaretLeft size={20} weight="light" />
-            <span className="hidden md:inline">Back to Hub</span>
+            <span className="hidden sm:inline">Back to Hub</span>
           </button>
 
-          <div aria-hidden="true" className="w-px h-4 bg-ankahe-border/50" />
-
-          <div>
+          <div className="flex items-center">
             {view === "build" && hasManualContent && (
               <button
                 type="button"
                 onClick={() => setView("artifact")}
-                className="type-ui-label min-h-11 inline-flex items-center gap-2 px-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
               >
                 <Sparkle size={18} weight="light" />
                 <span className="hidden sm:inline">Preview manual</span>
@@ -81,7 +79,7 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("build")}
-                className="type-ui-label min-h-11 inline-flex items-center gap-2 px-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
               >
                 <FileText size={18} weight="light" />
                 <span className="hidden sm:inline">Back to answers</span>
@@ -118,7 +116,7 @@ export function ManualBuilder({
               </div>
 
               {/* Preview Side (Desktop only) */}
-              <div className="hidden space-y-8 xl:sticky xl:top-28 xl:block">
+              <div className="hidden space-y-8 xl:sticky xl:top-36 xl:block">
                 <div className="space-y-4">
                   <h3 className="type-meta text-ankahe-muted px-1">
                     Live Manual Preview
