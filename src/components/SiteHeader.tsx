@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { AnkaheMark } from "./AnkaheMark";
@@ -61,21 +61,56 @@ export function SiteHeader() {
             </Link>
           </nav>
           <div className="w-px h-4 bg-ankahe-border/50 mx-1" aria-hidden="true" />
-          <Suspense fallback={<ThemeSwitcherFallback />}>
-            <ThemeSwitcher />
-          </Suspense>
+          <DeferredThemeSwitcher />
         </div>
       </div>
     </header>
   );
 }
 
-function ThemeSwitcherFallback() {
+function DeferredThemeSwitcher() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoad) return;
+
+    const loadSwitcher = () => setShouldLoad(true);
+    const idleId = window.requestIdleCallback
+      ? window.requestIdleCallback(loadSwitcher, { timeout: 2200 })
+      : window.setTimeout(loadSwitcher, 1200);
+
+    return () => {
+      if (window.cancelIdleCallback && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+    };
+  }, [shouldLoad]);
+
+  if (!shouldLoad) {
+    return <ThemeSwitcherFallback onLoad={() => setShouldLoad(true)} />;
+  }
+
   return (
-    <span
-      aria-hidden="true"
-      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ankahe-border bg-ankahe-control"
-    />
+    <Suspense fallback={<ThemeSwitcherFallback onLoad={() => setShouldLoad(true)} />}>
+      <ThemeSwitcher />
+    </Suspense>
+  );
+}
+
+function ThemeSwitcherFallback({ onLoad }: { onLoad: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label="Load theme controls"
+      onClick={onLoad}
+      onFocus={onLoad}
+      onPointerEnter={onLoad}
+      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ankahe-border bg-ankahe-control text-ankahe-muted transition-colors hover:bg-ankahe-control-hover hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+    >
+      <span aria-hidden="true" className="block h-4 w-4 rounded-full border border-current" />
+    </button>
   );
 }
 

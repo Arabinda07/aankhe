@@ -4,7 +4,8 @@
  */
 
 import { type ReactNode } from "react";
-import { CaretDown, CaretUp } from "@phosphor-icons/react";
+import { CaretDown } from "@phosphor-icons/react/dist/csr/CaretDown";
+import { CaretUp } from "@phosphor-icons/react/dist/csr/CaretUp";
 import { getOptionLabel, getOptionValue } from "../../lib/protocolManifest";
 import type { AnswerInputProps } from "./shared";
 

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { PenNib } from "@phosphor-icons/react";
+import { PenNib } from "@phosphor-icons/react/dist/csr/PenNib";
 import { cn } from "../lib/utils";
 
 interface AnkaheMarkProps {

@@ -3,7 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Eye, EyeSlash, LinkSimpleHorizontal, LockKey } from "@phosphor-icons/react";
+import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
+import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
+import { LinkSimpleHorizontal } from "@phosphor-icons/react/dist/csr/LinkSimpleHorizontal";
+import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
 import type React from "react";
 
 export function PrivacyPage() {

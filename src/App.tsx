@@ -9,7 +9,6 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
 import type { ModeId, OnboardingContext, StorageMode } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
-import { SiteFooter } from './components/SiteFooter';
 
 const ManualBuilder = lazy(() =>
   import("./components/ManualBuilder").then((module) => ({
@@ -26,6 +25,12 @@ const PrivacyPage = lazy(() =>
 const HowItWorksPage = lazy(() =>
   import("./components/InfoPages").then((module) => ({
     default: module.HowItWorksPage,
+  }))
+);
+
+const SiteFooter = lazy(() =>
+  import("./components/SiteFooter").then((module) => ({
+    default: module.SiteFooter,
   }))
 );
 
@@ -102,8 +107,37 @@ function AppContent() {
           </Routes>
         </div>
       </main>
-      <SiteFooter />
+      <DeferredFooter />
     </div>
+  );
+}
+
+function DeferredFooter() {
+  const [shouldLoadFooter, setShouldLoadFooter] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoadFooter) return;
+
+    const loadFooter = () => setShouldLoadFooter(true);
+    const idleId = window.requestIdleCallback
+      ? window.requestIdleCallback(loadFooter, { timeout: 2400 })
+      : window.setTimeout(loadFooter, 1400);
+
+    return () => {
+      if (window.cancelIdleCallback && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+    };
+  }, [shouldLoadFooter]);
+
+  if (!shouldLoadFooter) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <SiteFooter />
+    </Suspense>
   );
 }
 

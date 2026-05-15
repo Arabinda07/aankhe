@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), asyncStylesheetPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -19,3 +19,18 @@ export default defineConfig(() => {
     },
   };
 });
+
+function asyncStylesheetPlugin() {
+  return {
+    name: 'ankahe-async-stylesheet',
+    transformIndexHtml: {
+      order: 'post' as const,
+      handler(html: string) {
+        return html.replace(
+          /<link rel="stylesheet" crossorigin href="([^"]+)">/g,
+          `<link rel="preload" crossorigin href="$1" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" crossorigin href="$1"></noscript>`
+        );
+      },
+    },
+  };
+}

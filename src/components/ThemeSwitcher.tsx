@@ -1,4 +1,7 @@
-import { Check, Monitor, Moon, Sun } from "@phosphor-icons/react";
+import { Check } from "@phosphor-icons/react/dist/csr/Check";
+import { Monitor } from "@phosphor-icons/react/dist/csr/Monitor";
+import { Moon } from "@phosphor-icons/react/dist/csr/Moon";
+import { Sun } from "@phosphor-icons/react/dist/csr/Sun";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ThemePreference } from "../lib/appTheme";
 import { useThemePreference } from "../hooks/useThemePreference";

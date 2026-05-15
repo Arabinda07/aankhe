@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { FileArrowDown, Printer } from "@phosphor-icons/react";
+import { FileArrowDown } from "@phosphor-icons/react/dist/csr/FileArrowDown";
+import { Printer } from "@phosphor-icons/react/dist/csr/Printer";
 import { SoftButton } from "../SoftButton";
 import type { ManualViewMode } from "../../lib/visibilityPolicy";
 

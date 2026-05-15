@@ -4,7 +4,10 @@
  */
 
 import { useState } from "react";
-import { Eye, EyeSlash, LockKey, PencilSimple } from "@phosphor-icons/react";
+import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
+import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
+import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
+import { PencilSimple } from "@phosphor-icons/react/dist/csr/PencilSimple";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { answerValueIsPresent } from "../../lib/answerUiPolicy";
 import type { ManualWorkspace } from "../../hooks/useManualState";

@@ -11,7 +11,9 @@ import { useQuestionController } from '../hooks/useQuestionController';
 import { QuestionStep } from './QuestionStep';
 import { ManualPreview } from './ManualPreview';
 import { AnimatePresence, motion } from 'motion/react';
-import { BookOpenText, CaretLeft, FileText } from '@phosphor-icons/react';
+import { BookOpenText } from '@phosphor-icons/react/dist/csr/BookOpenText';
+import { CaretLeft } from '@phosphor-icons/react/dist/csr/CaretLeft';
+import { FileText } from '@phosphor-icons/react/dist/csr/FileText';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
 import { SoftButton } from './SoftButton';
 

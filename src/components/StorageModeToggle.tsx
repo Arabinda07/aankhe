@@ -5,7 +5,8 @@
 
 import { StorageMode } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
-import { LinkSimpleHorizontal, Monitor } from "@phosphor-icons/react";
+import { LinkSimpleHorizontal } from "@phosphor-icons/react/dist/csr/LinkSimpleHorizontal";
+import { Monitor } from "@phosphor-icons/react/dist/csr/Monitor";
 
 interface StorageModeToggleProps {
   value: StorageMode;

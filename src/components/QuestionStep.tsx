@@ -17,7 +17,9 @@
  */
 
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { Eye, EyeSlash, LockKey } from "@phosphor-icons/react";
+import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
+import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
+import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { answerValueIsPresent, getAnswerComponentForQuestion, getSensitiveSkipAction } from "../lib/answerUiPolicy";
 import type { Question, Visibility } from "../lib/schemaTypes";

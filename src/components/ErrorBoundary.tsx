@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { ShieldWarning } from '@phosphor-icons/react';
+import { ShieldWarning } from '@phosphor-icons/react/dist/csr/ShieldWarning';
 import { SoftButton } from './SoftButton';
 
 interface Props {

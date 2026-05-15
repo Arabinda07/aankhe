@@ -4,7 +4,11 @@
  */
 
 import { useId, useState } from "react";
-import { Check, Copy, EnvelopeSimple, QrCode, WarningCircle } from "@phosphor-icons/react";
+import { Check } from "@phosphor-icons/react/dist/csr/Check";
+import { Copy } from "@phosphor-icons/react/dist/csr/Copy";
+import { EnvelopeSimple } from "@phosphor-icons/react/dist/csr/EnvelopeSimple";
+import { QrCode } from "@phosphor-icons/react/dist/csr/QrCode";
+import { WarningCircle } from "@phosphor-icons/react/dist/csr/WarningCircle";
 import * as Popover from "@radix-ui/react-popover";
 import * as Tooltip from "@radix-ui/react-tooltip";
 import { QRCodeSVG } from "qrcode.react";
