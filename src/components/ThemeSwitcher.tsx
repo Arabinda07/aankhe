@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
         aria-label={`Theme: ${preference}`}
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ankahe-border bg-ankahe-control text-ankahe-muted transition-colors hover:bg-ankahe-control-hover hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
       >
         <ActiveIcon size={20} weight="light" />
       </DropdownMenu.Trigger>
@@ -34,7 +34,7 @@ export function ThemeSwitcher() {
         <DropdownMenu.Content
           align="end"
           sideOffset={8}
-          className="z-50 min-w-40 rounded-md border border-ankahe-border bg-ankahe-surface p-1.5 shadow-[0_18px_48px_color-mix(in_oklch,var(--color-text)_12%,transparent)]"
+          className="z-50 min-w-40 rounded-md border border-parichay-border bg-parichay-surface p-1.5 shadow-[0_18px_48px_color-mix(in_oklch,var(--color-text)_12%,transparent)]"
           aria-label="Choose theme"
         >
           <DropdownMenu.RadioGroup value={preference} onValueChange={(value) => setPreference(value as ThemePreference)}>
@@ -47,17 +47,17 @@ export function ThemeSwitcher() {
                   key={option.value}
                   value={option.value}
                   className={cn(
-                    "type-ui-label flex min-h-11 w-full cursor-pointer items-center justify-between gap-4 rounded-sm px-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus",
+                    "type-ui-label flex min-h-11 w-full cursor-pointer items-center justify-between gap-4 rounded-sm px-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus",
                     isSelected
-                      ? "bg-ankahe-control-selected text-ankahe-text"
-                      : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
+                      ? "bg-parichay-control-selected text-parichay-text"
+                      : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
                   )}
                 >
                   <span className="inline-flex items-center gap-2">
                     <Icon size={18} weight="light" />
                     {option.label}
                   </span>
-                  {isSelected && <Check size={16} weight="bold" className="text-ankahe-accent" />}
+                  {isSelected && <Check size={16} weight="bold" className="text-parichay-accent" />}
                 </DropdownMenu.RadioItem>
               );
             })}

@@ -2,9 +2,9 @@
 
 ## Canonical Product Terms
 
-### Ankahe
+### Parichay
 
-The product name. Ankahe helps people create private personal or professional manuals that can be shared deliberately.
+The product name. Parichay helps people create private personal or professional manuals that can be shared deliberately.
 
 ### Manual
 
@@ -82,7 +82,7 @@ Avoid as the opposite of included. Prefer "private" because it names the user's 
 
 ## Banned Or Strongly Discouraged
 
-Do not use these for Ankahe product surfaces:
+Do not use these for Parichay product surfaces:
 
 - Diagnosis
 - Assessment

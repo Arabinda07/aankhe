@@ -2,7 +2,7 @@
 
 ## Voice Attributes
 
-Ankahe sounds calm, plain, warm, careful, and capable.
+Parichay sounds calm, plain, warm, careful, and capable.
 
 It should feel like a thoughtful collaborator sitting beside the user, not a coach evaluating them, a therapist interpreting them, or a SaaS product selling momentum.
 

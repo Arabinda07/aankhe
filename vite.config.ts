@@ -22,7 +22,7 @@ export default defineConfig(() => {
 
 function asyncStylesheetPlugin() {
   return {
-    name: 'ankahe-async-stylesheet',
+    name: 'parichay-async-stylesheet',
     transformIndexHtml: {
       order: 'post' as const,
       handler(html: string) {

@@ -1,13 +1,13 @@
-# Ankahe
+# Parichay
 
-> Ankahe is a client-only manual studio for creating private personal and professional manuals. Nothing is stored on a server, uploaded, tracked, or tied to an account.
+> Parichay is a client-only manual studio for creating private personal and professional manuals. Nothing is stored on a server, uploaded, tracked, or tied to an account.
 
-Ankahe helps people write the context that is often left unspoken, choose which answers are included, private, or omitted, and shape the result into a manual they can keep, print, or share.
+Parichay helps people write the context that is often left unspoken, choose which answers are included, private, or omitted, and shape the result into a manual they can keep, print, or share.
 
 ## Core Details
 
 - Product: Privacy-first personal manual studio
-- Tagline: Say it once. Be understood.
+- Tagline: Your Story, Always Ready.
 - Storage: Client-side only
 - Accounts: None
 - Database: None
@@ -24,10 +24,10 @@ Ankahe helps people write the context that is often left unspoken, choose which 
 
 ## Important Pages
 
-- Home: https://ankahe.vercel.app/
-- How it works: https://ankahe.vercel.app/how-it-works
-- Privacy: https://ankahe.vercel.app/privacy
+- Home: https://parichay-your-story.vercel.app/
+- How it works: https://parichay-your-story.vercel.app/how-it-works
+- Privacy: https://parichay-your-story.vercel.app/privacy
 
 ## Good Summary
 
-Ankahe is a private, client-only web app for creating personal and professional operating manuals. It has no accounts, database, uploads, or analytics. Users control answer visibility and can share only the parts they mark included.
+Parichay is a private, client-only web app for creating personal and professional operating manuals. It has no accounts, database, uploads, or analytics. Users control answer visibility and can share only the parts they mark included.

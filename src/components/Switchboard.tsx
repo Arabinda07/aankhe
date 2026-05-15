@@ -5,7 +5,7 @@
 
 import { SealCheck } from "@phosphor-icons/react/dist/csr/SealCheck";
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
-import type { ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
+import type { ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { SoftButton } from "./SoftButton";
 
 const SwitchboardSetup = lazy(() =>
@@ -17,15 +17,11 @@ const SwitchboardSetup = lazy(() =>
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
   onLearnMore: () => void;
-  storageMode: StorageMode;
-  onStorageModeChange: (mode: StorageMode) => void;
 }
 
 export function Switchboard({
   onStart,
   onLearnMore,
-  storageMode,
-  onStorageModeChange,
 }: SwitchboardProps) {
   const [shouldLoadSetup, setShouldLoadSetup] = useState(false);
 
@@ -54,14 +50,14 @@ export function Switchboard({
   }, []);
 
   return (
-    <div className="bg-ankahe-bg">
+    <div className="bg-parichay-bg">
       <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-5 py-12 text-left sm:px-8 md:py-20 lg:grid-cols-[1fr_minmax(auto,600px)] lg:items-start lg:gap-12 xl:gap-24 lg:py-28 xl:py-32">
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
-            <h1 className="type-mixed-heading text-ankahe-heading lg:max-w-xl">
-              Your Story Always Ready
+            <h1 className="type-mixed-heading text-parichay-heading lg:max-w-xl">
+              Say it once. Be understood.
             </h1>
-            <p className="type-lead max-w-lg text-ankahe-muted">
+            <p className="type-lead max-w-lg text-parichay-muted">
               Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
             </p>
           </div>
@@ -81,16 +77,14 @@ export function Switchboard({
           </div>
 
           <div className="flex items-center gap-3">
-            <SealCheck size={20} className="text-ankahe-muted shrink-0" weight="light" />
-            <p className="type-caption text-ankahe-muted">No servers. No accounts. This tab is a burner space.</p>
+            <SealCheck size={20} className="text-parichay-muted shrink-0" weight="light" />
+            <p className="type-caption text-parichay-muted">Your answers stay in this tab. Before you share, you choose what is included.</p>
           </div>
         </div>
 
         {shouldLoadSetup ? (
           <Suspense fallback={<SetupFallback />}>
             <SwitchboardSetup
-              storageMode={storageMode}
-              onStorageModeChange={onStorageModeChange}
               onStart={onStart}
             />
           </Suspense>
@@ -107,9 +101,9 @@ function SetupFallback() {
     <aside
       id="onboarding"
       aria-label="Manual setup loading"
-      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
+      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
     >
-      <div className="min-h-[36rem] rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10" />
+      <div className="min-h-[36rem] rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10" />
     </aside>
   );
 }

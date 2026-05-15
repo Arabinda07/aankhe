@@ -9,7 +9,7 @@ Date: 2026-05-13
 | 1 | Accessibility | 4 | Current patterns use named controls, focus rings, semantic state attributes, and 44px targets. |
 | 2 | Performance | 4 | Artifact export libraries are lazy-loaded, and fonts are planned for local `/fonts/` loading. |
 | 3 | Responsive Design | 4 | Header, segmented controls, and key buttons use mobile-safe target sizing. |
-| 4 | Theming | 4 | OKLCH Ankahe tokens define color, state, and surface roles. |
+| 4 | Theming | 4 | OKLCH Parichay tokens define color, state, and surface roles. |
 | 5 | Anti-Patterns | 4 | Warm document-studio styling avoids gradient text, glass panels, hero metrics, and generic AI visuals. |
 | **Total** |  | **20/20** | **Excellent, maintain with focused polish.** |
 
@@ -40,7 +40,7 @@ Pass. The current direction does not read as generic AI product styling. The str
 - Category: Theming / Polish
 - Location: Tailwind token usage and documentation
 - Impact: Future one-off utility colors could weaken the warm brand system.
-- Recommendation: Use Ankahe tokens for new surfaces and add new semantic tokens only when a real state needs them.
+- Recommendation: Use Parichay tokens for new surfaces and add new semantic tokens only when a real state needs them.
 - Suggested command: `$impeccable polish`
 
 ## Positive Findings

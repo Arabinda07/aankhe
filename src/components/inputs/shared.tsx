@@ -32,11 +32,11 @@ export const choiceGridClassName = "grid gap-3 md:grid-cols-[repeat(2,minmax(16r
 export function choiceClassName(checked: boolean, focusMode: "focus-within" | "focus-visible" = "focus-within") {
   const base = "flex min-h-16 cursor-pointer items-center rounded-sm border px-4 py-3 text-left text-base font-semibold leading-snug transition-all md:min-h-20 md:px-5 md:py-4";
   const focusRing = focusMode === "focus-visible"
-    ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
-    : "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2";
+    ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+    : "focus-within:outline-none focus-within:ring-2 focus-within:ring-parichay-focus focus-within:ring-offset-2";
   const color = checked
-    ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
-    : "border-ankahe-paper-border bg-ankahe-paper text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-paper-muted";
+    ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
+    : "border-parichay-paper-border bg-parichay-paper text-parichay-text hover:border-parichay-border-strong hover:bg-parichay-paper-muted";
 
   return `${base} ${focusRing} ${color}`;
 }

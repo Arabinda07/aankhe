@@ -25,7 +25,7 @@ const noopActions: ManualWorkspaceActions = {
 function installWindowStub() {
   globalThis.window = {
     location: {
-      origin: "https://ankahe.test",
+      origin: "https://parichay.test",
       pathname: "/manual/me",
       hash: "",
     },
@@ -52,7 +52,7 @@ test("artifact studio policy composes the selected preview and share URL", () =>
   });
 
   assert.equal((policy.manual as ComposedManual).mode, "me");
-  assert.match(policy.sharedUrl, /^https:\/\/ankahe\.test\/manual\/me#s=/);
+  assert.match(policy.sharedUrl, /^https:\/\/parichay\.test\/manual\/me#s=/);
   assert.equal(policy.previewDescription, getArtifactPreviewDescription("included"));
   assert.equal(policy.showSafeToSendNote, true);
   assert.equal(policy.isSectionExcluded("communication"), false);

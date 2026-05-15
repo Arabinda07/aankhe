@@ -1,10 +1,10 @@
-# Ankahe Coding Agent Instructions
+# Parichay Coding Agent Instructions
 
-Ankahe is a sister site to Reflections, not a clone. Preserve Reflections' calm editorial rhythm, warm light/dark tuning, semantic tokens, generous whitespace, restrained motion, soft borders, artifact-first payoff, and trust-first language. Do not copy its botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
+Parichay is a sister site to Reflections, not a clone. Preserve Reflections' calm editorial rhythm, warm light/dark tuning, semantic tokens, generous whitespace, restrained motion, soft borders, artifact-first payoff, and trust-first language. Do not copy its botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
 
 ## Brand
 
-Ankahe's identity is **Smoked Lac + Sandal Paper**. It should feel like sealed letters, warm paper, rosewood ink, private manuals, high-end stationery, quiet intimacy, and emotional precision. It must not feel like a wellness app, green journaling app, SaaS dashboard, AI tool, HR assessment, chatbot, or therapy replacement.
+Parichay's identity is **Smoked Lac + Sandal Paper**. It should feel like sealed letters, warm paper, rosewood ink, private manuals, high-end stationery, quiet intimacy, and emotional precision. It must not feel like a wellness app, green journaling app, SaaS dashboard, AI tool, HR assessment, chatbot, or therapy replacement.
 
 Use Geist for UI, structure, navigation, buttons, labels, captions, metadata, choice cards, privacy controls, progress text, and product chrome. Use Source Serif 4 for reflective prompts, question text, answer fields, generated manual prose, artifact reading surfaces, editorial hooks, and human/authored text. Use Geist Mono only for technical/privacy microcopy such as URL hashes, timestamps, export metadata, and local-only technical details. Do not use Inter.
 
@@ -43,9 +43,9 @@ Surface tone meanings:
 
 ## Product Essence
 
-Ankahe means "unspoken." It is a private personal manual studio with the tagline:
+Parichay is a private personal manual studio with the tagline:
 
-> Say it once. Be understood.
+> Your Story, Always Ready.
 
 The product turns answers into a beautiful, shareable manual. The final artifact is the reward. Users should feel understood, safe, unhurried, and in control.
 

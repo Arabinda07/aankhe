@@ -1,4 +1,4 @@
-# Ankahe Design System
+# Parichay Design System
 
 ## Core Aesthetic
 
@@ -10,17 +10,17 @@ Brand-level rules live in `docs/brand/`.
 
 ### Colors
 
-- `ankahe-bg`: warm paper background, defined in OKLCH.
-- `ankahe-surface`: soft panel surface, tinted instead of pure white.
-- `ankahe-surface-soft`: interaction states and highlights.
-- `ankahe-text`: deep warm ink.
-- `ankahe-muted`: secondary warm text, tuned for WCAG AA contrast.
-- `ankahe-border`: gentle dividers.
-- `ankahe-accent`: darker terracotta primary accent, tuned for WCAG AA with `ankahe-on-accent`.
-- `ankahe-accent-dark`: deep contrast variation.
-- `ankahe-on-accent`: warm light text on primary accent surfaces.
-- `ankahe-sage`, `ankahe-clay`, `ankahe-oat`: supporting warmth and trust accents.
-- `ankahe-success`, `ankahe-warning`, `ankahe-danger`: semantic status colors expressed as Ankahe tokens, not default Tailwind colors.
+- `parichay-bg`: warm paper background, defined in OKLCH.
+- `parichay-surface`: soft panel surface, tinted instead of pure white.
+- `parichay-surface-soft`: interaction states and highlights.
+- `parichay-text`: deep warm ink.
+- `parichay-muted`: secondary warm text, tuned for WCAG AA contrast.
+- `parichay-border`: gentle dividers.
+- `parichay-accent`: darker terracotta primary accent, tuned for WCAG AA with `parichay-on-accent`.
+- `parichay-accent-dark`: deep contrast variation.
+- `parichay-on-accent`: warm light text on primary accent surfaces.
+- `parichay-sage`, `parichay-clay`, `parichay-oat`: supporting warmth and trust accents.
+- `parichay-success`, `parichay-warning`, `parichay-danger`: semantic status colors expressed as Parichay tokens, not default Tailwind colors.
 
 ### Typography
 
@@ -78,4 +78,4 @@ Calm, clear, warm, non-judgmental. Not clinical, not manipulative, not gamified.
 
 Use "Your manual will start taking shape here." instead of "No data generated."
 
-Use "Say it once. Be understood." as a brand line only where it supports the task.
+Use "Your Story, Always Ready." only in title, meta, and social preview contexts.

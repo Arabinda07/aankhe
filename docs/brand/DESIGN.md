@@ -1,10 +1,10 @@
-# Ankahe Brand Design
+# Parichay Brand Design
 
 ## Design Position
 
-Ankahe is a warm private manual studio. It should feel calm, practical, and carefully made: sealed letters, sandal paper, smoked lac, rosewood ink, private manuals, and precise controls.
+Parichay is a warm private manual studio. It should feel calm, practical, and carefully made: sealed letters, sandal paper, smoked lac, rosewood ink, private manuals, and precise controls.
 
-The brand is related to Reflections through restraint and privacy, but Ankahe is more structured and artifact-led. Do not copy Reflections' botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
+The brand is related to Reflections through restraint and privacy, but Parichay is more structured and artifact-led. Do not copy Reflections' botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
 
 ## Scene
 
@@ -28,19 +28,19 @@ Color should guide action, state, and hierarchy. It should not decorate empty sp
 
 ## Token Roles
 
-- `ankahe-bg`: page background, warm paper.
-- `ankahe-surface`: primary panels and document surfaces.
-- `ankahe-surface-soft`: rails, selected surrounds, soft callouts.
-- `ankahe-text`: main ink.
-- `ankahe-muted`: secondary text with WCAG AA contrast.
-- `ankahe-border`: quiet dividers.
-- `ankahe-accent`: smoked lac action and selection.
-- `ankahe-accent-dark`: high-contrast deep lac text.
-- `ankahe-on-accent`: light text on accent surfaces.
-- `ankahe-sandal`: warm guidance and explanation.
-- `ankahe-private`: privacy and local-only state.
-- `ankahe-hidden`: omitted state.
-- `ankahe-danger`: destructive or caution state.
+- `parichay-bg`: page background, warm paper.
+- `parichay-surface`: primary panels and document surfaces.
+- `parichay-surface-soft`: rails, selected surrounds, soft callouts.
+- `parichay-text`: main ink.
+- `parichay-muted`: secondary text with WCAG AA contrast.
+- `parichay-border`: quiet dividers.
+- `parichay-accent`: smoked lac action and selection.
+- `parichay-accent-dark`: high-contrast deep lac text.
+- `parichay-on-accent`: light text on accent surfaces.
+- `parichay-sandal`: warm guidance and explanation.
+- `parichay-private`: privacy and local-only state.
+- `parichay-hidden`: omitted state.
+- `parichay-danger`: destructive or caution state.
 - Footer tokens keep the footer a deliberate dark close in both light and dark modes.
 
 ## Typography

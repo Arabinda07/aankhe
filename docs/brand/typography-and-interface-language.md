@@ -2,7 +2,7 @@
 
 ## Typography Role
 
-Ankahe uses type to create calm structure. The interface should feel like a private document studio: legible controls around a warm editorial artifact.
+Parichay uses type to create calm structure. The interface should feel like a private document studio: legible controls around a warm editorial artifact.
 
 ## Font Families
 
@@ -57,7 +57,7 @@ Avoid metaphorical controls:
 
 ## Layout Language
 
-Ankahe should prefer:
+Parichay should prefer:
 
 - Full-width bands.
 - Clear panels.

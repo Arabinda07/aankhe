@@ -1,0 +1,24 @@
+{
+  "name": "Parichay",
+  "short_name": "Parichay",
+  "description": "Create a private personal manual and share only the included parts.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8F1EA",
+  "theme_color": "#A85A44",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

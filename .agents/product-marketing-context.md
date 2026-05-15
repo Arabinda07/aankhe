@@ -4,7 +4,7 @@
 
 ## Product Overview
 **One-liner:** A private, client-side studio for creating personal operating manuals.
-**What it does:** Ankahe lets you write personal "manuals" explaining how you work, communicate, and operate. It runs entirely in the browser memory. You write the unedited truth, choose what to share, and generate a secure link containing only those selected answers.
+**What it does:** Parichay lets you write personal "manuals" explaining how you work, communicate, and operate. It runs entirely in the browser memory. You write the unedited truth, choose what to share, and generate a secure link containing only those selected answers.
 **Product category:** Personal Manual / Communication Cheat Sheet
 **Product type:** Client-side Web App
 **Business model:** Free, no accounts, no server.

@@ -32,10 +32,10 @@ export function ScaleInput({ question, value, onChange, labelledBy, describedBy 
             key={scaleValue}
             className={cn(
               "min-h-20 cursor-pointer rounded-sm border px-4 py-3 text-center transition-all",
-              "focus-within:outline-none focus-within:ring-2 focus-within:ring-ankahe-focus focus-within:ring-offset-2",
+              "focus-within:outline-none focus-within:ring-2 focus-within:ring-parichay-focus focus-within:ring-offset-2",
               checked
-                ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
-                : "border-ankahe-paper-border bg-ankahe-paper text-ankahe-text hover:border-ankahe-border-strong hover:bg-ankahe-paper-muted"
+                ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
+                : "border-parichay-paper-border bg-parichay-paper text-parichay-text hover:border-parichay-border-strong hover:bg-parichay-paper-muted"
             )}
           >
             <input
@@ -46,7 +46,7 @@ export function ScaleInput({ question, value, onChange, labelledBy, describedBy 
               className="sr-only"
             />
             <span className="type-tabular block text-xl font-semibold">{scaleValue}</span>
-            <span className="type-caption mt-1 block text-ankahe-muted">
+            <span className="type-caption mt-1 block text-parichay-muted">
               {anchor || (scaleValue === min ? "Low" : scaleValue === max ? "High" : "Middle")}
             </span>
           </label>

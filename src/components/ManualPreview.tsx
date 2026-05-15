@@ -15,25 +15,25 @@ interface ManualPreviewProps {
 
 export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
   return (
-    <div data-mode={mode} className={cn("manual-preview-shell bg-ankahe-paper md:rounded-sm md:border md:border-ankahe-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
+    <div data-mode={mode} className={cn("manual-preview-shell bg-parichay-paper md:rounded-sm md:border md:border-parichay-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-screen", className)}>
       <div className="max-w-3xl mx-auto space-y-16">
         {/* Header */}
-        <div className="space-y-6 border-b border-ankahe-paper-border pb-12 text-center">
-          <p className="type-eyebrow text-ankahe-sandal">
+        <div className="space-y-6 border-b border-parichay-paper-border pb-12 text-center">
+          <p className="type-eyebrow text-parichay-sandal">
             {manual.subtitle}
           </p>
-          <h1 className={cn("type-artifact-title text-ankahe-heading")}>
+          <h1 className={cn("type-artifact-title text-parichay-heading")}>
             {manual.title}
           </h1>
-          <div className="type-meta flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-ankahe-muted">
+          <div className="type-meta flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-parichay-muted">
             <span>For {manual.audience}</span>
             <span>{new Date().toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}</span>
           </div>
         </div>
 
         <section className="mx-auto max-w-2xl space-y-4 py-2 text-center">
-          <h2 className="type-meta mb-4 text-center text-ankahe-heading">How to read this</h2>
-          <p className="type-artifact-prose text-ankahe-text">
+          <h2 className="type-meta mb-4 text-center text-parichay-heading">How to read this</h2>
+          <p className="type-artifact-prose text-parichay-text">
             {manual.recipientNote}
           </p>
         </section>
@@ -41,8 +41,8 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         {/* At a Glance */}
         {manual.atAGlance && (
           <section className="mx-auto max-w-2xl space-y-4 py-4 text-center">
-            <h2 className="type-meta text-ankahe-heading mb-4 text-center">At a Glance</h2>
-            <p className="type-artifact-prose italic text-ankahe-text">
+            <h2 className="type-meta text-parichay-heading mb-4 text-center">At a Glance</h2>
+            <p className="type-artifact-prose italic text-parichay-text">
               {manual.atAGlance}
             </p>
           </section>
@@ -50,10 +50,10 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.recognitionSummaries.length > 1 && (
           <section className="space-y-4">
-            <h2 className="type-artifact-heading text-ankahe-heading">What this is noticing</h2>
+            <h2 className="type-artifact-heading text-parichay-heading">What this is noticing</h2>
             <div className="space-y-4">
               {manual.recognitionSummaries.slice(1, 3).map((summary) => (
-                <p key={summary} className="type-artifact-prose text-ankahe-text">
+                <p key={summary} className="type-artifact-prose text-parichay-text">
                   {summary}
                 </p>
               ))}
@@ -66,17 +66,17 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           {manual.sections.map((section: ComposedSection) => (
             <section key={section.id} className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-16 items-start">
               <div className="space-y-4 md:sticky md:top-8">
-                <h3 className="type-artifact-heading text-ankahe-heading">
+                <h3 className="type-artifact-heading text-parichay-heading">
                   {section.title}
                 </h3>
-                <p className="type-caption text-ankahe-muted max-w-xs">{section.description}</p>
+                <p className="type-caption text-parichay-muted max-w-xs">{section.description}</p>
               </div>
 
               <div className="space-y-6">
                 {section.details.length > 0 && (
                   <div className="space-y-4">
                     {section.details.map((p, i) => (
-                      <p key={i} className="type-artifact-prose text-ankahe-text">
+                      <p key={i} className="type-artifact-prose text-parichay-text">
                         {p}
                       </p>
                     ))}
@@ -89,13 +89,13 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.answeredCount === 0 && (
           <div className="text-center py-24 space-y-4">
-            <p className="type-artifact-prose text-ankahe-muted italic">Your manual will start taking shape here.</p>
+            <p className="type-artifact-prose text-parichay-muted italic">Your manual will start taking shape here.</p>
           </div>
         )}
 
-        <div className="pt-16 pb-8 border-t border-ankahe-paper-border text-center">
-          <p className="type-meta text-ankahe-muted/70">
-            Made with Ankahe. No account. No database.
+        <div className="pt-16 pb-8 border-t border-parichay-paper-border text-center">
+          <p className="type-meta text-parichay-muted/70">
+            Made with Parichay. No account. No database.
           </p>
         </div>
       </div>

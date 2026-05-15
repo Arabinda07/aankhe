@@ -98,11 +98,11 @@ export function QuestionStep({
   return (
     <div className="space-y-5 md:space-y-6">
       <div className="space-y-3">
-        <h2 id={questionLabelId} className="type-question-builder text-ankahe-heading">
+        <h2 id={questionLabelId} className="type-question-builder text-parichay-heading">
           {question.label}
         </h2>
         {question.helperText && (
-          <p id={helperTextId} className="type-lead text-ankahe-muted">
+          <p id={helperTextId} className="type-lead text-parichay-muted">
             {question.helperText}
           </p>
         )}
@@ -112,14 +112,14 @@ export function QuestionStep({
         <button
           type="button"
           onClick={() => handleSensitiveSkip("doesNotFit")}
-          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           None of these fit
         </button>
         <button
           type="button"
           onClick={() => handleSensitiveSkip("notReady")}
-          className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           Not ready to answer this
         </button>
@@ -136,7 +136,7 @@ export function QuestionStep({
       </div>
 
       {!showAnswerDetails && (
-        <p className="type-caption max-w-2xl text-ankahe-muted">
+        <p className="type-caption max-w-2xl text-parichay-muted">
           Privacy can be changed before sharing.
         </p>
       )}
@@ -148,13 +148,13 @@ export function QuestionStep({
               <button
                 type="button"
                 onClick={revealNuance}
-                className="type-ui-label min-h-11 px-1 py-2 text-ankahe-accent transition-colors hover:text-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-ui-label min-h-11 px-1 py-2 text-parichay-accent transition-colors hover:text-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
               >
                 Add nuance
               </button>
             ) : (
               <div className="space-y-2">
-                <label htmlFor={`${question.id}-note`} className="type-ui-label block text-ankahe-text">
+                <label htmlFor={`${question.id}-note`} className="type-ui-label block text-parichay-text">
                   Add nuance
                 </label>
                 <textarea
@@ -164,7 +164,7 @@ export function QuestionStep({
                   onChange={(event) => onNoteChange(event.target.value)}
                   rows={3}
                   placeholder="Add context only if this answer needs your words."
-                  className="type-body w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-4 text-ankahe-text placeholder:text-ankahe-muted/60 transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
+                  className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
                 />
               </div>
             )}
@@ -172,13 +172,13 @@ export function QuestionStep({
 
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="type-caption text-ankahe-muted">Visibility:</span>
-              <span className="type-caption font-semibold text-ankahe-text">{getVisibilityLabel(visibility)}</span>
-              <span className="type-caption text-ankahe-muted" aria-hidden="true">·</span>
+              <span className="type-caption text-parichay-muted">Visibility:</span>
+              <span className="type-caption font-semibold text-parichay-text">{getVisibilityLabel(visibility)}</span>
+              <span className="type-caption text-parichay-muted" aria-hidden="true">·</span>
               <button
                 type="button"
                 onClick={() => setIsVisibilityOpen((isOpen) => !isOpen)}
-                className="type-caption min-h-11 px-1 py-2 font-semibold text-ankahe-accent transition-colors hover:text-ankahe-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                className="type-caption min-h-11 px-1 py-2 font-semibold text-parichay-accent transition-colors hover:text-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                 aria-expanded={isVisibilityOpen}
                 aria-controls={`${question.id}-visibility-panel`}
               >
@@ -197,14 +197,14 @@ export function QuestionStep({
                 <button
                   type="button"
                   onClick={() => setIsVisibilityHelpOpen((isOpen) => !isOpen)}
-                  className="type-caption min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+                  className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                   aria-expanded={isVisibilityHelpOpen}
                   aria-controls={visibilityDescriptionId}
                 >
                   What does this mean?
                 </button>
                 {isVisibilityHelpOpen && (
-                  <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-ankahe-muted">
+                  <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-parichay-muted">
                     Share means included in links and exports. Private stays local. Hide is omitted from the manual.
                   </p>
                 )}
@@ -219,7 +219,7 @@ export function QuestionStep({
           <button
             type="button"
             onClick={onBack}
-            className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+            className="type-ui-label min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
           >
             Back
           </button>
@@ -227,7 +227,7 @@ export function QuestionStep({
         <button
           type="button"
           onClick={onNext}
-          className="type-ui-label min-h-11 px-1 py-2 text-ankahe-muted transition-colors hover:text-ankahe-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-ui-label min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           Skip
         </button>
@@ -271,13 +271,13 @@ function VisibilityControl({
 }) {
   return (
     <div className="space-y-3">
-      <p className="type-ui-label text-ankahe-text" id={`${questionId}-visibility-label`}>Visibility</p>
+      <p className="type-ui-label text-parichay-text" id={`${questionId}-visibility-label`}>Visibility</p>
       <RadioGroup.Root
         aria-labelledby={`${questionId}-visibility-label`}
         aria-describedby={describedBy}
         value={visibility}
         onValueChange={(value) => onVisibilityChange(value as Visibility)}
-        className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit"
+        className="flex w-full flex-wrap gap-2 rounded-sm border border-parichay-border bg-parichay-control-selected p-1 sm:w-fit"
       >
         <VisibilityOption
           value="share"
@@ -318,10 +318,10 @@ function VisibilityOption({
       value={value}
       className={cn(
         "type-ui-label min-h-11 flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border border-transparent px-3 py-1.5 transition-all sm:flex-none",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
         active
-          ? "border-ankahe-border bg-ankahe-control text-ankahe-text shadow-sm"
-          : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
+          ? "border-parichay-border bg-parichay-control text-parichay-text shadow-sm"
+          : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
       )}
     >
       {icon}

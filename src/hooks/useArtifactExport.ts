@@ -31,7 +31,7 @@ export function useArtifactExport(
         pixelRatio: 2
       });
       const link = document.createElement("a");
-      link.download = `ankahe-${viewMode}-manual-${mode}.png`;
+      link.download = `parichay-${viewMode}-manual-${mode}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {

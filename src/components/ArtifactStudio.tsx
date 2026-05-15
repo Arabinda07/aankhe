@@ -53,15 +53,15 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         {isExporting ? "Exporting image..." : ""}
       </div>
       <div className="space-y-4 text-center md:text-left">
-        <h2 className="type-display text-ankahe-heading">Artifact Studio</h2>
-        <p className="type-lead text-ankahe-muted">Shape your manual into a finished document for saving, printing, or sharing.</p>
+        <h2 className="type-display text-parichay-heading">Artifact Studio</h2>
+        <p className="type-lead text-parichay-muted">Shape your manual into a finished document for saving, printing, or sharing.</p>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         {/* Preview Container */}
         <div className="space-y-8">
-          <div className="overflow-hidden rounded-lg bg-ankahe-surface-preview p-3 md:p-6">
-            <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper">
+          <div className="overflow-hidden rounded-lg bg-parichay-surface-preview p-3 md:p-6">
+            <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper">
               <ManualPreview manual={policy.manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>
@@ -94,6 +94,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             sharedUrl={policy.sharedUrl}
             copied={copied}
             onCopyLink={copyLink}
+            onCreateLink={() => workspace.setStorageMode("url")}
           />
         </div>
       </div>

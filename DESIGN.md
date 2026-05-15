@@ -1,17 +1,17 @@
-# Ankahe Design System
+# Parichay Design System
 
 ## 1. Visual Theme & Atmosphere
 
-Ankahe is a private personal manual studio. It turns careful answers into a finished artifact that feels worth saving or sending. The atmosphere is warm, exact, and intimate: sealed letters, sandal paper, smoked lac, rosewood ink, private manuals, high-end stationery, and emotional precision.
+Parichay is a private personal manual studio. It turns careful answers into a finished artifact that feels worth saving or sending. The atmosphere is warm, exact, and intimate: sealed letters, sandal paper, smoked lac, rosewood ink, private manuals, high-end stationery, and emotional precision.
 
-Ankahe is a sister site to Reflections, not a clone. Preserve Reflections' calm editorial rhythm, semantic tokens, generous whitespace, restrained motion, soft borders, artifact-first payoff, and trust-first language. Do not copy Reflections' botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
+Parichay is a sister site to Reflections, not a clone. Preserve Reflections' calm editorial rhythm, semantic tokens, generous whitespace, restrained motion, soft borders, artifact-first payoff, and trust-first language. Do not copy Reflections' botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
 
 - **Product feeling:** document studio, private manual, composed artifact.
 - **Density:** daily app balanced, with airy reading surfaces and focused controls.
 - **Variance:** centered reading columns for long text, asymmetric split composition for setup and builder views.
 - **Motion:** restrained state feedback, never cinematic or playful.
 - **Primary promise:** Nothing is stored. Nothing is uploaded. You choose what leaves the page.
-- **Tagline:** Say it once. Be understood.
+- **Tagline:** Your Story, Always Ready.
 
 Never let the product feel like a wellness app, green journaling app, SaaS dashboard, AI tool, HR assessment, chatbot, or therapy replacement.
 
@@ -21,35 +21,35 @@ Use CSS variables and Tailwind theme mappings. Components must use semantic toke
 
 ### Core Surface Tokens
 
-- **`page` / `ankahe-bg`**: full-page warm paper background.
-- **`surface` / `ankahe-surface`**: main panels, site chrome, side controls.
+- **`page` / `parichay-bg`**: full-page warm paper background.
+- **`surface` / `parichay-surface`**: main panels, site chrome, side controls.
 - **`surface-raised`**: subtly lifted warm surface when a layer needs more presence.
-- **`surface-muted` / `ankahe-surface-soft`**: rails, selected surrounds, progress tracks, soft callouts.
+- **`surface-muted` / `parichay-surface-soft`**: rails, selected surrounds, progress tracks, soft callouts.
 - **`surface-translucent`**: restrained translucent overlays only when the underlying page remains quiet.
 - **`surface-preview`**: reflective preview shells around artifact canvases.
-- **`paper` / `ankahe-paper`**: document and artifact surfaces.
+- **`paper` / `parichay-paper`**: document and artifact surfaces.
 - **`paper-muted`**: inset document callouts and low-emphasis artifact panels.
 - **`paper-border`**: document-specific 1px dividers and artifact frames.
 
 ### Text Tokens
 
-- **`text` / `ankahe-text`**: primary ink for headings, body, controls, and artifact prose.
-- **`text-muted` / `ankahe-muted`**: secondary text, descriptions, helper copy, metadata. Must remain WCAG AA against its surface.
+- **`text` / `parichay-text`**: primary ink for headings, body, controls, and artifact prose.
+- **`text-muted` / `parichay-muted`**: secondary text, descriptions, helper copy, metadata. Must remain WCAG AA against its surface.
 - **`text-soft`**: tertiary hints or supporting metadata when `text-muted` is too strong.
-- **Opacity rule:** prefer dedicated text tokens. Use opacity suffixes only for intentionally lower-stakes metadata, such as `text-ankahe-muted/70` in artifact footers.
+- **Opacity rule:** prefer dedicated text tokens. Use opacity suffixes only for intentionally lower-stakes metadata, such as `text-parichay-muted/70` in artifact footers.
 
 ### Border And Focus Tokens
 
-- **`border` / `ankahe-border`**: default soft structural line.
-- **`border-strong` / `ankahe-border-strong`**: hover borders, active outlines, or stronger choice separation.
-- **`focus` / `ankahe-focus`**: visible focus rings. Do not remove focus rings for visual cleanliness.
+- **`border` / `parichay-border`**: default soft structural line.
+- **`border-strong` / `parichay-border-strong`**: hover borders, active outlines, or stronger choice separation.
+- **`focus` / `parichay-focus`**: visible focus rings. Do not remove focus rings for visual cleanliness.
 
 ### Action, Privacy, And State Tokens
 
-- **`accent` / `ankahe-accent`**: smoked lac. Use for primary actions, selected state borders, progress fill, important icon color, and export/share emphasis.
-- **`accent-hover` / `ankahe-accent-dark`**: deeper lac for hover and high-contrast accent text.
-- **`accent-soft` / `ankahe-accent-soft`**: selected backgrounds and safe-to-send callouts.
-- **`on-accent` / `ankahe-on-accent`**: text on lac-filled controls.
+- **`accent` / `parichay-accent`**: smoked lac. Use for primary actions, selected state borders, progress fill, important icon color, and export/share emphasis.
+- **`accent-hover` / `parichay-accent-dark`**: deeper lac for hover and high-contrast accent text.
+- **`accent-soft` / `parichay-accent-soft`**: selected backgrounds and safe-to-send callouts.
+- **`on-accent` / `parichay-on-accent`**: text on lac-filled controls.
 - **`sandal` / `sandal-soft`**: warm guidance, explanation, and low-pressure helper states.
 - **`plum` / `private` / `private-soft`**: privacy and depth. Use when distinguishing local/private state from shareable state.
 - **`hidden` / `hidden-soft`**: omitted state. Use for hidden or excluded content, not success.
@@ -113,7 +113,7 @@ Use these classes before inventing ad hoc font sizes.
 
 ## 4. Layout & Spacing System
 
-Ankahe should feel like a document studio, not a marketing template or dashboard. Layouts should give the manual room to breathe while keeping choices easy to scan.
+Parichay should feel like a document studio, not a marketing template or dashboard. Layouts should give the manual room to breathe while keeping choices easy to scan.
 
 ### Page Shells
 
@@ -146,7 +146,7 @@ Use Tailwind's 4px-based spacing scale. Preferred repeatable values:
 
 ## 5. Radius, Borders, Elevation & Surfaces
 
-Ankahe uses modest rectangular geometry. The design may be soft, but it must not become pill-shaped or bubbly.
+Parichay uses modest rectangular geometry. The design may be soft, but it must not become pill-shaped or bubbly.
 
 ### Radius Rules
 
@@ -159,8 +159,8 @@ Ankahe uses modest rectangular geometry. The design may be soft, but it must not
 
 ### Borders
 
-- Default to 1px tokenized borders: `border border-ankahe-border` or `border border-ankahe-paper-border`.
-- Use stronger borders for hover or selected states: `border-ankahe-border-strong` or `border-ankahe-accent`.
+- Default to 1px tokenized borders: `border border-parichay-border` or `border border-parichay-paper-border`.
+- Use stronger borders for hover or selected states: `border-parichay-border-strong` or `border-parichay-accent`.
 - Do not use thick decorative strokes or gradient border shells.
 
 ### Elevation
@@ -182,10 +182,10 @@ Use `SoftButton` for standard action buttons.
 - **Shape:** `rounded-md`, never pill.
 - **Base:** inline-flex, centered, `gap-3`, `font-semibold`, visible focus ring.
 - **Minimum heights:** small `min-h-11`, medium `min-h-12`, large `min-h-14`.
-- **Primary:** `bg-ankahe-accent text-ankahe-on-accent hover:bg-ankahe-accent-dark`.
-- **Secondary:** `bg-ankahe-control border border-ankahe-border text-ankahe-text hover:bg-ankahe-control-hover`.
+- **Primary:** `bg-parichay-accent text-parichay-on-accent hover:bg-parichay-accent-dark`.
+- **Secondary:** `bg-parichay-control border border-parichay-border text-parichay-text hover:bg-parichay-control-hover`.
 - **Ghost:** transparent, muted text, warm hover surface.
-- **Danger:** `bg-ankahe-danger-soft text-ankahe-danger border border-ankahe-danger/25`.
+- **Danger:** `bg-parichay-danger-soft text-parichay-danger border border-parichay-danger/25`.
 - **Motion:** hover may lift by 2px; tap may scale to 0.97. Keep transitions around 200ms.
 
 One primary action per area. Secondary actions should be visually quieter and never compete with export/share actions.
@@ -201,10 +201,10 @@ One primary action per area. Secondary actions should be visually quieter and ne
 
 Use the shared recipe visible in storage mode, builder view selector, public/private preview, and visibility toggles.
 
-- **Outer rail:** `flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border`.
+- **Outer rail:** `flex bg-parichay-control-selected p-1 rounded-sm w-fit border border-parichay-border`.
 - **Button:** `type-ui-label min-h-11 px-4 py-1.5 rounded-sm`.
-- **Selected:** `bg-ankahe-control text-ankahe-text shadow-sm`.
-- **Unselected:** `text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text`.
+- **Selected:** `bg-parichay-control text-parichay-text shadow-sm`.
+- **Unselected:** `text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text`.
 - **Semantics:** use `aria-pressed` for toggle buttons and `aria-current` for current step where appropriate.
 
 ### Visibility Controls
@@ -225,10 +225,10 @@ Visibility is a core privacy affordance, not decoration.
 
 Use cards only for choices, repeated items, modals/menus, and genuinely framed tools.
 
-- **Main panels:** `rounded-lg border border-ankahe-border bg-ankahe-surface p-4 md:p-6`.
-- **Document panels:** `rounded-md border border-ankahe-paper-border bg-ankahe-paper`.
+- **Main panels:** `rounded-lg border border-parichay-border bg-parichay-surface p-4 md:p-6`.
+- **Document panels:** `rounded-md border border-parichay-paper-border bg-parichay-paper`.
 - **Choice cards:** `min-h-24 rounded-sm border p-4 text-left`.
-- **Info cards:** `rounded-md border border-ankahe-border bg-ankahe-surface px-6 py-7`.
+- **Info cards:** `rounded-md border border-parichay-border bg-parichay-surface px-6 py-7`.
 - **Avoid:** nested cards unless the inner surface is a real document/artifact inside a studio shell. Never create decorative card soup.
 
 ### Tags, Chips, And Small Choices
@@ -236,8 +236,8 @@ Use cards only for choices, repeated items, modals/menus, and genuinely framed t
 Use small rectangular controls, not pills.
 
 - **Base:** `type-caption min-h-11 rounded-sm border px-3 py-1.5`.
-- **Selected:** `border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark`.
-- **Unselected:** `border-ankahe-paper-border bg-ankahe-paper-muted text-ankahe-text hover:border-ankahe-border-strong`.
+- **Selected:** `border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark`.
+- **Unselected:** `border-parichay-paper-border bg-parichay-paper-muted text-parichay-text hover:border-parichay-border-strong`.
 - **Metadata badges:** use `type-meta` only when uppercase scan behavior is useful.
 
 ### Inputs And Writing Areas
@@ -245,9 +245,9 @@ Use small rectangular controls, not pills.
 Inputs should feel like writing on warm paper.
 
 - **Main text input:** `type-answer-field`, transparent background, bottom border, lac focus.
-- **Textarea:** `type-answer-field bg-ankahe-paper border border-ankahe-paper-border rounded-sm p-6`.
-- **Optional note textarea:** `type-body bg-ankahe-paper-muted border border-ankahe-paper-border rounded-sm p-4`.
-- **Placeholder:** `placeholder:text-ankahe-muted/50` or `/60`.
+- **Textarea:** `type-answer-field bg-parichay-paper border border-parichay-paper-border rounded-sm p-6`.
+- **Optional note textarea:** `type-body bg-parichay-paper-muted border border-parichay-paper-border rounded-sm p-4`.
+- **Placeholder:** `placeholder:text-parichay-muted/50` or `/60`.
 - **Focus:** lac border plus visible tokenized focus ring.
 - **Resize:** textareas should not introduce uncontrolled layout jumps.
 
@@ -261,8 +261,8 @@ Inputs should feel like writing on warm paper.
 
 ### Progress And Step Navigation
 
-- Progress rail: `h-1.5 rounded-[3px] bg-ankahe-surface-soft`.
-- Progress fill: `bg-ankahe-accent`, animated via transform/scale only.
+- Progress rail: `h-1.5 rounded-[3px] bg-parichay-surface-soft`.
+- Progress fill: `bg-parichay-accent`, animated via transform/scale only.
 - Focused question pages use the section label, question count, and progress rail only.
 - Do not add bottom dot rails or shortcut bars to the focused question flow.
 
@@ -292,7 +292,7 @@ Inputs should feel like writing on warm paper.
 The Artifact Studio is the payoff. It must feel like a finished personal document, not a raw Q&A summary or dashboard report.
 
 - Artifact outer shell: warm surface, soft border, generous padding.
-- Artifact document: `max-w-2xl` or `max-w-3xl`, `bg-ankahe-paper`, `border-ankahe-paper-border`.
+- Artifact document: `max-w-2xl` or `max-w-3xl`, `bg-parichay-paper`, `border-parichay-paper-border`.
 - Manual title uses `type-artifact-title`.
 - Manual body uses `type-artifact-prose`.
 - Artifact sections may use a two-column layout on desktop: section heading/description left, prose right.
@@ -302,7 +302,7 @@ The Artifact Studio is the payoff. It must feel like a finished personal documen
 
 - Export/save is a primary lac action.
 - Print, QR, and copy actions are secondary unless they are the only action in the area.
-- Share link panels must state when Memory Only prevents link creation.
+- Share link panels in Memory Mode must create a link only after a deliberate user action.
 - Long URL warnings use sandal/warning tokens, not generic yellow.
 - QR panels use paper surfaces and restrained borders.
 
@@ -321,7 +321,7 @@ Motion should clarify state and make the interface feel responsive. It should ne
 
 - **Small interactions:** 150-250ms.
 - **Screen transitions:** 300-500ms only when the change benefits orientation.
-- **Default easing:** `var(--ease-out-expo)` for standard transitions. Use a cinematic `cubic-bezier(0.32,0.72,0,1)` for heavy, staggered entry cascades (like `ankahe-enter`).
+- **Default easing:** `var(--ease-out-expo)` for standard transitions. Use a cinematic `cubic-bezier(0.32,0.72,0,1)` for heavy, staggered entry cascades (like `parichay-enter`).
 - **Allowed animation properties:** transform and opacity.
 - **Avoid:** animating width, height, top, left, or expensive layout properties.
 - **Reduced motion:** respect `prefers-reduced-motion`; animations collapse to near-zero duration.
@@ -371,7 +371,7 @@ The voice is calm, precise, warm, and non-judgmental. It should feel like a care
 - No pill buttons.
 - No dashboard aesthetic, metric cards, dense admin panels, or generic SaaS composition.
 - No chatbot framing or AI-tool framing.
-- No generic 3-card marketing rows unless they are true repeated choices and follow Ankahe card rules.
+- No generic 3-card marketing rows unless they are true repeated choices and follow Parichay card rules.
 - No nested cards except a document artifact inside a studio shell.
 - No pure black.
 - No raw hardcoded brand colors in components.
@@ -386,7 +386,7 @@ Before calling a design pass complete, verify:
 - No Lucide imports remain.
 - No Inter usage remains.
 - No botanical green, sage naming, green success state, leaf identity, neon color, emojis, pill buttons, glass cards, or heavy gradients remain.
-- All new colors use semantic Ankahe tokens.
+- All new colors use semantic Parichay tokens.
 - Light and dark token values are tuned as separate emotional spaces.
 - The landing feels like a document studio, not a marketing template.
 - The builder feels private, calm, and non-judgmental.

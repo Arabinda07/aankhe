@@ -77,13 +77,13 @@ export function ManualBuilder({
   }
 
   return (
-    <div className="w-full font-sans transition-colors duration-700 bg-ankahe-bg text-ankahe-text relative">
+    <div className="w-full font-sans transition-colors duration-700 bg-parichay-bg text-parichay-text relative">
       {/* Builder Toolbar */}
-      <div className="sticky top-14 z-40 w-full border-b border-ankahe-border bg-ankahe-bg/95 backdrop-blur-sm">
+      <div className="sticky top-14 z-40 w-full border-b border-parichay-border bg-parichay-bg/95 backdrop-blur-sm">
         <nav aria-label="Manual builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <button
             onClick={onBack}
-            className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+            className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
             aria-label="Back to Hub"
           >
             <CaretLeft size={20} weight="light" />
@@ -95,7 +95,7 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("artifact")}
-                className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+                className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
               >
                 <BookOpenText size={18} weight="light" />
                 <span className="hidden sm:inline">Preview manual</span>
@@ -105,7 +105,7 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("build")}
-                className="type-ui-label flex items-center gap-2 text-ankahe-muted hover:text-ankahe-text transition-colors"
+                className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
               >
                 <FileText size={18} weight="light" />
                 <span className="hidden sm:inline">Back to answers</span>
@@ -117,9 +117,9 @@ export function ManualBuilder({
 
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32">
         {hashError && (
-          <div className="mb-10 flex items-start gap-4 rounded-lg border border-ankahe-danger/25 bg-ankahe-danger-soft p-4 text-ankahe-text shadow-sm">
+          <div className="mb-10 flex items-start gap-4 rounded-lg border border-parichay-danger/25 bg-parichay-danger-soft p-4 text-parichay-text shadow-sm">
             <div className="flex-1 space-y-1">
-              <h4 className="type-panel-title text-ankahe-heading">
+              <h4 className="type-panel-title text-parichay-heading">
                 Link could not be restored
               </h4>
               <p className="type-caption">
@@ -130,7 +130,7 @@ export function ManualBuilder({
               size="sm"
               variant="secondary"
               onClick={clearHashError}
-              className="bg-ankahe-surface text-ankahe-text border-ankahe-border"
+              className="bg-parichay-surface text-parichay-text border-parichay-border"
             >
               Dismiss
             </SoftButton>
@@ -150,9 +150,9 @@ export function ManualBuilder({
                 {controller && (
                   <div className="space-y-8 md:space-y-10">
                     <div className="space-y-3 md:space-y-4">
-                      <div className="type-meta flex items-center justify-between text-ankahe-muted">
+                      <div className="type-meta flex items-center justify-between text-parichay-muted">
                         <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded bg-ankahe-surface-soft text-ankahe-text">
+                          <span className="px-2 py-0.5 rounded bg-parichay-surface-soft text-parichay-text">
                             Section {controller.sectionIndex + 1}
                           </span>
                           <span>{controller.section?.title}</span>
@@ -160,9 +160,9 @@ export function ManualBuilder({
                         <span>{controller.currentStepIndex + 1} / {controller.totalSteps}</span>
                       </div>
                       
-                      <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-ankahe-surface-soft">
+                      <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-parichay-surface-soft">
                         <motion.div 
-                          className="h-full w-full bg-ankahe-accent origin-left"
+                          className="h-full w-full bg-parichay-accent origin-left"
                           initial={{ scaleX: 0 }}
                           animate={{ scaleX: controller.progress / 100 }}
                           transition={{ type: "spring", bounce: 0, duration: 0.5 }}
@@ -188,11 +188,11 @@ export function ManualBuilder({
               {/* Preview Side (Desktop only) */}
               <div className="hidden space-y-8 xl:sticky xl:top-36 xl:block">
                 <div className="space-y-4">
-                  <h3 className="type-meta text-ankahe-heading px-1">
+                  <h3 className="type-meta text-parichay-heading px-1">
                     Live Manual Preview
                   </h3>
-                  <div className="rounded-lg bg-ankahe-surface-preview p-2">
-                    <div className="overflow-hidden rounded-md border border-ankahe-paper-border bg-ankahe-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+                  <div className="rounded-lg bg-parichay-surface-preview p-2">
+                    <div className="overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
                       <ManualPreview
                         manual={composed}
                         mode={manual.mode}
@@ -226,16 +226,16 @@ export function ManualBuilder({
 
 function ManualRouteFallback({ label }: { label: string }) {
   return (
-    <div className="min-h-[calc(100dvh-8rem)] bg-ankahe-bg px-6 py-16 text-center">
-      <p className="type-meta text-ankahe-muted">{label}</p>
+    <div className="min-h-[calc(100dvh-8rem)] bg-parichay-bg px-6 py-16 text-center">
+      <p className="type-meta text-parichay-muted">{label}</p>
     </div>
   );
 }
 
 function ArtifactFallback() {
   return (
-    <div className="min-h-80 rounded-lg border border-ankahe-border bg-ankahe-surface p-8">
-      <p className="type-meta text-ankahe-muted">Preparing Artifact Studio</p>
+    <div className="min-h-80 rounded-lg border border-parichay-border bg-parichay-surface p-8">
+      <p className="type-meta text-parichay-muted">Preparing Artifact Studio</p>
     </div>
   );
 }

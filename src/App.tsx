@@ -7,7 +7,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
-import type { ModeId, OnboardingContext, StorageMode } from './lib/schemaTypes';
+import type { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
 
 const ManualBuilder = lazy(() =>
@@ -35,7 +35,6 @@ const SiteFooter = lazy(() =>
 );
 
 function AppContent() {
-  const [storageMode, setStorageMode] = useState<StorageMode>("memory");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,16 +47,15 @@ function AppContent() {
       state: {
         mode,
         onboarding,
-        storageMode,
       },
     });
   };
 
   return (
-    <div className="min-h-[100dvh] flex flex-col font-sans selection:bg-ankahe-accent-soft selection:text-ankahe-text">
+    <div className="min-h-[100dvh] flex flex-col font-sans selection:bg-parichay-accent-soft selection:text-parichay-text">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:border focus:border-ankahe-border focus:bg-ankahe-surface focus:px-4 focus:py-3 focus:text-ankahe-text focus:shadow-sm focus:outline-none focus:ring-2 focus:ring-ankahe-focus"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:border focus:border-parichay-border focus:bg-parichay-surface focus:px-4 focus:py-3 focus:text-parichay-text focus:shadow-sm focus:outline-none focus:ring-2 focus:ring-parichay-focus"
       >
         Skip to content
       </a>
@@ -68,10 +66,8 @@ function AppContent() {
             <Route
               path="/"
               element={
-                <div className="bg-ankahe-bg">
+                <div className="bg-parichay-bg">
                   <Switchboard
-                    storageMode={storageMode}
-                    onStorageModeChange={setStorageMode}
                     onStart={handleStart}
                     onLearnMore={() => navigate("/how-it-works")}
                   />
@@ -143,8 +139,8 @@ function DeferredFooter() {
 
 function RouteFallback({ label }: { label: string }) {
   return (
-    <div className="min-h-[calc(100dvh-8rem)] bg-ankahe-bg px-6 py-16 text-center">
-      <p className="type-caption text-ankahe-muted">{label}</p>
+    <div className="min-h-[calc(100dvh-8rem)] bg-parichay-bg px-6 py-16 text-center">
+      <p className="type-caption text-parichay-muted">{label}</p>
     </div>
   );
 }

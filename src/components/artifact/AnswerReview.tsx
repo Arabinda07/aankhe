@@ -48,16 +48,16 @@ export function AnswerReview({ workspace }: AnswerReviewProps) {
   );
 
   return (
-    <section className="space-y-6 rounded-lg border border-ankahe-border bg-ankahe-surface p-5 md:p-6">
+    <section className="space-y-6 rounded-lg border border-parichay-border bg-parichay-surface p-5 md:p-6">
       <div className="space-y-2">
-        <h3 className="type-panel-title text-ankahe-heading">Review answers before sharing</h3>
-        <p className="type-caption max-w-2xl text-ankahe-muted">
+        <h3 className="type-panel-title text-parichay-heading">Review answers before sharing</h3>
+        <p className="type-caption max-w-2xl text-parichay-muted">
           Check what is included, what stays private, and what is omitted before you send anything.
         </p>
       </div>
 
       {answeredQuestions.length === 0 ? (
-        <p className="type-body rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-4 text-ankahe-muted">
+        <p className="type-body rounded-sm border border-parichay-paper-border bg-parichay-paper p-4 text-parichay-muted">
           Your manual will start taking shape here.
         </p>
       ) : (
@@ -65,16 +65,16 @@ export function AnswerReview({ workspace }: AnswerReviewProps) {
           {VISIBILITY_GROUPS.map((group) => {
             const groupQuestions = answeredQuestions.filter((question) => workspace.getVisibility(question) === group.id);
             return (
-              <div key={group.id} className="space-y-3 border-t border-ankahe-border pt-5 first:border-t-0 first:pt-0">
+              <div key={group.id} className="space-y-3 border-t border-parichay-border pt-5 first:border-t-0 first:pt-0">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h4 className="type-ui-label text-ankahe-heading">{group.title}</h4>
-                    <p className="type-caption text-ankahe-muted">{group.description}</p>
+                    <h4 className="type-ui-label text-parichay-heading">{group.title}</h4>
+                    <p className="type-caption text-parichay-muted">{group.description}</p>
                   </div>
-                  <span className="type-tabular type-caption text-ankahe-muted">{groupQuestions.length}</span>
+                  <span className="type-tabular type-caption text-parichay-muted">{groupQuestions.length}</span>
                 </div>
                 {groupQuestions.length === 0 ? (
-                  <p className="type-caption rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted px-3 py-2 text-ankahe-muted">
+                  <p className="type-caption rounded-sm border border-parichay-paper-border bg-parichay-paper-muted px-3 py-2 text-parichay-muted">
                     No answers here.
                   </p>
                 ) : (
@@ -113,14 +113,14 @@ function ReviewAnswer({
   const helperId = question.helperText ? `review-${question.id}-helper` : undefined;
 
   return (
-    <article className="space-y-4 rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-4">
+    <article className="space-y-4 rounded-sm border border-parichay-paper-border bg-parichay-paper p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
-          <h5 id={labelId} className="type-body font-semibold text-ankahe-heading">
+          <h5 id={labelId} className="type-body font-semibold text-parichay-heading">
             {question.label}
           </h5>
           {question.helperText && (
-            <p id={helperId} className="type-caption text-ankahe-muted">
+            <p id={helperId} className="type-caption text-parichay-muted">
               {question.helperText}
             </p>
           )}
@@ -128,7 +128,7 @@ function ReviewAnswer({
         <button
           type="button"
           onClick={() => setIsEditing((current) => !current)}
-          className="type-ui-label flex min-h-11 items-center gap-2 rounded-sm border border-ankahe-border bg-ankahe-control px-3 py-1.5 text-ankahe-text transition-colors hover:bg-ankahe-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2"
+          className="type-ui-label flex min-h-11 items-center gap-2 rounded-sm border border-parichay-border bg-parichay-control px-3 py-1.5 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
           aria-expanded={isEditing}
         >
           <PencilSimple size={16} weight="light" />
@@ -150,7 +150,7 @@ function ReviewAnswer({
             onChange={(event) => workspace.updateAnswerNote(question.id, event.target.value)}
             rows={2}
             placeholder="Optional nuance"
-            className="type-body w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper-muted p-4 text-ankahe-text placeholder:text-ankahe-muted/60 transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
+            className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
             aria-label={`Optional nuance for ${question.label}`}
           />
           <ReviewVisibility
@@ -161,8 +161,8 @@ function ReviewAnswer({
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="type-body text-ankahe-text">{formatAnswer(value, question)}</p>
-          {note && <p className="type-caption text-ankahe-muted">In my words: {note}</p>}
+          <p className="type-body text-parichay-text">{formatAnswer(value, question)}</p>
+          {note && <p className="type-caption text-parichay-muted">In my words: {note}</p>}
           <VisibilityBadge visibility={visibility} />
         </div>
       )}
@@ -181,12 +181,12 @@ function ReviewVisibility({
 }) {
   return (
     <div>
-      <p className="type-ui-label mb-2 text-ankahe-text" id={`review-visibility-${questionId}-label`}>Visibility</p>
+      <p className="type-ui-label mb-2 text-parichay-text" id={`review-visibility-${questionId}-label`}>Visibility</p>
       <RadioGroup.Root
         value={visibility}
         onValueChange={(value) => onVisibilityChange(value as Visibility)}
         aria-labelledby={`review-visibility-${questionId}-label`}
-        className="flex w-full flex-wrap gap-2 rounded-sm border border-ankahe-border bg-ankahe-control-selected p-1 sm:w-fit"
+        className="flex w-full flex-wrap gap-2 rounded-sm border border-parichay-border bg-parichay-control-selected p-1 sm:w-fit"
       >
         {[
           { id: "share" as const, label: "Share", icon: <Eye size={16} weight={visibility === "share" ? "fill" : "light"} /> },
@@ -198,10 +198,10 @@ function ReviewVisibility({
             value={option.id}
             className={cn(
               "type-ui-label min-h-11 flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm border border-transparent px-3 py-1.5 transition-all sm:flex-none",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
               visibility === option.id
-                ? "border-ankahe-border bg-ankahe-control text-ankahe-text shadow-sm"
-                : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
+                ? "border-parichay-border bg-parichay-control text-parichay-text shadow-sm"
+                : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
             )}
           >
             {option.icon}
@@ -221,7 +221,7 @@ function VisibilityBadge({ visibility }: { visibility: Visibility }) {
   }[visibility];
 
   return (
-    <span className="type-caption inline-flex min-h-11 items-center gap-2 rounded-sm border border-ankahe-border bg-ankahe-paper-muted px-3 py-1.5 text-ankahe-muted">
+    <span className="type-caption inline-flex min-h-11 items-center gap-2 rounded-sm border border-parichay-border bg-parichay-paper-muted px-3 py-1.5 text-parichay-muted">
       {details.icon}
       {details.label}
     </span>

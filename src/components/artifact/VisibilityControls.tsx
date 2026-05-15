@@ -32,16 +32,16 @@ export function VisibilityControls({
   const { manual } = policy;
 
   return (
-    <div className="bg-ankahe-surface p-8 space-y-8 rounded-lg border border-ankahe-border shadow-sm">
+    <div className="bg-parichay-surface p-8 space-y-8 rounded-lg border border-parichay-border shadow-sm">
       <div>
-        <h3 className="type-panel-title text-ankahe-heading mb-4">Public preview</h3>
+        <h3 className="type-panel-title text-parichay-heading mb-4">Public preview</h3>
         <Tabs.Root value={viewMode} onValueChange={(value) => onViewModeChange(value as ManualViewMode)}>
-          <Tabs.List className="flex bg-ankahe-control-selected p-1 rounded-sm w-fit border border-ankahe-border" aria-label="Public preview mode">
+          <Tabs.List className="flex bg-parichay-control-selected p-1 rounded-sm w-fit border border-parichay-border" aria-label="Public preview mode">
           <Tabs.Trigger
             value="included"
             className={cn(
-              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
-              viewMode === "included" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
+              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
+              viewMode === "included" ? "bg-parichay-control text-parichay-text shadow-sm" : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
             )}
           >
             What they see
@@ -49,21 +49,21 @@ export function VisibilityControls({
           <Tabs.Trigger
             value="private"
             className={cn(
-              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
-              viewMode === "private" ? "bg-ankahe-control text-ankahe-text shadow-sm" : "text-ankahe-muted hover:bg-ankahe-control-hover hover:text-ankahe-text"
+              "type-ui-label min-h-11 px-4 py-1.5 rounded-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
+              viewMode === "private" ? "bg-parichay-control text-parichay-text shadow-sm" : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
             )}
           >
             What I see
           </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
-        <p className="type-caption text-ankahe-muted mt-3">
+        <p className="type-caption text-parichay-muted mt-3">
           {policy.previewDescription}
         </p>
       </div>
 
-      <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h4 className="type-panel-title text-ankahe-heading">Share format</h4>
+      <div className="space-y-4 border-t border-parichay-border pt-6">
+        <h4 className="type-panel-title text-parichay-heading">Share format</h4>
         <RadioGroup.Root
           value={manual.artifactFormat}
           onValueChange={(value) => onFormatChange(value as ArtifactFormat)}
@@ -75,21 +75,21 @@ export function VisibilityControls({
               key={format.id}
               value={format.id}
               className={cn(
-                "type-caption min-h-11 rounded-sm border px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                "type-caption min-h-11 rounded-sm border px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
                 manual.artifactFormat === format.id
-                  ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
-                  : "border-ankahe-border bg-ankahe-control text-ankahe-text hover:bg-ankahe-control-hover"
+                  ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
+                  : "border-parichay-border bg-parichay-control text-parichay-text hover:bg-parichay-control-hover"
               )}
             >
               <span className="block font-semibold">{format.label}</span>
-              <span className="block text-ankahe-muted">{format.description}</span>
+              <span className="block text-parichay-muted">{format.description}</span>
             </RadioGroup.Item>
           ))}
         </RadioGroup.Root>
       </div>
 
-      <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h4 className="type-panel-title text-ankahe-heading">Tone</h4>
+      <div className="space-y-4 border-t border-parichay-border pt-6">
+        <h4 className="type-panel-title text-parichay-heading">Tone</h4>
         <RadioGroup.Root
           value={manual.tone}
           onValueChange={(value) => onToneChange(value as TonePreference)}
@@ -101,10 +101,10 @@ export function VisibilityControls({
               key={tone.id}
               value={tone.id}
               className={cn(
-                "type-caption min-h-11 rounded-sm border px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                "type-caption min-h-11 rounded-sm border px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
                 manual.tone === tone.id
-                  ? "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
-                  : "border-ankahe-border bg-ankahe-control text-ankahe-text hover:bg-ankahe-control-hover"
+                  ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
+                  : "border-parichay-border bg-parichay-control text-parichay-text hover:bg-parichay-control-hover"
               )}
             >
               {tone.label}
@@ -114,7 +114,7 @@ export function VisibilityControls({
       </div>
 
       <div className="space-y-4">
-        <h4 className="type-panel-title text-ankahe-heading">Sections</h4>
+        <h4 className="type-panel-title text-parichay-heading">Sections</h4>
         <div className="flex flex-wrap gap-2">
           {config.sections.map((section) => {
             const isExcluded = policy.isSectionExcluded(section.id);
@@ -124,10 +124,10 @@ export function VisibilityControls({
                 onClick={() => onSectionToggle(section.id)}
                 aria-pressed={!isExcluded}
                 className={cn(
-                  "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+                  "type-caption min-h-11 px-3 py-1.5 rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
                   isExcluded
-                    ? "bg-ankahe-control-selected border-ankahe-border text-ankahe-muted"
-                    : "border-ankahe-accent bg-ankahe-accent-soft text-ankahe-accent-dark"
+                    ? "bg-parichay-control-selected border-parichay-border text-parichay-muted"
+                    : "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
                 )}
               >
                 {section.title}
@@ -137,27 +137,27 @@ export function VisibilityControls({
         </div>
       </div>
 
-      <div className="space-y-4 border-t border-ankahe-border pt-6">
-        <h3 className="type-panel-title text-ankahe-heading">Visibility note</h3>
+      <div className="space-y-4 border-t border-parichay-border pt-6">
+        <h3 className="type-panel-title text-parichay-heading">Visibility note</h3>
         <div className="space-y-3">
           <div className="type-caption flex items-center justify-between">
-            <span className="text-ankahe-muted">Included answers</span>
-            <span className="text-ankahe-text">{manual.shareableCount}</span>
+            <span className="text-parichay-muted">Included answers</span>
+            <span className="text-parichay-text">{manual.shareableCount}</span>
           </div>
           <div className="type-caption flex items-center justify-between">
-            <span className="text-ankahe-muted">Private answers</span>
-            <span className="text-ankahe-private">{manual.privateCount}</span>
+            <span className="text-parichay-muted">Private answers</span>
+            <span className="text-parichay-private">{manual.privateCount}</span>
           </div>
           <div className="type-caption flex items-center justify-between">
-            <span className="text-ankahe-muted">Omitted answers</span>
-            <span className="text-ankahe-text">{manual.hiddenCount}</span>
+            <span className="text-parichay-muted">Omitted answers</span>
+            <span className="text-parichay-text">{manual.hiddenCount}</span>
           </div>
         </div>
-        <p className="type-caption text-ankahe-muted">
+        <p className="type-caption text-parichay-muted">
           Share links and QR codes use included answers only.
         </p>
         {policy.showSafeToSendNote && (
-          <p className="type-ui-label rounded-sm border border-ankahe-sandal/25 bg-ankahe-sandal-soft px-3 py-2 text-ankahe-sandal">
+          <p className="type-ui-label rounded-sm border border-parichay-sandal/25 bg-parichay-sandal-soft px-3 py-2 text-parichay-sandal">
             This version is safe to send.
           </p>
         )}

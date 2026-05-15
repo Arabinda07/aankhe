@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Ankahe private manual studio</title>
-  <desc id="desc">A warm paper preview for Ankahe with the words Say it once. Be understood.</desc>
+  <title id="title">Parichay private manual studio</title>
+  <desc id="desc">A warm paper preview for Parichay with the words Your Story, Always Ready.</desc>
   <rect width="1200" height="630" fill="#F4EEE6"/>
-  <rect x="82" y="72" width="1036" height="486" rx="18" fill="#FFFDF8" stroke="#E2D4C5" stroke-width="2"/>
-  <text x="132" y="150" fill="#4A2F28" font-family="Georgia, serif" font-size="48" font-weight="700">Ankahe</text>
-  <text x="132" y="280" fill="#2C211E" font-family="Arial, sans-serif" font-size="96" font-weight="800">Say it once.</text>
-  <text x="132" y="385" fill="#AA5D48" font-family="Georgia, serif" font-size="98" font-style="italic">Be understood.</text>
-  <line x1="132" y1="438" x2="640" y2="438" stroke="#E2D4C5" stroke-width="2"/>
-  <text x="132" y="500" fill="#705F56" font-family="Arial, sans-serif" font-size="28">Create a private manual for work, care, and hard conversations.</text>
-  <rect x="790" y="150" width="240" height="320" rx="8" fill="#F4EEE6" stroke="#E2D4C5" stroke-width="2"/>
-  <line x1="830" y1="226" x2="990" y2="226" stroke="#AA5D48" stroke-width="10" stroke-linecap="round"/>
-  <line x1="830" y1="282" x2="970" y2="282" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
-  <line x1="830" y1="330" x2="1000" y2="330" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
-  <line x1="830" y1="378" x2="935" y2="378" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
+  <rect x="78" y="70" width="1044" height="490" rx="18" fill="#FFFDF8" stroke="#E2D4C5" stroke-width="2"/>
+  <rect x="132" y="126" width="72" height="72" rx="8" fill="#A85A44"/>
+  <text x="157" y="174" fill="#FFFDF8" font-family="Georgia, serif" font-size="42" font-weight="700" font-style="italic">P</text>
+  <text x="232" y="174" fill="#4A2F28" font-family="Georgia, serif" font-size="54" font-weight="700">Parichay</text>
+  <text x="132" y="292" fill="#2C211E" font-family="Arial, sans-serif" font-size="82" font-weight="800">Your Story,</text>
+  <text x="132" y="390" fill="#AA5D48" font-family="Georgia, serif" font-size="96" font-style="italic">Always Ready.</text>
+  <line x1="132" y1="438" x2="650" y2="438" stroke="#E2D4C5" stroke-width="2"/>
+  <text x="132" y="500" fill="#705F56" font-family="Arial, sans-serif" font-size="28">Create a private manual. Share only the included parts.</text>
+  <rect x="812" y="146" width="226" height="312" rx="8" fill="#F4EEE6" stroke="#E2D4C5" stroke-width="2"/>
+  <path d="M848 216h154M848 274h132M848 326h154M848 378h96" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
+  <path d="M848 216h118" stroke="#AA5D48" stroke-width="10" stroke-linecap="round"/>
 </svg>

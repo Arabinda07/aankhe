@@ -13,15 +13,12 @@ import { User } from "@phosphor-icons/react/dist/csr/User";
 import { UsersThree } from "@phosphor-icons/react/dist/csr/UsersThree";
 import type React from "react";
 import { useMemo, useState } from "react";
-import { ManualDepth, ModeId, OnboardingContext, StorageMode } from "../lib/schemaTypes";
+import { ManualDepth, ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
-import { StorageModeToggle } from "./StorageModeToggle";
 
 interface SwitchboardSetupProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
-  storageMode: StorageMode;
-  onStorageModeChange: (mode: StorageMode) => void;
 }
 
 type RecipientId = "manager" | "teammate" | "partner" | "friend" | "talk" | "self" | "sync";
@@ -59,11 +56,7 @@ const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
   { id: "deep", label: "Deeper manual", description: "The full version. Go slowly." },
 ];
 
-export function SwitchboardSetup({
-  onStart,
-  storageMode,
-  onStorageModeChange,
-}: SwitchboardSetupProps) {
+export function SwitchboardSetup({ onStart }: SwitchboardSetupProps) {
   const [recipientId, setRecipientId] = useState<RecipientId>("manager");
   const [misunderstanding, setMisunderstanding] = useState(MISREAD_TOPICS[0]);
   const [depth, setDepth] = useState<ManualDepth>("manual");
@@ -83,9 +76,9 @@ export function SwitchboardSetup({
     <aside
       id="onboarding"
       aria-label="Manual setup"
-      className="ankahe-enter ankahe-enter-aside w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-ankahe-border bg-ankahe-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
+      className="parichay-enter parichay-enter-aside w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
     >
-      <div className="rounded-[calc(2rem-0.75rem)] border border-ankahe-paper-border bg-ankahe-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+      <div className="rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div className="space-y-12">
           <ChoiceGroup title="Who should understand you better">
             <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:gap-3">
@@ -133,7 +126,7 @@ export function SwitchboardSetup({
             </ChoiceGroup>
           </div>
 
-          <StorageModeToggle value={storageMode} onChange={onStorageModeChange} />
+          <PrivacyLedger />
 
           <SoftButton
             size="md"
@@ -149,13 +142,34 @@ export function SwitchboardSetup({
   );
 }
 
+function PrivacyLedger() {
+  const rows = [
+    ["Included", "Can appear in the manual you share."],
+    ["Private", "Stays in this tab."],
+    ["Omitted", "Stays out of preview, links, and exports."],
+  ];
+
+  return (
+    <section aria-label="Privacy rules" className="border-t border-parichay-paper-border pt-6">
+      <div className="grid gap-3">
+        {rows.map(([label, description]) => (
+          <div key={label} className="grid grid-cols-[5.5rem_1fr] gap-3">
+            <span className="type-caption font-semibold text-parichay-heading">{label}</span>
+            <span className="type-caption text-parichay-muted">{description}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ChoiceGroup({ title, children, variant = "primary" }: { title: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
   return (
     <section className="space-y-5">
       <h2 className={cn(
         variant === "primary"
-          ? "type-panel-title text-ankahe-heading"
-          : "type-eyebrow text-ankahe-heading"
+          ? "type-panel-title text-parichay-heading"
+          : "type-eyebrow text-parichay-heading"
       )}>{title}</h2>
       {children}
     </section>
@@ -181,19 +195,19 @@ function ChoiceCard({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "group h-full min-h-24 w-full rounded-md p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "group h-full min-h-24 w-full rounded-md p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
         active
-          ? "bg-ankahe-accent-soft text-ankahe-accent-text ring-1 ring-inset ring-ankahe-accent/20"
-          : "bg-transparent text-ankahe-text hover:bg-ankahe-surface-halo-hover ring-1 ring-inset ring-transparent hover:ring-ankahe-border"
+          ? "bg-parichay-accent-soft text-parichay-accent-text ring-1 ring-inset ring-parichay-accent/20"
+          : "bg-transparent text-parichay-text hover:bg-parichay-surface-halo-hover ring-1 ring-inset ring-transparent hover:ring-parichay-border"
       )}
     >
       <span className="mb-3 flex items-center justify-between gap-4">
         <span className="type-ui-label">{title}</span>
-        <span aria-hidden="true" className={cn("transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1", active ? "text-ankahe-accent" : "text-ankahe-muted")}>{icon}</span>
+        <span aria-hidden="true" className={cn("transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1", active ? "text-parichay-accent" : "text-parichay-muted")}>{icon}</span>
       </span>
       <span className={cn(
         "type-caption block",
-        active ? "text-ankahe-accent-text-muted" : "text-ankahe-muted"
+        active ? "text-parichay-accent-text-muted" : "text-parichay-muted"
       )}>{description}</span>
     </button>
   );
@@ -206,10 +220,10 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "type-caption min-h-11 rounded-sm px-4 py-2 transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus focus-visible:ring-offset-2",
+        "type-caption min-h-11 rounded-sm px-4 py-2 transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
         active
-          ? "bg-ankahe-accent text-ankahe-on-accent"
-          : "bg-transparent text-ankahe-text ring-1 ring-inset ring-ankahe-border hover:bg-ankahe-surface-halo-hover hover:ring-ankahe-border-strong"
+          ? "bg-parichay-accent text-parichay-on-accent"
+          : "bg-transparent text-parichay-text ring-1 ring-inset ring-parichay-border hover:bg-parichay-surface-halo-hover hover:ring-parichay-border-strong"
       )}
     >
       {children}

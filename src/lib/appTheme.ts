@@ -1,7 +1,8 @@
 export type ThemePreference = "light" | "dark" | "system";
 export type ResolvedTheme = "light" | "dark";
 
-export const THEME_STORAGE_KEY = "ankahe-theme-preference";
+export const THEME_STORAGE_KEY = "parichay-theme-preference";
+const LEGACY_THEME_STORAGE_KEY = "ankahe-theme-preference";
 
 const THEME_PREFERENCES: ThemePreference[] = ["light", "dark", "system"];
 
@@ -12,7 +13,16 @@ export function isThemePreference(value: unknown): value is ThemePreference {
 export function getStoredThemePreference(): ThemePreference {
   try {
     const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return isThemePreference(stored) ? stored : "system";
+    if (isThemePreference(stored)) return stored;
+
+    const legacyStored = window.localStorage.getItem(LEGACY_THEME_STORAGE_KEY);
+    if (isThemePreference(legacyStored)) {
+      window.localStorage.setItem(THEME_STORAGE_KEY, legacyStored);
+      window.localStorage.removeItem(LEGACY_THEME_STORAGE_KEY);
+      return legacyStored;
+    }
+
+    return "system";
   } catch {
     return "system";
   }

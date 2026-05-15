@@ -1,10 +1,10 @@
-# Ankahe Brand Inheritance
+# Parichay Brand Inheritance
 
 ## Relationship
 
-Ankahe is a sibling brand to Reflections. Both products share a quiet, human, privacy-first sensibility, but they serve different moments.
+Parichay is a sibling brand to Reflections. Both products share a quiet, human, privacy-first sensibility, but they serve different moments.
 
-Reflections is a private writing space for noticing meaning over time. Ankahe is a private manual studio for explaining how a person works, relates, communicates, and sets boundaries.
+Reflections is a private writing space for noticing meaning over time. Parichay is a private manual studio for explaining how a person works, relates, communicates, and sets boundaries.
 
 ## Shared DNA
 
@@ -16,9 +16,9 @@ Reflections is a private writing space for noticing meaning over time. Ankahe is
 - No therapy, diagnosis, productivity scoring, streaks, XP, or achievement loops.
 - No "magic", "unlock", or AI-as-hero language.
 
-## Ankahe Distinction
+## Parichay Distinction
 
-Ankahe should feel more structured than Reflections. It is not a journal, diary, sanctuary, mood tracker, or insight dashboard. It is a place to create a useful artifact that can be shared with care.
+Parichay should feel more structured than Reflections. It is not a journal, diary, sanctuary, mood tracker, or insight dashboard. It is a place to create a useful artifact that can be shared with care.
 
 The experience should feel like:
 
@@ -46,10 +46,10 @@ It should not feel like:
 
 ## Elements To Adapt
 
-- Reflections' botanical and sky palette becomes Ankahe's paper, terracotta, clay, oat, and sage palette.
-- Reflections' notebook metaphor becomes Ankahe's manual and artifact metaphor.
-- Reflections' introspective tone becomes Ankahe's practical, careful, share-aware tone.
-- Reflections' long-form writing posture becomes Ankahe's structured answer posture.
+- Reflections' botanical and sky palette becomes Parichay's paper, terracotta, clay, oat, and sage palette.
+- Reflections' notebook metaphor becomes Parichay's manual and artifact metaphor.
+- Reflections' introspective tone becomes Parichay's practical, careful, share-aware tone.
+- Reflections' long-form writing posture becomes Parichay's structured answer posture.
 
 ## Elements To Avoid Importing
 

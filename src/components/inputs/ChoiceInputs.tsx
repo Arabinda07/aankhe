@@ -66,7 +66,7 @@ export function NativeSelectInput({ question, value, onChange, labelledBy, descr
     <select
       value={typeof value === "string" ? value : ""}
       onChange={(event) => onChange(event.target.value)}
-      className="type-body min-h-12 w-full rounded-sm border border-ankahe-paper-border bg-ankahe-paper px-4 py-3 text-ankahe-text transition-colors focus:border-ankahe-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ankahe-focus"
+      className="type-body min-h-12 w-full rounded-sm border border-parichay-paper-border bg-parichay-paper px-4 py-3 text-parichay-text transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus"
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
     >

@@ -4,11 +4,11 @@
 
 The main character is the user deciding what they want another person to understand.
 
-Ankahe should never make the model, the interface, or the brand feel like the hero. The product is successful when it quietly helps the user say something once, shape it with care, and choose what becomes visible.
+Parichay should never make the model, the interface, or the brand feel like the hero. The product is successful when it quietly helps the user say something once, shape it with care, and choose what becomes visible.
 
 ## Core Story
 
-Some parts of us are hard to explain in the moment. Ankahe helps turn those parts into a clear manual: what helps, what does not, what to know, and what should remain private.
+Some parts of us are hard to explain in the moment. Parichay helps turn those parts into a clear manual: what helps, what does not, what to know, and what should remain private.
 
 The story is not "AI understands you". The story is "you stay in charge of what is written, included, private, and shared."
 

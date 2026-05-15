@@ -34,11 +34,11 @@ function makeState(): ManualState {
 }
 
 function installWindowStub() {
-  let href = "https://ankahe.test/manual/me";
+  let href = "https://parichay.test/manual/me";
 
   globalThis.window = {
     location: {
-      origin: "https://ankahe.test",
+      origin: "https://parichay.test",
       pathname: "/manual/me",
       get href() {
         return href;
@@ -50,7 +50,7 @@ function installWindowStub() {
     },
     history: {
       replaceState: (_state: unknown, _title: string, url: string) => {
-        href = `https://ankahe.test/manual/me${url}`;
+        href = `https://parichay.test/manual/me${url}`;
         window.location.hash = url.startsWith("#") ? url : "";
       },
     },

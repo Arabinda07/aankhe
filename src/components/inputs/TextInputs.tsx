@@ -13,7 +13,7 @@ export function ShortTextInput({ value, onChange, labelledBy, describedBy }: Ans
       value={typeof value === "string" ? value : ""}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Type your answer..."
-      className="type-answer-field w-full rounded-sm border border-ankahe-paper-border bg-ankahe-paper px-4 py-3 text-ankahe-text shadow-sm transition-colors placeholder:text-ankahe-muted/50 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
+      className="type-answer-field w-full rounded-sm border border-parichay-paper-border bg-parichay-paper px-4 py-3 text-parichay-text shadow-sm transition-colors placeholder:text-parichay-muted/50 focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
     />
@@ -28,7 +28,7 @@ export function TextareaInput({ value, onChange, labelledBy, describedBy }: Answ
       onChange={(e) => onChange(e.target.value)}
       placeholder="Type your answer..."
       rows={4}
-      className="type-answer-field w-full resize-none rounded-sm border border-ankahe-paper-border bg-ankahe-paper p-6 text-ankahe-text shadow-sm transition-colors placeholder:text-ankahe-muted/50 focus:border-ankahe-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-ankahe-focus"
+      className="type-answer-field w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper p-6 text-parichay-text shadow-sm transition-colors placeholder:text-parichay-muted/50 focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
       aria-labelledby={labelledBy}
       aria-describedby={describedBy}
     />

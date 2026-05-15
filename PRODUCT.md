@@ -6,17 +6,17 @@ product
 
 ## Users
 
-Ankahe is for people who want a calm way to explain how they work, relate, communicate, and set boundaries without creating an account or storing data on a server. Users may be preparing for work collaboration, care conversations, repair conversations, or personal sharing where privacy and emotional safety matter.
+Parichay is for people who want a calm way to explain how they work, relate, communicate, and set boundaries without creating an account or storing data on a server. Users may be preparing for work collaboration, care conversations, repair conversations, or personal sharing where privacy and emotional safety matter.
 
 ## Product Purpose
 
-Ankahe is a privacy-first web application for creating personal and professional operating manuals. It helps users write structured answers, choose what is included or kept private, and export the result as a link, QR code, image, or PDF.
+Parichay is a privacy-first web application for creating personal and professional operating manuals. It helps users write structured answers, choose what is included or kept private, and export the result as a link, QR code, image, or PDF.
 
 Success means the user can say important context once, preserve agency over what is visible, and leave with a useful artifact.
 
 ## Brand Relationship
 
-Ankahe is a sibling brand to Reflections. Both share calm, human, privacy-first principles. Ankahe is distinct as a structured manual studio, not a journal, diary, sanctuary, mood tracker, insight dashboard, or therapy product.
+Parichay is a sibling brand to Reflections. Both share calm, human, privacy-first principles. Parichay is distinct as a structured manual studio, not a journal, diary, sanctuary, mood tracker, insight dashboard, or therapy product.
 
 Primary brand docs live in `docs/brand/`.
 
