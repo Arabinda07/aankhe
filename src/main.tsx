@@ -18,3 +18,5 @@ export function mountApp() {
     </StrictMode>,
   );
 }
+
+mountApp();

@@ -275,55 +275,6 @@
         line-height: 1.45;
       }
 
-      .initial-shell__footer {
-        border-top: 1px solid var(--initial-border);
-        background: var(--initial-surface);
-      }
-
-      .initial-shell__footer-inner {
-        box-sizing: border-box;
-        display: flex;
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 1.5rem 1.5rem 2rem;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .initial-shell__footer-nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem 1.5rem;
-      }
-
-      .initial-shell__footer-link {
-        display: inline-flex;
-        min-height: 2.75rem;
-        align-items: center;
-        justify-content: center;
-        color: var(--initial-muted);
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-decoration: none;
-        transition: color 0.2s ease-out;
-      }
-
-      .initial-shell__footer-link:hover {
-        color: var(--initial-text);
-      }
-
-      .initial-shell__footer-copy {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        color: var(--initial-text);
-        font-size: 0.875rem;
-        font-weight: 600;
-      }
-
       @media (min-width: 640px) {
         .initial-shell__bar {
           padding: 0 1.5rem;
@@ -360,12 +311,6 @@
 
         .initial-shell__setup {
           justify-self: end;
-        }
-
-        .initial-shell__footer-inner {
-          flex-direction: row;
-          justify-content: space-between;
-          padding-top: 2rem;
         }
       }
     </style>
@@ -474,20 +419,6 @@
             </div>
           </aside>
         </main>
-        <footer class="initial-shell__footer">
-          <div class="initial-shell__footer-inner">
-            <nav class="initial-shell__footer-nav" aria-label="Footer">
-              <a href="/" class="initial-shell__footer-link">Home</a>
-              <a href="/how-it-works" class="initial-shell__footer-link">FAQ</a>
-              <a href="/privacy" class="initial-shell__footer-link">Privacy</a>
-              <a href="/manual/me" class="initial-shell__footer-link">Me</a>
-              <a href="/manual/work" class="initial-shell__footer-link">Work</a>
-            </nav>
-            <p class="initial-shell__footer-copy">
-              © 2026&nbsp;<a href="https://arabinda07.github.io/" target="_blank" rel="noreferrer noopener" class="initial-shell__footer-link">ARABINDA</a>
-            </p>
-          </div>
-        </footer>
       </div>
     </div>
     <script type="module" src="/src/boot.ts"></script>

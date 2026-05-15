@@ -1,22 +1,24 @@
 import { shouldBootReactImmediately } from "./lib/routes";
 
+const IDLE_BOOT_DELAY_MS = 3000;
 
-let preloadPromise: Promise<typeof import("./main")> | null = null;
+const BOOT_EVENTS = [
+  "keydown",
+  "focusin",
+  "pointerdown",
+  "mousemove",
+  "wheel",
+  "touchstart",
+  "scroll",
+] as const;
+
 let appBoot: Promise<unknown> | null = null;
-
-function preloadApp() {
-  if (!preloadPromise) {
-    preloadPromise = import("./main");
-  }
-  return preloadPromise;
-}
 
 function bootApp() {
   if (!appBoot) {
     document.documentElement.dataset.reactBoot = "loading";
-    appBoot = preloadApp().then((module) => {
+    appBoot = import("./main").then((module) => {
       document.documentElement.dataset.reactBoot = "ready";
-      module.mountApp();
       return module;
     });
   }
@@ -34,15 +36,6 @@ function scrollToSetup() {
 }
 
 function bindHomeBoot() {
-  // Preload React in the background without evaluating its mount function.
-  // This downloads the bundle so it's ready when the user interacts,
-  // but doesn't trigger the heavy Style & Layout calculation of replacing the DOM.
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(() => preloadApp(), { timeout: 2000 });
-  } else {
-    setTimeout(() => preloadApp(), 1000);
-  }
-
   const startLink = document.querySelector<HTMLElement>('[data-boot-intent="start"]');
 
   startLink?.addEventListener(
@@ -53,6 +46,34 @@ function bindHomeBoot() {
     },
     { once: true }
   );
+
+  let fallbackTimeout: ReturnType<typeof setTimeout>;
+
+  const cleanup = () => {
+    clearTimeout(fallbackTimeout);
+    for (const event of BOOT_EVENTS) {
+      document.removeEventListener(event, bootFromIntent);
+    }
+  };
+
+  const bootFromIntent = (event?: Event) => {
+    if (event) {
+      const target = event.target instanceof Element ? event.target : null;
+
+      if (event.type === "pointerdown" && target?.closest('a[href]:not([href^="#"])')) {
+        return;
+      }
+    }
+
+    cleanup();
+    void bootApp();
+  };
+
+  for (const event of BOOT_EVENTS) {
+    document.addEventListener(event, bootFromIntent, { once: true, passive: true });
+  }
+
+  fallbackTimeout = setTimeout(() => bootFromIntent(), IDLE_BOOT_DELAY_MS);
 }
 
 if (shouldBootReactImmediately(window.location)) {
