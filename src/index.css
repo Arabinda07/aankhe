@@ -359,8 +359,8 @@
     font-family: var(--font-display);
     font-size: clamp(3.25rem, 8vw, 4rem);
     font-style: italic;
-    font-weight: 850;
-    line-height: 0.99;
+    font-weight: 650;
+    line-height: 1.38;
     letter-spacing: 0;
     color: var(--color-ankahe-heading);
     text-wrap: balance;
@@ -626,11 +626,11 @@
     }
 
     .type-mixed-heading {
-      font-size: 5.5rem;
+      font-size: 5.25rem;
     }
 
     .type-mixed-heading-page {
-      font-size: 4.125rem;
+      font-size: 4rem;
     }
 
     .type-question {
