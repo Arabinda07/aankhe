@@ -12,7 +12,7 @@ export default defineConfig(() => {
       asyncStylesheetPlugin(),
       VitePWA({
         registerType: 'autoUpdate',
-        injectRegister: 'auto',
+        injectRegister: false,
         manifest: false,
         workbox: {
           cleanupOutdatedCaches: true,

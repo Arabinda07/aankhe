@@ -1,8 +1,16 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
+import { List } from "@phosphor-icons/react/dist/csr/List";
 import { Link, NavLink } from "react-router-dom";
 import { HOW_IT_WORKS_PATH, MANUAL_PATHS, PRIVACY_PATH } from "../lib/routes";
+import type { ModeId } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { ParichayMark } from "./ParichayMark";
+
+const MobileHeaderMenu = lazy(() =>
+  import("./MobileHeaderMenu").then((module) => ({
+    default: module.MobileHeaderMenu,
+  }))
+);
 
 const ThemeSwitcher = lazy(() =>
   import("./ThemeSwitcher").then((module) => ({
@@ -10,7 +18,32 @@ const ThemeSwitcher = lazy(() =>
   }))
 );
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  onStart: (mode: ModeId) => void;
+}
+
+export function SiteHeader({ onStart }: SiteHeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [shouldLoadMobileMenu, setShouldLoadMobileMenu] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const prepareMobileMenu = () => setShouldLoadMobileMenu(true);
+  const openMobileMenu = () => {
+    setShouldLoadMobileMenu(true);
+    setIsMobileMenuOpen(true);
+  };
+  const handleMobileMenuOpenChange = (open: boolean) => {
+    setIsMobileMenuOpen(open);
+
+    if (!open) {
+      window.requestAnimationFrame(() => {
+        if (!document.documentElement.hasAttribute("data-sheet-open")) {
+          mobileMenuButtonRef.current?.focus();
+        }
+      });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-parichay-border bg-parichay-surface shadow-sm">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
@@ -63,8 +96,30 @@ export function SiteHeader() {
           </nav>
           <div className="hidden h-4 w-px shrink-0 bg-parichay-border/50 sm:block" aria-hidden="true" />
           <DeferredThemeSwitcher />
+          <button
+            ref={mobileMenuButtonRef}
+            type="button"
+            aria-label="Open menu"
+            aria-controls="mobile-header-menu"
+            aria-expanded={isMobileMenuOpen}
+            onClick={openMobileMenu}
+            onFocus={prepareMobileMenu}
+            onPointerEnter={prepareMobileMenu}
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:hidden"
+          >
+            <List size={22} weight="bold" aria-hidden="true" />
+          </button>
         </div>
       </div>
+      {shouldLoadMobileMenu && (
+        <Suspense fallback={null}>
+          <MobileHeaderMenu
+            open={isMobileMenuOpen}
+            onOpenChange={handleMobileMenuOpenChange}
+            onStart={onStart}
+          />
+        </Suspense>
+      )}
     </header>
   );
 }

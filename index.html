@@ -286,37 +286,55 @@
       }
 
       .initial-shell__setup-inner {
-        display: flex;
         min-height: 31rem;
-        flex-direction: column;
-        justify-content: space-between;
+        display: grid;
+        align-content: start;
+        gap: 2.75rem;
       }
 
       .initial-shell__setup-label {
-        margin: 0 0 1.5rem;
-        color: var(--initial-muted);
-        font-size: 0.75rem;
-        font-weight: 800;
-        letter-spacing: 0.11em;
+        margin: 0 0 1.25rem;
+        color: var(--initial-text);
+        font-family: "Source Serif 4", "Source Serif 4 Fallback", "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, Georgia, serif;
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 650;
         line-height: 1.2;
-        text-transform: uppercase;
       }
 
-      .initial-shell__line,
-      .initial-shell__card {
-        border-radius: 0.25rem;
-        background: color-mix(in oklch, var(--initial-muted) 16%, transparent);
+      .initial-shell__choice-grid {
+        display: grid;
+        gap: 0.75rem;
       }
 
-      .initial-shell__line {
-        height: 0.75rem;
+      .initial-shell__choice-card {
+        min-height: 6rem;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        background: transparent;
+      }
+
+      .initial-shell__choice-card:first-child {
+        border-color: color-mix(in oklch, var(--initial-accent) 20%, transparent);
+        background: color-mix(in oklch, var(--initial-accent) 12%, transparent);
+      }
+
+      .initial-shell__choice-title {
+        display: block;
+        color: var(--initial-text);
+        font-size: 0.875rem;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .initial-shell__choice-desc {
+        display: block;
         margin-top: 0.75rem;
-      }
-
-      .initial-shell__card {
-        height: 6rem;
-        margin-top: 1rem;
-        border: 1px solid var(--initial-border);
+        color: var(--initial-muted);
+        font-size: 0.8125rem;
+        line-height: 1.45;
       }
 
       .initial-shell__promise {
@@ -345,6 +363,10 @@
         .initial-shell__setup-paper {
           border-radius: calc(2rem - 0.75rem);
           padding: 2.5rem 2rem;
+        }
+
+        .initial-shell__choice-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
@@ -460,14 +482,25 @@
           <div class="initial-shell__setup-paper">
             <div class="initial-shell__setup-inner">
               <div>
-                <p class="initial-shell__setup-label">Preparing your manual studio</p>
-                <div class="initial-shell__line" style="width: 66%"></div>
-                <div class="initial-shell__line" style="width: 92%"></div>
-                <div class="initial-shell__line" style="width: 80%"></div>
-              </div>
-              <div>
-                <div class="initial-shell__card"></div>
-                <div class="initial-shell__card"></div>
+                <p class="initial-shell__setup-label">Who should understand you better</p>
+                <div class="initial-shell__choice-grid">
+                  <div class="initial-shell__choice-card">
+                    <span class="initial-shell__choice-title">Manager</span>
+                    <span class="initial-shell__choice-desc">How you work, focus, and handle pressure.</span>
+                  </div>
+                  <div class="initial-shell__choice-card">
+                    <span class="initial-shell__choice-title">Teammate</span>
+                    <span class="initial-shell__choice-desc">Collaboration rhythm and what helps work move.</span>
+                  </div>
+                  <div class="initial-shell__choice-card">
+                    <span class="initial-shell__choice-title">Partner</span>
+                    <span class="initial-shell__choice-desc">Care, boundaries, and what tends to get misread.</span>
+                  </div>
+                  <div class="initial-shell__choice-card">
+                    <span class="initial-shell__choice-title">Friend</span>
+                    <span class="initial-shell__choice-desc">What support looks like when guessing is getting old.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

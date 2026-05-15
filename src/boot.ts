@@ -32,6 +32,13 @@ function afterAppReady(callback: () => void) {
   window.addEventListener("parichay:app-ready", callback, { once: true });
 }
 
+function preloadManualAfterReadyAndScroll() {
+  afterAppReady(() => {
+    void import("./lib/manualRoutePreload").then((module) => module.preloadManualBuilder());
+    scrollToSetup();
+  });
+}
+
 function bindHomeBoot() {
   const startLink = document.querySelector<HTMLElement>('[data-boot-intent="start"]');
 
@@ -39,7 +46,7 @@ function bindHomeBoot() {
     "click",
     (event) => {
       event.preventDefault();
-      void bootApp().then(() => afterAppReady(scrollToSetup));
+      void bootApp().then(preloadManualAfterReadyAndScroll);
     },
     { once: true }
   );

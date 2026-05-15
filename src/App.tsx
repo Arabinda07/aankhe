@@ -4,22 +4,24 @@
  */
 
 import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation, useNavigationType } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
 import type { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
-import { MobileNav } from './components/MobileNav';
 import { FOOTER_INTERSECTION_ROOT_MARGIN, FOOTER_SCROLL_LOAD_THRESHOLD_PX } from './lib/performancePolicy';
 import { HOME_PATH, HOW_IT_WORKS_PATH, manualModePath } from './lib/routes';
-import { loadManualBuilder, preloadManualBuilder } from './lib/manualRoutePreload';
+import { scheduleServiceWorkerRegistration } from './lib/serviceWorkerRegistration';
 
 const ManualBuilder = lazy(() =>
-  loadManualBuilder().then((module) => ({
+  import("./lib/manualRoutePreload").then((module) => module.loadManualBuilder()).then((module) => ({
     default: module.ManualBuilder,
   }))
 );
+
+function preloadManualBuilderOnIntent() {
+  void import("./lib/manualRoutePreload").then((module) => module.preloadManualBuilder());
+}
 
 const PrivacyPage = lazy(() =>
   import("./components/InfoPages").then((module) => ({
@@ -69,49 +71,19 @@ function useAppVisualReadySignal() {
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
-  const navigationType = useNavigationType();
-  const prefersReducedMotion = useReducedMotion();
 
   useAppVisualReadySignal();
+
+  useEffect(() => {
+    scheduleServiceWorkerRegistration();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
-  useEffect(() => {
-    if (location.pathname !== HOME_PATH) return;
-
-    let cancelIdlePreload: (() => void) | null = null;
-    let cancelled = false;
-
-    const scheduleIdlePreload = () => {
-      if (cancelled) return;
-
-      if ("requestIdleCallback" in window) {
-        const handle = window.requestIdleCallback(() => preloadManualBuilder(), { timeout: 1200 });
-        cancelIdlePreload = () => window.cancelIdleCallback(handle);
-        return;
-      }
-
-      const handle = globalThis.setTimeout(() => preloadManualBuilder(), 500);
-      cancelIdlePreload = () => globalThis.clearTimeout(handle);
-    };
-
-    if (document.documentElement.dataset.appVisualReady === "true") {
-      scheduleIdlePreload();
-    } else {
-      window.addEventListener("parichay:app-ready", scheduleIdlePreload, { once: true });
-    }
-
-    return () => {
-      cancelled = true;
-      window.removeEventListener("parichay:app-ready", scheduleIdlePreload);
-      cancelIdlePreload?.();
-    };
-  }, [location.pathname]);
-
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
-    preloadManualBuilder();
+    preloadManualBuilderOnIntent();
     navigate(manualModePath(mode), {
       state: {
         mode,
@@ -128,18 +100,10 @@ function AppContent() {
       >
         Skip to content
       </a>
-      <SiteHeader />
-      <main id="main-content" className="flex-1 flex flex-col items-center w-full pb-mobile-nav sm:pb-0">
+      <SiteHeader onStart={handleStart} />
+      <main id="main-content" className="flex-1 flex flex-col items-center w-full">
         <div className="w-full">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={location.pathname}
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: navigationType === "POP" ? -20 : 20 }}
-              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
-              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: navigationType === "POP" ? 20 : -20 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.22, ease: [0.32, 0.72, 0, 1] }}
-            >
-          <Routes location={location}>
+          <Routes>
             <Route
               path="/"
               element={
@@ -147,7 +111,7 @@ function AppContent() {
                   <Switchboard
                     onStart={handleStart}
                     onLearnMore={() => navigate(HOW_IT_WORKS_PATH)}
-                    onManualIntentPreload={preloadManualBuilder}
+                    onManualIntentPreload={preloadManualBuilderOnIntent}
                   />
                 </div>
               }
@@ -179,11 +143,8 @@ function AppContent() {
               }
             />
           </Routes>
-            </motion.div>
-          </AnimatePresence>
         </div>
       </main>
-      <MobileNav onStart={handleStart} />
       <DeferredFooter pathname={location.pathname} />
     </div>
   );

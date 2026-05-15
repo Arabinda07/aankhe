@@ -105,8 +105,6 @@
   --radius-bezel-inner: calc(var(--radius-bezel-outer) - 0.75rem);
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-  --mobile-nav-height: 4rem;
-  --mobile-nav-total: calc(var(--mobile-nav-height) + var(--safe-area-bottom));
 
   /* Fonts */
   --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
@@ -545,51 +543,6 @@
     display: none;
   }
 
-  .pb-mobile-nav {
-    padding-bottom: var(--mobile-nav-total);
-  }
-
-  html[data-exporting] .mobile-nav-shell {
-    display: none;
-  }
-
-  .parichay-enter {
-    animation: parichay-enter 800ms var(--ease-out-expo) both;
-  }
-
-  .parichay-enter-0 {
-    animation-delay: 0ms;
-  }
-
-  .parichay-enter-1 {
-    animation-delay: 80ms;
-  }
-
-  .parichay-enter-2 {
-    animation-delay: 160ms;
-  }
-
-  .parichay-enter-3 {
-    animation-delay: 220ms;
-  }
-
-  .parichay-enter-aside {
-    animation-delay: 120ms;
-    animation-duration: 900ms;
-  }
-
-  @keyframes parichay-enter {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .manual-preview-shell {
     container-type: inline-size;
   }
@@ -604,10 +557,6 @@
 
 
 @media (prefers-reduced-motion: reduce) {
-  .parichay-enter {
-    animation: none !important;
-  }
-
   *,
   ::before,
   ::after {
