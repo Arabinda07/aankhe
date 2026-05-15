@@ -26,7 +26,7 @@ export function PrivacyPage() {
       </div>
 
       <section className="px-2 py-12 md:px-8">
-        <h2 className="type-artifact-heading text-parichay-heading">What can leave the page</h2>
+        <h2 className="type-reading-heading text-parichay-heading">What can leave the page</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
@@ -41,7 +41,7 @@ export function PrivacyPage() {
       </section>
 
       <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
-        <h2 className="type-artifact-heading text-parichay-heading">The promise</h2>
+        <h2 className="type-reading-heading text-parichay-heading">The promise</h2>
         <p className="type-lead text-parichay-muted">
           You decide what goes into the final envelope. We don't add private answers behind your back. The boundary you wrote for yourself stays right where you put it.
         </p>
@@ -84,7 +84,7 @@ export function HowItWorksPage() {
           >
             <span className="type-meta text-parichay-muted md:pt-2">{String(index + 1).padStart(2, "0")}</span>
             <div className="max-w-3xl space-y-3">
-              <h2 className="type-artifact-heading text-parichay-heading">{item.title}</h2>
+              <h2 className="type-reading-heading text-parichay-heading">{item.title}</h2>
               <p className="type-lead whitespace-pre-wrap text-parichay-muted">{item.text}</p>
             </div>
           </section>
@@ -110,7 +110,7 @@ function InfoShell({
       <section className="mx-auto max-w-5xl px-6 py-24 md:py-32 lg:py-40">
         <div className="mb-12 max-w-3xl space-y-5">
           <p className="type-eyebrow text-parichay-sandal">{eyebrow}</p>
-          <h1 className="type-mixed-heading type-mixed-heading-page text-parichay-heading">{title}</h1>
+          <h1 className="type-serif-title-page text-parichay-heading">{title}</h1>
           <p className="type-lead text-parichay-muted">{lead}</p>
         </div>
         <div className="space-y-10">{children}</div>
@@ -131,7 +131,7 @@ function InfoCard({
   return (
     <section className="px-2 py-6 md:px-0 md:py-8">
       <div className="mb-6 text-parichay-muted">{icon}</div>
-      <h2 className="type-artifact-heading text-parichay-heading">{title}</h2>
+      <h2 className="type-reading-heading text-parichay-heading">{title}</h2>
       <p className="type-lead mt-4 text-parichay-muted">{children}</p>
     </section>
   );

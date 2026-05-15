@@ -1,6 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --spacing-space-xs: var(--space-xs);
+  --spacing-space-sm: var(--space-sm);
+  --spacing-space-md: var(--space-md);
+  --spacing-space-lg: var(--space-lg);
+  --spacing-space-xl: var(--space-xl);
+  --spacing-space-2xl: var(--space-2xl);
+  --spacing-space-3xl: var(--space-3xl);
+  --spacing-space-4xl: var(--space-4xl);
+  --spacing-space-5xl: var(--space-5xl);
+
+  --radius-bezel-outer: var(--radius-bezel-outer);
+  --radius-bezel-inner: var(--radius-bezel-inner);
+}
+
 @font-face {
   font-family: "Geist";
   src: url("/fonts/Geist[wght].woff2") format("woff2");
@@ -31,7 +46,7 @@
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
-  font-display: swap;
+  font-display: optional;
   font-style: normal;
   font-weight: 200 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -40,7 +55,7 @@
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/SourceSerif4Variable-Italic.otf.woff2") format("woff2");
-  font-display: swap;
+  font-display: optional;
   font-style: italic;
   font-weight: 200 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -48,7 +63,7 @@
 
 @font-face {
   font-family: "Source Serif 4 Fallback";
-  src: local("Georgia");
+  src: local("Iowan Old Style"), local("Palatino Linotype"), local("URW Palladio L"), local("P052"), local("Georgia");
   size-adjust: 96%;
   ascent-override: 93%;
   descent-override: 26%;
@@ -74,9 +89,25 @@
 }
 
 :root {
+  /* Semantic Spacing Tokens */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --space-3xl: 3rem;
+  --space-4xl: 4rem;
+  --space-5xl: 6rem;
+
+  /* Radius Tokens */
+  --radius-bezel-outer: 2rem;
+  --radius-bezel-inner: calc(var(--radius-bezel-outer) - 0.75rem);
+
+  /* Fonts */
   --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
-  --font-display: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
-  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, serif;
+  --font-display: "Source Serif 4", "Source Serif 4 Fallback", "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, Georgia, serif;
+  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, Georgia, serif;
   --font-editor: var(--font-serif);
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --parichay-page: oklch(0.96 0.012 60);
@@ -337,109 +368,94 @@
   @apply prose max-w-none;
 }
 
-@layer components {
-  .type-hero {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-    font-weight: 650;
-    line-height: 1.02;
+@@layer components {
+  /* Step 5: Display Large (Hero) - clamp(3.052rem, 8vw, 4.768rem) */
+  .type-serif-title,
+  .type-display,
+  .type-mode-title {
+    font-size: clamp(3.052rem, 8vw, 4.768rem);
     letter-spacing: 0;
     color: var(--color-parichay-heading);
     text-wrap: balance;
   }
-
-  .type-hero-emphasis {
+  
+  .type-serif-title {
     font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 650;
-    color: var(--color-parichay-heading);
-  }
-
-  .type-mixed-heading {
-    font-family: var(--font-display);
-    font-size: clamp(3.25rem, 8vw, 4rem);
     font-style: italic;
     font-weight: 650;
     line-height: 1.1;
-    letter-spacing: 0;
-    color: var(--color-parichay-heading);
-    text-wrap: balance;
   }
-
-  .type-mixed-heading-page {
-    font-size: 2.875rem;
-  }
-
-  .type-display {
-    font-family: var(--font-sans);
-    font-size: 3.25rem;
-    font-weight: 800;
-    line-height: 0.96;
-    letter-spacing: 0;
-    color: var(--color-parichay-heading);
-    text-wrap: balance;
-  }
-
+  
+  .type-display,
   .type-mode-title {
     font-family: var(--font-sans);
-    font-size: 3.25rem;
     font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: 0;
-    color: var(--color-parichay-heading);
+    line-height: 0.96;
   }
 
+  /* Step 4: Display Medium (Page Titles, Large Questions) - clamp(2.441rem, 6vw, 3.815rem) */
+  .type-serif-title-page,
+  .type-artifact-title,
+  .type-question {
+    font-family: var(--font-display);
+    font-size: clamp(2.441rem, 6vw, 3.815rem);
+    letter-spacing: 0;
+    color: var(--color-parichay-heading);
+    text-wrap: balance;
+  }
+  
+  .type-serif-title-page {
+    font-style: italic;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+  
+  .type-artifact-title {
+    font-weight: 650;
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+  
   .type-question {
     font-family: var(--font-editor);
-    font-size: 2.625rem;
     font-style: italic;
     font-weight: 400;
     line-height: 1.05;
-    letter-spacing: 0;
-    max-width: 13ch;
-    color: var(--color-parichay-heading);
-    text-wrap: balance;
+    max-width: 28ch;
   }
 
+  /* Step 3: Display Small (Section Titles, Builder Prompts) - clamp(1.953rem, 5vw, 2.441rem) */
   .type-question-builder {
     font-family: var(--font-editor);
-    font-size: 1.875rem;
+    font-size: clamp(1.953rem, 5vw, 2.441rem);
     font-style: italic;
     font-weight: 400;
-    line-height: 1.16;
+    line-height: 1.14;
     letter-spacing: 0;
-    max-width: min(100%, 28ch);
+    max-width: min(100%, 32ch);
     color: var(--color-parichay-heading);
   }
 
-  .type-answer-field {
-    font-family: var(--font-editor);
-    font-size: 1.375rem;
-    font-weight: 400;
-    line-height: 1.45;
-    letter-spacing: 0;
-  }
-
-  .type-artifact-title {
+  /* Step 2: Large (Subheadings, Inputs) - 1.5625rem */
+  .type-artifact-heading,
+  .type-reading-heading {
     font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 650;
-    line-height: 1.02;
-    letter-spacing: 0;
-    text-wrap: balance;
-    color: var(--color-parichay-heading);
-    overflow-wrap: anywhere;
-  }
-
-  .type-artifact-heading {
-    font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.5625rem;
     font-weight: 650;
     line-height: 1.12;
     letter-spacing: 0;
     color: var(--color-parichay-heading);
   }
+  
+  .type-answer-field {
+    font-family: var(--font-editor);
+    font-size: 1.5625rem;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
 
+  /* Step 1: Medium (Lead, Prose) - 1.25rem */
   .type-artifact-prose {
     font-family: var(--font-display);
     font-size: 1.25rem;
@@ -447,16 +463,17 @@
     line-height: 1.78;
     letter-spacing: 0;
   }
-
+  
   .type-lead {
     font-family: var(--font-sans);
-    font-size: 1.1875rem;
+    font-size: 1.25rem;
     font-weight: 400;
     line-height: 1.65;
     letter-spacing: 0;
     max-width: 60ch;
   }
 
+  /* Step 0: Base - 1rem */
   .type-body {
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -464,69 +481,55 @@
     line-height: 1.65;
     letter-spacing: 0;
   }
-
-  .type-ui-label {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0;
-  }
-
-  .type-panel-title {
-    font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: 0;
-  }
-
-  .type-eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-  }
-
-  .type-caption {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.45;
-    letter-spacing: 0;
-  }
-
-  .type-meta {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .type-footer-nav {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .type-tabular {
-    font-variant-numeric: tabular-nums;
-  }
-
+  
   .type-choice {
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.375;
     letter-spacing: 0;
+  }
+
+  /* Step -1: Small - 0.8rem */
+  .type-ui-label,
+  .type-panel-title,
+  .type-caption,
+  .type-meta,
+  .type-footer-nav,
+  .type-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0;
+  }
+  
+  .type-ui-label { font-weight: 700; line-height: 1.2; }
+  .type-panel-title { font-weight: 700; line-height: 1.25; }
+  .type-caption { font-weight: 500; line-height: 1.45; }
+  
+  .type-meta {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .type-footer-nav {
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  
+  .type-eyebrow {
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .type-tabular {
+    font-variant-numeric: tabular-nums;
   }
 
   .scrollbar-none {
@@ -585,94 +588,8 @@
       overflow-wrap: normal;
     }
   }
-
-  @media (min-width: 640px) {
-    .type-question-builder {
-      font-size: 2.125rem;
-      line-height: 1.14;
-      max-width: min(100%, 30ch);
-    }
-  }
-
-  @media (min-width: 768px) {
-    .type-hero {
-      font-size: 5.5rem;
-      line-height: 1;
-    }
-
-    .type-mixed-heading {
-      font-size: 5rem;
-    }
-
-    .type-mixed-heading-page {
-      font-size: 3.75rem;
-    }
-
-    .type-question {
-      font-size: 3rem;
-      line-height: 1.1;
-      max-width: min(100%, 24ch);
-    }
-
-    .type-question-builder {
-      font-size: 2.125rem;
-      line-height: 1.14;
-      max-width: min(100%, 30ch);
-    }
-
-    .type-answer-field {
-      font-size: 1.5rem;
-    }
-
-    .type-display {
-      font-size: 4.5rem;
-    }
-
-    .type-mode-title {
-      font-size: 4.25rem;
-    }
-
-    .type-artifact-title {
-      font-size: 3.75rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .type-hero {
-      font-size: 5.875rem;
-    }
-
-    .type-mixed-heading {
-      font-size: 5.25rem;
-    }
-
-    .type-mixed-heading-page {
-      font-size: 4rem;
-    }
-
-    .type-question {
-      max-width: min(100%, 28ch);
-    }
-
-    .type-question-builder {
-      font-size: 2.375rem;
-      line-height: 1.12;
-      max-width: min(100%, 32ch);
-    }
-
-    .type-display {
-      font-size: 5.5rem;
-    }
-
-    .type-mode-title {
-      font-size: 5.25rem;
-    }
-
-    .type-artifact-title {
-      font-size: 4.25rem;
-    }
-  }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .parichay-enter {

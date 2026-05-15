@@ -27,7 +27,7 @@ export function Switchboard({
       <section className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-5 py-12 text-left sm:px-8 md:py-20 lg:grid-cols-[1fr_minmax(auto,600px)] lg:items-start lg:gap-12 xl:gap-24 lg:py-28 xl:py-32">
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
-            <h1 className="type-mixed-heading text-parichay-heading lg:max-w-xl">
+            <h1 className="type-serif-title text-parichay-heading lg:max-w-xl">
               Your story always ready
             </h1>
             <p className="type-lead max-w-lg text-parichay-muted">

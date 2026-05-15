@@ -64,6 +64,16 @@ Light mode should feel like warm paper in natural light: calm, readable, high-tr
 - Avoid generic Tailwind green, emerald, lime, blue, purple, slate, zinc, or red in components.
 - Avoid botanical green and sage naming in new docs or UI. If legacy code references older support accents, migrate future language to sandal, plum, hidden, private, lac, and ember/danger roles.
 
+### Core Color Values (OKLCH)
+
+| Role | Light Value | Note |
+|---|---|---|
+| `parichay-page` | `oklch(0.96 0.012 60)` | Main background |
+| `parichay-surface` | `oklch(0.983 0.012 68)` | Component background |
+| `parichay-paper` | `oklch(0.982 0.011 68)` | Artifact background |
+| `parichay-text` | `oklch(0.239 0.02 357)` | Main text |
+| `parichay-border` | `oklch(0.886 0.026 52)` | Soft structural line |
+| `parichay-accent` | `oklch(0.477 0.109 7)` | Smoked lac |
 ## 3. Typography Rules
 
 - Use the locally hosted fonts from `public/fonts`.
@@ -79,30 +89,30 @@ Light mode should feel like warm paper in natural light: calm, readable, high-tr
 
 ### Canonical Type Classes
 
-Use these classes before inventing ad hoc font sizes.
+Use these classes before inventing ad hoc font sizes. Parichay uses a strict 5-step mathematical scale (1.25 ratio) above a 1rem base.
 
-| Class | Font | Size | Weight | Line Height | Use |
-| --- | --- | ---: | ---: | ---: | --- |
-| `type-hero` | Source Serif 4 | 3.5rem mobile, 5.5rem tablet, 5.875rem desktop | 650 | 1.02/1 | Landing editorial hook only |
-| `type-hero-emphasis` | Source Serif 4 italic | inherit | 650 | inherit | Lac emphasis inside hero |
-| `type-mixed-heading` | Source Serif 4 italic | clamp(3.25rem,8vw,4rem) mobile, 5rem tablet, 5.25rem desktop | 650 | 1.1 | Landing hero title, info page titles |
-| `type-display` | Geist | 3.25rem mobile, 4.5rem tablet, 5.5rem desktop | 800 | 0.96 | Major structural page titles |
-| `type-mode-title` | Geist | 3.25rem mobile, 4.25rem tablet, 5.25rem desktop | 800 | 0.95 | Mode selection titles |
-| `type-question` | Source Serif 4 italic | 2.625rem mobile, 3rem tablet | 400 | 1.05-1.1 | Active form question |
-| `type-question-builder` | Source Serif 4 italic | 2rem mobile, 2.25rem tablet, 2.5rem desktop | 400 | 1.15/1.14/1.12 | Focused builder question prompt |
-| `type-answer-field` | Source Serif 4 | 1.75rem mobile, 2rem tablet | 400 | 1.45 | Main writing inputs |
-| `type-artifact-title` | Source Serif 4 | 3rem mobile, 3.75rem tablet, 4.25rem desktop | 650 | 1.02 | Manual title |
-| `type-artifact-heading` | Source Serif 4 | 2rem | 650 | 1.12 | Artifact section headings, info page section headings |
-| `type-artifact-prose` | Source Serif 4 | 1.1875rem | 400 | 1.72 | Manual paragraphs and composed prose |
-| `type-lead` | Geist | 1.1875rem | 400 | 1.65 | Intro copy and explanation |
-| `type-body` | Geist | 1rem | 400 | 1.65 | Standard UI body |
-| `type-choice` | Geist | 1rem | 600 | 1.375 | Choice card and option button labels |
-| `type-ui-label` | Geist | 0.875rem | 700 | 1.2 | Buttons, labels, nav |
-| `type-panel-title` | Geist | 0.9375rem | 700 | 1.25 | Panel headings |
-| `type-eyebrow` | Geist | 0.75rem | 800 | 1.2 | Uppercase section markers |
-| `type-caption` | Geist | 0.8125rem | 500 | 1.45 | Supporting text, chips, small descriptions |
-| `type-meta` | Geist | 0.8125rem | 700 | 1.2 | Uppercase metadata and counters |
-| `type-footer-nav` | Geist | 0.8125rem | 800 | 1.2 | Footer links (extra weight compensates for dark footer surface) |
+| Class | Font | Scale Step | Size | Weight | Line Height | Use |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| `type-serif-title` | Source Serif 4 italic | Step 5 | `clamp(3.052rem, 8vw, 4.768rem)` | 650 | 1.1 | Landing hero title |
+| `type-display` | Geist | Step 5 | `clamp(3.052rem, 8vw, 4.768rem)` | 800 | 0.96 | Major structural page titles |
+| `type-mode-title` | Geist | Step 5 | `clamp(3.052rem, 8vw, 4.768rem)` | 800 | 0.96 | Mode selection titles |
+| `type-serif-title-page` | Source Serif 4 italic | Step 4 | `clamp(2.441rem, 6vw, 3.815rem)` | 650 | 1.1 | Info page titles |
+| `type-artifact-title` | Source Serif 4 | Step 4 | `clamp(2.441rem, 6vw, 3.815rem)` | 650 | 1.02 | Manual title |
+| `type-question` | Source Serif 4 italic | Step 4 | `clamp(2.441rem, 6vw, 3.815rem)` | 400 | 1.05 | Active form question |
+| `type-question-builder` | Source Serif 4 italic | Step 3 | `clamp(1.953rem, 5vw, 2.441rem)` | 400 | 1.14 | Focused builder question prompt |
+| `type-artifact-heading` | Source Serif 4 | Step 2 | 1.5625rem | 650 | 1.12 | Artifact section headings |
+| `type-reading-heading` | Source Serif 4 | Step 2 | 1.5625rem | 650 | 1.12 | Info page section headings |
+| `type-answer-field` | Source Serif 4 | Step 2 | 1.5625rem | 400 | 1.45 | Main writing inputs |
+| `type-artifact-prose` | Source Serif 4 | Step 1 | 1.25rem | 400 | 1.78 | Manual paragraphs and composed prose |
+| `type-lead` | Geist | Step 1 | 1.25rem | 400 | 1.65 | Intro copy and explanation |
+| `type-body` | Geist | Step 0 | 1rem | 400 | 1.65 | Standard UI body |
+| `type-choice` | Geist | Step 0 | 1rem | 600 | 1.375 | Choice card and option button labels |
+| `type-ui-label` | Geist | Step -1 | 0.8rem | 700 | 1.2 | Buttons, labels, nav |
+| `type-panel-title` | Geist | Step -1 | 0.8rem | 700 | 1.25 | Panel headings |
+| `type-eyebrow` | Geist | Step -1 | 0.8rem | 800 | 1.2 | Uppercase section markers |
+| `type-caption` | Geist | Step -1 | 0.8rem | 500 | 1.45 | Supporting text, chips, small descriptions |
+| `type-meta` | Geist | Step -1 | 0.8rem | 700 | 1.2 | Uppercase metadata and counters |
+| `type-footer-nav` | Geist | Step -1 | 0.8rem | 800 | 1.2 | Footer links |
 
 ### Typography Usage
 
@@ -129,7 +139,19 @@ Parichay should feel like a document studio, not a marketing template or dashboa
 
 ### Spacing Cadence
 
-Use Tailwind's 4px-based spacing scale. Preferred repeatable values:
+Parichay uses semantic spacing tokens based on a 4px scale, available in CSS variables and Tailwind extensions (`p-space-md`, `gap-space-xl`).
+
+- `--space-xs`: 0.25rem (4px)
+- `--space-sm`: 0.5rem (8px)
+- `--space-md`: 0.75rem (12px)
+- `--space-lg`: 1rem (16px)
+- `--space-xl`: 1.5rem (24px)
+- `--space-2xl`: 2rem (32px)
+- `--space-3xl`: 3rem (48px)
+- `--space-4xl`: 4rem (64px)
+- `--space-5xl`: 6rem (96px)
+
+Preferred repeatable values:
 
 - **Inline page padding:** `px-6`; header may use `px-3 sm:px-6`.
 - **Panel padding:** `p-4`, `p-5`, `p-6`, `p-8`.
@@ -157,7 +179,7 @@ Parichay uses modest rectangular geometry. The design may be soft, but it must n
 - **`rounded-md` (6px):** primary buttons, icon buttons, brand tile, document shell, small menus.
 - **`rounded-lg` (8px):** main setup panels and major app panels.
 - **`rounded-xl` (12px):** preview frames only, where a larger enclosing shell needs visible separation.
-- **Double-Bezel Architecture:** when creating deep, nested panels (like the ManualPreview shell), use calculated concentric radii: `rounded-[2rem]` for the outer shell and `rounded-[calc(2rem-0.75rem)]` for the inner core. 
+- **Double-Bezel Architecture:** when creating deep, nested panels (like the ManualPreview shell), use calculated concentric radii: `rounded-bezel-outer` for the outer shell and `rounded-bezel-inner` for the inner core.
 - **Avoid:** `rounded-full` and pill buttons. Use only if a future component has a proven non-brand reason (e.g., standard avatars). Never use pill buttons for navigation or primary actions.
 
 ### Borders
