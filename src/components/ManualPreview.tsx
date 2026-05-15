@@ -32,7 +32,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         </div>
 
         <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-          <h2 className="type-meta text-parichay-muted mb-5 text-center tracking-widest">HOW TO READ THIS</h2>
+          <h2 className="type-meta text-parichay-muted mb-5 text-center">HOW TO READ THIS</h2>
           <p className="type-artifact-prose text-parichay-text-soft">
             {manual.recipientNote}
           </p>
@@ -41,7 +41,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         {/* At a Glance */}
         {manual.atAGlance && (
           <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-            <h2 className="type-meta text-parichay-muted mb-5 text-center tracking-widest">AT A GLANCE</h2>
+            <h2 className="type-meta text-parichay-muted mb-5 text-center">AT A GLANCE</h2>
             <p className="type-artifact-prose text-parichay-text-soft">
               {manual.atAGlance}
             </p>
@@ -50,7 +50,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.recognitionSummaries.length > 1 && (
           <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-            <h2 className="type-meta text-parichay-muted mb-5 text-center tracking-widest">WHAT THIS IS NOTICING</h2>
+            <h2 className="type-meta text-parichay-muted mb-5 text-center">WHAT THIS IS NOTICING</h2>
             <div className="space-y-5">
               {manual.recognitionSummaries.slice(1, 3).map((summary) => (
                 <p key={summary} className="type-artifact-prose text-parichay-text">

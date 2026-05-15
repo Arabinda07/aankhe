@@ -30,7 +30,7 @@ export const choiceGridClassName = "grid gap-3 md:grid-cols-[repeat(2,minmax(16r
  * Produces the base class string for a choice card (radio or checkbox).
  */
 export function choiceClassName(checked: boolean, focusMode: "focus-within" | "focus-visible" = "focus-within") {
-  const base = "flex min-h-16 cursor-pointer items-center rounded-sm border px-4 py-3 text-left text-base font-semibold leading-snug transition-all md:min-h-20 md:px-5 md:py-4";
+  const base = "type-choice flex min-h-16 cursor-pointer items-center rounded-sm border px-4 py-3 text-left transition-all md:min-h-20 md:px-5 md:py-4";
   const focusRing = focusMode === "focus-visible"
     ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
     : "focus-within:outline-none focus-within:ring-2 focus-within:ring-parichay-focus focus-within:ring-offset-2";

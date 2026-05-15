@@ -31,7 +31,7 @@
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
-  font-display: optional;
+  font-display: swap;
   font-style: normal;
   font-weight: 200 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -40,7 +40,7 @@
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/SourceSerif4Variable-Italic.otf.woff2") format("woff2");
-  font-display: optional;
+  font-display: swap;
   font-style: italic;
   font-weight: 200 900;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -360,7 +360,7 @@
     font-size: clamp(3.25rem, 8vw, 4rem);
     font-style: italic;
     font-weight: 650;
-    line-height: 1.38;
+    line-height: 1.1;
     letter-spacing: 0;
     color: var(--color-parichay-heading);
     text-wrap: balance;
@@ -519,6 +519,14 @@
 
   .type-tabular {
     font-variant-numeric: tabular-nums;
+  }
+
+  .type-choice {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.375;
+    letter-spacing: 0;
   }
 
   .scrollbar-none {

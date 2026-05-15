@@ -4,6 +4,7 @@
  */
 
 import { useCallback } from "react";
+import { ShieldCheck } from "@phosphor-icons/react/dist/csr/ShieldCheck";
 import type { ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { SoftButton } from "./SoftButton";
 import { SwitchboardSetup } from "./SwitchboardSetup";
@@ -49,12 +50,12 @@ export function Switchboard({
           </div>
 
           <div className="flex min-w-0 items-start gap-3">
-            <span
+            <ShieldCheck
+              size={18}
+              weight="light"
               aria-hidden="true"
-              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm border border-parichay-border text-[0.625rem] font-semibold leading-none text-parichay-muted"
-            >
-              P
-            </span>
+              className="mt-0.5 shrink-0 text-parichay-muted"
+            />
             <p className="type-caption min-w-0 text-wrap text-parichay-muted">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
           </div>
         </div>
