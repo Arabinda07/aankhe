@@ -5,27 +5,47 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
 
-function isIOS() {
+type InstallPromptStatus = "native-ready" | "ios" | "installed" | "fallback";
+
+function isIOSDevice() {
   if (typeof navigator === "undefined") return false;
-  return /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const userAgent = navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test(userAgent) || (userAgent.includes("macintosh") && navigator.maxTouchPoints > 1);
+}
+
+function isStandaloneDisplay() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(display-mode: standalone)").matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
+}
+
+function getDismissedState() {
+  if (typeof localStorage === "undefined") return false;
+  return localStorage.getItem("parichay-install-dismissed") === "true";
 }
 
 export function useInstallPrompt() {
   const [event, setEvent] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isDismissed, setIsDismissed] = useState(() => (
-    typeof localStorage !== "undefined" && localStorage.getItem("parichay-install-dismissed") === "true"
-  ));
+  const [isDismissed, setIsDismissed] = useState(getDismissedState);
+  const [isStandalone, setIsStandalone] = useState(isStandaloneDisplay);
+  const isIOS = isIOSDevice();
 
   useEffect(() => {
-    if (isIOS() || typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
+    const displayMode = window.matchMedia("(display-mode: standalone)");
+    const updateStandalone = () => setIsStandalone(isStandaloneDisplay());
 
     const handleBeforeInstallPrompt = (installEvent: Event) => {
       installEvent.preventDefault();
       setEvent(installEvent as BeforeInstallPromptEvent);
     };
 
+    updateStandalone();
+    displayMode.addEventListener("change", updateStandalone);
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    return () => {
+      displayMode.removeEventListener("change", updateStandalone);
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
   }, []);
 
   const dismiss = useCallback(() => {
@@ -44,10 +64,22 @@ export function useInstallPrompt() {
     setEvent(null);
   }, [dismiss, event]);
 
+  const status: InstallPromptStatus = isStandalone
+    ? "installed"
+    : event && !isIOS
+      ? "native-ready"
+      : isIOS
+        ? "ios"
+        : "fallback";
+
   return {
+    canPrompt: status === "native-ready",
     dismiss,
-    isIOS: isIOS(),
-    isReady: Boolean(event) && !isDismissed && !isIOS(),
+    isDismissed,
+    isIOS,
+    isReady: status === "native-ready" && !isDismissed,
+    isStandalone,
     prompt,
+    status,
   };
 }

@@ -16,7 +16,6 @@ import { FileText } from '@phosphor-icons/react/dist/csr/FileText';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
 import { SoftButton } from './SoftButton';
 import { EmptyState } from './EmptyState';
-import { InstallBanner } from './InstallBanner';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useSwipeBack } from '../hooks/useSwipeBack';
 
@@ -65,10 +64,6 @@ export function ManualBuilder({
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
   const composed = useMemo(() => manual?.composeManual(), [manual]);
-  const answeredCount = manual?.config.questions.filter((question) => (
-    answerValueIsPresent(manual.getAnswer(question.id)) ||
-    manual.getAnswerNote(question.id).trim().length > 0
-  )).length ?? 0;
   const hasManualContent = manual?.config.questions.some((question) => (
     answerValueIsPresent(manual.getAnswer(question.id)) ||
     manual.getAnswerNote(question.id).trim().length > 0
@@ -277,7 +272,6 @@ export function ManualBuilder({
             </motion.div>
           )}
         </AnimatePresence>
-        <InstallBanner answeredCount={answeredCount} />
       </div>
 
     </div>

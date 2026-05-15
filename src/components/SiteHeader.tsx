@@ -22,7 +22,7 @@ export function SiteHeader() {
           <ParichayMark wordmarkClassName="hidden sm:inline" />
         </Link>
         <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-4">
-          <nav className="type-ui-label scrollbar-none flex min-w-0 items-center gap-2 overflow-x-auto text-parichay-muted sm:gap-3" aria-label="Site">
+          <nav className="type-ui-label hidden min-w-0 items-center gap-2 overflow-x-auto text-parichay-muted sm:flex sm:gap-3" aria-label="Site">
             <NavLink
               to={HOW_IT_WORKS_PATH}
               className={infoNavClassName}
@@ -35,33 +35,33 @@ export function SiteHeader() {
             >
               Privacy
             </NavLink>
-            <div className="hidden sm:block w-px h-4 bg-parichay-border mx-1" aria-hidden="true" />
+            <div className="mx-1 h-4 w-px bg-parichay-border" aria-hidden="true" />
             <Link
               to={MANUAL_PATHS.me}
-              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Me
             </Link>
             <Link
               to={MANUAL_PATHS.work}
-              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Work
             </Link>
             <Link
               to={MANUAL_PATHS.talk}
-              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Talk
             </Link>
             <Link
               to={MANUAL_PATHS.us}
-              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Sync
             </Link>
           </nav>
-          <div className="shrink-0 w-px h-4 bg-parichay-border/50 mx-1" aria-hidden="true" />
+          <div className="hidden h-4 w-px shrink-0 bg-parichay-border/50 sm:block" aria-hidden="true" />
           <DeferredThemeSwitcher />
         </div>
       </div>

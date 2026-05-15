@@ -1,14 +1,15 @@
-import { BookOpenText } from "@phosphor-icons/react/dist/csr/BookOpenText";
+import { DownloadSimple } from "@phosphor-icons/react/dist/csr/DownloadSimple";
 import { House } from "@phosphor-icons/react/dist/csr/House";
 import { Info } from "@phosphor-icons/react/dist/csr/Info";
 import { Plus } from "@phosphor-icons/react/dist/csr/Plus";
 import type React from "react";
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useIsMobile } from "../hooks/useIsMobile";
-import { HOME_PATH, HOW_IT_WORKS_PATH, MANUAL_PATH_PREFIX, MANUAL_PATHS } from "../lib/routes";
+import { HOME_PATH, HOW_IT_WORKS_PATH } from "../lib/routes";
 import type { ModeId } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
+import { InstallSheet } from "./InstallSheet";
 import { ManualModeSheet } from "./ManualModeSheet";
 
 interface MobileNavProps {
@@ -17,29 +18,25 @@ interface MobileNavProps {
 
 export function MobileNav({ onStart }: MobileNavProps) {
   const isMobile = useIsMobile();
-  const location = useLocation();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isInstallOpen, setIsInstallOpen] = useState(false);
 
   if (!isMobile) return null;
-
-  const manualPath = location.pathname.startsWith(MANUAL_PATH_PREFIX)
-    ? location.pathname
-    : MANUAL_PATHS.me;
 
   return (
     <>
       <nav
         aria-label="Primary"
-        className="mobile-nav-shell fixed inset-x-0 bottom-[calc(1rem+var(--safe-area-bottom))] z-[60] mx-auto flex h-16 max-w-[22rem] items-center justify-center gap-1 rounded-[2rem] border border-parichay-border bg-parichay-surface px-2 shadow-sm"
+        className="mobile-nav-shell fixed inset-x-0 bottom-[calc(1rem+var(--safe-area-bottom))] z-[60] mx-auto flex h-16 max-w-[22rem] items-center justify-center gap-1 rounded-xl border border-parichay-border bg-parichay-surface px-2 shadow-sm"
       >
-        <MobileNavItem to={HOME_PATH} label="Home" icon={House} pathname={location.pathname} end />
-        <MobileNavItem to={manualPath} label="Manual" icon={BookOpenText} pathname={location.pathname} manual />
-        <MobileNavItem to={HOW_IT_WORKS_PATH} label="FAQ" icon={Info} pathname={location.pathname} />
+        <MobileNavItem to={HOME_PATH} label="Home" icon={House} end />
+        <MobileNavItem to={HOW_IT_WORKS_PATH} label="FAQ" icon={Info} />
+        <MobileNavButton label="Install" icon={DownloadSimple} onClick={() => setIsInstallOpen(true)} />
         <button
           type="button"
           onClick={() => setIsSheetOpen(true)}
           aria-label="Start a manual"
-          className="ml-1 inline-flex min-h-12 min-w-12 items-center justify-center rounded-full bg-parichay-accent text-parichay-on-accent shadow-sm transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+          className="ml-1 inline-flex min-h-12 min-w-12 items-center justify-center rounded-lg bg-parichay-accent text-parichay-on-accent shadow-sm transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           <Plus size={22} weight="bold" />
         </button>
@@ -49,6 +46,10 @@ export function MobileNav({ onStart }: MobileNavProps) {
         onOpenChange={setIsSheetOpen}
         onStart={onStart}
       />
+      <InstallSheet
+        open={isInstallOpen}
+        onOpenChange={setIsInstallOpen}
+      />
     </>
   );
 }
@@ -57,35 +58,51 @@ function MobileNavItem({
   to,
   label,
   icon: Icon,
-  pathname,
   end,
-  manual,
 }: {
   to: string;
   label: string;
   icon: React.ComponentType<{ size?: number; weight?: "light" | "fill" }>;
-  pathname: string;
   end?: boolean;
-  manual?: boolean;
 }) {
   return (
     <NavLink
       to={to}
       end={end}
       className={({ isActive }) => cn(
-        "type-caption flex min-h-12 min-w-16 flex-col items-center justify-center gap-0.5 rounded-full text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
-        (isActive || (manual && pathname.startsWith(MANUAL_PATH_PREFIX))) && "text-parichay-accent"
+        "type-caption flex min-h-12 min-w-16 flex-col items-center justify-center gap-0.5 rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
+        isActive && "text-parichay-accent"
       )}
     >
       {({ isActive }) => {
-        const active = isActive || (manual && pathname.startsWith(MANUAL_PATH_PREFIX));
         return (
           <>
-            <Icon size={20} weight={active ? "fill" : "light"} />
+            <Icon size={20} weight={isActive ? "fill" : "light"} />
             <span>{label}</span>
           </>
         );
       }}
     </NavLink>
+  );
+}
+
+function MobileNavButton({
+  label,
+  icon: Icon,
+  onClick,
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; weight?: "light" | "fill" }>;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="type-caption flex min-h-12 min-w-16 flex-col items-center justify-center gap-0.5 rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+    >
+      <Icon size={20} weight="light" />
+      <span>{label}</span>
+    </button>
   );
 }
