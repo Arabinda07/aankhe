@@ -4,6 +4,7 @@
  */
 
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { SETUP_SCROLL_LOAD_THRESHOLD_PX } from "../lib/performancePolicy";
 import type { ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { SoftButton } from "./SoftButton";
 
@@ -28,7 +29,7 @@ export function Switchboard({
     if (shouldLoadSetup) return;
 
     const loadSetupAfterScroll = () => {
-      if (window.scrollY > 96) {
+      if (window.scrollY > SETUP_SCROLL_LOAD_THRESHOLD_PX) {
         setShouldLoadSetup(true);
       }
     };

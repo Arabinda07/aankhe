@@ -9,6 +9,8 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
 import type { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
+import { FOOTER_INTERSECTION_ROOT_MARGIN, FOOTER_SCROLL_LOAD_THRESHOLD_PX } from './lib/performancePolicy';
+import { HOME_PATH, HOW_IT_WORKS_PATH, manualModePath } from './lib/routes';
 
 const ManualBuilder = lazy(() =>
   import("./components/ManualBuilder").then((module) => ({
@@ -43,7 +45,7 @@ function AppContent() {
   }, [location.pathname]);
 
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
-    navigate(`/manual/${mode}`, {
+    navigate(manualModePath(mode), {
       state: {
         mode,
         onboarding,
@@ -69,7 +71,7 @@ function AppContent() {
                 <div className="bg-parichay-bg">
                   <Switchboard
                     onStart={handleStart}
-                    onLearnMore={() => navigate("/how-it-works")}
+                    onLearnMore={() => navigate(HOW_IT_WORKS_PATH)}
                   />
                 </div>
               }
@@ -114,7 +116,7 @@ function DeferredFooter({ pathname }: { pathname: string }) {
   useEffect(() => {
     if (shouldLoadFooter) return;
 
-    if (pathname !== "/") {
+    if (pathname !== HOME_PATH) {
       setShouldLoadFooter(true);
       return;
     }
@@ -122,7 +124,7 @@ function DeferredFooter({ pathname }: { pathname: string }) {
     const sentinel = document.getElementById("footer-sentinel");
     if (!sentinel || !("IntersectionObserver" in window)) {
       const loadFooterAfterScroll = () => {
-        if (window.scrollY > 480) {
+        if (window.scrollY > FOOTER_SCROLL_LOAD_THRESHOLD_PX) {
           setShouldLoadFooter(true);
         }
       };
@@ -138,7 +140,7 @@ function DeferredFooter({ pathname }: { pathname: string }) {
           observer.disconnect();
         }
       },
-      { rootMargin: "480px 0px" }
+      { rootMargin: FOOTER_INTERSECTION_ROOT_MARGIN }
     );
 
     observer.observe(sentinel);

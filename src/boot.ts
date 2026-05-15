@@ -1,19 +1,6 @@
+import { shouldBootReactImmediately } from "./lib/routes";
+
 let appBoot: Promise<unknown> | null = null;
-
-function hasSharedState() {
-  return window.location.hash.startsWith("#s=") || window.location.hash.includes("s=");
-}
-
-function shouldBootImmediately() {
-  const { pathname } = window.location;
-
-  return (
-    pathname.startsWith("/manual/") ||
-    pathname === "/privacy" ||
-    pathname === "/how-it-works" ||
-    hasSharedState()
-  );
-}
 
 function bootApp() {
   if (!appBoot) {
@@ -70,7 +57,7 @@ function bindHomeBoot() {
   document.addEventListener("pointerdown", bootFromIntent, { once: true, passive: true });
 }
 
-if (shouldBootImmediately()) {
+if (shouldBootReactImmediately(window.location)) {
   void bootApp();
 } else {
   bindHomeBoot();

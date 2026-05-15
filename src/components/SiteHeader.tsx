@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { HOW_IT_WORKS_PATH, MANUAL_PATHS, PRIVACY_PATH } from "../lib/routes";
 import { cn } from "../lib/utils";
 import { ParichayMark } from "./ParichayMark";
 
@@ -23,38 +24,38 @@ export function SiteHeader() {
         <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-4">
           <nav className="type-ui-label scrollbar-none flex min-w-0 items-center gap-2 overflow-x-auto text-parichay-muted sm:gap-3" aria-label="Site">
             <NavLink
-              to="/how-it-works"
+              to={HOW_IT_WORKS_PATH}
               className={infoNavClassName}
             >
               FAQ
             </NavLink>
             <NavLink
-              to="/privacy"
+              to={PRIVACY_PATH}
               className={infoNavClassName}
             >
               Privacy
             </NavLink>
             <div className="hidden sm:block w-px h-4 bg-parichay-border mx-1" aria-hidden="true" />
             <Link
-              to="/manual/me"
+              to={MANUAL_PATHS.me}
               className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Me
             </Link>
             <Link
-              to="/manual/work"
+              to={MANUAL_PATHS.work}
               className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Work
             </Link>
             <Link
-              to="/manual/talk"
+              to={MANUAL_PATHS.talk}
               className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Talk
             </Link>
             <Link
-              to="/manual/us"
+              to={MANUAL_PATHS.us}
               className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Sync
