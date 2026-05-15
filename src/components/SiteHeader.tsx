@@ -38,25 +38,25 @@ export function SiteHeader() {
             <div className="hidden sm:block w-px h-4 bg-parichay-border mx-1" aria-hidden="true" />
             <Link
               to={MANUAL_PATHS.me}
-              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
             >
               Me
             </Link>
             <Link
               to={MANUAL_PATHS.work}
-              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
             >
               Work
             </Link>
             <Link
               to={MANUAL_PATHS.talk}
-              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
             >
               Talk
             </Link>
             <Link
               to={MANUAL_PATHS.us}
-              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="hidden min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:inline-flex"
             >
               Sync
             </Link>

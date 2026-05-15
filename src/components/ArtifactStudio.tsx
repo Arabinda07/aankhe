@@ -17,6 +17,7 @@ import { ExportControls } from "./artifact/ExportControls";
 import { ShareControls } from "./artifact/ShareControls";
 import { VisibilityControls } from "./artifact/VisibilityControls";
 import { AnswerReview } from "./artifact/AnswerReview";
+import { MobileExportBar } from "./artifact/MobileExportBar";
 
 interface ArtifactStudioProps {
   manual: ManualWorkspace;
@@ -45,6 +46,13 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
     setExcludedSections((prev) => toggleExcludedSection(prev, sectionId));
   };
 
+  const copyIncludedLink = () => {
+    if (workspace.storageMode !== "url") {
+      workspace.setStorageMode("url");
+    }
+    copyLink();
+  };
+
   return (
     <div className="space-y-12 pb-24">
       <div aria-live="polite" className="sr-only">
@@ -61,10 +69,16 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         {/* Preview Container */}
         <div className="space-y-8">
           <div className="overflow-hidden rounded-lg bg-parichay-surface-preview p-3 md:p-6">
-            <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper">
+            <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper max-sm:max-h-[55dvh] max-sm:overflow-y-auto">
               <ManualPreview manual={policy.manual} mode={workspace.mode} className="border-none shadow-none max-h-none" />
             </div>
           </div>
+          <MobileExportBar
+            copied={copied}
+            isExporting={isExporting}
+            onCopyLink={copyIncludedLink}
+            onExportImage={exportAsImage}
+          />
           
           <ExportControls
             isExporting={isExporting}
@@ -72,7 +86,6 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             onExportImage={exportAsImage}
             onPrint={printManual}
           />
-          <AnswerReview workspace={workspace} />
         </div>
 
         {/* Sharing Side */}
@@ -93,11 +106,12 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             storageMode={workspace.storageMode}
             sharedUrl={policy.sharedUrl}
             copied={copied}
-            onCopyLink={copyLink}
+            onCopyLink={copyIncludedLink}
             onCreateLink={() => workspace.setStorageMode("url")}
           />
         </div>
       </div>
+      <AnswerReview workspace={workspace} />
     </div>
   );
 }

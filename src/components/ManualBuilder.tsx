@@ -15,6 +15,10 @@ import { CaretLeft } from '@phosphor-icons/react/dist/csr/CaretLeft';
 import { FileText } from '@phosphor-icons/react/dist/csr/FileText';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
 import { SoftButton } from './SoftButton';
+import { EmptyState } from './EmptyState';
+import { InstallBanner } from './InstallBanner';
+import { useIsMobile } from '../hooks/useIsMobile';
+import { useSwipeBack } from '../hooks/useSwipeBack';
 
 const ArtifactStudio = lazy(() =>
   import("./ArtifactStudio").then((module) => ({
@@ -56,16 +60,25 @@ export function ManualBuilder({
   });
   const [view, setView] = useState<"build" | "artifact">("build");
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const shouldRenderDesktopPreview = useShouldRenderDesktopPreview();
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
   const composed = useMemo(() => manual?.composeManual(), [manual]);
+  const answeredCount = manual?.config.questions.filter((question) => (
+    answerValueIsPresent(manual.getAnswer(question.id)) ||
+    manual.getAnswerNote(question.id).trim().length > 0
+  )).length ?? 0;
   const hasManualContent = manual?.config.questions.some((question) => (
     answerValueIsPresent(manual.getAnswer(question.id)) ||
     manual.getAnswerNote(question.id).trim().length > 0
   )) ?? false;
 
   const controller = manual ? useQuestionController(manual.config, manual, () => setView("artifact")) : null;
+  const swipeBackHandlers = useSwipeBack({
+    enabled: isMobile && !prefersReducedMotion,
+    onBack,
+  });
 
   useEffect(() => {
     manual?.activate();
@@ -113,7 +126,10 @@ export function ManualBuilder({
     : { type: "spring", bounce: 0, duration: 0.5 };
 
   return (
-    <div className="w-full font-sans transition-colors duration-700 bg-parichay-bg text-parichay-text relative">
+    <div
+      className="w-full font-sans transition-colors duration-700 bg-parichay-bg text-parichay-text relative"
+      {...swipeBackHandlers}
+    >
       {/* Builder Toolbar */}
       <div className="sticky top-14 z-40 w-full border-b border-parichay-border bg-parichay-bg/95 backdrop-blur-sm">
         <nav aria-label="Manual builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
@@ -126,6 +142,12 @@ export function ManualBuilder({
             <span className="hidden sm:inline">Back to Hub</span>
           </button>
 
+          {view === "build" && controller && (
+            <span className="type-meta absolute left-1/2 -translate-x-1/2 text-parichay-muted sm:hidden">
+              {controller.currentStepIndex + 1} / {controller.totalSteps}
+            </span>
+          )}
+
           <div className="flex items-center">
             {view === "build" && hasManualContent && (
               <button
@@ -134,6 +156,7 @@ export function ManualBuilder({
                 className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
               >
                 <BookOpenText size={18} weight="light" />
+                <span className="sm:hidden">Preview</span>
                 <span className="hidden sm:inline">Preview manual</span>
               </button>
             )}
@@ -180,7 +203,7 @@ export function ManualBuilder({
               className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_450px]"
             >
               {/* Form Side */}
-              <div className="space-y-12">
+              <div className="space-y-12 max-sm:mb-[calc(var(--mobile-nav-total)+1rem)]">
                 {controller && (
                   <div className="space-y-8 md:space-y-10">
                     <div className="space-y-3 md:space-y-4">
@@ -212,6 +235,9 @@ export function ManualBuilder({
                         <QuestionStep {...controller.getStepProps()} />
                       </motion.div>
                     </AnimatePresence>
+                    {!hasManualContent && (
+                      <EmptyState variant="first-run" />
+                    )}
                   </div>
                 )}
               </div>
@@ -251,6 +277,7 @@ export function ManualBuilder({
             </motion.div>
           )}
         </AnimatePresence>
+        <InstallBanner answeredCount={answeredCount} />
       </div>
 
     </div>

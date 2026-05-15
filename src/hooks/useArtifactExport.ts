@@ -19,6 +19,7 @@ export function useArtifactExport(
   const exportAsImage = async () => {
     if (!artifactRef.current) return;
     setIsExporting(true);
+    document.documentElement.setAttribute("data-exporting", "true");
     try {
       const pageColor =
         getComputedStyle(document.documentElement).getPropertyValue("--color-page").trim() ||
@@ -38,6 +39,7 @@ export function useArtifactExport(
       console.error("Oops, something went wrong!", err);
     } finally {
       setIsExporting(false);
+      document.documentElement.removeAttribute("data-exporting");
     }
   };
 

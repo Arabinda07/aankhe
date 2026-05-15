@@ -233,7 +233,7 @@ export function QuestionStep({
         </button>
         {needsExplicitContinue && (
           <SoftButton
-            className="ml-auto min-w-36"
+            className="ml-auto min-h-11 min-w-36"
             onClick={onNext}
             disabled={!hasAnswer}
             variant="primary"

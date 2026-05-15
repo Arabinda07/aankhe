@@ -1,0 +1,14 @@
+html[data-sheet-open] body > #root {
+  transform: scale(0.96);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out-expo), border-radius 0.35s var(--ease-out-expo);
+  transform-origin: center top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-sheet-open] body > #root {
+    transform: none;
+    transition: none;
+  }
+}

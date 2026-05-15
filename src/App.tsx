@@ -3,12 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, useNavigationType } from 'react-router-dom';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
 import type { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
+import { MobileNav } from './components/MobileNav';
 import { FOOTER_INTERSECTION_ROOT_MARGIN, FOOTER_SCROLL_LOAD_THRESHOLD_PX } from './lib/performancePolicy';
 import { HOME_PATH, HOW_IT_WORKS_PATH, manualModePath } from './lib/routes';
 import { loadManualBuilder, preloadManualBuilder } from './lib/manualRoutePreload';
@@ -37,9 +39,40 @@ const SiteFooter = lazy(() =>
   }))
 );
 
+function useAppVisualReadySignal() {
+  useLayoutEffect(() => {
+    if (document.documentElement.dataset.appVisualReady === "true") return;
+
+    let firstFrame = 0;
+    let secondFrame = 0;
+
+    firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        const root = document.getElementById("root");
+        const shell = document.getElementById("initial-shell");
+
+        document.documentElement.dataset.appVisualReady = "true";
+        root?.removeAttribute("aria-hidden");
+        root?.removeAttribute("inert");
+        shell?.setAttribute("aria-hidden", "true");
+        window.dispatchEvent(new CustomEvent("parichay:app-ready"));
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, []);
+}
+
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
+  const navigationType = useNavigationType();
+  const prefersReducedMotion = useReducedMotion();
+
+  useAppVisualReadySignal();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -48,13 +81,33 @@ function AppContent() {
   useEffect(() => {
     if (location.pathname !== HOME_PATH) return;
 
-    if ("requestIdleCallback" in window) {
-      const handle = window.requestIdleCallback(() => preloadManualBuilder(), { timeout: 1200 });
-      return () => window.cancelIdleCallback(handle);
+    let cancelIdlePreload: (() => void) | null = null;
+    let cancelled = false;
+
+    const scheduleIdlePreload = () => {
+      if (cancelled) return;
+
+      if ("requestIdleCallback" in window) {
+        const handle = window.requestIdleCallback(() => preloadManualBuilder(), { timeout: 1200 });
+        cancelIdlePreload = () => window.cancelIdleCallback(handle);
+        return;
+      }
+
+      const handle = globalThis.setTimeout(() => preloadManualBuilder(), 500);
+      cancelIdlePreload = () => globalThis.clearTimeout(handle);
+    };
+
+    if (document.documentElement.dataset.appVisualReady === "true") {
+      scheduleIdlePreload();
+    } else {
+      window.addEventListener("parichay:app-ready", scheduleIdlePreload, { once: true });
     }
 
-    const handle = setTimeout(() => preloadManualBuilder(), 500);
-    return () => clearTimeout(handle);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("parichay:app-ready", scheduleIdlePreload);
+      cancelIdlePreload?.();
+    };
   }, [location.pathname]);
 
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
@@ -76,9 +129,17 @@ function AppContent() {
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main-content" className="flex-1 flex flex-col items-center w-full">
+      <main id="main-content" className="flex-1 flex flex-col items-center w-full pb-mobile-nav sm:pb-0">
         <div className="w-full">
-          <Routes>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={location.pathname}
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: navigationType === "POP" ? -20 : 20 }}
+              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+              exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: navigationType === "POP" ? 20 : -20 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.22, ease: [0.32, 0.72, 0, 1] }}
+            >
+          <Routes location={location}>
             <Route
               path="/"
               element={
@@ -118,8 +179,11 @@ function AppContent() {
               }
             />
           </Routes>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
+      <MobileNav onStart={handleStart} />
       <DeferredFooter pathname={location.pathname} />
     </div>
   );

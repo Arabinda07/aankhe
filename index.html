@@ -2,11 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Parichay | Your story always ready</title>
     <meta name="description" content="Parichay helps you create a private personal manual, choose what leaves the page, and share only the finished parts. Your story always ready." />
     <meta name="application-name" content="Parichay" />
     <meta name="apple-mobile-web-app-title" content="Parichay" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="theme-color" content="#a85a44" />
     <link rel="canonical" href="https://parichay-your-story.vercel.app/" />
     <meta property="og:type" content="website" />
@@ -87,6 +90,37 @@
 
       .skip-initial-shell #initial-shell {
         display: none;
+      }
+
+      .use-initial-shell #root[aria-hidden="true"] {
+        visibility: hidden;
+      }
+
+      .use-initial-shell #initial-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        overflow-y: auto;
+        opacity: 1;
+        transition:
+          opacity 180ms ease-out,
+          visibility 180ms ease-out;
+      }
+
+      .use-initial-shell[data-app-visual-ready="true"] #root {
+        visibility: visible;
+      }
+
+      .use-initial-shell[data-app-visual-ready="true"] #initial-shell {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .use-initial-shell #initial-shell {
+          transition: none;
+        }
       }
 
       .initial-shell {
@@ -366,7 +400,9 @@
         document.documentElement.dataset.themePreference = preference;
         document.documentElement.dataset.themeResolved = resolved;
 
-        if (window.location.pathname !== "/") {
+        if (window.location.pathname === "/") {
+          document.documentElement.classList.add("use-initial-shell");
+        } else {
           document.documentElement.classList.add("skip-initial-shell");
         }
       })();
@@ -390,54 +426,53 @@
     </script>
   </head>
   <body>
-    <div id="root">
-      <div id="initial-shell" class="initial-shell" aria-label="Parichay loading preview">
-        <header class="initial-shell__header">
-          <div class="initial-shell__bar">
-            <a class="initial-shell__brand" href="/" aria-label="Parichay home">
-              <span class="initial-shell__mark" aria-hidden="true">P</span>
-              <span class="initial-shell__wordmark">Parichay</span>
-            </a>
-            <nav class="initial-shell__nav" aria-label="Preview navigation">
-              <a class="initial-shell__button" href="/how-it-works">FAQ</a>
-              <a class="initial-shell__button" href="/privacy">Privacy</a>
-              <a class="initial-shell__button" href="/manual/me">Me</a>
-              <a class="initial-shell__button" href="/manual/work">Work</a>
-              <a class="initial-shell__button" href="/manual/talk">Talk</a>
-              <a class="initial-shell__button" href="/manual/us">Sync</a>
-            </nav>
+    <div id="root" aria-hidden="true" inert></div>
+    <div id="initial-shell" class="initial-shell" aria-label="Parichay loading preview">
+      <header class="initial-shell__header">
+        <div class="initial-shell__bar">
+          <a class="initial-shell__brand" href="/" aria-label="Parichay home">
+            <span class="initial-shell__mark" aria-hidden="true">P</span>
+            <span class="initial-shell__wordmark">Parichay</span>
+          </a>
+          <nav class="initial-shell__nav" aria-label="Preview navigation">
+            <a class="initial-shell__button" href="/how-it-works">FAQ</a>
+            <a class="initial-shell__button" href="/privacy">Privacy</a>
+            <a class="initial-shell__button" href="/manual/me">Me</a>
+            <a class="initial-shell__button" href="/manual/work">Work</a>
+            <a class="initial-shell__button" href="/manual/talk">Talk</a>
+            <a class="initial-shell__button" href="/manual/us">Sync</a>
+          </nav>
+        </div>
+      </header>
+      <main class="initial-shell__main">
+        <section class="initial-shell__copy" aria-labelledby="initial-shell-title">
+          <h1 id="initial-shell-title" class="initial-shell__title">Your story always ready</h1>
+          <p class="initial-shell__lead">
+            Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
+          </p>
+          <div class="initial-shell__actions">
+            <a href="#onboarding" data-boot-intent="start" class="initial-shell__button initial-shell__button--primary">Start your manual</a>
+            <a href="/how-it-works" class="initial-shell__button">See how it works</a>
           </div>
-        </header>
-        <main class="initial-shell__main">
-          <section class="initial-shell__copy" aria-labelledby="initial-shell-title">
-            <h1 id="initial-shell-title" class="initial-shell__title">Your story always ready</h1>
-            <p class="initial-shell__lead">
-              Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
-            </p>
-            <div class="initial-shell__actions">
-              <a href="#onboarding" data-boot-intent="start" class="initial-shell__button initial-shell__button--primary">Start your manual</a>
-              <a href="/how-it-works" class="initial-shell__button">See how it works</a>
-            </div>
-            <p class="initial-shell__promise">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
-          </section>
-          <aside id="onboarding" class="initial-shell__setup" aria-label="Manual setup loading">
-            <div class="initial-shell__setup-paper">
-              <div class="initial-shell__setup-inner">
-                <div>
-                  <p class="initial-shell__setup-label">Preparing your manual studio</p>
-                  <div class="initial-shell__line" style="width: 66%"></div>
-                  <div class="initial-shell__line" style="width: 92%"></div>
-                  <div class="initial-shell__line" style="width: 80%"></div>
-                </div>
-                <div>
-                  <div class="initial-shell__card"></div>
-                  <div class="initial-shell__card"></div>
-                </div>
+          <p class="initial-shell__promise">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
+        </section>
+        <aside id="onboarding" class="initial-shell__setup" aria-label="Manual setup loading">
+          <div class="initial-shell__setup-paper">
+            <div class="initial-shell__setup-inner">
+              <div>
+                <p class="initial-shell__setup-label">Preparing your manual studio</p>
+                <div class="initial-shell__line" style="width: 66%"></div>
+                <div class="initial-shell__line" style="width: 92%"></div>
+                <div class="initial-shell__line" style="width: 80%"></div>
+              </div>
+              <div>
+                <div class="initial-shell__card"></div>
+                <div class="initial-shell__card"></div>
               </div>
             </div>
-          </aside>
-        </main>
-      </div>
+          </div>
+        </aside>
+      </main>
     </div>
     <script type="module" src="/src/boot.ts"></script>
   </body>

@@ -103,6 +103,10 @@
   /* Radius Tokens */
   --radius-bezel-outer: 2rem;
   --radius-bezel-inner: calc(var(--radius-bezel-outer) - 0.75rem);
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --mobile-nav-height: 4rem;
+  --mobile-nav-total: calc(var(--mobile-nav-height) + var(--safe-area-bottom));
 
   /* Fonts */
   --font-sans: "Geist", "Geist Fallback", system-ui, sans-serif;
@@ -538,6 +542,14 @@
   }
 
   .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pb-mobile-nav {
+    padding-bottom: var(--mobile-nav-total);
+  }
+
+  html[data-exporting] .mobile-nav-shell {
     display: none;
   }
 

@@ -23,6 +23,15 @@ function scrollToSetup() {
   });
 }
 
+function afterAppReady(callback: () => void) {
+  if (document.documentElement.dataset.appVisualReady === "true") {
+    callback();
+    return;
+  }
+
+  window.addEventListener("parichay:app-ready", callback, { once: true });
+}
+
 function bindHomeBoot() {
   const startLink = document.querySelector<HTMLElement>('[data-boot-intent="start"]');
 
@@ -30,7 +39,7 @@ function bindHomeBoot() {
     "click",
     (event) => {
       event.preventDefault();
-      void bootApp().then(scrollToSetup);
+      void bootApp().then(() => afterAppReady(scrollToSetup));
     },
     { once: true }
   );
