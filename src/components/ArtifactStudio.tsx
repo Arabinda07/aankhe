@@ -86,6 +86,9 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             onExportImage={exportAsImage}
             onPrint={printManual}
           />
+          <div className="hidden lg:block">
+            <AnswerReview workspace={workspace} />
+          </div>
         </div>
 
         {/* Sharing Side */}
@@ -111,7 +114,9 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
           />
         </div>
       </div>
-      <AnswerReview workspace={workspace} />
+      <div className="lg:hidden">
+        <AnswerReview workspace={workspace} />
+      </div>
     </div>
   );
 }
