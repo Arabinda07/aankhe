@@ -368,7 +368,7 @@
   @apply prose max-w-none;
 }
 
-@@layer components {
+@layer components {
   /* Step 5: Display Large (Hero) - clamp(3.052rem, 8vw, 4.768rem) */
   .type-serif-title,
   .type-display,

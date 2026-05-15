@@ -12,15 +12,18 @@ import { SwitchboardSetup } from "./SwitchboardSetup";
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
   onLearnMore: () => void;
+  onManualIntentPreload: () => void;
 }
 
 export function Switchboard({
   onStart,
   onLearnMore,
+  onManualIntentPreload,
 }: SwitchboardProps) {
   const scrollToOnboarding = useCallback(() => {
+    onManualIntentPreload();
     document.getElementById("onboarding")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+  }, [onManualIntentPreload]);
 
   return (
     <div className="bg-parichay-bg">
@@ -36,7 +39,14 @@ export function Switchboard({
           </div>
 
           <div className="flex w-full flex-col items-start gap-4 sm:w-auto sm:flex-row sm:items-center">
-            <SoftButton size="md" onClick={scrollToOnboarding} className="w-full sm:w-auto">
+            <SoftButton
+              size="md"
+              onClick={scrollToOnboarding}
+              onFocus={onManualIntentPreload}
+              onPointerEnter={onManualIntentPreload}
+              onTouchStart={onManualIntentPreload}
+              className="w-full sm:w-auto"
+            >
               Start your manual
             </SoftButton>
             <SoftButton
@@ -60,7 +70,7 @@ export function Switchboard({
           </div>
         </div>
 
-        <SwitchboardSetup onStart={onStart} />
+        <SwitchboardSetup onStart={onStart} onManualIntentPreload={onManualIntentPreload} />
       </section>
     </div>
   );

@@ -3,16 +3,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactNode, ButtonHTMLAttributes } from 'react';
+import type React from 'react';
+import type { ReactNode } from 'react';
 import { cn } from '../lib/utils';
 
-export interface SoftButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface SoftButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   icon?: ReactNode;
   className?: string; 
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
+  onPointerEnter?: React.PointerEventHandler<HTMLButtonElement>;
+  onTouchStart?: React.TouchEventHandler<HTMLButtonElement>;
   disabled?: boolean;
 }
 

@@ -11,9 +11,10 @@ import type { ModeId, OnboardingContext } from './lib/schemaTypes';
 import { SiteHeader } from './components/SiteHeader';
 import { FOOTER_INTERSECTION_ROOT_MARGIN, FOOTER_SCROLL_LOAD_THRESHOLD_PX } from './lib/performancePolicy';
 import { HOME_PATH, HOW_IT_WORKS_PATH, manualModePath } from './lib/routes';
+import { loadManualBuilder, preloadManualBuilder } from './lib/manualRoutePreload';
 
 const ManualBuilder = lazy(() =>
-  import("./components/ManualBuilder").then((module) => ({
+  loadManualBuilder().then((module) => ({
     default: module.ManualBuilder,
   }))
 );
@@ -44,7 +45,20 @@ function AppContent() {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (location.pathname !== HOME_PATH) return;
+
+    if ("requestIdleCallback" in window) {
+      const handle = window.requestIdleCallback(() => preloadManualBuilder(), { timeout: 1200 });
+      return () => window.cancelIdleCallback(handle);
+    }
+
+    const handle = setTimeout(() => preloadManualBuilder(), 500);
+    return () => clearTimeout(handle);
+  }, [location.pathname]);
+
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
+    preloadManualBuilder();
     navigate(manualModePath(mode), {
       state: {
         mode,
@@ -72,6 +86,7 @@ function AppContent() {
                   <Switchboard
                     onStart={handleStart}
                     onLearnMore={() => navigate(HOW_IT_WORKS_PATH)}
+                    onManualIntentPreload={preloadManualBuilder}
                   />
                 </div>
               }

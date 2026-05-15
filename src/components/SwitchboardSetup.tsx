@@ -19,6 +19,7 @@ import { SoftButton } from "./SoftButton";
 
 interface SwitchboardSetupProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
+  onManualIntentPreload: () => void;
 }
 
 type RecipientId = "manager" | "teammate" | "partner" | "friend" | "talk" | "self" | "sync";
@@ -56,7 +57,7 @@ const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
   { id: "deep", label: "Deeper manual", description: "The full version. Go slowly." },
 ];
 
-export function SwitchboardSetup({ onStart }: SwitchboardSetupProps) {
+export function SwitchboardSetup({ onStart, onManualIntentPreload }: SwitchboardSetupProps) {
   const [recipientId, setRecipientId] = useState<RecipientId>("manager");
   const [misunderstanding, setMisunderstanding] = useState(MISREAD_TOPICS[0]);
   const [depth, setDepth] = useState<ManualDepth>("manual");
@@ -128,7 +129,13 @@ export function SwitchboardSetup({ onStart }: SwitchboardSetupProps) {
 
           <SoftButton
             size="md"
-            onClick={() => onStart(recipient.mode, onboarding)}
+            onClick={() => {
+              onManualIntentPreload();
+              onStart(recipient.mode, onboarding);
+            }}
+            onFocus={onManualIntentPreload}
+            onPointerEnter={onManualIntentPreload}
+            onTouchStart={onManualIntentPreload}
             icon={<ArrowRight size={16} />}
             className="w-full"
           >
