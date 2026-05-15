@@ -22,7 +22,6 @@
     <meta name="twitter:image" content="https://parichay-your-story.vercel.app/og-image.svg" />
     <meta name="twitter:image:alt" content="Parichay private manual studio preview" />
     <link rel="preload" href="/fonts/Geist[wght].woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/SourceSerif4Variable-Roman.otf.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       @font-face {
         font-family: "Geist";
@@ -30,22 +29,6 @@
         font-display: swap;
         font-style: normal;
         font-weight: 100 900;
-      }
-
-      @font-face {
-        font-family: "Source Serif 4";
-        src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
-        font-display: optional;
-        font-style: normal;
-        font-weight: 200 900;
-      }
-
-      @font-face {
-        font-family: "Source Serif 4";
-        src: url("/fonts/SourceSerif4Variable-Italic.otf.woff2") format("woff2");
-        font-display: optional;
-        font-style: italic;
-        font-weight: 200 900;
       }
 
       :root {
@@ -119,7 +102,7 @@
         align-items: center;
         gap: 0.75rem;
         color: var(--initial-accent-hover);
-        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+        font-family: Georgia, "Times New Roman", serif;
         font-size: 1.65rem;
         font-style: italic;
         line-height: 1;
@@ -134,7 +117,7 @@
         border-radius: 0.125rem;
         background: var(--initial-accent);
         color: var(--initial-on-accent);
-        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+        font-family: Georgia, "Times New Roman", serif;
         font-size: 1.25rem;
       }
 
@@ -151,6 +134,16 @@
 
       .initial-shell__nav::-webkit-scrollbar {
         display: none;
+      }
+
+      .initial-shell__nav .initial-shell__button {
+        min-height: 2.75rem;
+        flex-shrink: 0;
+        border: 0;
+        background: transparent;
+        padding: 0 0.25rem;
+        color: inherit;
+        font-size: inherit;
       }
 
       .initial-shell__main {
@@ -171,7 +164,7 @@
         margin: 0;
         max-width: 11ch;
         color: var(--initial-accent);
-        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+        font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(3.25rem, 8vw, 5.875rem);
         font-style: italic;
         font-weight: 650;
@@ -219,6 +212,61 @@
         color: var(--initial-on-accent);
       }
 
+      .initial-shell__setup {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 37.5rem;
+        justify-self: start;
+        border: 1px solid var(--initial-border);
+        border-radius: 2rem;
+        background: var(--initial-surface);
+        padding: 0.5rem;
+      }
+
+      .initial-shell__setup-paper {
+        box-sizing: border-box;
+        min-height: 36rem;
+        border: 1px solid var(--initial-border);
+        border-radius: calc(2rem - 0.5rem);
+        background: var(--initial-surface);
+        padding: 1.5rem 1.25rem;
+      }
+
+      .initial-shell__setup-inner {
+        display: flex;
+        min-height: 31rem;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .initial-shell__setup-label {
+        margin: 0 0 1.5rem;
+        color: var(--initial-muted);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .initial-shell__line,
+      .initial-shell__card {
+        border-radius: 0.25rem;
+        background: color-mix(in oklch, var(--initial-muted) 16%, transparent);
+      }
+
+      .initial-shell__line {
+        height: 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      .initial-shell__card {
+        height: 6rem;
+        margin-top: 1rem;
+        border: 1px solid var(--initial-border);
+      }
+
       .initial-shell__promise {
         margin-top: 2rem;
         color: var(--initial-muted);
@@ -236,6 +284,16 @@
           flex-direction: row;
           align-items: center;
         }
+
+        .initial-shell__setup {
+          justify-self: center;
+          padding: 0.75rem;
+        }
+
+        .initial-shell__setup-paper {
+          border-radius: calc(2rem - 0.75rem);
+          padding: 2.5rem 2rem;
+        }
       }
 
       @media (max-width: 639px) {
@@ -249,6 +307,10 @@
           grid-template-columns: 1fr minmax(auto, 37.5rem);
           padding-top: 7rem;
           padding-bottom: 8rem;
+        }
+
+        .initial-shell__setup {
+          justify-self: end;
         }
       }
     </style>
@@ -319,12 +381,12 @@
               <span class="initial-shell__wordmark">Parichay</span>
             </a>
             <nav class="initial-shell__nav" aria-label="Preview navigation">
-              <span>FAQ</span>
-              <span>Privacy</span>
-              <span>Me</span>
-              <span>Work</span>
-              <span>Talk</span>
-              <span>Sync</span>
+              <a class="initial-shell__button" href="/how-it-works">FAQ</a>
+              <a class="initial-shell__button" href="/privacy">Privacy</a>
+              <a class="initial-shell__button" href="/manual/me">Me</a>
+              <a class="initial-shell__button" href="/manual/work">Work</a>
+              <a class="initial-shell__button" href="/manual/talk">Talk</a>
+              <a class="initial-shell__button" href="/manual/us">Sync</a>
             </nav>
           </div>
         </header>
@@ -334,15 +396,31 @@
             <p class="initial-shell__lead">
               Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
             </p>
-            <div class="initial-shell__actions" aria-hidden="true">
-              <span class="initial-shell__button initial-shell__button--primary">Start your manual</span>
-              <span class="initial-shell__button">See how it works</span>
+            <div class="initial-shell__actions">
+              <a href="#onboarding" data-boot-intent="start" class="initial-shell__button initial-shell__button--primary">Start your manual</a>
+              <a href="/how-it-works" class="initial-shell__button">See how it works</a>
             </div>
             <p class="initial-shell__promise">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
           </section>
+          <aside id="onboarding" class="initial-shell__setup" aria-label="Manual setup loading">
+            <div class="initial-shell__setup-paper">
+              <div class="initial-shell__setup-inner">
+                <div>
+                  <p class="initial-shell__setup-label">Preparing your manual studio</p>
+                  <div class="initial-shell__line" style="width: 66%"></div>
+                  <div class="initial-shell__line" style="width: 92%"></div>
+                  <div class="initial-shell__line" style="width: 80%"></div>
+                </div>
+                <div>
+                  <div class="initial-shell__card"></div>
+                  <div class="initial-shell__card"></div>
+                </div>
+              </div>
+            </div>
+          </aside>
         </main>
       </div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/boot.ts"></script>
   </body>
 </html>

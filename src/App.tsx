@@ -103,32 +103,51 @@ function AppContent() {
           </Routes>
         </div>
       </main>
-      <DeferredFooter />
+      <DeferredFooter pathname={location.pathname} />
     </div>
   );
 }
 
-function DeferredFooter() {
+function DeferredFooter({ pathname }: { pathname: string }) {
   const [shouldLoadFooter, setShouldLoadFooter] = useState(false);
 
   useEffect(() => {
     if (shouldLoadFooter) return;
 
-    const loadFooter = () => setShouldLoadFooter(true);
-    const idleId = window.requestIdleCallback
-      ? window.requestIdleCallback(loadFooter, { timeout: 2400 })
-      : window.setTimeout(loadFooter, 1400);
+    if (pathname !== "/") {
+      setShouldLoadFooter(true);
+      return;
+    }
 
-    return () => {
-      if (window.cancelIdleCallback && typeof idleId === "number") {
-        window.cancelIdleCallback(idleId);
-      } else {
-        window.clearTimeout(idleId);
-      }
-    };
-  }, [shouldLoadFooter]);
+    const sentinel = document.getElementById("footer-sentinel");
+    if (!sentinel || !("IntersectionObserver" in window)) {
+      const loadFooterAfterScroll = () => {
+        if (window.scrollY > 480) {
+          setShouldLoadFooter(true);
+        }
+      };
 
-  if (!shouldLoadFooter) return null;
+      window.addEventListener("scroll", loadFooterAfterScroll, { passive: true });
+      return () => window.removeEventListener("scroll", loadFooterAfterScroll);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoadFooter(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "480px 0px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [pathname, shouldLoadFooter]);
+
+  if (!shouldLoadFooter) {
+    return <div id="footer-sentinel" className="h-px w-full" aria-hidden="true" />;
+  }
 
   return (
     <Suspense fallback={null}>

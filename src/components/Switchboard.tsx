@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SealCheck } from "@phosphor-icons/react/dist/csr/SealCheck";
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import type { ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { SoftButton } from "./SoftButton";
@@ -28,17 +27,15 @@ export function Switchboard({
   useEffect(() => {
     if (shouldLoadSetup) return;
 
-    const loadSetup = () => setShouldLoadSetup(true);
-    const idleId = window.requestIdleCallback
-      ? window.requestIdleCallback(loadSetup, { timeout: 1800 })
-      : window.setTimeout(loadSetup, 900);
-
-    return () => {
-      if (window.cancelIdleCallback && typeof idleId === "number") {
-        window.cancelIdleCallback(idleId);
-      } else {
-        window.clearTimeout(idleId);
+    const loadSetupAfterScroll = () => {
+      if (window.scrollY > 96) {
+        setShouldLoadSetup(true);
       }
+    };
+
+    window.addEventListener("scroll", loadSetupAfterScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", loadSetupAfterScroll);
     };
   }, [shouldLoadSetup]);
 
@@ -77,7 +74,12 @@ export function Switchboard({
           </div>
 
           <div className="flex min-w-0 items-start gap-3">
-            <SealCheck size={20} className="text-parichay-muted shrink-0" weight="light" />
+            <span
+              aria-hidden="true"
+              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-sm border border-parichay-border text-[0.625rem] font-semibold leading-none text-parichay-muted"
+            >
+              P
+            </span>
             <p className="type-caption min-w-0 text-wrap text-parichay-muted">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
           </div>
         </div>

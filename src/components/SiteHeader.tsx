@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { ParichayMark } from "./ParichayMark";
@@ -70,23 +70,6 @@ export function SiteHeader() {
 
 function DeferredThemeSwitcher() {
   const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    if (shouldLoad) return;
-
-    const loadSwitcher = () => setShouldLoad(true);
-    const idleId = window.requestIdleCallback
-      ? window.requestIdleCallback(loadSwitcher, { timeout: 2200 })
-      : window.setTimeout(loadSwitcher, 1200);
-
-    return () => {
-      if (window.cancelIdleCallback && typeof idleId === "number") {
-        window.cancelIdleCallback(idleId);
-      } else {
-        window.clearTimeout(idleId);
-      }
-    };
-  }, [shouldLoad]);
 
   if (!shouldLoad) {
     return <ThemeSwitcherFallback onLoad={() => setShouldLoad(true)} />;
