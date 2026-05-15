@@ -3,16 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
-import { SETUP_SCROLL_LOAD_THRESHOLD_PX } from "../lib/performancePolicy";
+import { useCallback } from "react";
 import type { ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { SoftButton } from "./SoftButton";
-
-const SwitchboardSetup = lazy(() =>
-  import("./SwitchboardSetup").then((module) => ({
-    default: module.SwitchboardSetup,
-  }))
-);
+import { SwitchboardSetup } from "./SwitchboardSetup";
 
 interface SwitchboardProps {
   onStart: (mode: ModeId, onboarding?: OnboardingContext) => void;
@@ -23,28 +17,8 @@ export function Switchboard({
   onStart,
   onLearnMore,
 }: SwitchboardProps) {
-  const [shouldLoadSetup, setShouldLoadSetup] = useState(false);
-
-  useEffect(() => {
-    if (shouldLoadSetup) return;
-
-    const loadSetupAfterScroll = () => {
-      if (window.scrollY > SETUP_SCROLL_LOAD_THRESHOLD_PX) {
-        setShouldLoadSetup(true);
-      }
-    };
-
-    window.addEventListener("scroll", loadSetupAfterScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", loadSetupAfterScroll);
-    };
-  }, [shouldLoadSetup]);
-
   const scrollToOnboarding = useCallback(() => {
-    setShouldLoadSetup(true);
-    window.requestAnimationFrame(() => {
-      document.getElementById("onboarding")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    document.getElementById("onboarding")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
@@ -85,43 +59,8 @@ export function Switchboard({
           </div>
         </div>
 
-        {shouldLoadSetup ? (
-          <Suspense fallback={<SetupFallback />}>
-            <SwitchboardSetup
-              onStart={onStart}
-            />
-          </Suspense>
-        ) : (
-          <SetupFallback />
-        )}
+        <SwitchboardSetup onStart={onStart} />
       </section>
     </div>
-  );
-}
-
-function SetupFallback() {
-  return (
-    <aside
-      id="onboarding"
-      aria-label="Manual setup loading"
-      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
-    >
-      <div className="min-h-[36rem] rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10">
-        <div className="flex h-full min-h-[31rem] flex-col justify-between">
-          <div className="space-y-6">
-            <p className="type-eyebrow text-parichay-muted">Preparing your manual studio</p>
-            <div className="space-y-3" aria-hidden="true">
-              <div className="h-3 w-2/3 rounded-sm bg-parichay-surface-soft" />
-              <div className="h-3 w-11/12 rounded-sm bg-parichay-surface-soft" />
-              <div className="h-3 w-4/5 rounded-sm bg-parichay-surface-soft" />
-            </div>
-          </div>
-          <div className="space-y-4" aria-hidden="true">
-            <div className="h-24 rounded-md border border-parichay-paper-border bg-parichay-paper-muted" />
-            <div className="h-24 rounded-md border border-parichay-paper-border bg-parichay-paper-muted" />
-          </div>
-        </div>
-      </div>
-    </aside>
   );
 }
