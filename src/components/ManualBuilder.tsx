@@ -10,7 +10,7 @@ import type { ModeId, OnboardingContext, StorageMode } from '../lib/schemaTypes'
 import { useQuestionController } from '../hooks/useQuestionController';
 import { QuestionStep } from './QuestionStep';
 import { ManualPreview } from './ManualPreview';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { BookOpenText } from '@phosphor-icons/react/dist/csr/BookOpenText';
 import { CaretLeft } from '@phosphor-icons/react/dist/csr/CaretLeft';
 import { FileText } from '@phosphor-icons/react/dist/csr/FileText';
@@ -50,6 +50,7 @@ export function ManualBuilder({
     initialStorageMode: routeState?.storageMode,
   });
   const [view, setView] = useState<"build" | "artifact">("build");
+  const prefersReducedMotion = useReducedMotion();
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
   const composed = useMemo(() => manual?.composeManual(), [manual]);
@@ -75,6 +76,35 @@ export function ManualBuilder({
   if (!manual || !composed) {
     return <Navigate to="/" />;
   }
+
+  const viewMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, y: 10 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -10 },
+      };
+  const questionMotion = prefersReducedMotion
+    ? {
+        initial: { opacity: 1 },
+        animate: { opacity: 1 },
+        exit: { opacity: 1 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, x: 20 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -20 },
+        transition: { duration: 0.3 },
+      };
+  const progressTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { type: "spring", bounce: 0, duration: 0.5 };
 
   return (
     <div className="w-full font-sans transition-colors duration-700 bg-parichay-bg text-parichay-text relative">
@@ -140,9 +170,7 @@ export function ManualBuilder({
           {view === "build" ? (
             <motion.div
               key="build"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              {...viewMotion}
               className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_450px]"
             >
               {/* Form Side */}
@@ -163,9 +191,9 @@ export function ManualBuilder({
                       <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-parichay-surface-soft">
                         <motion.div 
                           className="h-full w-full bg-parichay-accent origin-left"
-                          initial={{ scaleX: 0 }}
+                          initial={{ scaleX: prefersReducedMotion ? controller.progress / 100 : 0 }}
                           animate={{ scaleX: controller.progress / 100 }}
-                          transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+                          transition={progressTransition}
                         />
                       </div>
                     </div>
@@ -173,10 +201,7 @@ export function ManualBuilder({
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={controller.currentQuestion.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
+                        {...questionMotion}
                       >
                         <QuestionStep {...controller.getStepProps()} />
                       </motion.div>
@@ -206,9 +231,7 @@ export function ManualBuilder({
           ) : (
             <motion.div
               key="artifact"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              {...viewMotion}
             >
               <Suspense fallback={<ArtifactFallback />}>
                 <ArtifactStudio

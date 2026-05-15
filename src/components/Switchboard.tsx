@@ -55,7 +55,7 @@ export function Switchboard({
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
             <h1 className="type-mixed-heading text-parichay-heading lg:max-w-xl">
-              Say it once. Be understood.
+              Your story always ready
             </h1>
             <p className="type-lead max-w-lg text-parichay-muted">
               Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
@@ -76,9 +76,9 @@ export function Switchboard({
             </SoftButton>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-start gap-3">
             <SealCheck size={20} className="text-parichay-muted shrink-0" weight="light" />
-            <p className="type-caption text-parichay-muted">Your answers stay in this tab. Before you share, you choose what is included.</p>
+            <p className="type-caption min-w-0 text-wrap text-parichay-muted">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
           </div>
         </div>
 
@@ -103,7 +103,22 @@ function SetupFallback() {
       aria-label="Manual setup loading"
       className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
     >
-      <div className="min-h-[36rem] rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10" />
+      <div className="min-h-[36rem] rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10">
+        <div className="flex h-full min-h-[31rem] flex-col justify-between">
+          <div className="space-y-6">
+            <p className="type-eyebrow text-parichay-muted">Preparing your manual studio</p>
+            <div className="space-y-3" aria-hidden="true">
+              <div className="h-3 w-2/3 rounded-sm bg-parichay-surface-soft" />
+              <div className="h-3 w-11/12 rounded-sm bg-parichay-surface-soft" />
+              <div className="h-3 w-4/5 rounded-sm bg-parichay-surface-soft" />
+            </div>
+          </div>
+          <div className="space-y-4" aria-hidden="true">
+            <div className="h-24 rounded-md border border-parichay-paper-border bg-parichay-paper-muted" />
+            <div className="h-24 rounded-md border border-parichay-paper-border bg-parichay-paper-muted" />
+          </div>
+        </div>
+      </div>
     </aside>
   );
 }

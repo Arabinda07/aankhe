@@ -126,8 +126,6 @@ export function SwitchboardSetup({ onStart }: SwitchboardSetupProps) {
             </ChoiceGroup>
           </div>
 
-          <PrivacyLedger />
-
           <SoftButton
             size="md"
             onClick={() => onStart(recipient.mode, onboarding)}
@@ -139,27 +137,6 @@ export function SwitchboardSetup({ onStart }: SwitchboardSetupProps) {
         </div>
       </div>
     </aside>
-  );
-}
-
-function PrivacyLedger() {
-  const rows = [
-    ["Included", "Can appear in the manual you share."],
-    ["Private", "Stays in this tab."],
-    ["Omitted", "Stays out of preview, links, and exports."],
-  ];
-
-  return (
-    <section aria-label="Privacy rules" className="border-t border-parichay-paper-border pt-6">
-      <div className="grid gap-3">
-        {rows.map(([label, description]) => (
-          <div key={label} className="grid grid-cols-[5.5rem_1fr] gap-3">
-            <span className="type-caption font-semibold text-parichay-heading">{label}</span>
-            <span className="type-caption text-parichay-muted">{description}</span>
-          </div>
-        ))}
-      </div>
-    </section>
   );
 }
 

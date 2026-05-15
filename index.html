@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parichay | Your Story, Always Ready.</title>
-    <meta name="description" content="Parichay helps you create a private personal manual, choose what is included, and share only the finished parts. Your Story, Always Ready." />
+    <title>Parichay | Your story always ready</title>
+    <meta name="description" content="Parichay helps you create a private personal manual, choose what leaves the page, and share only the finished parts. Your story always ready." />
     <meta name="application-name" content="Parichay" />
     <meta name="apple-mobile-web-app-title" content="Parichay" />
     <meta name="theme-color" content="#a85a44" />
@@ -12,17 +12,42 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Parichay" />
     <meta property="og:url" content="https://parichay-your-story.vercel.app/" />
-    <meta property="og:title" content="Parichay | Your Story, Always Ready." />
-    <meta property="og:description" content="Create a private personal manual. Keep drafts local, choose what is included, and share only the sealed copy." />
+    <meta property="og:title" content="Parichay | Your story always ready" />
+    <meta property="og:description" content="Create a private personal manual. Keep drafts local, choose what leaves the page, and share only the sealed copy." />
     <meta property="og:image" content="https://parichay-your-story.vercel.app/og-image.svg" />
     <meta property="og:image:alt" content="Parichay private manual studio preview" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Parichay | Your Story, Always Ready." />
-    <meta name="twitter:description" content="Create a private personal manual. Keep drafts local, choose what is included, and share only the sealed copy." />
+    <meta name="twitter:title" content="Parichay | Your story always ready" />
+    <meta name="twitter:description" content="Create a private personal manual. Keep drafts local, choose what leaves the page, and share only the sealed copy." />
     <meta name="twitter:image" content="https://parichay-your-story.vercel.app/og-image.svg" />
     <meta name="twitter:image:alt" content="Parichay private manual studio preview" />
     <link rel="preload" href="/fonts/Geist[wght].woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SourceSerif4Variable-Roman.otf.woff2" as="font" type="font/woff2" crossorigin />
     <style>
+      @font-face {
+        font-family: "Geist";
+        src: url("/fonts/Geist[wght].woff2") format("woff2");
+        font-display: swap;
+        font-style: normal;
+        font-weight: 100 900;
+      }
+
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
+        font-display: optional;
+        font-style: normal;
+        font-weight: 200 900;
+      }
+
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("/fonts/SourceSerif4Variable-Italic.otf.woff2") format("woff2");
+        font-display: optional;
+        font-style: italic;
+        font-weight: 200 900;
+      }
+
       :root {
         --initial-page: oklch(0.96 0.012 60);
         --initial-surface: oklch(0.983 0.012 68);
@@ -54,7 +79,7 @@
       }
 
       body {
-        font-family: Geist, Arial, system-ui, sans-serif;
+        font-family: "Geist", Arial, system-ui, sans-serif;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
       }
@@ -94,7 +119,7 @@
         align-items: center;
         gap: 0.75rem;
         color: var(--initial-accent-hover);
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
         font-size: 1.65rem;
         font-style: italic;
         line-height: 1;
@@ -109,7 +134,7 @@
         border-radius: 0.125rem;
         background: var(--initial-accent);
         color: var(--initial-on-accent);
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
         font-size: 1.25rem;
       }
 
@@ -117,9 +142,15 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        overflow-x: auto;
+        scrollbar-width: none;
         color: var(--initial-muted);
         font-size: 0.875rem;
         font-weight: 700;
+      }
+
+      .initial-shell__nav::-webkit-scrollbar {
+        display: none;
       }
 
       .initial-shell__main {
@@ -140,7 +171,7 @@
         margin: 0;
         max-width: 11ch;
         color: var(--initial-accent);
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
         font-size: clamp(3.25rem, 8vw, 5.875rem);
         font-style: italic;
         font-weight: 650;
@@ -208,8 +239,7 @@
       }
 
       @media (max-width: 639px) {
-        .initial-shell__wordmark,
-        .initial-shell__nav span:first-child {
+        .initial-shell__wordmark {
           display: none;
         }
       }
@@ -266,9 +296,9 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Parichay",
-        "alternateName": "Your Story, Always Ready.",
+        "alternateName": "Your story always ready",
         "url": "https://parichay-your-story.vercel.app/",
-        "description": "A privacy-first web application for creating private personal manuals and sharing only the included parts.",
+        "description": "A privacy-first web application for creating private personal manuals and sharing only the parts you choose.",
         "applicationCategory": "ProductivityApplication",
         "operatingSystem": "Web",
         "offers": {
@@ -293,12 +323,14 @@
               <span>Privacy</span>
               <span>Me</span>
               <span>Work</span>
+              <span>Talk</span>
+              <span>Sync</span>
             </nav>
           </div>
         </header>
         <main class="initial-shell__main">
           <section class="initial-shell__copy" aria-labelledby="initial-shell-title">
-            <h1 id="initial-shell-title" class="initial-shell__title">Say it once. Be understood.</h1>
+            <h1 id="initial-shell-title" class="initial-shell__title">Your story always ready</h1>
             <p class="initial-shell__lead">
               Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
             </p>
@@ -306,7 +338,7 @@
               <span class="initial-shell__button initial-shell__button--primary">Start your manual</span>
               <span class="initial-shell__button">See how it works</span>
             </div>
-            <p class="initial-shell__promise">Your answers stay in this tab. Before you share, you choose what is included.</p>
+            <p class="initial-shell__promise">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
           </section>
         </main>
       </div>

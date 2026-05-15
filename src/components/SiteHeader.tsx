@@ -12,16 +12,16 @@ const ThemeSwitcher = lazy(() =>
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-parichay-border bg-parichay-surface shadow-sm">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
         <Link 
           to="/" 
-          className="min-h-11 inline-flex items-center pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+          className="min-h-11 shrink-0 inline-flex items-center pr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
           aria-label="Parichay home"
         >
           <ParichayMark wordmarkClassName="hidden sm:inline" />
         </Link>
-        <div className="flex items-center gap-2 sm:gap-4">
-          <nav className="type-ui-label flex items-center gap-2 sm:gap-3 text-parichay-muted">
+        <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-4">
+          <nav className="type-ui-label scrollbar-none flex min-w-0 items-center gap-2 overflow-x-auto text-parichay-muted sm:gap-3" aria-label="Site">
             <NavLink
               to="/how-it-works"
               className={infoNavClassName}
@@ -37,30 +37,30 @@ export function SiteHeader() {
             <div className="hidden sm:block w-px h-4 bg-parichay-border mx-1" aria-hidden="true" />
             <Link
               to="/manual/me"
-              className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Me
             </Link>
             <Link
               to="/manual/work"
-              className="min-h-11 min-w-11 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Work
             </Link>
             <Link
               to="/manual/talk"
-              className="hidden md:inline-flex min-h-11 min-w-11 items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Talk
             </Link>
             <Link
               to="/manual/us"
-              className="hidden md:inline-flex min-h-11 min-w-11 items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center px-1 hover:text-parichay-text transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Sync
             </Link>
           </nav>
-          <div className="w-px h-4 bg-parichay-border/50 mx-1" aria-hidden="true" />
+          <div className="shrink-0 w-px h-4 bg-parichay-border/50 mx-1" aria-hidden="true" />
           <DeferredThemeSwitcher />
         </div>
       </div>
@@ -107,7 +107,7 @@ function ThemeSwitcherFallback({ onLoad }: { onLoad: () => void }) {
       onClick={onLoad}
       onFocus={onLoad}
       onPointerEnter={onLoad}
-      className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+      className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
     >
       <span aria-hidden="true" className="block h-4 w-4 rounded-full border border-current" />
     </button>
@@ -116,7 +116,7 @@ function ThemeSwitcherFallback({ onLoad }: { onLoad: () => void }) {
 
 function infoNavClassName({ isActive }: { isActive: boolean }) {
   return cn(
-    "hidden sm:inline-flex min-h-11 items-center justify-center px-2 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
+    "min-h-11 shrink-0 inline-flex items-center justify-center px-2 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
     isActive ? "text-parichay-text underline decoration-parichay-accent/45 underline-offset-8" : "text-parichay-muted"
   );
 }
