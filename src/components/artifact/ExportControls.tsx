@@ -26,7 +26,6 @@ export function ExportControls({
       <SoftButton
         onClick={onExportImage}
         disabled={isExporting}
-        className="gap-2 bg-parichay-accent text-parichay-on-accent border-none py-3"
       >
         <FileArrowDown size={20} weight="light" />
         {isExporting ? "Exporting..." : viewMode === "private" ? "Save Private Image" : "Save Included Image"}
@@ -34,7 +33,6 @@ export function ExportControls({
       <SoftButton
         variant="secondary"
         onClick={onPrint}
-        className="gap-2 bg-parichay-surface text-parichay-text py-3"
       >
         <Printer size={20} weight="light" />
         {viewMode === "private" ? "Print Private Copy" : "Print Included PDF"}
