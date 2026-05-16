@@ -9,7 +9,9 @@ import type { ManualViewMode } from "../../lib/visibilityPolicy";
 import type { ArtifactStudioPolicy } from "../../lib/artifactStudioPolicy";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import * as Tabs from "@radix-ui/react-tabs";
+import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import { cn } from "../../lib/utils";
+import { motion, AnimatePresence } from "motion/react";
 
 interface VisibilityControlsProps {
   config: ModeConfig;
@@ -131,8 +133,23 @@ export function ShareFormatPicker({
                 : "border-parichay-border bg-parichay-control text-parichay-text hover:bg-parichay-control-hover"
             )}
           >
-            <span className="block font-semibold">{format.label}</span>
-            <span className="block text-parichay-muted">{format.description}</span>
+            <span className="flex items-center justify-between">
+              <span className="block font-semibold">{format.label}</span>
+              <AnimatePresence>
+                {manual.artifactFormat === format.id && (
+                  <motion.span
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex items-center"
+                  >
+                    <CheckCircle size={16} weight="fill" className="text-parichay-accent-dark" aria-label="Selected" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </span>
+            <span className="block text-parichay-muted mt-1">{format.description}</span>
           </RadioGroup.Item>
         ))}
       </RadioGroup.Root>
@@ -250,7 +267,22 @@ export function ToneOptionsDisclosure({
                     : "border-parichay-border bg-parichay-control text-parichay-text hover:bg-parichay-control-hover"
                 )}
               >
-                {tone.label}
+                <span className="flex items-center gap-2">
+                  {tone.label}
+                  <AnimatePresence>
+                    {manual.tone === tone.id && (
+                      <motion.span
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.5, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex items-center"
+                      >
+                        <CheckCircle size={14} weight="fill" className="text-parichay-accent-dark" aria-label="Selected" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
               </RadioGroup.Item>
             ))}
           </RadioGroup.Root>

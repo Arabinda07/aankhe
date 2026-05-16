@@ -12,6 +12,8 @@ import { SiteHeader } from './components/SiteHeader';
 import { FOOTER_INTERSECTION_ROOT_MARGIN, FOOTER_SCROLL_LOAD_THRESHOLD_PX } from './lib/performancePolicy';
 import { HOME_PATH, HOW_IT_WORKS_PATH, manualModePath } from './lib/routes';
 import { scheduleServiceWorkerRegistration } from './lib/serviceWorkerRegistration';
+import { ConnectionStatus } from './components/ConnectionStatus';
+import { UpdatePrompt } from './components/UpdatePrompt';
 
 const ManualBuilder = lazy(() =>
   import("./lib/manualRoutePreload").then((module) => module.loadManualBuilder()).then((module) => ({
@@ -104,6 +106,8 @@ function AppContent() {
         Skip to content
       </a>
       <SiteHeader />
+      <ConnectionStatus />
+      <UpdatePrompt />
       <main id="main-content" className="flex-1 flex flex-col items-center w-full">
         <div className="w-full">
           <Routes>

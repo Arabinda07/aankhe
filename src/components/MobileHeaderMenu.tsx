@@ -8,6 +8,7 @@ import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { HOME_PATH, HOW_IT_WORKS_PATH, PRIVACY_PATH } from "../lib/routes";
 import { BottomSheet } from "./primitives/BottomSheet";
+import { useInstallPrompt } from "../hooks/useInstallPrompt";
 
 const InstallSheet = lazy(() =>
   import("./InstallSheet").then((module) => ({
@@ -21,6 +22,7 @@ interface MobileHeaderMenuProps {
 }
 
 export function MobileHeaderMenu({ open, onOpenChange }: MobileHeaderMenuProps) {
+  const { isStandalone } = useInstallPrompt();
   const [isInstallSheetOpen, setIsInstallSheetOpen] = useState(false);
   const [shouldLoadInstallSheet, setShouldLoadInstallSheet] = useState(false);
 
@@ -44,19 +46,25 @@ export function MobileHeaderMenu({ open, onOpenChange }: MobileHeaderMenuProps) 
         <div className="space-y-7">
           <nav aria-label="Mobile site navigation" className="grid gap-2">
             <MenuLink to={HOME_PATH} label="Home" icon={<House size={20} weight="light" />} onClick={closeMenu} />
-            <MenuLink to={HOW_IT_WORKS_PATH} label="How it works" icon={<Info size={20} weight="light" />} onClick={closeMenu} />
-            <MenuLink to={PRIVACY_PATH} label="Privacy" icon={<ShieldCheck size={20} weight="light" />} onClick={closeMenu} />
+            {!isStandalone && (
+              <>
+                <MenuLink to={HOW_IT_WORKS_PATH} label="How it works" icon={<Info size={20} weight="light" />} onClick={closeMenu} />
+                <MenuLink to={PRIVACY_PATH} label="Privacy" icon={<ShieldCheck size={20} weight="light" />} onClick={closeMenu} />
+              </>
+            )}
             <MenuLink to="/#onboarding" label="Create intro" icon={<Plus size={20} weight="light" />} onClick={closeMenu} />
           </nav>
 
-          <button
-            type="button"
-            onClick={openInstallSheet}
-            className="type-ui-label inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-surface-soft px-4 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-          >
-            <DownloadSimple size={18} weight="light" aria-hidden="true" />
-            Install Parichay
-          </button>
+          {!isStandalone && (
+            <button
+              type="button"
+              onClick={openInstallSheet}
+              className="type-ui-label inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-surface-soft px-4 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            >
+              <DownloadSimple size={18} weight="light" aria-hidden="true" />
+              Install Parichay
+            </button>
+          )}
         </div>
       </BottomSheet>
 

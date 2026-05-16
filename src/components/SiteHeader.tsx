@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HOW_IT_WORKS_PATH, PRIVACY_PATH } from "../lib/routes";
 import { cn } from "../lib/utils";
 import { ParichayMark } from "./ParichayMark";
+import { useInstallPrompt } from "../hooks/useInstallPrompt";
 
 const MobileHeaderMenu = lazy(() =>
   import("./MobileHeaderMenu").then((module) => ({
@@ -18,6 +19,7 @@ const ThemeSwitcher = lazy(() =>
 );
 
 export function SiteHeader() {
+  const { isStandalone } = useInstallPrompt();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [shouldLoadMobileMenu, setShouldLoadMobileMenu] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -51,21 +53,28 @@ export function SiteHeader() {
         </Link>
         <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-4">
           <nav className="type-ui-label hidden min-w-0 items-center gap-2 overflow-x-auto text-parichay-muted sm:flex sm:gap-3" aria-label="Site">
-            <NavLink
-              to={HOW_IT_WORKS_PATH}
-              className={infoNavClassName}
-            >
-              How it works
-            </NavLink>
-            <NavLink
-              to={PRIVACY_PATH}
-              className={infoNavClassName}
-            >
-              Privacy
-            </NavLink>
+            {!isStandalone && (
+              <>
+                <NavLink
+                  to={HOW_IT_WORKS_PATH}
+                  className={infoNavClassName}
+                >
+                  How it works
+                </NavLink>
+                <NavLink
+                  to={PRIVACY_PATH}
+                  className={infoNavClassName}
+                >
+                  Privacy
+                </NavLink>
+              </>
+            )}
             <Link
               to="/#onboarding"
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm px-2 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className={cn(
+                "inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm px-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
+                isStandalone ? "bg-parichay-accent text-parichay-on-accent hover:bg-parichay-accent-dark" : "text-parichay-text hover:bg-parichay-control-hover"
+              )}
             >
               Create intro
             </Link>

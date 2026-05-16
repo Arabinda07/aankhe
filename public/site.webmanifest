@@ -1,20 +1,33 @@
 {
+  "id": "/",
   "name": "Parichay",
   "short_name": "Parichay",
-  "description": "Create a private personal manual and share only the included parts.",
+  "description": "Create a personal intro page for the way you work, communicate, and want to be understood.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
-  "orientation": "portrait",
   "background_color": "#F8F1EA",
   "theme_color": "#A85A44",
   "categories": ["productivity", "utilities"],
   "shortcuts": [
     {
-      "name": "Me Manual",
-      "short_name": "Me",
-      "description": "Start a personal manual.",
+      "name": "Create Work Intro",
+      "short_name": "Work Intro",
+      "description": "Start a work intro.",
+      "url": "/manual/work",
+      "icons": [
+        {
+          "src": "/icons/shortcut-work-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Create Personal Intro",
+      "short_name": "Personal",
+      "description": "Start a personal intro.",
       "url": "/manual/me",
       "icons": [
         {
@@ -25,13 +38,13 @@
       ]
     },
     {
-      "name": "Work Manual",
-      "short_name": "Work",
-      "description": "Start a work manual.",
-      "url": "/manual/work",
+      "name": "Prepare a Talk",
+      "short_name": "Talk",
+      "description": "Start a hard conversation intro.",
+      "url": "/manual/talk",
       "icons": [
         {
-          "src": "/icons/shortcut-work-192.png",
+          "src": "/icons/shortcut-me-192.png",
           "sizes": "192x192",
           "type": "image/png"
         }

@@ -10,8 +10,10 @@ import { EnvelopeSimple } from "@phosphor-icons/react/dist/csr/EnvelopeSimple";
 import { FileText } from "@phosphor-icons/react/dist/csr/FileText";
 import { Handshake } from "@phosphor-icons/react/dist/csr/Handshake";
 import { UsersThree } from "@phosphor-icons/react/dist/csr/UsersThree";
+import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import type React from "react";
 import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { ManualDepth, ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
@@ -34,9 +36,9 @@ interface RecipientOption {
 
 const RECIPIENTS: RecipientOption[] = [
   { id: "manager", label: "Work", description: "For a manager, teammate, client, or collaborator who needs the useful version.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "partner", label: "Close", description: "For someone who cares about you and wants fewer wrong guesses.", mode: "me", icon: <Handshake size={22} weight="light" /> },
+  { id: "partner", label: "Someone close", description: "For someone who cares about you and wants fewer wrong guesses.", mode: "me", icon: <Handshake size={22} weight="light" /> },
   { id: "talk", label: "Hard conversation", description: "For a note before something you do not want to fumble.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
-  { id: "sync", label: "Us", description: "For two people trying to stop explaining the same thing twice.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "sync", label: "Two of us", description: "For two people trying to stop explaining the same thing twice.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
@@ -75,9 +77,9 @@ export function SwitchboardSetup({ onStart, onManualIntentPreload }: Switchboard
     <aside
       id="onboarding"
       aria-label="Intro setup"
-      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-lg border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
+      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-lg sm:border sm:border-parichay-border sm:bg-parichay-surface py-6 sm:p-3 md:p-3 sm:shadow-sm scroll-mt-24 lg:scroll-mt-32"
     >
-      <div className="rounded-md border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+      <div className="rounded-md sm:border sm:border-parichay-paper-border sm:bg-parichay-paper sm:px-5 sm:py-6 md:px-8 md:py-10 sm:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div className="space-y-8">
           <div className="flex items-center justify-between gap-4">
             <p className="type-meta text-parichay-muted">Step {step + 1} / 3</p>
@@ -215,7 +217,22 @@ function ChoiceCard({
       )}
     >
       <span className="mb-3 flex items-center justify-between gap-4">
-        <span className="type-ui-label">{title}</span>
+        <span className="type-ui-label flex items-center gap-2">
+          {title}
+          <AnimatePresence>
+            {active && (
+              <motion.span
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.5, opacity: 0 }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="text-parichay-accent flex items-center"
+              >
+                <CheckCircle size={16} weight="fill" aria-label="Selected" />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </span>
         <span aria-hidden="true" className={cn("transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1", active ? "text-parichay-accent" : "text-parichay-muted")}>{icon}</span>
       </span>
       <span className={cn(
@@ -239,7 +256,22 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
           : "bg-transparent text-parichay-text ring-1 ring-inset ring-parichay-border hover:bg-parichay-surface-halo-hover hover:ring-parichay-border-strong"
       )}
     >
-      {children}
+      <span className="flex items-center gap-2">
+        {children}
+        <AnimatePresence>
+          {active && (
+            <motion.span
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center"
+            >
+              <CheckCircle size={14} weight="fill" aria-label="Selected" />
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </span>
     </button>
   );
 }

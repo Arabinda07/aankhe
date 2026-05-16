@@ -18,6 +18,14 @@ import { PreviewModeToggle, VisibilityControls } from "./artifact/VisibilityCont
 import { AnswerReview } from "./artifact/AnswerReview";
 import { MobileExportBar } from "./artifact/MobileExportBar";
 import { cn } from "../lib/utils";
+import { lazy, Suspense, useEffect } from "react";
+import { useInstallPrompt } from "../hooks/useInstallPrompt";
+
+const InstallSheet = lazy(() =>
+  import("./InstallSheet").then((module) => ({
+    default: module.InstallSheet,
+  }))
+);
 
 interface ArtifactStudioProps {
   manual: ManualWorkspace;
@@ -33,6 +41,15 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
   const [activeTab, setActiveTab] = useState<ArtifactTab>(defaultArtifactTab);
   const [hasVisitedReview, setHasVisitedReview] = useState(false);
   const [isAnswerReviewOpen, setIsAnswerReviewOpen] = useState(false);
+  const { isStandalone, isDismissed } = useInstallPrompt();
+  const [isInstallSheetOpen, setIsInstallSheetOpen] = useState(false);
+  const [hasShownInstallPrompt, setHasShownInstallPrompt] = useState(false);
+
+  const triggerInstallPrompt = () => {
+    if (isStandalone || isDismissed || hasShownInstallPrompt) return;
+    setHasShownInstallPrompt(true);
+    setTimeout(() => setIsInstallSheetOpen(true), 1500);
+  };
 
   const policy = useMemo(
     () => createArtifactStudioPolicy(workspace, { viewMode, excludedSections }),
@@ -61,9 +78,18 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
 
   const moveToTab = (tab: ArtifactTab) => {
     if (tab === "send" && !hasVisitedReview) return;
-    if (tab === "review") setHasVisitedReview(true);
+    if (tab === "review") {
+      setHasVisitedReview(true);
+      triggerInstallPrompt();
+    }
     setActiveTab(tab);
   };
+
+  useEffect(() => {
+    if (copied || isExporting) {
+      triggerInstallPrompt();
+    }
+  }, [copied, isExporting]);
 
   return (
     <div className="min-w-0 space-y-12 pb-24">
@@ -77,7 +103,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         <p className="type-lead text-parichay-muted">Review what people will see before you send it.</p>
       </div>
 
-      <div className="flex flex-wrap gap-2 rounded-sm border border-parichay-border bg-parichay-control-selected p-1" role="tablist" aria-label="Intro review steps">
+      <nav className="hidden sm:flex flex-wrap gap-2 rounded-sm border border-parichay-border bg-parichay-control-selected p-1" aria-label="Intro review steps">
         <ArtifactTabButton active={activeTab === "preview"} onClick={() => moveToTab("preview")}>
           Preview
         </ArtifactTabButton>
@@ -87,6 +113,15 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         <ArtifactTabButton active={activeTab === "send"} onClick={() => moveToTab("send")} disabled={!hasVisitedReview}>
           Send / Export
         </ArtifactTabButton>
+      </nav>
+
+      <div className="sm:hidden space-y-3">
+        <p className="type-meta text-parichay-muted">
+          Step {activeTab === "preview" ? 1 : activeTab === "review" ? 2 : 3} of 3 —{" "}
+          <span className="text-parichay-heading">
+            {activeTab === "preview" ? "Preview" : activeTab === "review" ? "Review sharing" : "Send / Export"}
+          </span>
+        </p>
       </div>
 
       {activeTab === "preview" && (
@@ -137,7 +172,14 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
               </div>
             )}
           </section>
-          <div className="flex justify-end">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
+            <button
+              type="button"
+              onClick={() => moveToTab("preview")}
+              className="type-ui-label sm:hidden inline-flex min-h-12 items-center justify-center rounded-md border border-parichay-border bg-parichay-surface px-5 text-parichay-text transition-colors hover:bg-parichay-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            >
+              Back to Preview
+            </button>
             <button
               type="button"
               onClick={() => moveToTab("send")}
@@ -153,27 +195,44 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
           <PreviewFrame artifactRef={artifactRef} policy={policy} mode={workspace.mode} />
           <div className="min-w-0 space-y-8 lg:sticky lg:top-28">
-            <ExportControls
-              isExporting={isExporting}
-              viewMode={viewMode}
-              onExportImage={exportAsImage}
-              onPrint={printManual}
-            />
-            <ShareControls
-              storageMode={workspace.storageMode}
-              sharedUrl={policy.sharedUrl}
-              copied={copied}
-              onCopyLink={copyIncludedLink}
-              onCreateLink={() => workspace.setStorageMode("url")}
-            />
+            <div className="hidden space-y-8 sm:block">
+              <ExportControls
+                isExporting={isExporting}
+                viewMode={viewMode}
+                onExportImage={exportAsImage}
+                onPrint={printManual}
+              />
+              <ShareControls
+                storageMode={workspace.storageMode}
+                sharedUrl={policy.sharedUrl}
+                copied={copied}
+                onCopyLink={copyIncludedLink}
+                onCreateLink={() => workspace.setStorageMode("url")}
+              />
+            </div>
             <MobileExportBar
               copied={copied}
               isExporting={isExporting}
               onCopyLink={copyIncludedLink}
               onExportImage={exportAsImage}
             />
+            <div className="sm:hidden pt-4">
+              <button
+                type="button"
+                onClick={() => moveToTab("review")}
+                className="type-ui-label w-full inline-flex min-h-12 items-center justify-center rounded-md border border-parichay-border bg-parichay-surface px-5 text-parichay-text transition-colors hover:bg-parichay-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              >
+                Back to Review
+              </button>
+            </div>
           </div>
         </div>
+      )}
+
+      {isInstallSheetOpen && (
+        <Suspense fallback={null}>
+          <InstallSheet open={isInstallSheetOpen} onOpenChange={setIsInstallSheetOpen} />
+        </Suspense>
       )}
     </div>
   );
@@ -193,8 +252,7 @@ function ArtifactTabButton({
   return (
     <button
       type="button"
-      role="tab"
-      aria-selected={active}
+      aria-current={active ? "step" : undefined}
       disabled={disabled}
       onClick={onClick}
       className={cn(

@@ -16,6 +16,7 @@
  */
 
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { CaretLeft } from "@phosphor-icons/react/dist/csr/CaretLeft";
 import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
 import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
@@ -214,26 +215,28 @@ export function QuestionStep({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2 md:pt-4">
-        {!isFirst && (
+      <div className="flex flex-col-reverse sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2 md:pt-4">
+        <div className="flex w-full sm:w-auto justify-between gap-3 sm:contents">
+          {!isFirst && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="type-ui-label flex-1 sm:flex-none inline-flex min-h-11 items-center justify-center gap-2 px-3 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            >
+              <CaretLeft size={16} weight="light" aria-hidden="true" />
+              Previous
+            </button>
+          )}
           <button
             type="button"
-            onClick={onBack}
-            className="type-ui-label inline-flex min-h-11 items-center gap-2 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            onClick={onNext}
+            className="type-ui-label flex-1 sm:flex-none inline-flex min-h-11 items-center justify-center px-3 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
           >
-            <CaretLeft size={16} weight="light" aria-hidden="true" />
-            Previous question
+            Skip
           </button>
-        )}
-        <button
-          type="button"
-          onClick={onNext}
-          className="type-ui-label min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-        >
-          Skip
-        </button>
+        </div>
         <SoftButton
-          className="ml-auto min-h-11 min-w-36"
+          className="sm:ml-auto min-h-11 w-full sm:w-auto sm:min-w-36"
           onClick={onNext}
           disabled={!showAnswerDetails}
           variant="primary"
@@ -337,8 +340,33 @@ function VisibilityOption({
           : "text-parichay-muted hover:bg-parichay-control-hover hover:text-parichay-text"
       )}
     >
-      {icon}
-      {label}
+      <span className="flex items-center gap-2">
+        {icon}
+        {label}
+        {active && <span className="sr-only"> (Selected)</span>}
+      </span>
+      <AnimatePresence>
+        {active && (
+          <motion.span
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center ml-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 256 256"
+              width="14"
+              height="14"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
+            </svg>
+          </motion.span>
+        )}
+      </AnimatePresence>
     </RadioGroup.Item>
   );
 }

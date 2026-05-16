@@ -47,7 +47,6 @@ export function BottomSheet({
               />
             </Dialog.Overlay>
             <Dialog.Content
-              aria-describedby={description ? undefined : undefined}
               asChild
             >
               <motion.div

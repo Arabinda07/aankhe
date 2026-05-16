@@ -31,10 +31,10 @@ export function Switchboard({
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
             <h1 className="type-serif-title text-parichay-heading lg:max-w-xl">
-              Curate your life story
+              Your story always ready.
             </h1>
             <p className="type-lead max-w-lg text-parichay-muted">
-              Write the stuff people usually miss. Keep private answers private. Share only the version you mean to send.
+              Create a personal intro page for the way you work, communicate, and want to be understood.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export function Switchboard({
               aria-hidden="true"
               className="mt-0.5 shrink-0 text-parichay-muted"
             />
-            <p className="type-caption min-w-0 text-wrap text-parichay-muted">Nothing is stored. Nothing is uploaded. You choose what leaves the page.</p>
+            <p className="type-caption min-w-0 text-wrap text-parichay-muted">No account needed.</p>
           </div>
         </div>
 
