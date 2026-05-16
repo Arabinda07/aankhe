@@ -27,7 +27,7 @@ export function PrivacyPage() {
 
       <section className="px-2 py-12 md:px-8">
         <h2 className="type-reading-heading text-parichay-heading">What can leave the page</h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
           </VisibilityRule>
@@ -42,7 +42,7 @@ export function PrivacyPage() {
 
       <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-reading-heading text-parichay-heading">The promise</h2>
-        <p className="type-lead text-parichay-muted">
+        <p className="type-body text-parichay-muted">
           You decide what goes into the final envelope. We don't add private answers behind your back. The boundary you wrote for yourself stays right where you put it.
         </p>
       </section>
@@ -53,9 +53,9 @@ export function PrivacyPage() {
 export function HowItWorksPage() {
   const useCases = [
     "You are joining a new team and want people to know how to work with you.",
-    "A friend or partner keeps misreading your quiet, your pace, or your tone.",
-    "You are about to have a conversation that would go better with context.",
-    "Someone wants to support you, but you do not want to explain everything from scratch.",
+    "A friend or partner keeps misreading your quiet, pace, or tone.",
+    "A conversation needs context before it gets messy.",
+    "Someone wants to support you, but you do not want to explain it all again.",
   ];
 
   const steps = [
@@ -72,7 +72,7 @@ export function HowItWorksPage() {
     },
     {
       title: "Can I use this for work and personal life?",
-      text: "Yes. Pick the starting point that fits the person reading it. A teammate needs different context than someone close.",
+      text: "Yes. Pick the starting point that fits the person reading it. A teammate may need different context than someone close.",
     },
     {
       title: "Will it tell me who I am?",
@@ -90,11 +90,11 @@ export function HowItWorksPage() {
       title="A clearer way to introduce yourself."
       lead="Parichay helps you make a short intro page for how you work, communicate, and want to be understood."
     >
-      <section className="grid gap-5 py-4 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+      <section className="grid gap-6 py-8 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <h2 className="type-reading-heading text-parichay-heading">What is Parichay?</h2>
         <div className="space-y-4">
-          <p className="type-lead text-parichay-muted">
-            Parichay is a personal onboarding page.
+          <p className="type-body text-parichay-muted">
+            Parichay is a private intro page.
           </p>
           <p className="type-body text-parichay-muted">
             It helps people understand how to work with you, talk to you, or support you. You answer a few guided questions, choose what people can see, and turn the useful parts into a short intro page.
@@ -102,11 +102,11 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="space-y-6 border-t border-parichay-border/60 py-10">
+      <section className="space-y-6 border-t border-parichay-border/60 py-12">
         <h2 className="type-reading-heading text-parichay-heading">Use Parichay when...</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {useCases.map((item) => (
-            <div key={item} className="rounded-md border border-parichay-border bg-parichay-surface px-5 py-5">
+            <div key={item} className="rounded-md border border-parichay-border bg-parichay-surface px-6 py-7">
               <p className="type-body text-parichay-text">{item}</p>
             </div>
           ))}
@@ -131,7 +131,7 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="grid gap-8 border-t border-parichay-border/60 py-10 md:grid-cols-[0.7fr_1.3fr] md:items-start">
+      <section className="grid gap-8 border-t border-parichay-border/60 py-12 md:grid-cols-[0.7fr_1.3fr] md:items-start">
         <div className="space-y-3">
           <h2 className="type-reading-heading text-parichay-heading">How it works</h2>
           <p className="type-body text-parichay-muted">
@@ -148,7 +148,7 @@ export function HowItWorksPage() {
         </ol>
       </section>
 
-      <section className="grid gap-6 border-t border-parichay-border/60 py-10 md:grid-cols-2">
+      <section className="grid gap-4 border-t border-parichay-border/60 py-12 md:grid-cols-2">
         <InfoCard icon={<Eye size={24} weight="light" />} title="Is this a personality test?">
           No. Parichay does not score you, sort you, or tell you what type of person you are. It turns your own words into an intro page that is easier for someone else to read.
         </InfoCard>
@@ -157,10 +157,10 @@ export function HowItWorksPage() {
         </InfoCard>
       </section>
 
-      <section className="grid gap-5 border-t border-parichay-border/60 py-10 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+      <section className="grid gap-6 border-t border-parichay-border/60 py-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <h2 className="type-reading-heading text-parichay-heading">Privacy in plain language</h2>
         <div className="space-y-4">
-          <p className="type-lead text-parichay-muted">
+          <p className="type-body text-parichay-muted">
             No accounts. No database. Your answers stay in this browser unless you create a link or export.
           </p>
           <p className="type-body text-parichay-muted">
@@ -169,14 +169,14 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="border-t border-parichay-border/60 py-10">
+      <section className="border-t border-parichay-border/60 py-12">
         <div className="mb-8 max-w-2xl space-y-3">
           <h2 className="type-reading-heading text-parichay-heading">Share / Private / Hide</h2>
           <p className="type-body text-parichay-muted">
             Only answers marked Share are included in links and exports. Private answers stay in this browser. Hidden answers are omitted from the intro page.
           </p>
         </div>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
           <VisibilityRule icon={<Eye size={22} weight="light" />} title="Share">
             Included in the intro page, link, and export.
           </VisibilityRule>
@@ -189,7 +189,7 @@ export function HowItWorksPage() {
         </div>
       </section>
 
-      <section className="grid gap-8 border-t border-parichay-border/60 py-10 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+      <section className="grid gap-8 border-t border-parichay-border/60 py-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <div className="space-y-2">
           <h2 className="type-reading-heading text-parichay-heading">Modes and templates</h2>
           <p className="type-body text-parichay-muted">
@@ -213,7 +213,7 @@ export function HowItWorksPage() {
         {commonQuestions.map((item) => (
           <div key={item.title} className="grid gap-3 py-8 md:grid-cols-[0.8fr_1.2fr]">
             <h2 className="type-reading-heading text-parichay-heading">{item.title}</h2>
-            <p className="type-lead text-parichay-muted">{item.text}</p>
+            <p className="type-body text-parichay-muted">{item.text}</p>
           </div>
         ))}
       </section>
@@ -240,7 +240,7 @@ function InfoShell({
           <h1 className="type-serif-title-page text-parichay-heading">{title}</h1>
           <p className="type-lead text-parichay-muted">{lead}</p>
         </div>
-        <div className="space-y-10">{children}</div>
+        <div className="space-y-12">{children}</div>
       </section>
     </div>
   );
@@ -256,10 +256,10 @@ function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="px-2 py-6 md:px-0 md:py-8">
+    <section className="rounded-md border border-parichay-border bg-parichay-surface px-6 py-7">
       <div className="mb-6 text-parichay-muted">{icon}</div>
       <h2 className="type-reading-heading text-parichay-heading">{title}</h2>
-      <p className="type-lead mt-4 text-parichay-muted">{children}</p>
+      <p className="type-body mt-4 text-parichay-muted">{children}</p>
     </section>
   );
 }
@@ -274,7 +274,7 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="py-2">
+    <div className="rounded-md border border-parichay-border bg-parichay-surface px-5 py-5">
       <div className="mb-4 text-parichay-muted">{icon}</div>
       <h3 className="type-panel-title text-parichay-heading">{title}</h3>
       <p className="type-caption mt-2 text-parichay-muted">{children}</p>

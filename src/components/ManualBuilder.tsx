@@ -15,7 +15,6 @@ import { CaretLeft } from '@phosphor-icons/react/dist/csr/CaretLeft';
 import { FileText } from '@phosphor-icons/react/dist/csr/FileText';
 import { answerValueIsPresent } from '../lib/answerUiPolicy';
 import { SoftButton } from './SoftButton';
-import { EmptyState } from './EmptyState';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useSwipeBack } from '../hooks/useSwipeBack';
 
@@ -124,10 +123,10 @@ export function ManualBuilder({
           <button
             onClick={onBack}
             className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
-            aria-label="Back"
+            aria-label="Exit intro"
           >
             <CaretLeft size={20} weight="light" />
-            <span className="hidden sm:inline">Back</span>
+            <span className="hidden sm:inline">Exit intro</span>
           </button>
 
           {view === "build" && controller && (
@@ -222,9 +221,6 @@ export function ManualBuilder({
                         <QuestionStep {...controller.getStepProps()} />
                       </motion.div>
                     </AnimatePresence>
-                    {!hasManualContent && (
-                      <EmptyState variant="first-run" />
-                    )}
                   </div>
                 )}
               </div>

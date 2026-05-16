@@ -16,6 +16,7 @@
  */
 
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { CaretLeft } from "@phosphor-icons/react/dist/csr/CaretLeft";
 import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
 import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
 import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
@@ -209,9 +210,10 @@ export function QuestionStep({
           <button
             type="button"
             onClick={onBack}
-            className="type-ui-label min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            className="type-ui-label inline-flex min-h-11 items-center gap-2 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
           >
-            Back
+            <CaretLeft size={16} weight="light" aria-hidden="true" />
+            Previous question
           </button>
         )}
         <button

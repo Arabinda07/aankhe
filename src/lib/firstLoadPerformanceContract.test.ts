@@ -32,8 +32,16 @@ test("manual preload remains tied to real start intent", () => {
   assert.match(switchboard, /onPointerEnter=\{onManualIntentPreload\}/);
   assert.match(switchboard, /onTouchStart=\{onManualIntentPreload\}/);
   assert.match(switchboardSetup, /onManualIntentPreload\(\);[\s\S]*onStart\(recipient\.mode, onboarding\);/);
-  assert.match(boot, /import\("\.\/lib\/manualRoutePreload"\)/);
-  assert.match(boot, /bootApp\(\)\.then\(preloadManualAfterReadyAndScroll\)/);
+  assert.doesNotMatch(boot, /manualRoutePreload/);
+  assert.doesNotMatch(boot, /preloadManualAfterReadyAndScroll/);
+});
+
+test("home boot is immediate and does not depend on a static shell", () => {
+  assert.match(boot, /import "\.\/main"/);
+  assert.doesNotMatch(boot, /shouldBootReactImmediately/);
+  assert.doesNotMatch(boot, /bindHomeBoot/);
+  assert.doesNotMatch(boot, /setTimeout/);
+  assert.doesNotMatch(boot, /data-boot-intent/);
 });
 
 test("home setup has no first-paint entrance animation", () => {
@@ -44,6 +52,8 @@ test("home setup has no first-paint entrance animation", () => {
 
 test("service worker registration stays off the critical head path", () => {
   assert.match(viteConfig, /injectRegister:\s*false/);
+  assert.doesNotMatch(viteConfig, /asyncStylesheetPlugin/);
+  assert.doesNotMatch(viteConfig, /rel="preload"[\s\S]*as="style"/);
   assert.match(serviceWorkerRegistration, /import\.meta[\s\S]*env\?\.[\s\S]*PROD/);
   assert.match(serviceWorkerRegistration, /parichay:app-ready/);
   assert.match(serviceWorkerRegistration, /window\.addEventListener\("load"/);

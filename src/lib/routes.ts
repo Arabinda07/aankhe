@@ -10,25 +10,6 @@ export const MANUAL_PATHS = {
   us: `${MANUAL_PATH_PREFIX}us`,
 } as const;
 
-const INFO_PAGE_PATHS = new Set([HOW_IT_WORKS_PATH, PRIVACY_PATH]);
-
-interface RouteLocation {
-  pathname: string;
-  hash: string;
-}
-
-export function hasSharedStateHash(hash: string) {
-  return hash.startsWith("#s=") || hash.includes("s=");
-}
-
 export function manualModePath(mode: string) {
   return `${MANUAL_PATH_PREFIX}${mode}`;
-}
-
-export function shouldBootReactImmediately(location: RouteLocation) {
-  return (
-    location.pathname.startsWith(MANUAL_PATH_PREFIX) ||
-    INFO_PAGE_PATHS.has(location.pathname) ||
-    hasSharedStateHash(location.hash)
-  );
 }

@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
         aria-label={`Theme: ${preference}`}
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
       >
         <ActiveIcon size={20} weight="light" />
       </DropdownMenu.Trigger>

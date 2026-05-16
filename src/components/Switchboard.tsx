@@ -31,10 +31,10 @@ export function Switchboard({
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
             <h1 className="type-serif-title text-parichay-heading lg:max-w-xl">
-              Curate Your Life Story
+              Curate your life story
             </h1>
             <p className="type-lead max-w-lg text-parichay-muted">
-              Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
+              Write the stuff people usually miss. Keep private answers private. Share only the version you mean to send.
             </p>
           </div>
 

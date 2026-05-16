@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Switchboard } from './components/Switchboard';
@@ -42,7 +42,7 @@ const SiteFooter = lazy(() =>
 );
 
 function useAppVisualReadySignal() {
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (document.documentElement.dataset.appVisualReady === "true") return;
 
     let firstFrame = 0;
@@ -50,13 +50,7 @@ function useAppVisualReadySignal() {
 
     firstFrame = window.requestAnimationFrame(() => {
       secondFrame = window.requestAnimationFrame(() => {
-        const root = document.getElementById("root");
-        const shell = document.getElementById("initial-shell");
-
         document.documentElement.dataset.appVisualReady = "true";
-        root?.removeAttribute("aria-hidden");
-        root?.removeAttribute("inert");
-        shell?.setAttribute("aria-hidden", "true");
         window.dispatchEvent(new CustomEvent("parichay:app-ready"));
       });
     });

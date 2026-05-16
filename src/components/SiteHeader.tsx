@@ -65,7 +65,7 @@ export function SiteHeader() {
             </NavLink>
             <Link
               to="/#onboarding"
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control px-3 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-sm px-2 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Create intro
             </Link>
@@ -121,9 +121,9 @@ function ThemeSwitcherFallback({ onLoad }: { onLoad: () => void }) {
       onClick={onLoad}
       onFocus={onLoad}
       onPointerEnter={onLoad}
-      className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+      className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
     >
-      <span aria-hidden="true" className="block h-4 w-4 rounded-full border border-current" />
+      <span aria-hidden="true" className="block h-4 w-4 rounded-sm border border-current" />
     </button>
   );
 }
@@ -131,6 +131,6 @@ function ThemeSwitcherFallback({ onLoad }: { onLoad: () => void }) {
 function infoNavClassName({ isActive }: { isActive: boolean }) {
   return cn(
     "min-h-11 shrink-0 inline-flex items-center justify-center px-2 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
-    isActive ? "text-parichay-text underline decoration-parichay-accent/45 underline-offset-8" : "text-parichay-muted"
+    isActive ? "font-extrabold text-parichay-text" : "text-parichay-muted"
   );
 }

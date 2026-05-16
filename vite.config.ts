@@ -9,7 +9,6 @@ export default defineConfig(() => {
     plugins: [
       react(),
       tailwindcss(),
-      asyncStylesheetPlugin(),
       VitePWA({
         registerType: 'autoUpdate',
         injectRegister: false,
@@ -48,18 +47,3 @@ export default defineConfig(() => {
     },
   };
 });
-
-function asyncStylesheetPlugin() {
-  return {
-    name: 'parichay-async-stylesheet',
-    transformIndexHtml: {
-      order: 'post' as const,
-      handler(html: string) {
-        return html.replace(
-          /<link rel="stylesheet" crossorigin href="([^"]+)">/g,
-          `<link rel="preload" crossorigin href="$1" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" crossorigin href="$1"></noscript>`
-        );
-      },
-    },
-  };
-}

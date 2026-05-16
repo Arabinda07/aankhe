@@ -33,10 +33,10 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "Someone at work", description: "A manager, teammate, client, or collaborator who needs the quick version.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "partner", label: "Someone close", description: "A partner, friend, or family member who wants to understand you better.", mode: "me", icon: <Handshake size={22} weight="light" /> },
-  { id: "talk", label: "A specific conversation", description: "A short note before something sensitive or hard to say.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
-  { id: "sync", label: "A shared relationship", description: "A page for getting on the same page without over-explaining.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "manager", label: "Work", description: "For a manager, teammate, client, or collaborator who needs the useful version.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
+  { id: "partner", label: "Close", description: "For someone who cares about you and wants fewer wrong guesses.", mode: "me", icon: <Handshake size={22} weight="light" /> },
+  { id: "talk", label: "Hard conversation", description: "For a note before something you do not want to fumble.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
+  { id: "sync", label: "Us", description: "For two people trying to stop explaining the same thing twice.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
