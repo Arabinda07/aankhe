@@ -122,6 +122,7 @@ export function QuestionStep({
         <button
           type="button"
           onClick={() => handleSensitiveSkip("doesNotFit")}
+          aria-describedby={questionLabelId}
           className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           None of these fit
@@ -129,6 +130,7 @@ export function QuestionStep({
         <button
           type="button"
           onClick={() => handleSensitiveSkip("notReady")}
+          aria-describedby={questionLabelId}
           className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           Not ready to answer this
@@ -158,7 +160,7 @@ export function QuestionStep({
                 onChange={(event) => onNoteChange(event.target.value)}
                 rows={2}
                 placeholder="Add context only if this answer needs your words."
-                className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
+                className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-all duration-200 ease-[var(--ease-out-expo)] focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
               />
             </div>
           ) : (
@@ -198,7 +200,7 @@ export function QuestionStep({
                   onVisibilityChange={onVisibilityChange}
                   describedBy={visibilityDescriptionId}
                 />
-                <details className="group rounded-sm border border-parichay-border bg-parichay-sandal-soft px-3 py-2">
+                <details className="group rounded-sm border border-parichay-border bg-parichay-sandal-soft px-3 py-2 transition-all duration-200 ease-[var(--ease-out-expo)]">
                   <summary className="type-caption min-h-11 cursor-pointer list-none py-2 text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2">
                     What this means
                   </summary>
@@ -281,19 +283,31 @@ function VisibilityControl({
         <VisibilityOption
           value="share"
           active={visibility === "share"}
-          icon={<Eye size={16} weight={visibility === "share" ? "fill" : "light"} />}
+          icon={
+            <span className={cn("transition-transform duration-200 ease-[var(--ease-out-expo)]", visibility === "share" ? "scale-110" : "scale-100")}>
+              <Eye size={16} weight={visibility === "share" ? "fill" : "light"} />
+            </span>
+          }
           label="Share"
         />
         <VisibilityOption
           value="private"
           active={visibility === "private"}
-          icon={<LockKey size={16} weight={visibility === "private" ? "fill" : "light"} />}
+          icon={
+            <span className={cn("transition-transform duration-200 ease-[var(--ease-out-expo)]", visibility === "private" ? "scale-110" : "scale-100")}>
+              <LockKey size={16} weight={visibility === "private" ? "fill" : "light"} />
+            </span>
+          }
           label="Private"
         />
         <VisibilityOption
           value="hide"
           active={visibility === "hide"}
-          icon={<EyeSlash size={16} weight={visibility === "hide" ? "fill" : "light"} />}
+          icon={
+            <span className={cn("transition-transform duration-200 ease-[var(--ease-out-expo)]", visibility === "hide" ? "scale-110" : "scale-100")}>
+              <EyeSlash size={16} weight={visibility === "hide" ? "fill" : "light"} />
+            </span>
+          }
           label="Hide"
         />
       </RadioGroup.Root>

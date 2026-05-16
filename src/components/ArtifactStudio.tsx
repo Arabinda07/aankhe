@@ -125,13 +125,14 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
               type="button"
               onClick={() => setIsAnswerReviewOpen((current) => !current)}
               aria-expanded={isAnswerReviewOpen}
+              aria-controls="answer-review-panel"
               className="type-ui-label flex min-h-11 w-full items-center justify-between gap-4 text-left text-parichay-heading transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
               Review individual answers
               <span className="text-parichay-muted">{isAnswerReviewOpen ? "Close" : "Open"}</span>
             </button>
             {isAnswerReviewOpen && (
-              <div className="mt-5">
+              <div id="answer-review-panel" className="mt-5">
                 <AnswerReview workspace={workspace} />
               </div>
             )}

@@ -31,10 +31,10 @@ export function ScaleInput({ question, value, onChange, labelledBy, describedBy 
           <label
             key={scaleValue}
             className={cn(
-              "min-h-20 cursor-pointer rounded-sm border px-4 py-3 text-center transition-all",
+              "min-h-20 cursor-pointer rounded-sm border px-4 py-3 text-center transition-[border-color,background-color,color,box-shadow,transform] duration-200 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
               "focus-within:outline-none focus-within:ring-2 focus-within:ring-parichay-focus focus-within:ring-offset-2",
               checked
-                ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
+                ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)]"
                 : "border-parichay-paper-border bg-parichay-paper text-parichay-text hover:border-parichay-border-strong hover:bg-parichay-paper-muted"
             )}
           >

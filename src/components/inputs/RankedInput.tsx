@@ -88,7 +88,7 @@ function RankButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-parichay-border bg-parichay-control text-parichay-text transition-colors hover:bg-parichay-control-hover disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+      className="flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-parichay-border bg-parichay-control text-parichay-text transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-[var(--ease-out-expo)] hover:bg-parichay-control-hover hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
     >
       {icon}
     </button>
