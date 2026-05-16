@@ -31,10 +31,10 @@ export function Switchboard({
         <div className="flex w-full min-w-0 flex-col space-y-10 lg:space-y-12 lg:sticky lg:top-32 lg:pt-4">
           <div className="space-y-6 md:space-y-8">
             <h1 className="type-serif-title text-parichay-heading lg:max-w-xl">
-              Create a private intro page before you need one.
+              Curate Your Life Story
             </h1>
             <p className="type-lead max-w-lg text-parichay-muted">
-              Explain how you work, communicate, and want to be understood. Answer a few guided questions, choose what people can see, and send a short intro when it helps.
+              Explaining yourself to new people gets old. Write down your story, keep the private parts to yourself, then share the sealed copy.
             </p>
           </div>
 
