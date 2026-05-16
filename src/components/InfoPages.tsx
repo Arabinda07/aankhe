@@ -51,45 +51,92 @@ export function PrivacyPage() {
 }
 
 export function HowItWorksPage() {
-  const items = [
+  const useCases = [
+    "A new manager or teammate needs the quick version of how you work.",
+    "Someone close keeps misreading your silence, pace, or tone.",
+    "A conversation matters, and you want to say things clearly before you are in it.",
+    "You want a short intro page ready to send without making an account.",
+  ];
+
+  const steps = [
+    "Choose who it's for.",
+    "Answer guided questions.",
+    "Review what gets shared.",
+    "Send your intro.",
+  ];
+
+  const questions = [
     {
-      title: "Why actually use this?",
-      text: "Because repeating yourself gets old. New manager, new partner, friend who reads your silence wrong, same problem: they need context, and you don't want to rebuild it from scratch every time.",
+      title: "What is Parichay for?",
+      text: "It helps you make a short intro page about how you work, communicate, and want to be understood.",
     },
     {
-      title: "How do I use it?",
-      text: "Pick a manual. Answer what fits. Mark each answer Share, Private, or Hide. The honest draft can stay local; the cleaner version becomes the link.",
+      title: "What stays private?",
+      text: "Private answers stay in your tab. Omitted answers are left out. Only included answers can appear in a link or export.",
     },
     {
-      title: "Is this actually private?",
-      text: "Yes. Nothing saves to a server. There's no account and no email. Close the tab and unsaved answers vanish. To keep a manual, generate a link or export it before you leave.",
-    },
-    {
-      title: "What do the buttons do?",
-      text: "'Share' goes into the final link or export. 'Private' stays visible only in your tab. 'Hide' leaves it out. You can change your mind before sending.",
+      title: "Do I need an account?",
+      text: "No. Nothing is stored. Nothing is uploaded. You choose what leaves the page.",
     },
   ];
 
   return (
     <InfoShell
-      eyebrow="Why & How"
-      title="Why are we doing this?"
-      lead="Repeating yourself is exhausting. Parichay keeps the messy draft private and the finished version shareable."
+      eyebrow="How it works"
+      title="Make the intro before the moment gets awkward."
+      lead="Parichay helps you explain the important stuff once, then decide what is safe to send."
     >
-      <div className="divide-y divide-parichay-border/60">
-        {items.map((item, index) => (
-          <section
-            key={item.title}
-            className="grid gap-6 py-12 md:grid-cols-[7rem_minmax(0,1fr)] md:items-start md:py-16"
-          >
-            <span className="type-meta text-parichay-muted md:pt-2">{String(index + 1).padStart(2, "0")}</span>
-            <div className="max-w-3xl space-y-3">
-              <h2 className="type-reading-heading text-parichay-heading">{item.title}</h2>
-              <p className="type-lead whitespace-pre-wrap text-parichay-muted">{item.text}</p>
+      <section className="space-y-6 py-4">
+        <h2 className="type-reading-heading text-parichay-heading">Use Parichay when...</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {useCases.map((item) => (
+            <div key={item} className="rounded-md border border-parichay-border bg-parichay-surface px-5 py-5">
+              <p className="type-body text-parichay-text">{item}</p>
             </div>
-          </section>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-8 py-10 md:grid-cols-[0.7fr_1.3fr] md:items-start">
+        <div className="space-y-3">
+          <h2 className="type-reading-heading text-parichay-heading">How it works</h2>
+          <p className="type-body text-parichay-muted">
+            A guided draft becomes a short intro page. You stay in control the whole time.
+          </p>
+        </div>
+        <ol className="grid gap-3">
+          {steps.map((item, index) => (
+            <li key={item} className="grid grid-cols-[3rem_1fr] items-center gap-4 rounded-md border border-parichay-border bg-parichay-surface px-4 py-4">
+              <span className="type-meta text-parichay-muted">{String(index + 1).padStart(2, "0")}</span>
+              <span className="type-body font-semibold text-parichay-heading">{item}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="grid gap-8 rounded-md border border-parichay-paper-border bg-parichay-paper px-6 py-7 md:grid-cols-[0.8fr_1.2fr] md:px-8 md:py-9">
+        <div className="space-y-2">
+          <p className="type-eyebrow text-parichay-sandal">Example intro</p>
+          <h2 className="type-reading-heading text-parichay-heading">What people see</h2>
+        </div>
+        <div className="space-y-4">
+          <p className="type-artifact-prose text-parichay-text">
+            I do my clearest thinking in writing. If something feels urgent, send me the context first and I will come back with a better answer.
+          </p>
+          <p className="type-caption text-parichay-muted">
+            Included answers only. Private notes stay out.
+          </p>
+        </div>
+      </section>
+
+      <section className="divide-y divide-parichay-border/60 py-6">
+        {questions.map((item) => (
+          <div key={item.title} className="grid gap-3 py-8 md:grid-cols-[0.8fr_1.2fr]">
+            <h2 className="type-reading-heading text-parichay-heading">{item.title}</h2>
+            <p className="type-lead text-parichay-muted">{item.text}</p>
+          </div>
         ))}
-      </div>
+      </section>
     </InfoShell>
   );
 }

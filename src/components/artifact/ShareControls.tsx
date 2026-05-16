@@ -100,7 +100,7 @@ export function ShareControls({
                 >
                   <QRCodeSVG value={sharedUrl} size={200} level="M" />
                   <p className="type-caption max-w-56 text-center text-parichay-muted">
-                    Scan to open this manual on another device.
+                    Scan to open this intro on another device.
                   </p>
                   <Popover.Arrow className="fill-parichay-paper" />
                 </Popover.Content>

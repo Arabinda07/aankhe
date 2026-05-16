@@ -36,7 +36,7 @@ export function choiceClassName(checked: boolean, focusMode: "focus-within" | "f
     : "focus-within:outline-none focus-within:ring-2 focus-within:ring-parichay-focus focus-within:ring-offset-2";
   const color = checked
     ? "border-parichay-accent bg-parichay-accent-soft text-parichay-accent-dark"
-    : "border-parichay-paper-border bg-parichay-paper text-parichay-text hover:border-parichay-border-strong hover:bg-parichay-paper-muted";
+    : "border-parichay-paper-border bg-parichay-paper/70 text-parichay-text hover:border-parichay-border-strong hover:bg-parichay-paper-muted";
 
   return `${base} ${focusRing} ${color}`;
 }

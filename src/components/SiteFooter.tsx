@@ -13,10 +13,9 @@ export function SiteFooter() {
           className="type-footer-nav flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-2 text-parichay-footer-text"
         >
           <FooterLink to="/" className="hidden sm:inline-flex">Home</FooterLink>
-          <FooterLink to="/how-it-works" className="hidden sm:inline-flex">FAQ</FooterLink>
+          <FooterLink to="/how-it-works" className="hidden sm:inline-flex">How it works</FooterLink>
           <FooterLink to="/privacy">Privacy</FooterLink>
-          <FooterLink to="/manual/me" className="hidden sm:inline-flex">Me</FooterLink>
-          <FooterLink to="/manual/work" className="hidden sm:inline-flex">Work</FooterLink>
+          <FooterLink to="/#onboarding" className="hidden sm:inline-flex">Create intro</FooterLink>
         </nav>
 
         <p className="type-footer-nav text-center text-parichay-footer-text-strong lg:text-right">

@@ -47,7 +47,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-parichay-heading">Something went wrong</h2>
               <p className="type-caption text-parichay-muted">
-                We encountered an unexpected error while composing your manual.
+                Something broke while putting your intro together.
                 Your data in the URL might be corrupted, or memory state failed.
               </p>
             </div>

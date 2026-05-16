@@ -3,20 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { ModeConfig, Question } from "../lib/schemaTypes";
 import { useStepNavigation } from "./useStepNavigation";
 import { ManualWorkspace } from "./useManualState";
-import { getAnswerComponentForQuestion } from "../lib/answerUiPolicy";
-
-/** Single-select components that should auto-advance after choosing. */
-const AUTO_ADVANCE_COMPONENTS = new Set([
-  "radioCards",
-  "pairedChoice",
-  "segmentedTriState",
-  "labeledScale",
-  "nativeSelect",
-]);
 
 export function useQuestionController(
   config: ModeConfig,
@@ -32,31 +22,15 @@ export function useQuestionController(
   const section = config.sections.find((s) => s.id === currentQuestion.sectionId);
   const sectionIndex = config.sections.findIndex((s) => s.id === section?.id);
 
-  const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout>>();
-
-  useEffect(() => {
-    return () => {
-      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
-    };
-  }, []);
-
   const handleAnswerChange = useCallback(
     (question: Question, value: string | string[] | number) => {
       workspace.updateAnswer(question.id, value);
-
-      const component = getAnswerComponentForQuestion(question);
-      if (AUTO_ADVANCE_COMPONENTS.has(component)) {
-        if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
-        autoAdvanceTimer.current = setTimeout(() => next(), 350);
-      }
     },
-    [workspace, next]
+    [workspace]
   );
 
   const handleSensitiveSkip = useCallback(
     (question: Question, action: { shouldClearAnswer: boolean, visibility: any }) => {
-      if (autoAdvanceTimer.current) clearTimeout(autoAdvanceTimer.current);
-      
       if (action.shouldClearAnswer) {
         workspace.clearAnswer(question.id);
         workspace.updateAnswerNote(question.id, "");

@@ -9,7 +9,6 @@ import { ChatCenteredText } from "@phosphor-icons/react/dist/csr/ChatCenteredTex
 import { EnvelopeSimple } from "@phosphor-icons/react/dist/csr/EnvelopeSimple";
 import { FileText } from "@phosphor-icons/react/dist/csr/FileText";
 import { Handshake } from "@phosphor-icons/react/dist/csr/Handshake";
-import { User } from "@phosphor-icons/react/dist/csr/User";
 import { UsersThree } from "@phosphor-icons/react/dist/csr/UsersThree";
 import type React from "react";
 import { useMemo, useState } from "react";
@@ -23,6 +22,7 @@ interface SwitchboardSetupProps {
 }
 
 type RecipientId = "manager" | "teammate" | "partner" | "friend" | "talk" | "self" | "sync";
+type SetupStep = 0 | 1 | 2;
 
 interface RecipientOption {
   id: RecipientId;
@@ -33,34 +33,32 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "Manager", description: "How you work, focus, and handle pressure.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "teammate", label: "Teammate", description: "Collaboration rhythm, handoffs, and what helps work move.", mode: "work", icon: <UsersThree size={22} weight="light" /> },
-  { id: "partner", label: "Partner", description: "Care, boundaries, and what tends to get misread.", mode: "me", icon: <Handshake size={22} weight="light" /> },
-  { id: "friend", label: "Friend", description: "What support looks like when guessing is getting old.", mode: "me", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "talk", label: "Difficult talk", description: "A small brief for a conversation you keep putting off.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
-  { id: "self", label: "Myself", description: "A private place to get your thoughts out first.", mode: "me", icon: <User size={22} weight="light" /> },
-  { id: "sync", label: "Shared note", description: "A note for getting on the same page without circling it.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "manager", label: "Someone at work", description: "A manager, teammate, client, or collaborator who needs the quick version.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
+  { id: "partner", label: "Someone close", description: "A partner, friend, or family member who wants to understand you better.", mode: "me", icon: <Handshake size={22} weight="light" /> },
+  { id: "talk", label: "A specific conversation", description: "A short note before something sensitive or hard to say.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
+  { id: "sync", label: "A shared relationship", description: "A page for getting on the same page without over-explaining.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
-  "how I actually communicate",
-  "what happens when I'm stressed",
-  "how I fight",
+  "how I communicate",
+  "how I work best",
+  "what I need when stressed",
   "how I show care",
-  "how I actually work",
-  "what I won't ask for",
+  "what gets misread",
+  "what helps things go better",
 ];
 
 const DEPTHS: Array<{ id: ManualDepth; label: string; description: string }> = [
-  { id: "note", label: "5-minute note", description: "Just the essentials for a quick sync." },
-  { id: "manual", label: "10-minute manual", description: "Enough context to be useful." },
-  { id: "deep", label: "Deeper manual", description: "The full version. Go slowly." },
+  { id: "note", label: "Quick intro", description: "Just the essentials for a fast read." },
+  { id: "manual", label: "Standard intro", description: "Enough context to be useful without making it a project." },
+  { id: "deep", label: "Deeper intro", description: "More room for care, context, and edge cases." },
 ];
 
 export function SwitchboardSetup({ onStart, onManualIntentPreload }: SwitchboardSetupProps) {
   const [recipientId, setRecipientId] = useState<RecipientId>("manager");
   const [misunderstanding, setMisunderstanding] = useState(MISREAD_TOPICS[0]);
   const [depth, setDepth] = useState<ManualDepth>("manual");
+  const [step, setStep] = useState<SetupStep>(0);
 
   const recipient = useMemo(
     () => RECIPIENTS.find((item) => item.id === recipientId) || RECIPIENTS[0],
@@ -76,29 +74,46 @@ export function SwitchboardSetup({ onStart, onManualIntentPreload }: Switchboard
   return (
     <aside
       id="onboarding"
-      aria-label="Manual setup"
-      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-[2rem] border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
+      aria-label="Intro setup"
+      className="w-full min-w-0 max-w-[600px] justify-self-start sm:justify-self-center lg:justify-self-end rounded-lg border border-parichay-border bg-parichay-surface p-2 sm:p-3 md:p-3 shadow-sm scroll-mt-24 lg:scroll-mt-32"
     >
-      <div className="rounded-[calc(2rem-0.75rem)] border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-        <div className="space-y-12">
-          <ChoiceGroup title="Who should understand you better">
-            <div className="flex flex-col gap-2 sm:grid sm:grid-cols-2 sm:gap-3">
-              {RECIPIENTS.map((item, index) => (
-                <div key={item.id} className={cn(index === 6 ? "sm:col-span-2" : "")}>
-                  <ChoiceCard
-                    active={recipientId === item.id}
-                    title={item.label}
-                    description={item.description}
-                    icon={item.icon}
-                    onClick={() => setRecipientId(item.id)}
-                  />
-                </div>
+      <div className="rounded-md border border-parichay-paper-border bg-parichay-paper px-5 py-6 md:px-8 md:py-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+        <div className="space-y-8">
+          <div className="flex items-center justify-between gap-4">
+            <p className="type-meta text-parichay-muted">Step {step + 1} / 3</p>
+            <div className="flex gap-1" aria-hidden="true">
+              {[0, 1, 2].map((item) => (
+                <span
+                  key={item}
+                  className={cn(
+                    "block h-1.5 w-8 rounded-[3px]",
+                    item <= step ? "bg-parichay-accent" : "bg-parichay-surface-soft"
+                  )}
+                />
               ))}
             </div>
-          </ChoiceGroup>
+          </div>
 
-          <div className="space-y-10">
-            <ChoiceGroup title="What keeps getting misread" variant="secondary">
+          {step === 0 && (
+            <ChoiceGroup title="Who is this for?">
+              <div className="grid gap-3 sm:grid-cols-2">
+                {RECIPIENTS.map((item) => (
+                  <div key={item.id}>
+                    <ChoiceCard
+                      active={recipientId === item.id}
+                      title={item.label}
+                      description={item.description}
+                      icon={item.icon}
+                      onClick={() => setRecipientId(item.id)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </ChoiceGroup>
+          )}
+
+          {step === 1 && (
+            <ChoiceGroup title="What should they understand?">
               <div className="flex flex-wrap gap-3">
                 {MISREAD_TOPICS.map((item) => (
                   <span key={item}>
@@ -109,8 +124,10 @@ export function SwitchboardSetup({ onStart, onManualIntentPreload }: Switchboard
                 ))}
               </div>
             </ChoiceGroup>
+          )}
 
-            <ChoiceGroup title="How much do you want to say" variant="secondary">
+          {step === 2 && (
+            <ChoiceGroup title="How long should it be?">
               <div className="grid gap-3">
                 {DEPTHS.map((item) => (
                   <div key={item.id}>
@@ -125,36 +142,48 @@ export function SwitchboardSetup({ onStart, onManualIntentPreload }: Switchboard
                 ))}
               </div>
             </ChoiceGroup>
-          </div>
+          )}
 
-          <SoftButton
-            size="md"
-            onClick={() => {
-              onManualIntentPreload();
-              onStart(recipient.mode, onboarding);
-            }}
-            onFocus={onManualIntentPreload}
-            onPointerEnter={onManualIntentPreload}
-            onTouchStart={onManualIntentPreload}
-            icon={<ArrowRight size={16} />}
-            className="w-full"
-          >
-            {ctaTextForRecipient(recipientId)}
-          </SoftButton>
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            {step > 0 && (
+              <button
+                type="button"
+                onClick={() => setStep((current) => Math.max(0, current - 1) as SetupStep)}
+                className="type-ui-label min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              >
+                Back
+              </button>
+            )}
+            <SoftButton
+              size="md"
+              onClick={() => {
+                if (step < 2) {
+                  setStep((current) => Math.min(2, current + 1) as SetupStep);
+                  return;
+                }
+
+                onManualIntentPreload();
+                onStart(recipient.mode, onboarding);
+              }}
+              onFocus={onManualIntentPreload}
+              onPointerEnter={onManualIntentPreload}
+              onTouchStart={onManualIntentPreload}
+              icon={<ArrowRight size={16} />}
+              className="ml-auto min-w-44"
+            >
+              {step < 2 ? "Continue" : "Start the questions"}
+            </SoftButton>
+          </div>
         </div>
       </div>
     </aside>
   );
 }
 
-function ChoiceGroup({ title, children, variant = "primary" }: { title: string; children: React.ReactNode; variant?: "primary" | "secondary" }) {
+function ChoiceGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-5">
-      <h2 className={cn(
-        variant === "primary"
-          ? "type-panel-title text-parichay-heading"
-          : "type-eyebrow text-parichay-heading"
-      )}>{title}</h2>
+      <h2 className="type-panel-title text-parichay-heading">{title}</h2>
       {children}
     </section>
   );
@@ -182,7 +211,7 @@ function ChoiceCard({
         "group h-full min-h-24 w-full rounded-md p-4 text-left transition-all duration-300 ease-[var(--ease-out-expo)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2",
         active
           ? "bg-parichay-accent-soft text-parichay-accent-text ring-1 ring-inset ring-parichay-accent/20"
-          : "bg-transparent text-parichay-text hover:bg-parichay-surface-halo-hover ring-1 ring-inset ring-transparent hover:ring-parichay-border"
+          : "bg-parichay-paper-muted/50 text-parichay-text ring-1 ring-inset ring-parichay-paper-border hover:bg-parichay-paper-muted hover:ring-parichay-border"
       )}
     >
       <span className="mb-3 flex items-center justify-between gap-4">
@@ -213,17 +242,4 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
       {children}
     </button>
   );
-}
-
-function ctaTextForRecipient(id: RecipientId): string {
-  const labels: Record<RecipientId, string> = {
-    manager: "Build your work manual",
-    teammate: "Build your work manual",
-    partner: "Build your personal manual",
-    friend: "Build your personal manual",
-    talk: "Prep the talk",
-    self: "Start your brain dump",
-    sync: "Write your shared note",
-  };
-  return labels[id];
 }

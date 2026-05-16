@@ -32,7 +32,7 @@ export function useArtifactExport(
         pixelRatio: 2
       });
       const link = document.createElement("a");
-      link.download = `parichay-${viewMode}-manual-${mode}.png`;
+      link.download = `parichay-${viewMode}-intro-${mode}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {

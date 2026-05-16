@@ -56,7 +56,8 @@ test("mobile sheets load only after their controls are requested", () => {
   assert.ok(!mobileHeaderMenu.includes('from "./ManualModeSheet"'));
   assert.ok(!mobileNav.includes('from "./InstallSheet"'));
   assert.ok(!mobileNav.includes('from "./ManualModeSheet"'));
-  assert.match(mobileHeaderMenu, /const ManualModeSheet = lazy/);
+  assert.doesNotMatch(mobileHeaderMenu, /const ManualModeSheet = lazy/);
+  assert.doesNotMatch(mobileHeaderMenu, /Manual shortcuts/);
   assert.match(mobileHeaderMenu, /const InstallSheet = lazy/);
   assert.match(mobileNav, /const ManualModeSheet = lazy/);
   assert.match(mobileNav, /const InstallSheet = lazy/);

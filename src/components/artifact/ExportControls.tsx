@@ -28,14 +28,14 @@ export function ExportControls({
         disabled={isExporting}
       >
         <FileArrowDown size={20} weight="light" />
-        {isExporting ? "Exporting..." : viewMode === "private" ? "Save Private Image" : "Save Included Image"}
+        {isExporting ? "Exporting..." : viewMode === "private" ? "Save private image" : "Save included image"}
       </SoftButton>
       <SoftButton
         variant="secondary"
         onClick={onPrint}
       >
         <Printer size={20} weight="light" />
-        {viewMode === "private" ? "Print Private Copy" : "Print Included PDF"}
+        {viewMode === "private" ? "Print private copy" : "Print included PDF"}
       </SoftButton>
     </div>
   );

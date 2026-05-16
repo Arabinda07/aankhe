@@ -57,8 +57,8 @@ export function AnswerReview({ workspace }: AnswerReviewProps) {
       </div>
 
       {answeredQuestions.length === 0 ? (
-        <p className="type-body rounded-sm border border-parichay-paper-border bg-parichay-paper p-4 text-parichay-muted">
-          Your manual will start taking shape here.
+          <p className="type-body rounded-sm border border-parichay-paper-border bg-parichay-paper p-4 text-parichay-muted">
+          Your intro will start taking shape here.
         </p>
       ) : (
         <div className="space-y-6">

@@ -82,6 +82,15 @@ function AppContent() {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (location.hash !== "#onboarding") return;
+
+    preloadManualBuilderOnIntent();
+    window.requestAnimationFrame(() => {
+      document.getElementById("onboarding")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [location.hash, location.pathname]);
+
   const handleStart = (mode: ModeId, onboarding?: OnboardingContext) => {
     preloadManualBuilderOnIntent();
     navigate(manualModePath(mode), {
@@ -100,7 +109,7 @@ function AppContent() {
       >
         Skip to content
       </a>
-      <SiteHeader onStart={handleStart} />
+      <SiteHeader />
       <main id="main-content" className="flex-1 flex flex-col items-center w-full">
         <div className="w-full">
           <Routes>
@@ -135,7 +144,7 @@ function AppContent() {
             <Route
               path="/manual/:mode"
               element={
-                <Suspense fallback={<RouteFallback label="Preparing your manual" />}>
+                <Suspense fallback={<RouteFallback label="Preparing your intro" />}>
                   <ManualBuilder
                     onBack={() => navigate("/")}
                   />

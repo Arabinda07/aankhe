@@ -24,7 +24,7 @@ export function InstallSheet({ open, onOpenChange }: InstallSheetProps) {
       open={open}
       onOpenChange={onOpenChange}
       title="Install Parichay"
-      description="Keep your manual studio one tap away."
+      description="Keep Parichay one tap away."
     >
       <div className="space-y-4">
         {isStandalone ? (

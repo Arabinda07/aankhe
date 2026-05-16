@@ -1,8 +1,7 @@
 import { lazy, Suspense, useRef, useState } from "react";
 import { List } from "@phosphor-icons/react/dist/csr/List";
 import { Link, NavLink } from "react-router-dom";
-import { HOW_IT_WORKS_PATH, MANUAL_PATHS, PRIVACY_PATH } from "../lib/routes";
-import type { ModeId } from "../lib/schemaTypes";
+import { HOW_IT_WORKS_PATH, PRIVACY_PATH } from "../lib/routes";
 import { cn } from "../lib/utils";
 import { ParichayMark } from "./ParichayMark";
 
@@ -18,11 +17,7 @@ const ThemeSwitcher = lazy(() =>
   }))
 );
 
-interface SiteHeaderProps {
-  onStart: (mode: ModeId) => void;
-}
-
-export function SiteHeader({ onStart }: SiteHeaderProps) {
+export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [shouldLoadMobileMenu, setShouldLoadMobileMenu] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -60,7 +55,7 @@ export function SiteHeader({ onStart }: SiteHeaderProps) {
               to={HOW_IT_WORKS_PATH}
               className={infoNavClassName}
             >
-              FAQ
+              How it works
             </NavLink>
             <NavLink
               to={PRIVACY_PATH}
@@ -68,30 +63,11 @@ export function SiteHeader({ onStart }: SiteHeaderProps) {
             >
               Privacy
             </NavLink>
-            <div className="mx-1 h-4 w-px bg-parichay-border" aria-hidden="true" />
             <Link
-              to={MANUAL_PATHS.me}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              to="/#onboarding"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control px-3 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
-              Me
-            </Link>
-            <Link
-              to={MANUAL_PATHS.work}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-            >
-              Work
-            </Link>
-            <Link
-              to={MANUAL_PATHS.talk}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-            >
-              Talk
-            </Link>
-            <Link
-              to={MANUAL_PATHS.us}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center px-1 transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-            >
-              Sync
+              Create intro
             </Link>
           </nav>
           <div className="hidden h-4 w-px shrink-0 bg-parichay-border/50 sm:block" aria-hidden="true" />
@@ -116,7 +92,6 @@ export function SiteHeader({ onStart }: SiteHeaderProps) {
           <MobileHeaderMenu
             open={isMobileMenuOpen}
             onOpenChange={handleMobileMenuOpenChange}
-            onStart={onStart}
           />
         </Suspense>
       )}

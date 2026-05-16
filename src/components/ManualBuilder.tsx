@@ -25,12 +25,6 @@ const ArtifactStudio = lazy(() =>
   }))
 );
 
-const ManualPreview = lazy(() =>
-  import("./ManualPreview").then((module) => ({
-    default: module.ManualPreview,
-  }))
-);
-
 export interface ManualRouteState {
   mode?: ModeId;
   onboarding?: OnboardingContext;
@@ -60,7 +54,6 @@ export function ManualBuilder({
   const [view, setView] = useState<"build" | "artifact">("build");
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
-  const shouldRenderDesktopPreview = useShouldRenderDesktopPreview();
   const manual = getManualForRoute(mode);
   const manualMode = manual?.mode;
   const composed = useMemo(() => manual?.composeManual(), [manual]);
@@ -84,7 +77,7 @@ export function ManualBuilder({
   }, [view]);
 
   if (!isInitialized) {
-    return <ManualRouteFallback label="Preparing manual" />;
+    return <ManualRouteFallback label="Preparing your intro" />;
   }
 
   if (!manual || !composed) {
@@ -127,14 +120,14 @@ export function ManualBuilder({
     >
       {/* Builder Toolbar */}
       <div className="sticky top-14 z-40 w-full border-b border-parichay-border bg-parichay-bg/95 backdrop-blur-sm">
-        <nav aria-label="Manual builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
+        <nav aria-label="Intro builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <button
             onClick={onBack}
             className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
-            aria-label="Back to Hub"
+            aria-label="Back"
           >
             <CaretLeft size={20} weight="light" />
-            <span className="hidden sm:inline">Back to Hub</span>
+            <span className="hidden sm:inline">Back</span>
           </button>
 
           {view === "build" && controller && (
@@ -152,7 +145,7 @@ export function ManualBuilder({
               >
                 <BookOpenText size={18} weight="light" />
                 <span className="sm:hidden">Preview</span>
-                <span className="hidden sm:inline">Preview manual</span>
+                <span className="hidden sm:inline">Preview intro</span>
               </button>
             )}
             {view === "artifact" && (
@@ -177,7 +170,7 @@ export function ManualBuilder({
                 Link could not be restored
               </h4>
               <p className="type-caption">
-                The manual link appears to be corrupted or incomplete. You can start fresh or try another link.
+                The intro link appears to be corrupted or incomplete. You can start fresh or try another link.
               </p>
             </div>
             <SoftButton
@@ -195,9 +188,8 @@ export function ManualBuilder({
             <motion.div
               key="build"
               {...viewMotion}
-              className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_450px]"
+              className="mx-auto max-w-4xl"
             >
-              {/* Form Side */}
               <div className="space-y-12 max-sm:mb-[calc(var(--mobile-nav-total)+1rem)]">
                 {controller && (
                   <div className="space-y-8 md:space-y-10">
@@ -236,28 +228,6 @@ export function ManualBuilder({
                   </div>
                 )}
               </div>
-
-              {/* Preview Side (Desktop only) */}
-              {shouldRenderDesktopPreview && (
-              <div className="hidden space-y-8 xl:sticky xl:top-36 xl:block">
-                <div className="space-y-4">
-                  <h3 className="type-meta text-parichay-heading px-1">
-                    Live Manual Preview
-                  </h3>
-                  <div className="rounded-lg bg-parichay-surface-preview p-2">
-                    <div className="overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper-muted shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-                      <Suspense fallback={<ManualPreviewFallback />}>
-                        <ManualPreview
-                          manual={composed}
-                          mode={manual.mode}
-                          className="h-[600px] border-none shadow-none"
-                        />
-                      </Suspense>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              )}
             </motion.div>
           ) : (
             <motion.div
@@ -278,21 +248,6 @@ export function ManualBuilder({
   );
 }
 
-function useShouldRenderDesktopPreview() {
-  const [shouldRender, setShouldRender] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 1280px)");
-    const update = () => setShouldRender(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return shouldRender;
-}
-
 function ManualRouteFallback({ label }: { label: string }) {
   return (
     <div className="min-h-[calc(100dvh-8rem)] bg-parichay-bg px-6 py-16 text-center">
@@ -301,18 +256,10 @@ function ManualRouteFallback({ label }: { label: string }) {
   );
 }
 
-function ManualPreviewFallback() {
-  return (
-    <div className="h-[600px] border-none bg-parichay-paper px-8 py-10">
-      <p className="type-meta text-parichay-muted">Preparing preview</p>
-    </div>
-  );
-}
-
 function ArtifactFallback() {
   return (
     <div className="min-h-80 rounded-lg border border-parichay-border bg-parichay-surface p-8">
-      <p className="type-meta text-parichay-muted">Preparing Artifact Studio</p>
+      <p className="type-meta text-parichay-muted">Preparing your intro</p>
     </div>
   );
 }

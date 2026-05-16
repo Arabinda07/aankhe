@@ -26,8 +26,8 @@ export function ManualModeSheet({ open, onOpenChange, onStart }: ManualModeSheet
     <BottomSheet
       open={open}
       onOpenChange={onOpenChange}
-      title="Start a manual"
-      description="Choose the kind of manual you want to write."
+      title="Create an intro"
+      description="Choose the kind of intro you want to write."
     >
       <div className="space-y-3">
         {MODES.map(({ id, icon }) => {

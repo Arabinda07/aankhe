@@ -9,7 +9,6 @@
  * Responsibilities:
  *   - Render the question label and helper text
  *   - Delegate answer rendering to `AnswerInput` (from `inputs/`)
- *   - Auto-advance on single-select answers (radio, paired, segmented, scale)
  *   - Manage nuance (note) disclosure
  *   - Manage per-question visibility controls
  *   - Handle sensitive skip actions
@@ -21,7 +20,7 @@ import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
 import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
 import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { answerValueIsPresent, getAnswerComponentForQuestion, getSensitiveSkipAction } from "../lib/answerUiPolicy";
+import { answerValueIsPresent, getSensitiveSkipAction } from "../lib/answerUiPolicy";
 import type { Question, Visibility } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
@@ -74,9 +73,6 @@ export function QuestionStep({
   const hasNote = note.trim().length > 0;
   const showAnswerDetails = hasAnswer || hasNote;
 
-  const component = getAnswerComponentForQuestion(question);
-  const needsExplicitContinue = !["radioCards", "pairedChoice", "segmentedTriState", "labeledScale", "nativeSelect"].includes(component);
-
   useEffect(() => {
     if (note.trim().length > 0) setIsNuanceOpen(true);
   }, [note]);
@@ -108,6 +104,16 @@ export function QuestionStep({
         )}
       </div>
 
+      <div className="py-1">
+        <AnswerInput
+          question={question}
+          value={value}
+          onChange={handleChange}
+          labelledBy={questionLabelId}
+          describedBy={helperTextId}
+        />
+      </div>
+
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <button
           type="button"
@@ -124,22 +130,6 @@ export function QuestionStep({
           Not ready to answer this
         </button>
       </div>
-
-      <div className="py-1">
-        <AnswerInput
-          question={question}
-          value={value}
-          onChange={handleChange}
-          labelledBy={questionLabelId}
-          describedBy={helperTextId}
-        />
-      </div>
-
-      {!showAnswerDetails && (
-        <p className="type-caption max-w-2xl text-parichay-muted">
-          Privacy can be changed before sharing.
-        </p>
-      )}
 
       {showAnswerDetails && (
         <div className="space-y-4">
@@ -205,7 +195,7 @@ export function QuestionStep({
                 </button>
                 {isVisibilityHelpOpen && (
                   <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-parichay-muted">
-                    Share means included in links and exports. Private stays local. Hide is omitted from the manual.
+                    Share means included in links and exports. Private stays here. Hide leaves it out of the intro.
                   </p>
                 )}
               </div>
@@ -231,16 +221,14 @@ export function QuestionStep({
         >
           Skip
         </button>
-        {needsExplicitContinue && (
-          <SoftButton
-            className="ml-auto min-h-11 min-w-36"
-            onClick={onNext}
-            disabled={!hasAnswer}
-            variant="primary"
-          >
-            {isLast ? "Review Manual" : "Continue"}
-          </SoftButton>
-        )}
+        <SoftButton
+          className="ml-auto min-h-11 min-w-36"
+          onClick={onNext}
+          disabled={!showAnswerDetails}
+          variant="primary"
+        >
+          {isLast ? "Review intro" : "Continue"}
+        </SoftButton>
       </div>
     </div>
   );

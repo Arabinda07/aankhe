@@ -54,12 +54,12 @@ export function EmptyState({ variant, onAction, actionLabel }: EmptyStateProps) 
         <Notebook size={64} weight="light" className="relative text-parichay-accent" />
       </div>
       <div className="space-y-2">
-        <h3 className="type-reading-heading text-parichay-heading">Your manual is blank</h3>
+        <h3 className="type-reading-heading text-parichay-heading">Your intro is blank</h3>
         <p className="type-caption text-parichay-muted">Tap + to start answering questions.</p>
       </div>
       {showHint && (
         <p className="type-caption max-w-xs rounded-sm border border-parichay-border bg-parichay-sandal-soft px-3 py-2 text-parichay-text">
-          The bottom action starts another manual whenever you need a different lens.
+          The start action opens a fresh intro whenever you need a different angle.
         </p>
       )}
     </div>

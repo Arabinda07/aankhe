@@ -42,7 +42,7 @@ export function MobileNav({ onStart }: MobileNavProps) {
         className="mobile-nav-shell fixed inset-x-0 bottom-[calc(1rem+var(--safe-area-bottom))] z-[60] mx-auto flex h-16 max-w-[22rem] items-center justify-center gap-1 rounded-xl border border-parichay-border bg-parichay-surface px-2 shadow-sm"
       >
         <MobileNavItem to={HOME_PATH} label="Home" icon={House} end />
-        <MobileNavItem to={HOW_IT_WORKS_PATH} label="FAQ" icon={Info} />
+        <MobileNavItem to={HOW_IT_WORKS_PATH} label="How it works" icon={Info} />
         <MobileNavButton
           label="Install"
           icon={DownloadSimple}
@@ -57,7 +57,7 @@ export function MobileNav({ onStart }: MobileNavProps) {
             setShouldLoadManualSheet(true);
             setIsSheetOpen(true);
           }}
-          aria-label="Start a manual"
+          aria-label="Create intro"
           className="ml-1 inline-flex min-h-12 min-w-12 items-center justify-center rounded-lg bg-parichay-accent text-parichay-on-accent shadow-sm transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
           <Plus size={22} weight="bold" />

@@ -89,7 +89,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
 
         {manual.answeredCount === 0 && (
           <div className="text-center py-24 space-y-4">
-            <p className="type-artifact-prose text-parichay-text-soft">Your manual will start taking shape here.</p>
+            <p className="type-artifact-prose text-parichay-text-soft">Your intro will start taking shape here.</p>
           </div>
         )}
 
