@@ -1,16 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">Parichay private manual studio</title>
   <desc id="desc">A warm paper preview for Parichay with the words Your Story, Always Ready.</desc>
+  <style>
+    @font-face {
+      font-family: "Geist";
+      src: url("/fonts/Geist[wght].woff2") format("woff2");
+      font-weight: 100 900;
+    }
+    @font-face {
+      font-family: "Source Serif 4";
+      src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
+      font-weight: 200 900;
+    }
+  </style>
   <rect width="1200" height="630" fill="#F4EEE6"/>
   <rect x="78" y="70" width="1044" height="490" rx="18" fill="#FFFDF8" stroke="#E2D4C5" stroke-width="2"/>
-  <rect x="132" y="126" width="72" height="72" rx="8" fill="#A85A44"/>
-  <text x="157" y="174" fill="#FFFDF8" font-family="Georgia, serif" font-size="42" font-weight="700" font-style="italic">P</text>
-  <text x="232" y="174" fill="#4A2F28" font-family="Georgia, serif" font-size="54" font-weight="700">Parichay</text>
-  <text x="132" y="292" fill="#2C211E" font-family="Arial, sans-serif" font-size="82" font-weight="800">Your Story,</text>
-  <text x="132" y="390" fill="#AA5D48" font-family="Georgia, serif" font-size="96" font-style="italic">Always Ready.</text>
+  <g transform="translate(132 120)">
+    <rect width="88" height="88" rx="12" fill="#F8F1EA" stroke="#A85A44" stroke-width="4"/>
+    <rect x="16" y="22" width="56" height="44" rx="4" fill="#FFFDF8" stroke="#A85A44" stroke-width="4"/>
+    <path d="M20 26l24 18 24-18" fill="none" stroke="#A85A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="44" cy="48" r="13" fill="#8E4738"/>
+    <text x="39" y="56" fill="#FFF7ED" font-family="Source Serif 4, Georgia, serif" font-size="22" font-weight="700">P</text>
+  </g>
+  <text x="244" y="176" fill="#4A2F28" font-family="Source Serif 4, Georgia, serif" font-size="54" font-weight="700">Parichay</text>
+  <text x="132" y="292" fill="#2C211E" font-family="Geist, Arial, sans-serif" font-size="82" font-weight="800">Your Story,</text>
+  <text x="132" y="390" fill="#AA5D48" font-family="Source Serif 4, Georgia, serif" font-size="78" font-style="italic">Always Ready.</text>
   <line x1="132" y1="438" x2="650" y2="438" stroke="#E2D4C5" stroke-width="2"/>
-  <text x="132" y="500" fill="#705F56" font-family="Arial, sans-serif" font-size="28">Create a private manual. Share only the included parts.</text>
+  <text x="132" y="500" fill="#705F56" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="650">Create a private manual. Share only the included parts.</text>
   <rect x="812" y="146" width="226" height="312" rx="8" fill="#F4EEE6" stroke="#E2D4C5" stroke-width="2"/>
-  <path d="M848 216h154M848 274h132M848 326h154M848 378h96" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
-  <path d="M848 216h118" stroke="#AA5D48" stroke-width="10" stroke-linecap="round"/>
+  <path d="M848 218h154M848 276h132M848 328h154M848 380h96" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
+  <path d="M848 218h118" stroke="#AA5D48" stroke-width="10" stroke-linecap="round"/>
 </svg>

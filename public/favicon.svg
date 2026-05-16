@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
   <title id="title">Parichay</title>
   <rect width="64" height="64" rx="12" fill="#F8F1EA"/>
-  <path d="M14 19h36v27H14z" fill="#FFFDF8" stroke="#A85A44" stroke-width="3"/>
-  <path d="M16 20l16 13 16-13" fill="none" stroke="#A85A44" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M27 47V18h10c7 0 11 4 11 10s-4 10-11 10h-4v9zM33 32h4c4 0 6-1 6-4s-2-4-6-4h-4z" fill="#3A2923"/>
+  <rect x="12" y="15" width="40" height="34" rx="3" fill="#FFFDF8" stroke="#A85A44" stroke-width="2.8"/>
+  <path d="M14 18l18 14 18-14" fill="none" stroke="#A85A44" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 42h24" stroke="#E2D4C5" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="32" cy="33" r="8" fill="#8E4738"/>
+  <path d="M29 38V27h5.1c3 0 5.1 1.8 5.1 4.4 0 2.7-2.1 4.5-5.1 4.5h-1.8V38H29zm3.3-4.7h1.7c1.2 0 1.9-.7 1.9-1.9s-.7-1.8-1.9-1.8h-1.7v3.7z" fill="#FFF7ED"/>
 </svg>
