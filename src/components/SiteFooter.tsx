@@ -10,7 +10,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-row flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-6 sm:py-8 lg:justify-between">
         <nav
           aria-label="Footer"
-          className="type-footer-nav flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-2 text-parichay-footer-text"
+          className="type-footer-nav hidden sm:flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-2 text-parichay-footer-text"
         >
           <FooterLink to="/" className="hidden sm:inline-flex">Home</FooterLink>
           <FooterLink to="/how-it-works" className="hidden sm:inline-flex">How it works</FooterLink>

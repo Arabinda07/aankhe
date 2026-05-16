@@ -16,7 +16,7 @@ export function PrivacyPage() {
       title="Nothing leaves until you say so"
       lead="No accounts. No database. Your tab is the room. You decide what stays and what goes."
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
           Your answers live in this tab. Close it or refresh it and they disappear. Generate a link or export before you leave if you want to keep them.
         </InfoCard>
@@ -40,7 +40,7 @@ export function PrivacyPage() {
         </div>
       </section>
 
-      <section className="grid gap-6 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
+      <section className="grid gap-12 py-12 md:grid-cols-[0.8fr_1.2fr] md:items-center">
         <h2 className="type-reading-heading text-parichay-heading">The promise</h2>
         <p className="type-body text-parichay-muted">
           You decide what goes into the final envelope. We don't add private answers behind your back. The boundary you wrote for yourself stays right where you put it.
@@ -90,7 +90,7 @@ export function HowItWorksPage() {
       title="A clearer way to introduce yourself."
       lead="Parichay helps you make a short intro page for how you work, communicate, and want to be understood."
     >
-      <section className="grid gap-6 py-8 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+      <section className="grid gap-12 py-8 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <h2 className="type-reading-heading text-parichay-heading">What is Parichay?</h2>
         <div className="space-y-4">
           <p className="type-body text-parichay-muted">
@@ -157,7 +157,7 @@ export function HowItWorksPage() {
         </InfoCard>
       </section>
 
-      <section className="grid gap-6 border-t border-parichay-border/60 py-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
+      <section className="grid gap-12 border-t border-parichay-border/60 py-12 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <h2 className="type-reading-heading text-parichay-heading">Privacy in plain language</h2>
         <div className="space-y-4">
           <p className="type-body text-parichay-muted">
@@ -274,7 +274,7 @@ function VisibilityRule({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-md border border-parichay-border bg-parichay-surface px-5 py-5">
+    <div className="rounded-md border border-parichay-border bg-parichay-surface px-6 py-7">
       <div className="mb-4 text-parichay-muted">{icon}</div>
       <h3 className="type-panel-title text-parichay-heading">{title}</h3>
       <p className="type-caption mt-2 text-parichay-muted">{children}</p>
