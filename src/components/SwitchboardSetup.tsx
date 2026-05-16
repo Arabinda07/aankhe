@@ -273,7 +273,7 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
               transition={transition}
               className="flex items-center"
             >
-              <CheckCircle size={14} weight="fill" aria-label="Selected" />
+              <CheckCircle size={16} weight="fill" aria-label="Selected" />
             </motion.span>
           )}
         </AnimatePresence>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="blank-artifact-light-title blank-artifact-light-desc">
+  <title id="blank-artifact-light-title">Parichay blank artifact illustration</title>
+  <desc id="blank-artifact-light-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#34231F" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-0" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#D9C4B4" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-0)">
+    
+          
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#F2E3D2" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#C86757" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#E5A95D" opacity=".9"/>
+    
+          <g transform="translate(-4 0) rotate(-7 180 130)">
+            <ellipse cx="180" cy="110" rx="72" ry="84" fill="#A85A44" />
+            <ellipse cx="180" cy="108" rx="51" ry="62" fill="#FFF7ED" opacity=".92"/>
+            <path d="M148 93 C168 75 202 76 219 99 C202 91 176 93 158 111Z" fill="#4A314F" opacity=".9"/>
+            <rect x="163" y="178" width="34" height="58" rx="15" fill="#A85A44" />
+            <path d="M151 64 C168 51 207 49 228 71" fill="none" stroke="#FFF7ED" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+          </g>
+          <circle cx="179" cy="116" r="8" fill="#4A314F"/>
+          <circle cx="205" cy="118" r="8" fill="#4A314F"/>
+          <path d="M169 144 C184 153 201 153 216 143" fill="none" stroke="#6E2D3F" stroke-width="8" stroke-linecap="round"/>
+        
+  </g>
+  <g opacity=".42">
+    <circle cx="50" cy="52" r="5" fill="#6E2D3F"/>
+    <circle cx="298" cy="219" r="4" fill="#E5A95D"/>
+    <path d="M58 222 C87 205 104 205 132 222" fill="none" stroke="#A85A44" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-0)" opacity=".34"/>
+</svg>

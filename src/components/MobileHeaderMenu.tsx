@@ -61,7 +61,7 @@ export function MobileHeaderMenu({ open, onOpenChange }: MobileHeaderMenuProps) 
               onClick={openInstallSheet}
               className="type-ui-label inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-surface-soft px-4 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
             >
-              <DownloadSimple size={18} weight="light" aria-hidden="true" />
+              <DownloadSimple size={20} weight="light" aria-hidden="true" />
               Install Parichay
             </button>
           )}

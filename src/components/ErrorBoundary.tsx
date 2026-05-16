@@ -6,6 +6,7 @@
 import React from 'react';
 import { ShieldWarning } from '@phosphor-icons/react/dist/csr/ShieldWarning';
 import { SoftButton } from './SoftButton';
+import { BrandIllustration } from './BrandIllustration';
 
 interface Props {
   children: React.ReactNode;
@@ -41,8 +42,11 @@ export class ErrorBoundary extends React.Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-parichay-bg p-6">
           <div className="paper-card max-w-md w-full p-8 space-y-6 text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-parichay-danger-soft text-parichay-danger">
-              <ShieldWarning size={36} weight="light" />
+            <div className="space-y-2">
+              <BrandIllustration name="corrupt-url" className="mx-auto h-36 w-auto" />
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-parichay-danger-soft text-parichay-danger">
+                <ShieldWarning size={32} weight="light" />
+              </div>
             </div>
             <div className="space-y-2">
               <h2 className="type-artifact-heading text-parichay-heading">Something went wrong</h2>

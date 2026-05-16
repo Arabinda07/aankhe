@@ -56,7 +56,7 @@ export function ShareControls({
                     aria-label={copied ? "Link copied" : "Copy share link"}
                     className="min-h-11 min-w-11 p-2 bg-parichay-control rounded-sm shadow-sm hover:bg-parichay-control-hover transition-colors text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                   >
-                    {copied ? <Check size={18} className="text-parichay-accent" weight="light" /> : <Copy size={18} weight="light" />}
+                    {copied ? <Check size={20} className="text-parichay-accent" weight="light" /> : <Copy size={20} weight="light" />}
                   </button>
                 </Tooltip.Trigger>
                 <Tooltip.Portal>
@@ -80,7 +80,7 @@ export function ShareControls({
 
           {sharedUrl.length > 2000 && (
             <div className="type-caption flex gap-3 rounded-sm border border-parichay-danger/25 bg-parichay-danger-soft p-3 text-parichay-danger">
-              <WarningCircle size={18} className="shrink-0 text-parichay-danger" weight="light" />
+              <WarningCircle size={20} className="shrink-0 text-parichay-danger" weight="light" />
               <p>
                 This URL is long. Saving an image or PDF may be more reliable in older apps.
               </p>

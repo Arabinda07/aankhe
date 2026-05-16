@@ -7,6 +7,7 @@ import { ComposedManual, ComposedSection } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { ModeId } from "../lib/schemaTypes";
 import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
+import { BrandIllustration } from "./BrandIllustration";
 
 interface ManualPreviewProps {
   manual: ComposedManual;
@@ -77,7 +78,7 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
                       >
                         {detail.isPrivate && (
                           <span className="shrink-0 mt-[0.3em] text-parichay-private" aria-hidden="true" title="Private">
-                            <LockKey size={18} weight="light" />
+                            <LockKey size={20} weight="light" />
                           </span>
                         )}
                         <p>{detail.text}</p>
@@ -91,7 +92,8 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
         </div>
 
         {manual.answeredCount === 0 && (
-          <div className="text-center py-24 space-y-4">
+          <div className="text-center py-20 space-y-5">
+            <BrandIllustration name="blank-artifact" className="mx-auto h-40 w-auto" />
             <p className="type-artifact-prose text-parichay-text-soft">Your intro will start taking shape here.</p>
           </div>
         )}

@@ -60,7 +60,7 @@ export function MobileNav({ onStart }: MobileNavProps) {
           aria-label="Create intro"
           className="ml-1 inline-flex min-h-12 min-w-12 items-center justify-center rounded-lg bg-parichay-accent text-parichay-on-accent shadow-sm transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
         >
-          <Plus size={22} weight="bold" />
+          <Plus size={24} weight="bold" />
         </button>
       </nav>
       {shouldLoadManualSheet && (

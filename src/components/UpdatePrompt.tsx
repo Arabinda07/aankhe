@@ -56,14 +56,14 @@ export function UpdatePrompt() {
                 <button
                   type="button"
                   onClick={() => updateServiceWorker(true)}
-                  className="type-ui-label flex h-9 items-center justify-center rounded-md bg-parichay-accent px-3 text-parichay-on-accent transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+                  className="type-ui-label flex min-h-11 items-center justify-center rounded-md bg-parichay-accent px-4 text-parichay-on-accent transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                 >
                   Refresh
                 </button>
                 <button
                   type="button"
                   onClick={close}
-                  className="type-ui-label flex h-9 items-center justify-center rounded-md border border-parichay-border bg-parichay-surface-soft px-3 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+                  className="type-ui-label flex min-h-11 items-center justify-center rounded-md border border-parichay-border bg-parichay-surface-soft px-4 text-parichay-text transition-colors hover:bg-parichay-control-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                 >
                   Later
                 </button>

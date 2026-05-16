@@ -1,33 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Parichay private manual studio</title>
-  <desc id="desc">A warm paper preview for Parichay with the words Your Story, Always Ready.</desc>
-  <style>
-    @font-face {
-      font-family: "Geist";
-      src: url("/fonts/Geist[wght].woff2") format("woff2");
-      font-weight: 100 900;
-    }
-    @font-face {
-      font-family: "Source Serif 4";
-      src: url("/fonts/SourceSerif4Variable-Roman.otf.woff2") format("woff2");
-      font-weight: 200 900;
-    }
-  </style>
-  <rect width="1200" height="630" fill="#F4EEE6"/>
-  <rect x="78" y="70" width="1044" height="490" rx="18" fill="#FFFDF8" stroke="#E2D4C5" stroke-width="2"/>
-  <g transform="translate(132 120)">
-    <rect width="88" height="88" rx="12" fill="#F8F1EA" stroke="#A85A44" stroke-width="4"/>
-    <rect x="16" y="22" width="56" height="44" rx="4" fill="#FFFDF8" stroke="#A85A44" stroke-width="4"/>
-    <path d="M20 26l24 18 24-18" fill="none" stroke="#A85A44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="44" cy="48" r="13" fill="#8E4738"/>
-    <text x="39" y="56" fill="#FFF7ED" font-family="Source Serif 4, Georgia, serif" font-size="22" font-weight="700">P</text>
-  </g>
-  <text x="244" y="176" fill="#4A2F28" font-family="Source Serif 4, Georgia, serif" font-size="54" font-weight="700">Parichay</text>
-  <text x="132" y="292" fill="#2C211E" font-family="Geist, Arial, sans-serif" font-size="82" font-weight="800">Your Story,</text>
-  <text x="132" y="390" fill="#AA5D48" font-family="Source Serif 4, Georgia, serif" font-size="78" font-style="italic">Always Ready.</text>
-  <line x1="132" y1="438" x2="650" y2="438" stroke="#E2D4C5" stroke-width="2"/>
-  <text x="132" y="500" fill="#705F56" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="650">Create a private manual. Share only the included parts.</text>
-  <rect x="812" y="146" width="226" height="312" rx="8" fill="#F4EEE6" stroke="#E2D4C5" stroke-width="2"/>
-  <path d="M848 218h154M848 276h132M848 328h154M848 380h96" stroke="#705F56" stroke-width="8" stroke-linecap="round"/>
-  <path d="M848 218h118" stroke="#AA5D48" stroke-width="10" stroke-linecap="round"/>
+  <title id="title">Parichay private intro studio</title>
+  <desc id="desc">A warm cut-paper Parichay social card with a mirror, folded note, and lac seal.</desc>
+  <rect width="1200" height="630" fill="#F8F1EA"/>
+  <text x="140" y="174" fill="#34231F" font-family="Source Serif 4, Georgia, serif" font-size="72" font-weight="700">Parichay</text>
+  <text x="140" y="310" fill="#34231F" font-family="Geist, Arial, sans-serif" font-size="86" font-weight="800">Your Story,</text>
+  <text x="140" y="412" fill="#A85A44" font-family="Source Serif 4, Georgia, serif" font-size="82" font-weight="700" font-style="italic">Always Ready.</text>
+  <text x="140" y="488" fill="#7C6158" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="650">Create a private intro. Share only the included parts.</text>
+  <path d="M792 144 C872 88 990 118 1034 220 C982 221 946 260 902 305 C844 363 780 334 724 292Z" fill="#F2E3D2"/>
+  <ellipse cx="874" cy="246" rx="84" ry="96" fill="#A85A44"/>
+  <ellipse cx="874" cy="242" rx="58" ry="70" fill="#FFF7ED"/>
+  <path d="M828 416 C888 372 968 384 1032 430" fill="none" stroke="#6E2D3F" stroke-width="18" stroke-linecap="round"/>
 </svg>

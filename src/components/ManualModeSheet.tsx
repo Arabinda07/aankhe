@@ -15,10 +15,10 @@ interface ManualModeSheetProps {
 }
 
 const MODES: Array<{ id: ModeId; icon: React.ReactNode }> = [
-  { id: "me", icon: <BookOpenText size={22} weight="light" /> },
-  { id: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "talk", icon: <ChatCenteredText size={22} weight="light" /> },
-  { id: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "me", icon: <BookOpenText size={24} weight="light" /> },
+  { id: "work", icon: <Briefcase size={24} weight="light" /> },
+  { id: "talk", icon: <ChatCenteredText size={24} weight="light" /> },
+  { id: "us", icon: <UsersThree size={24} weight="light" /> },
 ];
 
 export function ManualModeSheet({ open, onOpenChange, onStart }: ManualModeSheetProps) {

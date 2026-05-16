@@ -4,6 +4,7 @@ import { DownloadSimple } from "@phosphor-icons/react/dist/csr/DownloadSimple";
 import { Share } from "@phosphor-icons/react/dist/csr/Share";
 import type React from "react";
 import { useInstallPrompt } from "../hooks/useInstallPrompt";
+import { BrandIllustration } from "./BrandIllustration";
 import { BottomSheet } from "./primitives/BottomSheet";
 
 interface InstallSheetProps {
@@ -27,16 +28,17 @@ export function InstallSheet({ open, onOpenChange }: InstallSheetProps) {
       description="Keep Parichay one tap away."
     >
       <div className="space-y-4">
+        <BrandIllustration name="install-prompt" className="mx-auto h-32 w-auto" />
         {isStandalone ? (
           <InstallMessage
-            icon={<DeviceMobile size={22} weight="light" />}
+            icon={<DeviceMobile size={24} weight="light" />}
             title="Already on your home screen"
             body="Parichay is running in installed-app mode on this device."
           />
         ) : canPrompt ? (
           <>
             <InstallMessage
-              icon={<DownloadSimple size={22} weight="light" />}
+              icon={<DownloadSimple size={24} weight="light" />}
               title="Ready to install"
               body="Your browser can add Parichay to your home screen now."
             />
@@ -51,7 +53,7 @@ export function InstallSheet({ open, onOpenChange }: InstallSheetProps) {
         ) : status === "ios" ? (
           <div className="space-y-3">
             <InstallMessage
-              icon={<Share size={22} weight="light" />}
+              icon={<Share size={24} weight="light" />}
               title="Use the iOS share sheet"
               body="Open Share in Safari, then choose Add to Home Screen."
             />
@@ -62,7 +64,7 @@ export function InstallSheet({ open, onOpenChange }: InstallSheetProps) {
         ) : (
           <div className="space-y-3">
             <InstallMessage
-              icon={<DotsThreeOutline size={22} weight="light" />}
+              icon={<DotsThreeOutline size={24} weight="light" />}
               title="Use your browser menu"
               body="Open the browser menu and choose Install app or Add to home screen."
             />

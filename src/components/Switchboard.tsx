@@ -61,7 +61,7 @@ export function Switchboard({
 
           <div className="flex min-w-0 items-start gap-3">
             <ShieldCheck
-              size={18}
+              size={20}
               weight="light"
               aria-hidden="true"
               className="mt-0.5 shrink-0 text-parichay-muted"

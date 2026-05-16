@@ -54,7 +54,7 @@ export function ThemeSwitcher() {
                   )}
                 >
                   <span className="inline-flex items-center gap-2">
-                    <Icon size={18} weight="light" />
+                    <Icon size={16} weight="light" />
                     {option.label}
                   </span>
                   {isSelected && <Check size={16} weight="bold" className="text-parichay-accent" />}

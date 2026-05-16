@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="private-only-preview-light-title private-only-preview-light-desc">
+  <title id="private-only-preview-light-title">Parichay private only preview illustration</title>
+  <desc id="private-only-preview-light-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-3" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#34231F" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#D9C4B4" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-3)">
+    
+          
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#F2E3D2" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#C86757" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#E5A95D" opacity=".9"/>
+    
+          <path d="M139 130 V101 C139 67 162 47 190 47 C218 47 241 67 241 101 V130" fill="none" stroke="#4A314F" stroke-width="18" stroke-linecap="round"/>
+          <rect x="111" y="123" width="158" height="104" rx="24" fill="#A85A44"/>
+          <circle cx="190" cy="166" r="13" fill="#FFF7ED"/>
+          <path d="M190 177 V200" stroke="#FFF7ED" stroke-width="10" stroke-linecap="round"/>
+          <path d="M72 83 C100 70 121 67 148 71" stroke="#E5A95D" stroke-width="12" stroke-linecap="round"/>
+          <path d="M260 218 C285 206 306 205 328 215" stroke="#6E2D3F" stroke-width="11" stroke-linecap="round"/>
+        
+  </g>
+  <g opacity=".42">
+    <circle cx="53" cy="55" r="5" fill="#6E2D3F"/>
+    <circle cx="295" cy="216" r="4" fill="#E5A95D"/>
+    <path d="M61 219 C90 205 107 205 135 222" fill="none" stroke="#A85A44" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-3)" opacity=".34"/>
+</svg>

@@ -75,7 +75,7 @@ export function BottomSheet({
                     aria-label="Close"
                     className="absolute right-4 top-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                   >
-                    <X size={18} weight="bold" aria-hidden="true" />
+                    <X size={20} weight="bold" aria-hidden="true" />
                   </button>
                 </Dialog.Close>
                 <div className="mx-auto mb-5 h-1 w-12 rounded-full bg-parichay-border-strong" aria-hidden="true" />

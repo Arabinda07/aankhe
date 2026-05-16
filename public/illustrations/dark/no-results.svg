@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="no-results-dark-title no-results-dark-desc">
+  <title id="no-results-dark-title">Parichay no results illustration</title>
+  <desc id="no-results-dark-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-1" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#F7E9D8" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1C1312" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-1)">
+    
+      
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#4A342D" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#E09276" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#D7A660" opacity=".9"/>
+    
+      <circle cx="180" cy="132" r="65" fill="#C97862"/>
+      <path d="M150 132 H210" stroke="#3A2924" stroke-width="12" stroke-linecap="round"/>
+    
+  </g>
+  <g opacity=".42">
+    <circle cx="51" cy="53" r="5" fill="#8E4558"/>
+    <circle cx="297" cy="218" r="4" fill="#D7A660"/>
+    <path d="M59 221 C88 205 105 205 133 222" fill="none" stroke="#C97862" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-1)" opacity=".34"/>
+</svg>

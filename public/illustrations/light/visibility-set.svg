@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="visibility-set-light-title visibility-set-light-desc">
+  <title id="visibility-set-light-title">Parichay visibility set illustration</title>
+  <desc id="visibility-set-light-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-16" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#34231F" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-16" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#D9C4B4" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-16)">
+    
+          
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#F2E3D2" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#C86757" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#E5A95D" opacity=".9"/>
+    
+          <path d="M63 129 C102 72 154 47 213 59 C257 68 287 100 307 132 C278 173 232 198 180 198 C125 198 85 171 63 129Z" fill="#FFF7ED" stroke="#D9C4B4" stroke-width="3"/>
+          <circle cx="184" cy="130" r="42" fill="#A85A44" opacity=".95"/>
+          <circle cx="184" cy="130" r="19" fill="#4A314F"/>
+          <path d="M73 206 C121 163 202 157 294 206" fill="none" stroke="#D8B7A2" stroke-width="24" stroke-linecap="round" opacity=".72"/>
+          <path d="M94 77 L290 206" stroke="#6E2D3F" stroke-width="9" stroke-linecap="round" opacity=".78"/>
+        
+  </g>
+  <g opacity=".42">
+    <circle cx="66" cy="68" r="5" fill="#6E2D3F"/>
+    <circle cx="282" cy="203" r="4" fill="#E5A95D"/>
+    <path d="M74 206 C92 205 120 205 133 222" fill="none" stroke="#A85A44" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-16)" opacity=".34"/>
+</svg>

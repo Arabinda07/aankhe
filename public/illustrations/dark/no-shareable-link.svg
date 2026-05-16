@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="no-shareable-link-dark-title no-shareable-link-dark-desc">
+  <title id="no-shareable-link-dark-title">Parichay no shareable link illustration</title>
+  <desc id="no-shareable-link-dark-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-20" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#F7E9D8" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-20" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#1C1312" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-20)">
+    
+          
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#4A342D" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#E09276" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#D7A660" opacity=".9"/>
+    
+          <g transform="rotate(-7 182 132)">
+            <path d="M96 76 H253 L282 107 V196 H96Z" fill="#3A2924" stroke="#1C1312" stroke-width="3"/>
+            <path d="M253 76 V108 H282" fill="#4A342D" stroke="#1C1312" stroke-width="3"/>
+            <path d="M126 123 H241 M126 151 H219 M126 178 H198" stroke="#C5A694" stroke-width="8" stroke-linecap="round" opacity=".58"/>
+            <circle cx="247" cy="169" r="27" fill="#C97862"/>
+            <path d="M235 169 C244 157 253 158 261 169 C251 180 244 181 235 169Z" fill="#3A2924"/>
+          </g>
+          <path d="M80 216 C130 198 192 208 252 229" fill="none" stroke="#8E4558" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+        
+  </g>
+  <g opacity=".42">
+    <circle cx="70" cy="54" r="5" fill="#8E4558"/>
+    <circle cx="278" cy="199" r="4" fill="#D7A660"/>
+    <path d="M59 219 C96 205 107 205 137 222" fill="none" stroke="#C97862" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-20)" opacity=".34"/>
+</svg>

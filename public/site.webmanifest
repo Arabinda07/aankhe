@@ -44,7 +44,20 @@
       "url": "/manual/talk",
       "icons": [
         {
-          "src": "/icons/shortcut-me-192.png",
+          "src": "/icons/shortcut-talk-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Create Two of Us Intro",
+      "short_name": "Two of us",
+      "description": "Start a shared-context intro.",
+      "url": "/manual/us",
+      "icons": [
+        {
+          "src": "/icons/shortcut-us-192.png",
           "sizes": "192x192",
           "type": "image/png"
         }

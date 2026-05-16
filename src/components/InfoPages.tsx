@@ -8,6 +8,7 @@ import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
 import { LinkSimpleHorizontal } from "@phosphor-icons/react/dist/csr/LinkSimpleHorizontal";
 import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
 import type React from "react";
+import { BrandIllustration, type IllustrationName } from "./BrandIllustration";
 
 export function PrivacyPage() {
   return (
@@ -15,6 +16,7 @@ export function PrivacyPage() {
       eyebrow="Privacy"
       title="Nothing leaves until you say so"
       lead="No accounts. No database. Your tab is the room. You decide what stays and what goes."
+      illustration="privacy-page"
     >
       <div className="grid gap-8 md:grid-cols-2">
         <InfoCard icon={<LockKey size={24} weight="light" />} title="Memory Only">
@@ -89,6 +91,7 @@ export function HowItWorksPage() {
       eyebrow="How it works"
       title="A clearer way to introduce yourself."
       lead="Parichay helps you make a short intro page for how you work, communicate, and want to be understood."
+      illustration="how-it-works"
     >
       <section className="grid gap-12 py-8 md:grid-cols-[0.75fr_1.25fr] md:items-start">
         <h2 className="type-reading-heading text-parichay-heading">What is Parichay?</h2>
@@ -225,20 +228,30 @@ function InfoShell({
   eyebrow,
   title,
   lead,
+  illustration,
   children,
 }: {
   eyebrow: string;
   title: string;
   lead: string;
+  illustration?: IllustrationName;
   children: React.ReactNode;
 }) {
   return (
     <div className="bg-parichay-bg">
       <section className="mx-auto max-w-5xl px-6 py-24 md:py-32 lg:py-40">
-        <div className="mb-12 max-w-3xl space-y-5">
-          <p className="type-eyebrow text-parichay-sandal">{eyebrow}</p>
-          <h1 className="type-serif-title-page text-parichay-heading">{title}</h1>
-          <p className="type-lead text-parichay-muted">{lead}</p>
+        <div className="mb-12 grid gap-8 md:grid-cols-[1fr_260px] md:items-center">
+          <div className="max-w-3xl space-y-5">
+            <p className="type-eyebrow text-parichay-sandal">{eyebrow}</p>
+            <h1 className="type-serif-title-page text-parichay-heading">{title}</h1>
+            <p className="type-lead text-parichay-muted">{lead}</p>
+          </div>
+          {illustration && (
+            <BrandIllustration
+              name={illustration}
+              className="hidden h-48 w-auto justify-self-end md:block"
+            />
+          )}
         </div>
         <div className="space-y-12">{children}</div>
       </section>

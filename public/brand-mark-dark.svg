@@ -1,12 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">Parichay refined letter mark for dark surfaces</title>
-  <desc id="desc">A warm paper manual, sealed with smoked lac and tuned for deep rosewood surfaces.</desc>
-  <rect width="512" height="512" rx="92" fill="#2B1E1A"/>
-  <rect x="76" y="100" width="360" height="314" rx="28" fill="#F8F1EA" stroke="#5B3A32" stroke-width="4"/>
-  <rect x="92" y="116" width="328" height="282" rx="18" fill="#FFF7ED" stroke="#B66A55" stroke-width="18"/>
-  <path d="M110 138l146 112 146-112" fill="none" stroke="#B66A55" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M146 350h220" stroke="#D9C7B4" stroke-width="13" stroke-linecap="round"/>
-  <path d="M174 378h164" stroke="#D9C7B4" stroke-width="9" stroke-linecap="round"/>
-  <circle cx="256" cy="266" r="70" fill="#9D5546"/>
-  <path d="M231 310V208h49c30 0 51 17 51 42 0 26-21 43-51 43h-16v17h-33zm33-45h15c13 0 21-5 21-15 0-9-8-14-21-14h-15v29z" fill="#FFF7ED"/>
+  <title id="title">Parichay cut-paper letter mark</title>
+  <desc id="desc">A folded paper manual, smoked lac seal, and rosewood P with halftone grain.</desc>
+  <defs>
+    <pattern id="grain" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#F7E9D8" opacity=".18"/></pattern>
+  </defs>
+  <rect width="512" height="512" rx="92" fill="#281C1A"/>
+  <path d="M94 142 256 70l162 72v228H94Z" fill="#4A342D"/>
+  <rect x="86" y="110" width="340" height="296" rx="34" fill="#3A2924" stroke="#1C1312" stroke-width="4"/>
+  <path d="M111 140 256 248 401 140" fill="none" stroke="#C97862" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M138 344h236M168 374h176" stroke="#C5A694" stroke-width="10" stroke-linecap="round" opacity=".5"/>
+  <circle cx="256" cy="266" r="70" fill="#C97862"/>
+  <text x="256" y="306" text-anchor="middle" fill="#3A2924" font-family="Source Serif 4, Georgia, serif" font-size="116" font-weight="700">P</text>
+  <rect width="512" height="512" fill="url(#grain)" opacity=".55"/>
 </svg>

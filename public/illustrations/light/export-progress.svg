@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" role="img" aria-labelledby="export-progress-light-title export-progress-light-desc">
+  <title id="export-progress-light-title">Parichay export progress illustration</title>
+  <desc id="export-progress-light-desc">A cut-paper stationery illustration with smoked lac, sandal, rosewood, and plum shapes.</desc>
+  <defs>
+    <pattern id="dots-10" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#34231F" opacity=".2"/>
+    </pattern>
+    <filter id="paper-shadow-10" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#D9C4B4" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#paper-shadow-10)">
+    
+          
+      <path d="M70 171 C108 126 122 89 170 74 C222 57 272 86 291 129 C252 124 231 147 202 171 C157 207 111 197 70 171Z" fill="#F2E3D2" opacity=".72"/>
+      <path d="M53 190 C93 187 121 208 157 226 C120 235 83 231 47 210Z" fill="#C86757" opacity=".88"/>
+      <path d="M228 55 C253 71 279 76 312 72 C292 103 268 119 235 121Z" fill="#E5A95D" opacity=".9"/>
+    
+          <path d="M97 65 H255 L284 96 V210 H97Z" fill="#FFF7ED" stroke="#D9C4B4" stroke-width="3"/>
+          <path d="M255 65 V98 H284" fill="#F2E3D2"/>
+          <path d="M87 122 C134 103 219 103 300 126 V162 C230 142 151 142 87 163Z" fill="#A85A44" opacity=".95"/>
+          <path d="M101 153 C151 137 224 138 288 156" fill="none" stroke="#FFF7ED" stroke-width="7" stroke-linecap="round" opacity=".65"/>
+          
+          <circle cx="267" cy="197" r="19" fill="#E5A95D"/>
+        
+  </g>
+  <g opacity=".42">
+    <circle cx="60" cy="62" r="5" fill="#6E2D3F"/>
+    <circle cx="288" cy="209" r="4" fill="#E5A95D"/>
+    <path d="M68 212 C97 205 114 205 142 222" fill="none" stroke="#A85A44" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <rect width="360" height="260" fill="url(#dots-10)" opacity=".34"/>
+</svg>

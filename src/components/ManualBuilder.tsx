@@ -143,7 +143,7 @@ export function ManualBuilder({
                 onClick={() => setView("artifact")}
                 className="type-ui-label inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:min-w-0 sm:justify-start"
               >
-                <BookOpenText size={18} weight="light" />
+                <BookOpenText size={20} weight="light" />
                 <span className="sm:hidden">Preview</span>
                 <span className="hidden sm:inline">Preview intro</span>
               </button>
@@ -154,7 +154,7 @@ export function ManualBuilder({
                 onClick={() => setView("build")}
                 className="type-ui-label inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:min-w-0 sm:justify-start"
               >
-                <FileText size={18} weight="light" />
+                <FileText size={20} weight="light" />
                 <span className="hidden sm:inline">Back to answers</span>
               </button>
             )}
