@@ -1,10 +1,11 @@
 import { WifiHigh } from "@phosphor-icons/react/dist/csr/WifiHigh";
 import { WifiSlash } from "@phosphor-icons/react/dist/csr/WifiSlash";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 
 export function ConnectionStatus() {
+  const prefersReducedMotion = useReducedMotion();
   const [isOnline, setIsOnline] = useState(
     typeof navigator !== "undefined" ? navigator.onLine : true
   );
@@ -36,7 +37,7 @@ export function ConnectionStatus() {
     };
   }, []);
 
-
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.4, ease: [0.16, 1, 0.3, 1] };
 
   return (
     <AnimatePresence>
@@ -45,7 +46,7 @@ export function ConnectionStatus() {
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={transition}
           className="fixed left-0 right-0 top-16 z-[100] flex justify-center p-4 sm:top-4"
         >
           <div

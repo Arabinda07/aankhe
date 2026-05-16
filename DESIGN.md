@@ -2,11 +2,11 @@
 
 ## 1. Visual Theme & Atmosphere
 
-Parichay is a private personal manual studio. It turns careful answers into a finished artifact that feels worth saving or sending. The atmosphere is warm, exact, and intimate: sealed letters, sandal paper, smoked lac, rosewood ink, private manuals, high-end stationery, and emotional precision.
+Parichay is a private intro-page studio. It turns careful answers into a finished artifact that feels worth saving or sending. The atmosphere is warm, exact, and intimate: sealed letters, sandal paper, smoked lac, rosewood ink, private notes, composed manuals, high-end stationery, and emotional precision.
 
 Parichay is a sister site to Reflections, not a clone. Preserve Reflections' calm editorial rhythm, semantic tokens, generous whitespace, restrained motion, soft borders, artifact-first payoff, and trust-first language. Do not copy Reflections' botanical green brand, leaf identity, tone names, layouts, copy, icons, or motifs.
 
-- **Product feeling:** document studio, private manual, composed artifact.
+- **Product feeling:** private intro page, document studio, composed artifact.
 - **Density:** daily app balanced, with airy reading surfaces and focused controls.
 - **Variance:** centered reading columns for long text, asymmetric split composition for setup and builder views.
 - **Motion:** restrained state feedback, never cinematic or playful.
@@ -126,7 +126,7 @@ Use these classes before inventing ad hoc font sizes. Parichay uses a strict 5-s
 
 ## 4. Layout & Spacing System
 
-Parichay should feel like a document studio, not a marketing template or dashboard. Layouts should give the manual room to breathe while keeping choices easy to scan.
+Parichay should feel like a private document studio, not a marketing template or dashboard. Layouts should give the intro and finished artifact room to breathe while keeping choices easy to scan.
 
 ### Page Shells
 
@@ -300,7 +300,7 @@ Inputs should feel like writing on warm paper.
 - Reveal the full Share/Private/Hide segmented control only after the user chooses Change.
 - Put the visibility explanation behind a disclosure. Use included/private/omitted language in explanatory copy.
 - Escape actions such as "None of these fit" and "I am not ready to answer this" are text actions, not answer cards.
-- Skip is a quiet text action. Continue or Review Manual is the only strong action in the question footer.
+- Skip is a quiet text action. Continue or Review intro is the only strong action in the question footer.
 - The builder top navigation should be quiet: back to hub on the left, optional preview/manual return on the right, no Draft/Artifact segmented selector while answering.
 
 ### Header And Footer
@@ -370,7 +370,7 @@ Canonical language:
 - Use `Share`, `Private`, `Hide` for direct controls.
 - Use `included`, `private`, `omitted` in explanatory copy.
 - Prefer "Nothing is stored. Nothing is uploaded. You choose what leaves the page."
-- Prefer "Your manual will start taking shape here." for empty artifact states.
+- Prefer "Your intro will start taking shape here." for empty artifact states.
 - Avoid technical privacy explanations when a clear human sentence will do.
 
 ## 10. Voice & Copy

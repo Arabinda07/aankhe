@@ -16,11 +16,12 @@
  */
 
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { CaretLeft } from "@phosphor-icons/react/dist/csr/CaretLeft";
 import { Eye } from "@phosphor-icons/react/dist/csr/Eye";
 import { EyeSlash } from "@phosphor-icons/react/dist/csr/EyeSlash";
 import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
+import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import { answerValueIsPresent, getSensitiveSkipAction } from "../lib/answerUiPolicy";
 import type { Question, Visibility } from "../lib/schemaTypes";
@@ -329,6 +330,9 @@ function VisibilityOption({
   icon: ReactNode;
   label: string;
 }) {
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] };
+
   return (
     <RadioGroup.Item
       value={value}
@@ -351,19 +355,10 @@ function VisibilityOption({
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={transition}
             className="flex items-center ml-1"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 256 256"
-              width="14"
-              height="14"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
-            </svg>
+            <CheckCircle size={14} weight="fill" aria-hidden="true" />
           </motion.span>
         )}
       </AnimatePresence>

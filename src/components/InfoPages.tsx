@@ -28,13 +28,13 @@ export function PrivacyPage() {
       <section className="px-2 py-12 md:px-8">
         <h2 className="type-reading-heading text-parichay-heading">What can leave the page</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <VisibilityRule icon={<Eye size={22} weight="light" />} title="Included">
+          <VisibilityRule icon={<Eye size={24} weight="light" />} title="Included">
             May appear in preview, export, QR code, and shared links.
           </VisibilityRule>
-          <VisibilityRule icon={<LockKey size={22} weight="light" />} title="Private">
+          <VisibilityRule icon={<LockKey size={24} weight="light" />} title="Private">
             Stays local. It never enters shared links or public exports.
           </VisibilityRule>
-          <VisibilityRule icon={<EyeSlash size={22} weight="light" />} title="Omitted">
+          <VisibilityRule icon={<EyeSlash size={24} weight="light" />} title="Omitted">
             Left out of preview, share, and export.
           </VisibilityRule>
         </div>
@@ -177,13 +177,13 @@ export function HowItWorksPage() {
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          <VisibilityRule icon={<Eye size={22} weight="light" />} title="Share">
+          <VisibilityRule icon={<Eye size={24} weight="light" />} title="Share">
             Included in the intro page, link, and export.
           </VisibilityRule>
-          <VisibilityRule icon={<LockKey size={22} weight="light" />} title="Private">
+          <VisibilityRule icon={<LockKey size={24} weight="light" />} title="Private">
             Kept here for your own reference.
           </VisibilityRule>
-          <VisibilityRule icon={<EyeSlash size={22} weight="light" />} title="Hide">
+          <VisibilityRule icon={<EyeSlash size={24} weight="light" />} title="Hide">
             Left out completely.
           </VisibilityRule>
         </div>

@@ -58,7 +58,7 @@ export function BottomSheet({
                 initial={{ y: prefersReducedMotion ? 0 : "100%" }}
                 animate={{ y: 0 }}
                 exit={{ y: prefersReducedMotion ? 0 : "100%" }}
-                transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", bounce: 0, duration: 0.42 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 drag={prefersReducedMotion ? false : "y"}
                 dragDirectionLock
                 dragConstraints={{ top: 0, bottom: 0 }}

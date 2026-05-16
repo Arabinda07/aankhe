@@ -15,10 +15,12 @@ export function useArtifactExport(
   const [isExporting, setIsExporting] = useState(false);
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
+  const [exportError, setExportError] = useState(false);
 
   const exportAsImage = async () => {
     if (!artifactRef.current) return;
     setIsExporting(true);
+    setExportError(false);
     document.documentElement.setAttribute("data-exporting", "true");
     try {
       const pageColor =
@@ -37,6 +39,7 @@ export function useArtifactExport(
       link.click();
     } catch (err) {
       console.error("Oops, something went wrong!", err);
+      setExportError(true);
     } finally {
       setIsExporting(false);
       document.documentElement.removeAttribute("data-exporting");
@@ -63,6 +66,7 @@ export function useArtifactExport(
     isExporting,
     copied,
     copyError,
+    exportError,
     exportAsImage,
     printManual,
     copyLink

@@ -307,9 +307,11 @@
   --color-parichay-surface-halo: var(--color-surface-halo);
   --color-parichay-surface-halo-hover: var(--color-surface-halo-hover);
   --color-parichay-surface-preview: var(--color-surface-preview);
+  --color-parichay-surface-hover: color-mix(in oklch, var(--color-surface) 95%, var(--color-text) 5%);
   --color-parichay-overlay: var(--color-overlay);
   --color-parichay-text: var(--color-text);
   --color-parichay-muted: var(--color-text-muted);
+  --color-parichay-text-soft: var(--color-text-soft);
   --color-parichay-heading: var(--color-heading);
   --color-parichay-border: var(--color-border);
   --color-parichay-border-strong: var(--color-border-strong);
@@ -328,6 +330,12 @@
   --color-parichay-on-accent: var(--color-on-accent);
   --color-parichay-sandal: var(--color-sandal);
   --color-parichay-sandal-soft: var(--color-sandal-soft);
+  --color-parichay-plum: var(--color-plum);
+  --color-parichay-plum-soft: var(--color-plum-soft);
+  --color-parichay-private: var(--color-private);
+  --color-parichay-private-soft: var(--color-private-soft);
+  --color-parichay-hidden: var(--color-hidden);
+  --color-parichay-hidden-soft: var(--color-hidden-soft);
   --color-parichay-danger: var(--color-danger);
   --color-parichay-danger-soft: var(--color-danger-soft);
   --color-parichay-footer: var(--color-footer);

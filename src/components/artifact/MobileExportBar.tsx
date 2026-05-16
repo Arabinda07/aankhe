@@ -4,6 +4,8 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 
 interface MobileExportBarProps {
   copied: boolean;
+  copyError?: boolean;
+  exportError?: boolean;
   isExporting: boolean;
   onCopyLink: () => void;
   onExportImage: () => void;
@@ -11,6 +13,8 @@ interface MobileExportBarProps {
 
 export function MobileExportBar({
   copied,
+  copyError,
+  exportError,
   isExporting,
   onCopyLink,
   onExportImage,
@@ -27,7 +31,7 @@ export function MobileExportBar({
         className="type-ui-label inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-parichay-accent px-3 text-parichay-on-accent transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:px-4"
       >
         <Copy size={18} weight="light" />
-        {copied ? "Copied" : "Copy link"}
+        {copied ? "Copied" : copyError ? "Copy failed" : "Copy link"}
       </button>
       <button
         type="button"
@@ -36,7 +40,7 @@ export function MobileExportBar({
         className="type-ui-label inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-control px-3 text-parichay-text transition-colors hover:bg-parichay-control-hover disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:px-4"
       >
         <DownloadSimple size={18} weight="light" />
-        {isExporting ? "Exporting" : "Export image"}
+        {isExporting ? "Exporting" : exportError ? "Export failed" : "Export image"}
       </button>
     </div>
   );

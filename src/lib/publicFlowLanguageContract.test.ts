@@ -38,19 +38,19 @@ test("mobile menu keeps public navigation simple", () => {
   assert.doesNotMatch(mobileHeaderMenu, /Manual shortcuts/);
 });
 
-test("landing restores story-led hero copy while keeping intro CTA language", () => {
-  assert.match(switchboard, /Curate your life story/);
+test("landing uses current intro-page hero copy", () => {
+  assert.match(switchboard, /Your story always ready/);
   assert.match(
     switchboard,
-    /Write the stuff people usually miss\. Keep private answers private\. Share only the version you mean to send\./,
+    /Create a personal intro page for the way you work, communicate, and want to be understood\./,
   );
   assert.match(switchboardSetup, /label: "Work"/);
   assert.match(switchboardSetup, /For a manager, teammate, client, or collaborator who needs the useful version\./);
-  assert.match(switchboardSetup, /label: "Close"/);
+  assert.match(switchboardSetup, /label: "Someone close"/);
   assert.match(switchboardSetup, /For someone who cares about you and wants fewer wrong guesses\./);
   assert.match(switchboardSetup, /label: "Hard conversation"/);
   assert.match(switchboardSetup, /For a note before something you do not want to fumble\./);
-  assert.match(switchboardSetup, /label: "Us"/);
+  assert.match(switchboardSetup, /label: "Two of us"/);
   assert.match(switchboardSetup, /For two people trying to stop explaining the same thing twice\./);
   assert.doesNotMatch(switchboard, /Make yourself easier to understand\./);
   assert.doesNotMatch(switchboard, /Curate Your Life Story/);
@@ -80,7 +80,7 @@ test("how it works page explains Parichay with concrete trust copy", () => {
 
 test("question flow separates exiting from previous question navigation", () => {
   assert.match(manualBuilder, />\s*Exit intro\s*</);
-  assert.match(questionStep, />\s*Previous question\s*</);
+  assert.match(questionStep, />\s*Previous\s*</);
   assert.doesNotMatch(manualBuilder, /<EmptyState variant="first-run" \/>/);
   assert.doesNotMatch(emptyState, /Your intro is blank/);
 });

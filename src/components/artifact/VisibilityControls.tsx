@@ -11,7 +11,7 @@ import * as RadioGroup from "@radix-ui/react-radio-group";
 import * as Tabs from "@radix-ui/react-tabs";
 import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import { cn } from "../../lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 interface VisibilityControlsProps {
   config: ModeConfig;
@@ -108,6 +108,8 @@ export function ShareFormatPicker({
   onViewModeChange: (viewMode: ManualViewMode) => void;
 }) {
   const { manual } = policy;
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] };
 
   return (
     <section className="space-y-4 rounded-lg border border-parichay-border bg-parichay-surface p-5 md:p-6">
@@ -141,7 +143,7 @@ export function ShareFormatPicker({
                     initial={{ scale: 0.5, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.5, opacity: 0 }}
-                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    transition={transition}
                     className="flex items-center"
                   >
                     <CheckCircle size={16} weight="fill" className="text-parichay-accent-dark" aria-label="Selected" />
@@ -235,6 +237,8 @@ export function ToneOptionsDisclosure({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { manual } = policy;
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] };
 
   return (
     <section className="rounded-lg border border-parichay-border bg-parichay-surface p-5 md:p-6">
@@ -275,7 +279,7 @@ export function ToneOptionsDisclosure({
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        transition={transition}
                         className="flex items-center"
                       >
                         <CheckCircle size={14} weight="fill" className="text-parichay-accent-dark" aria-label="Selected" />

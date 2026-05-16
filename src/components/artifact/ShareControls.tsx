@@ -19,6 +19,7 @@ interface ShareControlsProps {
   storageMode: StorageMode;
   sharedUrl: string;
   copied: boolean;
+  copyError?: boolean;
   onCopyLink: () => void;
   onCreateLink: () => void;
 }
@@ -27,6 +28,7 @@ export function ShareControls({
   storageMode,
   sharedUrl,
   copied,
+  copyError,
   onCopyLink,
   onCreateLink,
 }: ShareControlsProps) {
@@ -69,6 +71,12 @@ export function ShareControls({
               </Tooltip.Root>
             </Tooltip.Provider>
           </div>
+          {copyError && (
+            <p className="type-caption flex items-center gap-1.5 text-parichay-danger">
+              <WarningCircle size={16} weight="fill" />
+              Copy failed. Please try copying the text manually.
+            </p>
+          )}
 
           {sharedUrl.length > 2000 && (
             <div className="type-caption flex gap-3 rounded-sm border border-parichay-danger/25 bg-parichay-danger-soft p-3 text-parichay-danger">

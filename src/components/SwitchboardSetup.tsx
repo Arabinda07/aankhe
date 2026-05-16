@@ -13,7 +13,7 @@ import { UsersThree } from "@phosphor-icons/react/dist/csr/UsersThree";
 import { CheckCircle } from "@phosphor-icons/react/dist/csr/CheckCircle";
 import type React from "react";
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ManualDepth, ModeId, OnboardingContext } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { SoftButton } from "./SoftButton";
@@ -35,10 +35,10 @@ interface RecipientOption {
 }
 
 const RECIPIENTS: RecipientOption[] = [
-  { id: "manager", label: "Work", description: "For a manager, teammate, client, or collaborator who needs the useful version.", mode: "work", icon: <Briefcase size={22} weight="light" /> },
-  { id: "partner", label: "Someone close", description: "For someone who cares about you and wants fewer wrong guesses.", mode: "me", icon: <Handshake size={22} weight="light" /> },
-  { id: "talk", label: "Hard conversation", description: "For a note before something you do not want to fumble.", mode: "talk", icon: <EnvelopeSimple size={22} weight="light" /> },
-  { id: "sync", label: "Two of us", description: "For two people trying to stop explaining the same thing twice.", mode: "us", icon: <UsersThree size={22} weight="light" /> },
+  { id: "manager", label: "Work", description: "For a manager, teammate, client, or collaborator who needs the useful version.", mode: "work", icon: <Briefcase size={24} weight="light" /> },
+  { id: "partner", label: "Someone close", description: "For someone who cares about you and wants fewer wrong guesses.", mode: "me", icon: <Handshake size={24} weight="light" /> },
+  { id: "talk", label: "Hard conversation", description: "For a note before something you do not want to fumble.", mode: "talk", icon: <EnvelopeSimple size={24} weight="light" /> },
+  { id: "sync", label: "Two of us", description: "For two people trying to stop explaining the same thing twice.", mode: "us", icon: <UsersThree size={24} weight="light" /> },
 ];
 
 const MISREAD_TOPICS = [
@@ -137,7 +137,7 @@ export function SwitchboardSetup({ onStart, onManualIntentPreload }: Switchboard
                       active={depth === item.id}
                       title={item.label}
                       description={item.description}
-                      icon={<FileText size={22} weight="light" />}
+                      icon={<FileText size={24} weight="light" />}
                       onClick={() => setDepth(item.id)}
                     />
                   </div>
@@ -204,6 +204,9 @@ function ChoiceCard({
   icon: React.ReactNode;
   onClick: () => void;
 }) {
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] };
+
   return (
     <button
       type="button"
@@ -225,7 +228,7 @@ function ChoiceCard({
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.5, opacity: 0 }}
-                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={transition}
                 className="text-parichay-accent flex items-center"
               >
                 <CheckCircle size={16} weight="fill" aria-label="Selected" />
@@ -244,6 +247,9 @@ function ChoiceCard({
 }
 
 function SmallChoice({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] };
+
   return (
     <button
       type="button"
@@ -264,7 +270,7 @@ function SmallChoice({ active, onClick, children }: { active: boolean; onClick: 
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={transition}
               className="flex items-center"
             >
               <CheckCircle size={14} weight="fill" aria-label="Selected" />

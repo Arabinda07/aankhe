@@ -60,6 +60,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
     isExporting,
     copied,
     copyError,
+    exportError,
     exportAsImage,
     printManual,
     copyLink
@@ -198,6 +199,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
             <div className="hidden space-y-8 sm:block">
               <ExportControls
                 isExporting={isExporting}
+                exportError={exportError}
                 viewMode={viewMode}
                 onExportImage={exportAsImage}
                 onPrint={printManual}
@@ -206,12 +208,15 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
                 storageMode={workspace.storageMode}
                 sharedUrl={policy.sharedUrl}
                 copied={copied}
+                copyError={copyError}
                 onCopyLink={copyIncludedLink}
                 onCreateLink={() => workspace.setStorageMode("url")}
               />
             </div>
             <MobileExportBar
               copied={copied}
+              copyError={copyError}
+              exportError={exportError}
               isExporting={isExporting}
               onCopyLink={copyIncludedLink}
               onExportImage={exportAsImage}

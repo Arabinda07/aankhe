@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { DownloadSimple } from "@phosphor-icons/react/dist/csr/DownloadSimple";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 // @ts-expect-error - virtual module provided by vite-plugin-pwa
 import { useRegisterSW } from "virtual:pwa-register/react";
 
 export function UpdatePrompt() {
+  const prefersReducedMotion = useReducedMotion();
   const {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
@@ -28,6 +29,8 @@ export function UpdatePrompt() {
     }
   }, [needRefresh, setNeedRefresh]);
 
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.4, ease: [0.16, 1, 0.3, 1] };
+
   return (
     <AnimatePresence>
       {needRefresh && (
@@ -35,7 +38,7 @@ export function UpdatePrompt() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={transition}
           className="fixed bottom-24 left-4 right-4 z-[100] mx-auto max-w-sm rounded-lg border border-parichay-border bg-parichay-surface p-4 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1)] sm:bottom-6 sm:left-auto sm:right-6"
         >
           <div className="flex gap-3">

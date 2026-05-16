@@ -111,11 +111,11 @@ export function ManualBuilder({
       };
   const progressTransition = prefersReducedMotion
     ? { duration: 0 }
-    : { type: "spring", bounce: 0, duration: 0.5 };
+    : { duration: 0.3, ease: [0.16, 1, 0.3, 1] };
 
   return (
     <div
-      className="w-full font-sans transition-colors duration-700 bg-parichay-bg text-parichay-text relative"
+      className="w-full font-sans transition-colors bg-parichay-bg text-parichay-text relative"
       {...swipeBackHandlers}
     >
       {/* Builder Toolbar */}

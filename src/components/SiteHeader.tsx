@@ -92,7 +92,7 @@ export function SiteHeader() {
             onPointerEnter={prepareMobileMenu}
             className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-parichay-border bg-parichay-control text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:hidden"
           >
-            <List size={22} weight="bold" aria-hidden="true" />
+            <List size={24} weight="bold" aria-hidden="true" />
           </button>
         </div>
       </div>
