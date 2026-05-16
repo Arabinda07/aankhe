@@ -39,7 +39,7 @@ export function BottomSheet({
           <Dialog.Portal forceMount>
             <Dialog.Overlay asChild>
               <motion.div
-                className="fixed inset-0 z-[70] bg-black/30"
+                className="fixed inset-0 z-[70] bg-parichay-overlay"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -53,7 +53,7 @@ export function BottomSheet({
               <motion.div
                 id={contentId}
                 className={cn(
-                  "fixed inset-x-0 bottom-0 z-[80] mx-auto max-h-[88dvh] w-full max-w-xl overflow-y-auto rounded-t-2xl border border-parichay-border bg-parichay-surface p-5 pb-[calc(1.25rem+var(--safe-area-bottom))] text-parichay-text shadow-sm focus:outline-none",
+                  "fixed inset-x-0 bottom-0 z-[80] mx-auto max-h-[88dvh] w-full max-w-xl overflow-y-auto rounded-t-lg border border-parichay-border bg-parichay-surface p-5 pb-[calc(1.25rem+var(--safe-area-bottom))] text-parichay-text shadow-sm focus:outline-none",
                   className
                 )}
                 initial={{ y: prefersReducedMotion ? 0 : "100%" }}
@@ -74,7 +74,7 @@ export function BottomSheet({
                   <button
                     type="button"
                     aria-label="Close"
-                    className="absolute right-4 top-4 inline-flex min-h-10 min-w-10 items-center justify-center rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+                    className="absolute right-4 top-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
                   >
                     <X size={18} weight="bold" aria-hidden="true" />
                   </button>

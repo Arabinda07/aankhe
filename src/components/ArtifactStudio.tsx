@@ -66,7 +66,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
   };
 
   return (
-    <div className="space-y-12 pb-24">
+    <div className="min-w-0 space-y-12 pb-24">
       <div aria-live="polite" className="sr-only">
         {copied ? "Link copied to clipboard" : ""}
         {copyError ? "Could not copy the link" : ""}
@@ -90,9 +90,9 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
       </div>
 
       {activeTab === "preview" && (
-        <div className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
           <PreviewFrame artifactRef={artifactRef} policy={policy} mode={workspace.mode} />
-          <div className="space-y-4 lg:sticky lg:top-28">
+          <div className="min-w-0 space-y-4 lg:sticky lg:top-28">
             <PreviewModeToggle
               policy={policy}
               viewMode={viewMode}
@@ -149,9 +149,9 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
       )}
 
       {activeTab === "send" && (
-        <div className="grid gap-10 lg:grid-cols-[1fr_400px] lg:items-start">
+        <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
           <PreviewFrame artifactRef={artifactRef} policy={policy} mode={workspace.mode} />
-          <div className="space-y-8 lg:sticky lg:top-28">
+          <div className="min-w-0 space-y-8 lg:sticky lg:top-28">
             <ExportControls
               isExporting={isExporting}
               viewMode={viewMode}
@@ -216,8 +216,8 @@ function PreviewFrame({
   mode: ManualWorkspace["mode"];
 }) {
   return (
-    <div className="overflow-hidden rounded-bezel-outer bg-parichay-surface-preview p-3 md:p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-      <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-bezel-inner border border-parichay-paper-border bg-parichay-paper max-sm:max-h-[55dvh] max-sm:overflow-y-auto">
+    <div className="min-w-0 overflow-hidden rounded-bezel-outer bg-parichay-surface-preview p-3 md:p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+      <div ref={artifactRef} className="mx-auto w-full max-w-full lg:max-w-3xl origin-top overflow-hidden rounded-bezel-inner border border-parichay-paper-border bg-parichay-paper max-sm:max-h-[55dvh] max-sm:overflow-y-auto">
         <ManualPreview manual={policy.manual} mode={mode} className="max-h-none border-none shadow-none" />
       </div>
     </div>

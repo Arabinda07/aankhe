@@ -34,7 +34,7 @@ export function ShareControls({
   const qrPanelId = useId();
 
   return (
-    <div className="bg-parichay-surface p-8 space-y-8 rounded-lg border border-parichay-border shadow-sm">
+    <div className="min-w-0 bg-parichay-surface p-6 space-y-8 rounded-lg border border-parichay-border shadow-sm sm:p-8">
       <h3 className="type-panel-title text-parichay-heading flex items-center gap-2">
         <EnvelopeSimple size={20} className="text-parichay-accent" weight="light" />
         Share link
@@ -42,8 +42,8 @@ export function ShareControls({
 
       {storageMode === "url" ? (
         <div className="space-y-6">
-          <div className="flex items-center gap-2 p-2 bg-parichay-control-selected rounded-sm border border-parichay-border">
-            <div className="type-caption font-mono flex-1 truncate text-parichay-muted pl-2">
+          <div className="flex min-w-0 items-center gap-2 p-2 bg-parichay-control-selected rounded-sm border border-parichay-border">
+            <div className="type-caption min-w-0 flex-1 truncate pl-2 font-mono text-parichay-muted">
               {sharedUrl}
             </div>
             <Tooltip.Provider delayDuration={250}>
@@ -95,10 +95,11 @@ export function ShareControls({
                 <Popover.Content
                   id={qrPanelId}
                   sideOffset={12}
+                  collisionPadding={16}
                   align="center"
-                  className="z-50 bg-parichay-paper p-6 rounded-sm border border-parichay-paper-border flex flex-col items-center gap-4 shadow-sm"
+                  className="z-50 flex w-[min(calc(100vw-2rem),20rem)] max-w-[calc(100vw-2rem)] flex-col items-center gap-4 rounded-sm border border-parichay-paper-border bg-parichay-paper p-5 shadow-sm sm:p-6"
                 >
-                  <QRCodeSVG value={sharedUrl} size={200} level="M" />
+                  <QRCodeSVG value={sharedUrl} size={200} level="M" className="h-auto max-w-full" />
                   <p className="type-caption max-w-56 text-center text-parichay-muted">
                     Scan to open this intro on another device.
                   </p>

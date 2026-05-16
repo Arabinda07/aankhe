@@ -70,6 +70,21 @@ export function QuestionStep({
   const hasAnswer = answerValueIsPresent(value);
   const hasNote = note.trim().length > 0;
   const showAnswerDetails = hasAnswer || hasNote;
+  const [isNuanceOpen, setIsNuanceOpen] = useState(hasNote);
+  const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
+  const visibilityLabel = getVisibilityLabel(visibility);
+  const visibilityIcon = getVisibilityIcon(visibility);
+
+  useEffect(() => {
+    setIsNuanceOpen(note.trim().length > 0);
+    setIsVisibilityOpen(false);
+  }, [question.id]);
+
+  useEffect(() => {
+    if (isNuanceOpen) {
+      noteRef.current?.focus();
+    }
+  }, [isNuanceOpen]);
 
   const handleChange = useCallback((val: string | string[] | number) => {
     onChange(val);
@@ -121,32 +136,78 @@ export function QuestionStep({
       </div>
 
       {showAnswerDetails && (
-        <div className="space-y-6 pt-4 border-t border-parichay-border/40 mt-2">
-          <div className="space-y-2">
-            <label htmlFor={`${question.id}-note`} className="type-caption block text-parichay-text font-semibold">
-              Add nuance (optional)
-            </label>
-            <textarea
-              ref={noteRef}
-              id={`${question.id}-note`}
-              value={note}
-              onChange={(event) => onNoteChange(event.target.value)}
-              rows={2}
-              placeholder="Add context only if this answer needs your words."
-              className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
-            />
-          </div>
+        <div className="space-y-4 pt-4 border-t border-parichay-border/40 mt-2">
+          {isNuanceOpen ? (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-3">
+                <label htmlFor={`${question.id}-note`} className="type-caption block text-parichay-text font-semibold">
+                  Nuance (optional)
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setIsNuanceOpen(false)}
+                  className="type-caption min-h-11 px-2 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+                >
+                  Collapse
+                </button>
+              </div>
+              <textarea
+                ref={noteRef}
+                id={`${question.id}-note`}
+                value={note}
+                onChange={(event) => onNoteChange(event.target.value)}
+                rows={2}
+                placeholder="Add context only if this answer needs your words."
+                className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
+              />
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsNuanceOpen(true)}
+              className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+            >
+              {hasNote ? "Edit nuance" : "Add nuance"}
+            </button>
+          )}
 
-          <div className="space-y-2">
-            <VisibilityControl
-              questionId={question.id}
-              visibility={visibility}
-              onVisibilityChange={onVisibilityChange}
-              describedBy={visibilityDescriptionId}
-            />
-            <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-parichay-muted">
-              Share means included in links and exports. Private stays here. Hide leaves it out of the intro.
-            </p>
+          <div className="space-y-3">
+            <div className="flex min-h-11 flex-wrap items-center justify-between gap-3 rounded-sm border border-parichay-border bg-parichay-control-selected px-3 py-2">
+              <p className="type-caption flex items-center gap-2 text-parichay-text">
+                {visibilityIcon}
+                <span>
+                  Visibility: <span className="font-semibold">{visibilityLabel}</span>
+                </span>
+              </p>
+              <button
+                type="button"
+                onClick={() => setIsVisibilityOpen((current) => !current)}
+                aria-expanded={isVisibilityOpen}
+                aria-controls={`${question.id}-visibility-panel`}
+                className="type-ui-label min-h-11 px-2 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+              >
+                Change
+              </button>
+            </div>
+
+            {isVisibilityOpen && (
+              <div id={`${question.id}-visibility-panel`} className="space-y-3">
+                <VisibilityControl
+                  questionId={question.id}
+                  visibility={visibility}
+                  onVisibilityChange={onVisibilityChange}
+                  describedBy={visibilityDescriptionId}
+                />
+                <details className="group rounded-sm border border-parichay-border bg-parichay-sandal-soft px-3 py-2">
+                  <summary className="type-caption min-h-11 cursor-pointer list-none py-2 text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2">
+                    What this means
+                  </summary>
+                  <p id={visibilityDescriptionId} className="type-caption pb-2 text-parichay-muted">
+                    Included answers can appear in links and exports. Private stays here. Omitted leaves it out.
+                  </p>
+                </details>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -180,6 +241,18 @@ export function QuestionStep({
       </div>
     </div>
   );
+}
+
+function getVisibilityLabel(visibility: Visibility): string {
+  if (visibility === "private") return "Private";
+  if (visibility === "hide") return "Hide";
+  return "Share";
+}
+
+function getVisibilityIcon(visibility: Visibility): ReactNode {
+  if (visibility === "private") return <LockKey size={16} weight="light" aria-hidden="true" />;
+  if (visibility === "hide") return <EyeSlash size={16} weight="light" aria-hidden="true" />;
+  return <Eye size={16} weight="light" aria-hidden="true" />;
 }
 
 // ── Visibility sub-components (stay here — they're QuestionStep-specific) ──

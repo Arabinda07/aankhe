@@ -61,10 +61,7 @@ test("artifact studio policy composes the selected preview and share URL", () =>
 test("artifact studio policy keeps option vocabularies out of the controls", () => {
   assert.deepEqual(ARTIFACT_FORMAT_OPTIONS.map((option) => option.id), [
     "full",
-    "onePage",
-    "note",
-    "conversation",
-    "work",
+    "summary",
     "private",
   ]);
   assert.deepEqual(ARTIFACT_TONE_OPTIONS.map((option) => option.id), [

@@ -23,6 +23,13 @@ import {
 } from "../lib/manualWorkspace";
 export type { ManualWorkspace } from "../lib/manualWorkspace";
 
+export function shouldShowHashRestoreError(
+  hash: string | undefined,
+  savedState: ManualState | null
+): boolean {
+  return Boolean(hash?.startsWith("#s=") && !savedState);
+}
+
 export interface UseManualStateOptions {
   initialMode?: string;
   initialOnboarding?: OnboardingContext;
@@ -48,6 +55,9 @@ export function useManualState(options: UseManualStateOptions = {}) {
       // Create initial provider based on current hash state if it exists
       const initialProvider = createStorageProvider("url", () => setHashError(true));
       const saved = initialProvider.load();
+      if (shouldShowHashRestoreError(window.location.hash, saved)) {
+        setHashError(true);
+      }
       if (saved) {
         setState(saved);
         setProvider(createStorageProvider(saved.storageMode, () => setHashError(true)));
@@ -75,6 +85,7 @@ export function useManualState(options: UseManualStateOptions = {}) {
 
   const clearHashError = useCallback(() => {
     setHashError(false);
+    createStorageProvider("url").clear();
     provider.clear();
   }, [provider]);
 

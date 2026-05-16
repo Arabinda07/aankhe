@@ -122,7 +122,7 @@ export function ManualBuilder({
         <nav aria-label="Intro builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <button
             onClick={onBack}
-            className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
+            className="type-ui-label inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:min-w-0 sm:justify-start"
             aria-label="Exit intro"
           >
             <CaretLeft size={20} weight="light" />
@@ -140,7 +140,7 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("artifact")}
-                className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
+                className="type-ui-label inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:min-w-0 sm:justify-start"
               >
                 <BookOpenText size={18} weight="light" />
                 <span className="sm:hidden">Preview</span>
@@ -151,7 +151,7 @@ export function ManualBuilder({
               <button
                 type="button"
                 onClick={() => setView("build")}
-                className="type-ui-label flex items-center gap-2 text-parichay-muted hover:text-parichay-text transition-colors"
+                className="type-ui-label inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-2 text-parichay-muted transition-colors hover:bg-parichay-control-hover hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:min-w-0 sm:justify-start"
               >
                 <FileText size={18} weight="light" />
                 <span className="hidden sm:inline">Back to answers</span>

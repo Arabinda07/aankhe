@@ -20,11 +20,11 @@ export function MobileExportBar({
   if (!isMobile) return null;
 
   return (
-    <div className="sticky z-40 -mx-6 flex items-center gap-3 border-t border-parichay-border bg-parichay-surface px-5 py-3 bottom-[var(--mobile-nav-total)]">
+    <div className="sticky z-40 -mx-6 flex min-w-0 max-w-[calc(100%+3rem)] items-center gap-3 border-t border-parichay-border bg-parichay-surface px-5 py-3 bottom-[var(--mobile-nav-total)]">
       <button
         type="button"
         onClick={onCopyLink}
-        className="type-ui-label inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-parichay-accent px-4 text-parichay-on-accent transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+        className="type-ui-label inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-parichay-accent px-3 text-parichay-on-accent transition-colors hover:bg-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:px-4"
       >
         <Copy size={18} weight="light" />
         {copied ? "Copied" : "Copy link"}
@@ -33,7 +33,7 @@ export function MobileExportBar({
         type="button"
         onClick={onExportImage}
         disabled={isExporting}
-        className="type-ui-label inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-control px-4 text-parichay-text transition-colors hover:bg-parichay-control-hover disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
+        className="type-ui-label inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md border border-parichay-border bg-parichay-control px-3 text-parichay-text transition-colors hover:bg-parichay-control-hover disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2 sm:px-4"
       >
         <DownloadSimple size={18} weight="light" />
         {isExporting ? "Exporting" : "Export image"}

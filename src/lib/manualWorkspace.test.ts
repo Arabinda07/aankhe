@@ -73,6 +73,6 @@ test("manual workspace exposes answer notes and visibility through one interface
 
 test("manual workspace chooses default artifact formats from onboarding context", () => {
   assert.equal(defaultArtifactFormat(), "full");
-  assert.equal(defaultArtifactFormat({ recipient: "a friend", misunderstanding: "", depth: "note" }), "note");
-  assert.equal(defaultArtifactFormat({ recipient: "my manager", misunderstanding: "", depth: "manual" }), "work");
+  assert.equal(defaultArtifactFormat({ recipient: "a friend", misunderstanding: "", depth: "note" }), "summary");
+  assert.equal(defaultArtifactFormat({ recipient: "my manager", misunderstanding: "", depth: "manual" }), "full");
 });
