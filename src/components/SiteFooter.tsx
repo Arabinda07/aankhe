@@ -14,7 +14,7 @@ export function SiteFooter() {
         >
           <FooterLink to="/" className="hidden sm:inline-flex">Home</FooterLink>
           <FooterLink to="/how-it-works" className="hidden sm:inline-flex">How it works</FooterLink>
-          <FooterLink to="/privacy">Privacy</FooterLink>
+          <FooterLink to="/privacy" className="hidden sm:inline-flex">Privacy</FooterLink>
           <FooterLink to="/#onboarding" className="hidden sm:inline-flex">Create intro</FooterLink>
         </nav>
 

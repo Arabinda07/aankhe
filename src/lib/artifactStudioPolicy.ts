@@ -35,10 +35,7 @@ export interface ArtifactStudioPolicy {
 
 export const ARTIFACT_FORMAT_OPTIONS: readonly ArtifactFormatOption[] = [
   { id: "full", label: "Full intro", description: "A complete version with all included sections." },
-  { id: "onePage", label: "One-page intro", description: "A shorter intro for quick reading." },
-  { id: "note", label: "Conversation note", description: "A compact note for one hard conversation." },
-  { id: "conversation", label: "Conversation brief", description: "A focused brief for opening a specific talk." },
-  { id: "work", label: "Work intro", description: "A focused version for professional context." },
+  { id: "summary", label: "Summary intro", description: "A focused, shorter version for quick reading." },
   { id: "private", label: "Private copy", description: "A local copy for yourself." },
 ];
 

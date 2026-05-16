@@ -116,9 +116,9 @@ export function createManualWorkspace(
 
 export function defaultArtifactFormat(onboarding?: OnboardingContext): ArtifactFormat {
   if (!onboarding) return "full";
-  if (onboarding.depth === "note") return "note";
+  if (onboarding.depth === "note") return "summary";
   if (onboarding.recipient.includes("work") || onboarding.recipient.includes("manager") || onboarding.recipient.includes("teammate")) {
-    return "work";
+    return "full";
   }
 
   return "full";

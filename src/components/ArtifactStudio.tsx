@@ -73,7 +73,7 @@ export function ArtifactStudio({ manual: workspace }: ArtifactStudioProps) {
         {isExporting ? "Exporting image..." : ""}
       </div>
       <div className="space-y-4 text-center md:text-left">
-        <h2 className="type-display text-parichay-heading">Your intro is ready</h2>
+        <h2 className="type-serif-title-page text-parichay-heading">Your intro is ready</h2>
         <p className="type-lead text-parichay-muted">Review what people will see before you send it.</p>
       </div>
 
@@ -216,8 +216,8 @@ function PreviewFrame({
   mode: ManualWorkspace["mode"];
 }) {
   return (
-    <div className="overflow-hidden rounded-lg bg-parichay-surface-preview p-3 md:p-6">
-      <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-md border border-parichay-paper-border bg-parichay-paper max-sm:max-h-[55dvh] max-sm:overflow-y-auto">
+    <div className="overflow-hidden rounded-bezel-outer bg-parichay-surface-preview p-3 md:p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
+      <div ref={artifactRef} className="mx-auto w-full max-w-3xl origin-top overflow-hidden rounded-bezel-inner border border-parichay-paper-border bg-parichay-paper max-sm:max-h-[55dvh] max-sm:overflow-y-auto">
         <ManualPreview manual={policy.manual} mode={mode} className="max-h-none border-none shadow-none" />
       </div>
     </div>

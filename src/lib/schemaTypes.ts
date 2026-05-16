@@ -13,7 +13,7 @@ export type StorageMode = "memory" | "url";
 
 export type ManualDepth = "note" | "manual" | "deep";
 
-export type ArtifactFormat = "full" | "onePage" | "note" | "conversation" | "work" | "private";
+export type ArtifactFormat = "full" | "summary" | "private";
 
 export type TonePreference = "default" | "softer" | "direct" | "warmer" | "professional" | "shorter";
 
@@ -83,11 +83,16 @@ export interface ManualState {
   updatedAt: string;
 }
 
+export interface ComposedSectionDetail {
+  text: string;
+  isPrivate: boolean;
+}
+
 export interface ComposedSection {
   id: string;
   title: string;
   description: string;
-  details: string[];
+  details: ComposedSectionDetail[];
 }
 
 export interface ComposedManual {

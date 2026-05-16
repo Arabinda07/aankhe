@@ -118,7 +118,7 @@ export function ManualBuilder({
       {...swipeBackHandlers}
     >
       {/* Builder Toolbar */}
-      <div className="sticky top-14 z-40 w-full border-b border-parichay-border bg-parichay-bg/95 backdrop-blur-sm">
+      <div className="sticky top-14 z-40 w-full bg-parichay-bg/95 backdrop-blur-sm">
         <nav aria-label="Intro builder" className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <button
             onClick={onBack}
@@ -194,22 +194,14 @@ export function ManualBuilder({
                   <div className="space-y-8 md:space-y-10">
                     <div className="space-y-3 md:space-y-4">
                       <div className="type-meta flex items-center justify-between text-parichay-muted">
-                        <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded bg-parichay-surface-soft text-parichay-text">
+                        <div className="flex items-center gap-3">
+                          <span className="text-parichay-text">
                             Section {controller.sectionIndex + 1}
                           </span>
+                          <span aria-hidden="true" className="text-parichay-border/50">/</span>
                           <span>{controller.section?.title}</span>
                         </div>
                         <span>{controller.currentStepIndex + 1} / {controller.totalSteps}</span>
-                      </div>
-                      
-                      <div className="h-1.5 w-full overflow-hidden rounded-[3px] bg-parichay-surface-soft">
-                        <motion.div 
-                          className="h-full w-full bg-parichay-accent origin-left"
-                          initial={{ scaleX: prefersReducedMotion ? controller.progress / 100 : 0 }}
-                          animate={{ scaleX: controller.progress / 100 }}
-                          transition={progressTransition}
-                        />
                       </div>
                     </div>
 

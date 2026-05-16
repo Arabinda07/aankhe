@@ -58,9 +58,16 @@ export function PreviewModeToggle({
           <PreviewModeTab value="private" viewMode={viewMode}>What I see</PreviewModeTab>
         </Tabs.List>
       </Tabs.Root>
-      <p className="type-caption mt-3 text-parichay-muted">
-        {policy.previewDescription}
-      </p>
+      <div className="mt-3 space-y-2">
+        <p className="type-caption text-parichay-muted">
+          {policy.previewDescription}
+        </p>
+        {!policy.manual.hasPrivateItems && (
+          <p className="type-caption text-parichay-sandal">
+            No answers are marked private, so both views are identical.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

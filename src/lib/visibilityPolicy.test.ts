@@ -133,13 +133,13 @@ test("share URL preserves safe onboarding and artifact preferences but strips pr
     M_M_10: "They can see this note.",
     M_M_06: "They must not see this private note.",
   };
-  state.artifactFormat = "conversation";
+  state.artifactFormat = "summary";
   state.tone = "warmer";
 
   const sharedState = decodeHashFromUrl(generateSharedUrl(state));
 
   assert.deepEqual(sharedState.onboarding, state.onboarding);
-  assert.equal(sharedState.artifactFormat, "conversation");
+  assert.equal(sharedState.artifactFormat, "summary");
   assert.equal(sharedState.tone, "warmer");
   assert.deepEqual(sharedState.answerNotes, {
     M_M_10: "They can see this note.",
@@ -180,20 +180,20 @@ test("composer creates recognition summaries and handles directness with time to
 
 test("composer applies artifact formats and tone variants", () => {
   const state = makeState();
-  state.artifactFormat = "note";
+  state.artifactFormat = "summary";
   state.tone = "professional";
 
   const manual = composeManual(state, { viewMode: "included" });
 
-  assert.equal(manual.artifactFormat, "note");
+  assert.equal(manual.artifactFormat, "summary");
   assert.equal(manual.tone, "professional");
   assert.match(manual.recipientNote, /context/i);
   assert.ok(manual.sections.length <= 3);
-  assert.equal(manual.sections.some((section) => section.details.some((detail) => /I value clarity/i.test(detail))), true);
+  assert.equal(manual.sections.some((section) => section.details.some((detail) => /I value clarity/i.test(detail.text))), true);
 });
 
 test("each artifact format keeps private and hidden answers out of included view", () => {
-  const formats: ArtifactFormat[] = ["full", "onePage", "conversation", "work", "private"];
+  const formats: ArtifactFormat[] = ["full", "summary", "private"];
 
   for (const artifactFormat of formats) {
     const state = makeState();

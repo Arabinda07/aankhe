@@ -44,10 +44,11 @@ export function ScaleInput({ question, value, onChange, labelledBy, describedBy 
               checked={checked}
               onChange={() => onChange(scaleValue)}
               className="sr-only"
+              aria-label={anchor ? `${scaleValue}: ${anchor}` : String(scaleValue)}
             />
-            <span className="type-tabular block text-xl font-semibold">{scaleValue}</span>
-            <span className="type-caption mt-1 block text-parichay-muted">
-              {anchor || (scaleValue === min ? "Low" : scaleValue === max ? "High" : "Middle")}
+            <span className="type-tabular block text-xl font-semibold" aria-hidden="true">{scaleValue}</span>
+            <span className="type-caption mt-1 block text-parichay-muted" aria-hidden="true">
+              {anchor || (scaleValue === min ? "Low" : scaleValue === max ? "High" : "\u00A0")}
             </span>
           </label>
         );

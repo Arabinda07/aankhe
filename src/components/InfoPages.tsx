@@ -208,12 +208,12 @@ export function HowItWorksPage() {
 
       <section className="divide-y divide-parichay-border/60 border-t border-parichay-border/60 py-6">
         <div className="py-8">
-          <h2 className="type-reading-heading text-parichay-heading">Common questions</h2>
+          <h2 className="type-serif-title-page text-parichay-heading">Common questions</h2>
         </div>
-        {commonQuestions.map((item) => (
-          <div key={item.title} className="grid gap-3 py-8 md:grid-cols-[0.8fr_1.2fr]">
-            <h2 className="type-reading-heading text-parichay-heading">{item.title}</h2>
-            <p className="type-body text-parichay-muted">{item.text}</p>
+        {commonQuestions.map((question) => (
+          <div key={question.title} className="grid gap-3 py-8 md:grid-cols-[0.8fr_1.2fr]">
+            <h3 className="type-reading-heading text-parichay-heading">{question.title}</h3>
+            <p className="type-body text-parichay-muted">{question.text}</p>
           </div>
         ))}
       </section>

@@ -6,6 +6,7 @@
 import { ComposedManual, ComposedSection } from "../lib/schemaTypes";
 import { cn } from "../lib/utils";
 import { ModeId } from "../lib/schemaTypes";
+import { LockKey } from "@phosphor-icons/react/dist/csr/LockKey";
 
 interface ManualPreviewProps {
   manual: ComposedManual;
@@ -15,7 +16,7 @@ interface ManualPreviewProps {
 
 export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
   return (
-    <div data-mode={mode} className={cn("manual-preview-shell bg-parichay-paper md:rounded-md md:border md:border-parichay-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-[100dvh]", className)}>
+    <div data-mode={mode} className={cn("manual-preview-shell bg-parichay-paper md:rounded-bezel-inner md:border md:border-parichay-paper-border p-8 md:p-14 lg:p-16 overflow-y-auto max-h-[100dvh]", className)}>
       <div className="max-w-3xl mx-auto space-y-20">
         {/* Header */}
         <div className="space-y-6 border-b border-parichay-paper-border pb-16 text-center">
@@ -31,27 +32,18 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
           </div>
         </div>
 
-        <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-          <h2 className="type-meta text-parichay-muted mb-5 text-center">HOW TO READ THIS</h2>
-          <p className="type-artifact-prose text-parichay-text-soft">
-            {manual.recipientNote}
-          </p>
-        </section>
-
-        {/* At a Glance */}
-        {manual.atAGlance && (
+        {manual.artifactFormat !== "summary" && (
           <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-            <h2 className="type-meta text-parichay-muted mb-5 text-center">AT A GLANCE</h2>
-            <p className="type-artifact-prose text-parichay-text-soft">
-              {manual.atAGlance}
-            </p>
-          </section>
-        )}
-
-        {manual.recognitionSummaries.length > 1 && (
-          <section className="mx-auto max-w-2xl space-y-5 py-4 text-center">
-            <h2 className="type-meta text-parichay-muted mb-5 text-center">WHAT THIS IS NOTICING</h2>
-            <div className="space-y-5">
+            <h2 className="type-meta text-parichay-muted mb-5 text-center">CONTEXT</h2>
+            <div className="space-y-6">
+              <p className="type-artifact-prose text-parichay-text-soft">
+                {manual.recipientNote}
+              </p>
+              {manual.atAGlance && (
+                <p className="type-artifact-prose text-parichay-text-soft">
+                  {manual.atAGlance}
+                </p>
+              )}
               {manual.recognitionSummaries.slice(1, 3).map((summary) => (
                 <p key={summary} className="type-artifact-prose text-parichay-text">
                   {summary}
@@ -75,10 +67,21 @@ export function ManualPreview({ manual, mode, className }: ManualPreviewProps) {
               <div className="space-y-6">
                 {section.details.length > 0 && (
                   <div className="space-y-4">
-                    {section.details.map((p, i) => (
-                      <p key={i} className="type-artifact-prose text-parichay-text">
-                        {p}
-                      </p>
+                    {section.details.map((detail, i) => (
+                      <div 
+                        key={i} 
+                        className={cn(
+                          "type-artifact-prose flex gap-3", 
+                          "text-parichay-text"
+                        )}
+                      >
+                        {detail.isPrivate && (
+                          <span className="shrink-0 mt-[0.3em] text-parichay-private" aria-hidden="true" title="Private">
+                            <LockKey size={18} weight="light" />
+                          </span>
+                        )}
+                        <p>{detail.text}</p>
+                      </div>
                     ))}
                   </div>
                 )}

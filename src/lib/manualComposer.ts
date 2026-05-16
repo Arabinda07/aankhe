@@ -7,6 +7,7 @@ import {
   ArtifactFormat,
   ComposedManual,
   ComposedSection,
+  ComposedSectionDetail,
   ManualState,
   ModeId,
   Question,
@@ -44,26 +45,36 @@ export function composeManual(
       const sectionQuestions = config.questions.filter(q => q.sectionId === section.id);
       const sectionAnswers = sectionQuestions.filter(q => !!answers[q.id]);
       
-      const details: string[] = [];
+      const details: ComposedSectionDetail[] = [];
       
       sectionAnswers.forEach(q => {
         const val = answers[q.id];
         if (!visibilityPolicy.canAppearInManual(q, viewMode)) return;
 
         let formattedAnswer = formatAnswer(q, val);
+        const isPrivate = visibilityPolicy.visibilityFor(q) === "private";
         
         if (q.manualTemplate) {
           if (["select", "multiSelect", "yesNoMaybe", "pairedChoice"].includes(q.type)) {
             formattedAnswer = formattedAnswer.toLowerCase();
           }
-          details.push(applyTone(q.manualTemplate.replace("{answer}", formattedAnswer), tone, q));
+          details.push({
+            text: applyTone(q.manualTemplate.replace("{answer}", formattedAnswer), tone, q),
+            isPrivate
+          });
         } else {
-          details.push(applyTone(`${q.label} ${formattedAnswer}`, tone, q));
+          details.push({
+            text: applyTone(`${q.label} ${formattedAnswer}`, tone, q),
+            isPrivate
+          });
         }
 
         const note = answerNotes[q.id]?.trim();
         if (note) {
-          details.push(applyTone(`In my words: ${note}`, tone, q));
+          details.push({
+            text: applyTone(`In my words: ${note}`, tone, q),
+            isPrivate
+          });
         }
       });
 
@@ -126,29 +137,17 @@ function defaultAudience(mode: ModeId): string {
 }
 
 function titleForFormat(baseTitle: string, format: ArtifactFormat): string {
-  if (format === "onePage") return "One-page manual";
-  if (format === "note") return "Conversation note";
-  if (format === "conversation") return "Conversation brief";
-  if (format === "work") return "Work version";
+  if (format === "summary") return "Summary intro";
   if (format === "private") return "Private copy";
   return baseTitle;
 }
 
 function buildRecipientNote(format: ArtifactFormat): string {
-  if (format === "note" || format === "conversation") {
-    return "This is context for the conversation, not a demand or a diagnosis. Read it as a way to guess less and ask better.";
-  }
-
-  if (format === "work") {
-    return "This is not a performance profile. It is context for working with me clearly and with fewer assumptions.";
-  }
-
   return "This is not a demand or a diagnosis. It is context: a way to understand me without making me start from zero.";
 }
 
 function getFormatSectionLimit(format: ArtifactFormat): number {
-  if (format === "note") return 2;
-  if (format === "onePage" || format === "conversation" || format === "work") return 3;
+  if (format === "summary") return 3;
   return Number.POSITIVE_INFINITY;
 }
 

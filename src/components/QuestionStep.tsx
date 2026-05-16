@@ -63,9 +63,6 @@ export function QuestionStep({
   isFirst,
   isLast
 }: QuestionStepProps) {
-  const [isNuanceOpen, setIsNuanceOpen] = useState(note.trim().length > 0);
-  const [isVisibilityOpen, setIsVisibilityOpen] = useState(false);
-  const [isVisibilityHelpOpen, setIsVisibilityHelpOpen] = useState(false);
   const noteRef = useRef<HTMLTextAreaElement>(null);
   const questionLabelId = `question-${question.id}-label`;
   const helperTextId = question.helperText ? `question-${question.id}-helper` : undefined;
@@ -74,18 +71,9 @@ export function QuestionStep({
   const hasNote = note.trim().length > 0;
   const showAnswerDetails = hasAnswer || hasNote;
 
-  useEffect(() => {
-    if (note.trim().length > 0) setIsNuanceOpen(true);
-  }, [note]);
-
   const handleChange = useCallback((val: string | string[] | number) => {
     onChange(val);
   }, [onChange]);
-
-  const revealNuance = () => {
-    setIsNuanceOpen(true);
-    window.setTimeout(() => noteRef.current?.focus(), 0);
-  };
 
   const handleSensitiveSkip = (reason: "doesNotFit" | "notReady") => {
     const action = getSensitiveSkipAction(reason);
@@ -133,74 +121,32 @@ export function QuestionStep({
       </div>
 
       {showAnswerDetails && (
-        <div className="space-y-4">
-          <div className="space-y-3">
-            {!isNuanceOpen ? (
-              <button
-                type="button"
-                onClick={revealNuance}
-                className="type-ui-label min-h-11 px-1 py-2 text-parichay-accent transition-colors hover:text-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-              >
-                Add nuance
-              </button>
-            ) : (
-              <div className="space-y-2">
-                <label htmlFor={`${question.id}-note`} className="type-ui-label block text-parichay-text">
-                  Add nuance
-                </label>
-                <textarea
-                  ref={noteRef}
-                  id={`${question.id}-note`}
-                  value={note}
-                  onChange={(event) => onNoteChange(event.target.value)}
-                  rows={3}
-                  placeholder="Add context only if this answer needs your words."
-                  className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
-                />
-              </div>
-            )}
+        <div className="space-y-6 pt-4 border-t border-parichay-border/40 mt-2">
+          <div className="space-y-2">
+            <label htmlFor={`${question.id}-note`} className="type-caption block text-parichay-text font-semibold">
+              Add nuance (optional)
+            </label>
+            <textarea
+              ref={noteRef}
+              id={`${question.id}-note`}
+              value={note}
+              onChange={(event) => onNoteChange(event.target.value)}
+              rows={2}
+              placeholder="Add context only if this answer needs your words."
+              className="type-body w-full resize-none rounded-sm border border-parichay-paper-border bg-parichay-paper-muted p-4 text-parichay-text placeholder:text-parichay-muted/60 transition-colors focus:border-parichay-accent focus:outline-none focus-visible:ring-1 focus-visible:ring-parichay-focus"
+            />
           </div>
 
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="type-caption text-parichay-muted">Visibility:</span>
-              <span className="type-caption font-semibold text-parichay-text">{getVisibilityLabel(visibility)}</span>
-              <span className="type-caption text-parichay-muted" aria-hidden="true">·</span>
-              <button
-                type="button"
-                onClick={() => setIsVisibilityOpen((isOpen) => !isOpen)}
-                className="type-caption min-h-11 px-1 py-2 font-semibold text-parichay-accent transition-colors hover:text-parichay-accent-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-                aria-expanded={isVisibilityOpen}
-                aria-controls={`${question.id}-visibility-panel`}
-              >
-                {isVisibilityOpen ? "Close" : "Change"}
-              </button>
-            </div>
-
-            {isVisibilityOpen && (
-              <div id={`${question.id}-visibility-panel`} className="space-y-3">
-                <VisibilityControl
-                  questionId={question.id}
-                  visibility={visibility}
-                  onVisibilityChange={onVisibilityChange}
-                  describedBy={isVisibilityHelpOpen ? visibilityDescriptionId : undefined}
-                />
-                <button
-                  type="button"
-                  onClick={() => setIsVisibilityHelpOpen((isOpen) => !isOpen)}
-                  className="type-caption min-h-11 px-1 py-2 text-parichay-muted transition-colors hover:text-parichay-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-parichay-focus focus-visible:ring-offset-2"
-                  aria-expanded={isVisibilityHelpOpen}
-                  aria-controls={visibilityDescriptionId}
-                >
-                  What does this mean?
-                </button>
-                {isVisibilityHelpOpen && (
-                  <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-parichay-muted">
-                    Share means included in links and exports. Private stays here. Hide leaves it out of the intro.
-                  </p>
-                )}
-              </div>
-            )}
+          <div className="space-y-2">
+            <VisibilityControl
+              questionId={question.id}
+              visibility={visibility}
+              onVisibilityChange={onVisibilityChange}
+              describedBy={visibilityDescriptionId}
+            />
+            <p id={visibilityDescriptionId} className="type-caption max-w-2xl text-parichay-muted">
+              Share means included in links and exports. Private stays here. Hide leaves it out of the intro.
+            </p>
           </div>
         </div>
       )}
@@ -237,16 +183,6 @@ export function QuestionStep({
 }
 
 // ── Visibility sub-components (stay here — they're QuestionStep-specific) ──
-
-function getVisibilityLabel(visibility: Visibility): string {
-  const labels: Record<Visibility, string> = {
-    share: "Share",
-    private: "Private",
-    hide: "Hide",
-  };
-
-  return labels[visibility];
-}
 
 function VisibilityControl({
   questionId,
