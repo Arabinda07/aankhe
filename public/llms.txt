@@ -1,33 +1,29 @@
 # Parichay
 
-> Parichay is a client-only manual studio for creating private personal and professional manuals. Nothing is stored on a server, uploaded, tracked, or tied to an account.
+Parichay is a client-side personal manual builder. 
 
-Parichay helps people write the context that is often left unspoken, choose which answers are included, private, or omitted, and shape the result into a manual they can keep, print, or share.
+Most software saves your data to a database. Parichay does not. It runs entirely in your browser. There are no accounts, no analytics tracking, and no servers storing your answers.
+
+Users build "Me Manuals" or "Work Manuals" to document their working styles, boundaries, and unspoken context. You control exactly what leaves the page: answers can be marked as Included, Private, or Omitted. 
 
 ## Core Details
 
 - Product: Privacy-first personal manual studio
 - Tagline: Your Story, Always Ready.
-- Storage: Client-side only
+- Storage: Client-side only (localStorage and URL state)
 - Accounts: None
 - Database: None
 - Analytics: None
 - Pricing: Free
-- Primary modes: Me Manual and Work Manual
 
 ## Visibility Rules
 
-- Included answers may appear in share links, QR codes, image exports, and PDFs.
-- Private answers stay local unless the user chooses a private local export or print.
-- Omitted answers are left out of previews, shares, and exports.
-- Shared URLs contain only included answers.
+- **Included**: These answers appear in share links, QR codes, image exports, and PDFs.
+- **Private**: These answers stay on your device. They only leave the page if you generate a private local export or print it yourself. They are never sent in a shared URL.
+- **Omitted**: These answers are completely ignored in previews, shares, and exports.
 
 ## Important Pages
 
 - Home: https://parichay-your-story.vercel.app/
 - How it works: https://parichay-your-story.vercel.app/how-it-works
 - Privacy: https://parichay-your-story.vercel.app/privacy
-
-## Good Summary
-
-Parichay is a private, client-only web app for creating personal and professional operating manuals. It has no accounts, database, uploads, or analytics. Users control answer visibility and can share only the parts they mark included.
